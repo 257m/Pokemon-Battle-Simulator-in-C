@@ -1,6 +1,20 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+
+char c[64];
+char d[64];
+
+int stratt (a,b) {
+  strcpy(c,"");
+  strcpy(d,"");
+  strcpy(c,a);
+  strcpy(d,b);
+  strcat(c,d);
+   return c;
+}
 
 struct PokemonDex {
 char Name[20];
@@ -14,6 +28,7 @@ int SpD;
 int Spe;
 };
 
+struct PokemonDex NoPoke = {"NoPoke",0,0,0,0,0,0,0,0};
 struct PokemonDex Charmander = {"Charmander",2,0,39,52,43,60,50,65};
 struct PokemonDex Bulbasaur = {"Bulbasaur",5,8,45,49,49,65,65,45};
 
@@ -136,18 +151,63 @@ struct Nature Quirky = {1,1,1,1.1,1,24};
  int Spe;
 };
 
+struct Party {
+ struct MyPokemon *P1;
+ struct MyPokemon *P2;
+ struct MyPokemon *P3;
+ struct MyPokemon *P4;
+ struct MyPokemon *P5;
+ struct MyPokemon *P6;
+};
+
 
 struct MyPokemon Pokemon1 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing,0,0,0,0,0,0};
 
+struct MyPokemon Pokemon2 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing,0,0,0,0,0,0};
+
+struct MyPokemon Pokemon3 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing,0,0,0,0,0,0};
+
+struct MyPokemon Pokemon4 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing,0,0,0,0,0,0};
+
+struct MyPokemon Pokemon5 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing,0,0,0,0,0,0};
+
+struct MyPokemon Pokemon6 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing,0,0,0,0,0,0};
+
 struct MyPokemon EnemyPokemon1 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing};
 
-int StatCalc = 1;
-int BattleMode = 0;
-int Retrieve = 0;
-int Execute = 0;
-int Reset = 0;
-int First = 0;
-int Display = 0;
+struct MyPokemon EnemyPokemon2 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing};
+
+struct MyPokemon EnemyPokemon3 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing};
+
+struct MyPokemon EnemyPokemon4 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing};
+
+struct MyPokemon EnemyPokemon5 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing};
+
+struct MyPokemon EnemyPokemon6 ={&Charmander,5,18,&Docile,0,0,0,0,0,0,&Scratch,&Nothing,&Nothing,&Nothing};
+
+struct MyPokemon *SwitchSave;
+
+struct MyPokemon *EnemySwitchSave;
+
+struct Party PlayerParty = {&Pokemon1,&Pokemon2,&Pokemon3,&Pokemon4,&Pokemon5,&Pokemon6};
+
+struct Party EnemyParty =
+{&EnemyPokemon1,&EnemyPokemon2,&EnemyPokemon3,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6};
+
+struct Switch {
+struct MyPokemon *CurrentSwitch;
+};
+
+struct Switch PlayerSwitch;
+struct Switch EnemySwitch;
+
+bool StatCalc = 1;
+bool BattleMode = 0;
+bool Retrieve = 0;
+bool Execute = 0;
+bool Reset = 0;
+bool First = 0;
+bool Display = 0;
 char x[32];
 struct Move *YourTurn;
 struct Move *EnemyTurn;
@@ -159,117 +219,155 @@ float EnemySTAB;
 int Battle() {
   
   while (StatCalc == 1) {
-  Pokemon1.Hp =  ((Pokemon1.IVHp + 2 * Pokemon1.Poke->Hp + (Pokemon1.EVHp/4)) * Pokemon1.Level/100 ) + 10 +Pokemon1.Level;
+  PlayerParty.P1->Hp =  ((PlayerParty.P1->IVHp + 2 * PlayerParty.P1->Poke->Hp + (PlayerParty.P1->EVHp/4)) * PlayerParty.P1->Level/100 ) + 10 +PlayerParty.P1->Level;
   
-  Pokemon1.Atk = (((Pokemon1.IVAtk + 2 * Pokemon1.Poke->Atk + (Pokemon1.EVAtk/4) ) * Pokemon1.Level/100 ) + 5) * Pokemon1.Nature->Atk;
+  PlayerParty.P1->Atk = (((PlayerParty.P1->IVAtk + 2 * PlayerParty.P1->Poke->Atk + (PlayerParty.P1->EVAtk/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->Atk;
   
-  Pokemon1.Def = (((Pokemon1.IVDef + 2 * Pokemon1.Poke->Def + (Pokemon1.EVDef/4) ) * Pokemon1.Level/100 ) + 5) * Pokemon1.Nature->Def;
+  PlayerParty.P1->Def = (((PlayerParty.P1->IVDef + 2 * PlayerParty.P1->Poke->Def + (PlayerParty.P1->EVDef/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->Def;
   
-  Pokemon1.SpA = (((Pokemon1.IVSpA + 2 * Pokemon1.Poke->SpA + (Pokemon1.EVSpA/4) ) * Pokemon1.Level/100 ) + 5) * Pokemon1.Nature->SpA;
+  PlayerParty.P1->SpA = (((PlayerParty.P1->IVSpA + 2 * PlayerParty.P1->Poke->SpA + (PlayerParty.P1->EVSpA/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->SpA;
   
-  Pokemon1.SpD = (((Pokemon1.IVSpD + 2 * Pokemon1.Poke->SpD + (Pokemon1.EVSpD/4) ) * Pokemon1.Level/100 ) + 5) * Pokemon1.Nature->SpD;
+  PlayerParty.P1->SpD = (((PlayerParty.P1->IVSpD + 2 * PlayerParty.P1->Poke->SpD + (PlayerParty.P1->EVSpD/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->SpD;
 
-  Pokemon1.Spe = (((Pokemon1.IVSpe + 2 * Pokemon1.Poke->Spe + (Pokemon1.EVSpe/4) ) * Pokemon1.Level/100 ) + 5) * Pokemon1.Nature->Spe;
+  PlayerParty.P1->Spe = (((PlayerParty.P1->IVSpe + 2 * PlayerParty.P1->Poke->Spe + (PlayerParty.P1->EVSpe/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->Spe;
 
 
-  EnemyPokemon1.Hp =  ((EnemyPokemon1.IVHp + 2 * EnemyPokemon1.Poke->Hp + (EnemyPokemon1.EVHp/4)) * EnemyPokemon1.Level/100 ) + 10 +EnemyPokemon1.Level;
+  EnemyParty.P1->Hp =  ((EnemyParty.P1->IVHp + 2 * EnemyParty.P1->Poke->Hp + (EnemyParty.P1->EVHp/4)) * EnemyParty.P1->Level/100 ) + 10 +EnemyParty.P1->Level;
   
-  EnemyPokemon1.Atk = (((EnemyPokemon1.IVAtk + 2 * EnemyPokemon1.Poke->Atk + (EnemyPokemon1.EVAtk/4) ) * EnemyPokemon1.Level/100 ) + 5) * EnemyPokemon1.Nature->Atk;
+  EnemyParty.P1->Atk = (((EnemyParty.P1->IVAtk + 2 * EnemyParty.P1->Poke->Atk + (EnemyParty.P1->EVAtk/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->Atk;
   
-  EnemyPokemon1.Def = (((EnemyPokemon1.IVDef + 2 * EnemyPokemon1.Poke->Def + (EnemyPokemon1.EVDef/4) ) * EnemyPokemon1.Level/100 ) + 5) * EnemyPokemon1.Nature->Def;
+  EnemyParty.P1->Def = (((EnemyParty.P1->IVDef + 2 * EnemyParty.P1->Poke->Def + (EnemyParty.P1->EVDef/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->Def;
   
-  EnemyPokemon1.SpA = (((EnemyPokemon1.IVSpA + 2 * EnemyPokemon1.Poke->SpA + (EnemyPokemon1.EVSpA/4) ) * EnemyPokemon1.Level/100 ) + 5) * EnemyPokemon1.Nature->SpA;
+  EnemyParty.P1->SpA = (((EnemyParty.P1->IVSpA + 2 * EnemyParty.P1->Poke->SpA + (EnemyParty.P1->EVSpA/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->SpA;
   
-  EnemyPokemon1.SpD = (((EnemyPokemon1.IVSpD + 2 * EnemyPokemon1.Poke->SpD + (EnemyPokemon1.EVSpD/4) ) * EnemyPokemon1.Level/100 ) + 5) * EnemyPokemon1.Nature->SpD;
+  EnemyParty.P1->SpD = (((EnemyParty.P1->IVSpD + 2 * EnemyParty.P1->Poke->SpD + (EnemyParty.P1->EVSpD/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->SpD;
 
-  EnemyPokemon1.Spe = (((EnemyPokemon1.IVSpe + 2 * EnemyPokemon1.Poke->Spe + (EnemyPokemon1.EVSpe/4) ) * EnemyPokemon1.Level/100 ) + 5) * EnemyPokemon1.Nature->Spe;
+  EnemyParty.P1->Spe = (((EnemyParty.P1->IVSpe + 2 * EnemyParty.P1->Poke->Spe + (EnemyParty.P1->EVSpe/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->Spe;
     
     printf("Pokemon1:\n");
-    printf("HP:%d\n",Pokemon1.Hp);
-    printf("Atk:%d\n",Pokemon1.Atk);
-    printf("Def:%d\n",Pokemon1.Def);
-    printf("SpA:%d\n",Pokemon1.SpA);
-    printf("SpD:%d\n",Pokemon1.SpD);
-    printf("Spe:%d\n",Pokemon1.Spe);
+    printf("HP:%d\n",PlayerParty.P1->Hp);
+    printf("Atk:%d\n",PlayerParty.P1->Atk);
+    printf("Def:%d\n",PlayerParty.P1->Def);
+    printf("SpA:%d\n",PlayerParty.P1->SpA);
+    printf("SpD:%d\n",PlayerParty.P1->SpD);
+    printf("Spe:%d\n",PlayerParty.P1->Spe);
     printf("EnemyPokemon1:\n");
-    printf("HP:%d\n",EnemyPokemon1.Hp);
-    printf("Atk:%d\n",EnemyPokemon1.Atk);
-    printf("Def:%d\n",EnemyPokemon1.Def);
-    printf("SpA:%d\n",EnemyPokemon1.SpA);
-    printf("SpD:%d\n",EnemyPokemon1.SpD);
-    printf("Spe:%d\n",EnemyPokemon1.Spe);
+    printf("HP:%d\n",EnemyParty.P1->Hp);
+    printf("Atk:%d\n",EnemyParty.P1->Atk);
+    printf("Def:%d\n",EnemyParty.P1->Def);
+    printf("SpA:%d\n",EnemyParty.P1->SpA);
+    printf("SpD:%d\n",EnemyParty.P1->SpD);
+    printf("Spe:%d\n",EnemyParty.P1->Spe);
     StatCalc = 0;
     BattleMode = 1;
     Retrieve = 1;
   }
   
-  printf("Go %s!\n",Pokemon1.Poke->Name);
-  printf("The Enemy sent out %s!\n\n", EnemyPokemon1.Poke->Name);
+  printf("Go %s!\n",PlayerParty.P1->Poke->Name);
+  printf("The Enemy sent out %s!\n\n", EnemyParty.P1->Poke->Name);
   
   while(BattleMode == 1) {
     
     while(Retrieve == 1) {
     printf("Enter your move: ");
     scanf("%31[^\n]%*c", x);
-    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,Pokemon1.Move1->Name) == 0) {
-      YourTurn = Pokemon1.Move1;
-      if(Pokemon1.Move1 == &Nothing) {
+    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,PlayerParty.P1->Move1->Name) == 0) {
+      YourTurn = PlayerParty.P1->Move1;
+      if(PlayerParty.P1->Move1 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,Pokemon1.Move2->Name) == 0) {
-       YourTurn = Pokemon1.Move2;
-      if(Pokemon1.Move2 == &Nothing) {
+    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,PlayerParty.P1->Move2->Name) == 0) {
+       YourTurn = PlayerParty.P1->Move2;
+      if(PlayerParty.P1->Move2 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,Pokemon1.Move3->Name) == 0) {
-       YourTurn = Pokemon1.Move3;
-      if(Pokemon1.Move3 == &Nothing) {
+    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,PlayerParty.P1->Move3->Name) == 0) {
+       YourTurn = PlayerParty.P1->Move3;
+      if(PlayerParty.P1->Move3 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,Pokemon1.Move4->Name) == 0) {
-       YourTurn = Pokemon1.Move4;
-      if(Pokemon1.Move4 == &Nothing) {
+    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,PlayerParty.P1->Move4->Name) == 0) {
+       YourTurn = PlayerParty.P1->Move4;
+      if(PlayerParty.P1->Move4 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     } else {
       printf("Move Selection Failed. Please retry.");
       Reset = 1;
     }
-      if (YourTurn != &Nothing && Reset == 0) {
+      if (Reset != 1) {
      printf("\nEnter enemy's move: ");
      scanf("%31[^\n]%*c", x);
-      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,EnemyPokemon1.Move1->Name) == 0) {
-      EnemyTurn = EnemyPokemon1.Move1;
-      if(EnemyPokemon1.Move1 == &Nothing) {
+      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,EnemyParty.P1->Move1->Name) == 0) {
+      EnemyTurn = EnemyParty.P1->Move1;
+      if(EnemyParty.P1->Move1 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,EnemyPokemon1.Move2->Name) == 0) {
-       EnemyTurn = EnemyPokemon1.Move2;
-      if(EnemyPokemon1.Move2 == &Nothing) {
+    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,EnemyParty.P1->Move2->Name) == 0) {
+       EnemyTurn = EnemyParty.P1->Move2;
+      if(EnemyParty.P1->Move2 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,EnemyPokemon1.Move3->Name) == 0) {
-       EnemyTurn = EnemyPokemon1.Move3;
-      if(EnemyPokemon1.Move3 == &Nothing) {
+    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,EnemyParty.P1->Move3->Name) == 0) {
+       EnemyTurn = EnemyParty.P1->Move3;
+      if(EnemyParty.P1->Move3 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,EnemyPokemon1.Move4->Name) == 0) {
-       EnemyTurn = EnemyPokemon1.Move4;
-      if(EnemyPokemon1.Move4 == &Nothing) {
+    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,EnemyParty.P1->Move4->Name) == 0) {
+       EnemyTurn = EnemyParty.P1->Move4;
+      if(EnemyParty.P1->Move4 == &Nothing) {
         printf("Move Selection Failed. Please retry.");
+        Reset = 1;
+      }
+    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,strcat("Switch to ",EnemyParty.P2->Poke->Name)) == 0 || strcmp(x,EnemyParty.P2->Poke->Name) == 0) {
+       EnemySwitchSave = EnemyParty.P2;
+      if(EnemyParty.P2->Poke->Name == "NoPoke") {
+        printf("Move Selection Failed. Please retry.");
+        Reset = 1;
+      }
+    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,strcat("Switch to ",EnemyParty.P3->Poke->Name)) == 0 || strcmp(x,EnemyParty.P3->Poke->Name) == 0) {
+       EnemySwitchSave = EnemyParty.P3;
+      if(EnemyParty.P3->Poke->Name == "NoPoke") {
+        printf("Move Selection Failed. Please retry.");
+        Reset = 1;
+      }
+    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,strcat("Switch to ",EnemyParty.P4->Poke->Name)) == 0 || strcmp(x,EnemyParty.P4->Poke->Name) == 0) {
+       EnemySwitchSave = EnemyParty.P4;
+      if(EnemyParty.P4->Poke->Name == "NoPoke") {
+        printf("Move Selection Failed. Please retry.");
+        Reset = 1;
+      }
+    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,strcat("Switch to ",EnemyParty.P5->Poke->Name)) == 0 || strcmp(x,EnemyParty.P5->Poke->Name) == 0) {
+       EnemySwitchSave = EnemyParty.P5;
+      if(EnemyParty.P5->Poke->Name == "NoPoke") {
+        printf("Move Selection Failed. Please retry.");
+        Reset = 1;
+      }
+    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,strcat("Switch to ",EnemyParty.P6->Poke->Name)) == 0 || strcmp(x,EnemyParty.P5->Poke->Name) == 0) {
+       EnemySwitchSave = EnemyParty.P6;
+      if(EnemyParty.P6->Poke->Name == "NoPoke") {
+        printf("Move Selection Failed. Please retry.");
+        Reset = 1;
       }
     } else {
       printf("Move Selection Failed. Please retry.");
       Reset = 1;
     }
         }
-      if(Reset != 1 && YourTurn != &Nothing && EnemyTurn != &Nothing) {
+      if(Reset == 0) {
       Retrieve = 0;
       Execute = 1;
         } else {
@@ -280,22 +378,23 @@ int Battle() {
 
     
     while (Execute == 1) {
-      if (YourTurn->Type == Pokemon1.Poke->Type1 || YourTurn->Type == Pokemon1.Poke->Type2) {
+      if (YourTurn->Type == PlayerParty.P1->Poke->Type1 || YourTurn->Type == PlayerParty.P1->Poke->Type2) {
         STAB = 1.5;
       } else {
         STAB = 1;
       }
-      if (EnemyTurn->Type == EnemyPokemon1.Poke->Type1 || EnemyTurn->Type == EnemyPokemon1.Poke->Type2) {
+
+      if (EnemyTurn->Type == EnemyParty.P1->Poke->Type1 || EnemyTurn->Type == EnemyParty.P1->Poke->Type2) {
         EnemySTAB = 1.5;
       } else {
         EnemySTAB = 1;
       }
       
       if (YourTurn->Priority == EnemyTurn->Priority) {
-      if (Pokemon1.Spe > EnemyPokemon1.Spe) {
+      if (PlayerParty.P1->Spe > EnemyParty.P1->Spe) {
         First = 1;
       }
-      else if (Pokemon1.Spe < EnemyPokemon1.Spe) {
+      else if (PlayerParty.P1->Spe < EnemyParty.P1->Spe) {
         First = 0;
       }
       else {
@@ -319,48 +418,48 @@ int Battle() {
          
           }
         else if (YourTurn->Category == 1) {
-        Damage = ((((2 * Pokemon1.Level / 5 + 2) * Pokemon1.Atk * YourTurn->BP / EnemyPokemon1.Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type1] * TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type2]) * ((rand() % 16) + 85) / 100;
-        EnemyPokemon1.CurrentHp = EnemyPokemon1.CurrentHp - Damage;
+        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->BP / EnemyParty.P1->Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100;
+        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
           }
         else if (YourTurn->Category == 2) {
-        Damage = ((((2 * Pokemon1.Level / 5 + 2) * Pokemon1.SpA * YourTurn->BP / EnemyPokemon1.SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type1] * TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type2] * ((rand() % 16) + 85) / 100;
-        EnemyPokemon1.CurrentHp = EnemyPokemon1.CurrentHp - Damage; 
+        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->BP / EnemyParty.P1->SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
           }
         
         if (EnemyTurn->Category == 0) {
          
           }
         else if (EnemyTurn->Category == 1) {
-        EnemyDamage = ((((2 * EnemyPokemon1.Level / 5 + 2) * EnemyPokemon1.Atk * EnemyTurn->BP / Pokemon1.Def) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type1] * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type2] * ((rand() % 16) + 85) / 100;
-        Pokemon1.CurrentHp = Pokemon1.CurrentHp - EnemyDamage;
+        EnemyDamage = ((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->Atk * EnemyTurn->BP / PlayerParty.P1->Def) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
           }
         else if (EnemyTurn->Category == 2) {
-        EnemyDamage = ((((2 * EnemyPokemon1.Level / 5 + 2) * EnemyPokemon1.SpA * EnemyTurn->BP / Pokemon1.SpD) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type1] * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type2] * ((rand() % 16) + 85) / 100;
-        Pokemon1.CurrentHp = Pokemon1.CurrentHp - EnemyDamage; 
+        EnemyDamage = ((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->SpA * EnemyTurn->BP / PlayerParty.P1->SpD) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage; 
           }
       } else {
         if (YourTurn->Category == 0) {
          
           }
         else if (YourTurn->Category == 1) {
-        Damage = ((((2 * Pokemon1.Level / 5 + 2) * Pokemon1.Atk * YourTurn->BP / EnemyPokemon1.Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type1] * TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type2]) * ((rand() % 16) + 85) / 100;
-        EnemyPokemon1.CurrentHp = EnemyPokemon1.CurrentHp - Damage;
+        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->BP / EnemyParty.P1->Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100;
+        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
           }
         else if (YourTurn->Category == 2) {
-        Damage = ((((2 * Pokemon1.Level / 5 + 2) * Pokemon1.SpA * YourTurn->BP / EnemyPokemon1.SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type1] * TypeChart[YourTurn->Type][EnemyPokemon1.Poke->Type2] * ((rand() % 16) + 85) / 100;
-        EnemyPokemon1.CurrentHp = EnemyPokemon1.CurrentHp - Damage; 
+        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->BP / EnemyParty.P1->SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
           }
         
         if (EnemyTurn->Category == 0) {
          
           }
         else if (EnemyTurn->Category == 1) {
-        EnemyDamage = ((((2 * EnemyPokemon1.Level / 5 + 2) * EnemyPokemon1.Atk * EnemyTurn->BP / Pokemon1.Def) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type1] * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type2] * ((rand() % 16) + 85) / 100;
-        Pokemon1.CurrentHp = Pokemon1.CurrentHp - EnemyDamage;
+        EnemyDamage = ((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->Atk * EnemyTurn->BP / PlayerParty.P1->Def) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
           }
         else if (EnemyTurn->Category == 2) {
-        EnemyDamage = ((((2 * EnemyPokemon1.Level / 5 + 2) * EnemyPokemon1.SpA * EnemyTurn->BP / Pokemon1.SpD) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type1] * TypeChart[EnemyTurn->Type][Pokemon1.Poke->Type2] * ((rand() % 16) + 85) / 100;
-        Pokemon1.CurrentHp = Pokemon1.CurrentHp - EnemyDamage; 
+        EnemyDamage = ((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->SpA * EnemyTurn->BP / PlayerParty.P1->SpD) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage; 
           }
       }
       Execute = 0;
@@ -368,35 +467,35 @@ int Battle() {
     }
     while (Display == 1) {
       if (First == 1) {
-        printf("\n%s used %s!\n",Pokemon1.Poke->Name,YourTurn->Name);
+        printf("\n%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Name);
         printf("It did %d damage!\n",Damage);
-        printf("The opposing %s is at %d health\n",EnemyPokemon1.Poke->Name,EnemyPokemon1.CurrentHp);
-        if (EnemyPokemon1.CurrentHp <= 0) {
-          printf("The opposing %s fainted!",EnemyPokemon1.Poke->Name);
+        printf("The opposing %s is at %d health\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp);
+        if (EnemyParty.P1->CurrentHp <= 0) {
+          printf("The opposing %s fainted!",EnemyParty.P1->Poke->Name);
           BattleMode = 0;
         } else {
-        printf("\nThe opposing %s used %s!\n",EnemyPokemon1.Poke->Name,EnemyTurn->Name);
+        printf("\nThe opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Name);
         printf("It did %d damage!\n",EnemyDamage);
-        printf("Your %s is at %d health\n\n",Pokemon1.Poke->Name,Pokemon1.CurrentHp);
-          if (Pokemon1.CurrentHp <= 0) {
-          printf("Your %s fainted!",Pokemon1.Poke->Name);
+        printf("Your %s is at %d health\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp);
+          if (PlayerParty.P1->CurrentHp <= 0) {
+          printf("Your %s fainted!",PlayerParty.P1->Poke->Name);
           BattleMode = 0;
         }
           }
       }
       else {
-        printf("\nThe opposing %s used %s!\n",EnemyPokemon1.Poke->Name,EnemyTurn->Name);
+        printf("\nThe opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Name);
         printf("It did %d damage!\n",EnemyDamage);
-        printf("Your %s is at %d health\n",Pokemon1.Poke->Name,Pokemon1.CurrentHp);
-        if (Pokemon1.CurrentHp <= 0) {
-          printf("Your %s fainted!",Pokemon1.Poke->Name);
+        printf("Your %s is at %d health\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp);
+        if (PlayerParty.P1->CurrentHp <= 0) {
+          printf("Your %s fainted!",PlayerParty.P1->Poke->Name);
           BattleMode = 0;
         } else {
-        printf("\n%s used %s!\n",Pokemon1.Poke->Name,YourTurn->Name);
+        printf("\n%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Name);
         printf("It did %d damage!\n",Damage);
-        printf("The opposing %s is at %d health\n\n",EnemyPokemon1.Poke->Name,EnemyPokemon1.CurrentHp);
-          if (EnemyPokemon1.CurrentHp <= 0) {
-          printf("The opposing %s fainted!",EnemyPokemon1.Poke->Name);
+        printf("The opposing %s is at %d health\n\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp);
+          if (EnemyParty.P1->CurrentHp <= 0) {
+          printf("The opposing %s fainted!",EnemyParty.P1->Poke->Name);
           BattleMode = 0;
         }
           }
@@ -411,6 +510,8 @@ int Battle() {
 int main(void) {
   srand(time(NULL));
   printf("%d\n",time(0));
+  printf("%s",stratt(Charmander.Name,Bulbasaur.Name));
+  printf("%s",Charmander.Name);
   Battle();
   return 0;
 }
