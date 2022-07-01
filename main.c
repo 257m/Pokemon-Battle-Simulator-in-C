@@ -394,7 +394,8 @@ int Battle() {
     printf("SpD:%d\n",EnemyParty.P1->SpD);
     printf("Spe:%d\n",EnemyParty.P1->Spe);
     printf("Heal?\n");
-    scanf("%31[^\n]%*c", x);
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"y") == 0) {
       PlayerParty.P1->CurrentHp = PlayerParty.P1->Hp;
       PlayerParty.P2->CurrentHp = PlayerParty.P2->Hp;
@@ -424,7 +425,8 @@ int Battle() {
     PlayerSwitch = 0;
     EnemySwitch = 0;
     printf("Enter your move: ");
-    scanf("%31[^\n]%*c", x);
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,PlayerParty.P1->Move1->Name) == 0) {
       YourTurn = PlayerParty.P1->Move1;
       if(PlayerParty.P1->Move1 == &Nothing) {
@@ -493,7 +495,8 @@ int Battle() {
     }
       if (Reset != 1) {
      printf("\nEnter enemy's move: ");
-     scanf("%31[^\n]%*c", x);
+     fgets(x,31,stdin);
+     x[strcspn(x, "\n")] = 0;
       if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,EnemyParty.P1->Move1->Name) == 0) {
       EnemyTurn = EnemyParty.P1->Move1;
       if(EnemyParty.P1->Move1 == &Nothing) {
@@ -572,8 +575,10 @@ int Battle() {
 
     
     while (Execute == 1) {
+      // reset damage counter 
       Damage = 0;
       EnemyDamage = 0;
+      // sets stabs
       if (YourTurn->Type == PlayerParty.P1->Poke->Type1 || YourTurn->Type == PlayerParty.P1->Poke->Type2) {
         STAB = 1.5;
       } else {
@@ -585,7 +590,7 @@ int Battle() {
       } else {
         EnemySTAB = 1;
       }
-      
+      // sees who moves first
       if (YourTurn->Priority == EnemyTurn->Priority) {
       if (PlayerParty.P1->Spe > EnemyParty.P1->Spe) {
         First = 1;
@@ -626,8 +631,7 @@ int Battle() {
         Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->BP / EnemyParty.P1->Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100;
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
           }
-          }
-        else if (YourTurn->Category == 2) {
+          } else if (YourTurn->Category == 2) {
         if (PlayerParty.P1->CurrentHp > 0) {
         Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->BP / EnemyParty.P1->SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
@@ -659,25 +663,6 @@ int Battle() {
          Switcheroo2(EnemySwitchSave);
       }
         } else {
-        if (PlayerSwitch == 0) {
-        if (YourTurn->Category == 0) {
-         
-          }
-        else if (YourTurn->Category == 1) {
-        if (PlayerParty.P1->CurrentHp > 0) {
-        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->BP / EnemyParty.P1->Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100;
-        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
-          }
-          }
-        else if (YourTurn->Category == 2) {
-        if (PlayerParty.P1->CurrentHp > 0) {
-        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->BP / EnemyParty.P1->SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
-        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
-          }
-          }
-          }  else {
-         Switcheroo(PlayerSwitchSave);
-      }
         if (EnemySwitch == 0) {
         if (EnemyTurn->Category == 0) {
          
@@ -696,6 +681,26 @@ int Battle() {
           }
       } else {
          Switcheroo2(EnemySwitchSave);
+      }
+
+      if (PlayerSwitch == 0) {
+        if (YourTurn->Category == 0) {
+         
+          }
+        else if (YourTurn->Category == 1) {
+        if (PlayerParty.P1->CurrentHp > 0) {
+        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->BP / EnemyParty.P1->Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100;
+        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
+          }
+          }
+        else if (YourTurn->Category == 2) {
+        if (PlayerParty.P1->CurrentHp > 0) {
+        Damage = ((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->BP / EnemyParty.P1->SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100;
+        EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
+          }
+          }
+          }  else {
+         Switcheroo(PlayerSwitchSave);
       }
         }
       Execute = 0;
@@ -767,14 +772,14 @@ int Battle() {
   return 0;
 }
 
-int Switcheroo(struct MyPokemon *Switcher) {
+int Switcheroo(Switcher) {
   Temp = PlayerParty.P1;
   PlayerParty.P1 = Switcher;
   Switcher = Temp;
   return 0;
   }
 
-int Switcheroo2(struct MyPokemon *Switcher) {
+int Switcheroo2(Switcher) {
   Temp = EnemyParty.P1;
   EnemyParty.P1 = Switcher;
   Switcher = Temp;
@@ -783,64 +788,73 @@ int Switcheroo2(struct MyPokemon *Switcher) {
 
 int SwitchIn(PlayerOrEnemy) {
           if (PlayerOrEnemy == 0) {
-          printf("Switch-In: ");
-          scanf("%31[^\n]%*c", x);
-          if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P2->Poke->Name)) == 0 || strcmp(x,EnemyParty.P2->Poke->Name) == 0) {
+          printf("EnemySwitch-In: ");
+          fgets(x,31,stdin);
+          x[strcspn(x, "\n")] = 0;
+          if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P2->Poke->Name)) == 0 || strcmp(x,"P2") == 0) {
             if (EnemyParty.P2->CurrentHp > 0) {
             Switcheroo2(EnemyParty.P2);
             printf("Go! %s!\n",EnemyParty.P2->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P3->Poke->Name)) == 0 || strcmp(x,EnemyParty.P3->Poke->Name) == 0) {
+          }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P3->Poke->Name)) == 0 || strcmp(x,EnemyParty.P3->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
             if (EnemyParty.P3->CurrentHp > 0) {
             Switcheroo2(EnemyParty.P3);
             printf("Go! %s!\n",EnemyParty.P3->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P4->Poke->Name)) == 0 || strcmp(x,EnemyParty.P4->Poke->Name) == 0) {
+          }  else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P4->Poke->Name)) == 0 || strcmp(x,EnemyParty.P4->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
             if (EnemyParty.P4->CurrentHp > 0) {
             Switcheroo2(EnemyParty.P4);
               printf("Go! %s!\n",EnemyParty.P4->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P5->Poke->Name)) == 0 || strcmp(x,EnemyParty.P5->Poke->Name) == 0) {
+          }  else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P5->Poke->Name)) == 0 || strcmp(x,EnemyParty.P5->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
             if (EnemyParty.P5->CurrentHp > 0) {
             Switcheroo2(EnemyParty.P5);
               printf("Go! %s!\n",EnemyParty.P5->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P6->Poke->Name)) == 0 || strcmp(x,EnemyParty.P6->Poke->Name) == 0) {
+          }  else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P6->Poke->Name)) == 0 || strcmp(x,EnemyParty.P6->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
             if (EnemyParty.P6->CurrentHp > 0) {
             Switcheroo2(EnemyParty.P6);
               printf("Go! %s!\n",EnemyParty.P6->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
+          } else {
+            printf("That is not a valid switch. Please Try Again.\n");
+            SwitchIn(0);
           }
   } else {
           printf("Switch-In: ");
-          scanf("%31[^\n]%*c", x);
-          if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P2->Poke->Name)) == 0 || strcmp(x,PlayerParty.P2->Poke->Name) == 0) {
+          fgets(x,31,stdin);
+          x[strcspn(x, "\n")] = 0;
+          if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P2->Poke->Name)) == 0 || strcmp(x,PlayerParty.P2->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
             if (PlayerParty.P2->CurrentHp > 0) {
             Switcheroo(PlayerParty.P2);
               printf("Go! %s!\n",PlayerParty.P2->Poke->Name);
-              } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P3->Poke->Name)) == 0 || strcmp(x,PlayerParty.P3->Poke->Name) == 0) {
+              } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
+          }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P3->Poke->Name)) == 0 || strcmp(x,PlayerParty.P3->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
             if (PlayerParty.P3->CurrentHp > 0) {
             Switcheroo(PlayerParty.P3);
               printf("Go! %s!\n",PlayerParty.P3->Poke->Name);
-              } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P4->Poke->Name)) == 0 || strcmp(x,PlayerParty.P4->Poke->Name) == 0) {
+              } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
+          }  else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P4->Poke->Name)) == 0 || strcmp(x,PlayerParty.P4->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
             if (PlayerParty.P4->CurrentHp > 0) {
             Switcheroo(PlayerParty.P4);
               printf("Go! %s!\n",PlayerParty.P4->Poke->Name);
-              } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P5->Poke->Name)) == 0 || strcmp(x,PlayerParty.P5->Poke->Name) == 0) {
+              } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
+          }  else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P5->Poke->Name)) == 0 || strcmp(x,PlayerParty.P5->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
             if (PlayerParty.P5->CurrentHp > 0) {
             Switcheroo(PlayerParty.P5);
               printf("Go! %s!\n",PlayerParty.P5->Poke->Name);
-              } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
-          }  else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P6->Poke->Name)) == 0 || strcmp(x,PlayerParty.P6->Poke->Name) == 0) {
+              } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
+          }  else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P6->Poke->Name)) == 0 || strcmp(x,PlayerParty.P6->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
             if (PlayerParty.P6->CurrentHp > 0) {
             Switcheroo(PlayerParty.P6);
               printf("Go! %s!\n",PlayerParty.P6->Poke->Name);
-              } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
+              } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
+          } else {
+            printf("That is not a valid switch. Please Try Again.\n");
+            SwitchIn(1);
           }
   }
+  return 0;
 }
 
 int main(void) {
