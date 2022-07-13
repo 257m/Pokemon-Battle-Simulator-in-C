@@ -191,3 +191,8 @@ struct Party {
  struct MyPokemon *P5;
  struct MyPokemon *P6;
 };
+
+struct Party PlayerParty;
+struct Party EnemyParty;
+MoveSlot *YourTurn;
+MoveSlot *EnemyTurn;

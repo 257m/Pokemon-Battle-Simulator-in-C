@@ -9,3 +9,4 @@ struct Move Stone_Edge = {"Stone Edge",100,80,5,13,1,0,{0,0,0,0,0,0,0,0,0},&Ston
 struct Move Gust = {"Gust",40,100,35,10,2,0,{0,0,0,0,0,0,0,0,0},&Gustf};
 struct Move Thunder_Shock = {"Thunder Shock",40,100,30,4,2,0,{0,0,10,0,0,0,0,0,0},&Thunder_Shockf};
 struct Move Thunder_Wave = {"Thunder Wave",0,90,20,4,0,0,{0,0,0,0,0,0,0,0,0},&Thunder_Wavef};
+MoveSlot Empty_slot = {&Nothing,0,0};
