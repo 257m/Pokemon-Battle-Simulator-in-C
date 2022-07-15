@@ -1,6 +1,17 @@
 int Nothingf(unsigned char et, bool eop) {
   return 0;
 }
+int Strugglef(unsigned char et, bool eop) {
+  YourTurn->PP++;
+  if (et == 2) {
+    if (eop == 0) {
+      PlayerParty.P1->CurrentHp -= Damage/4;
+    } else {
+      EnemyParty.P1->CurrentHp -= EnemyDamage/4;
+    }
+  }
+  return 0;
+}
 int Scratchf(unsigned char et, bool eop) {
   return 0;
 }
@@ -43,7 +54,7 @@ int Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
   if (eop == 0) {
     EnemyParty.P1->Non_Volatile_Status = 3;
-  } else if (eop == 1) {
+  } else {
     PlayerParty.P1->Non_Volatile_Status = 3;
   }
   }

@@ -8,7 +8,6 @@
 #include "movedata.h"
 #include "pokedata.h"
 #include "partyset.h"
-#include "init.h"
 #include "switching.h"
 #include "battle.h"
 

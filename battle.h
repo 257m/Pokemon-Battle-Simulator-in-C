@@ -245,32 +245,60 @@ int Battle() {
     x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,PlayerParty.P1->Move1.Move->Name) == 0) {
       YourTurn = &PlayerParty.P1->Move1;
-if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(PlayerParty.P1->Move1.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (PlayerParty.P1->Move1.PP <= 0) {
+    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+      YourTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+  }
     }
     else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,PlayerParty.P1->Move2.Move->Name) == 0) {
        YourTurn = &PlayerParty.P1->Move2;
-      if(PlayerParty.P1->Move2.Move == &Nothing || PlayerParty.P1->Move2.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(PlayerParty.P1->Move1.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (PlayerParty.P1->Move1.PP <= 0) {
+    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+      YourTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+    }
     }
     else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,PlayerParty.P1->Move3.Move->Name) == 0) {
        YourTurn = &PlayerParty.P1->Move3;
-      if(PlayerParty.P1->Move3.Move == &Nothing || PlayerParty.P1->Move3.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+       if(PlayerParty.P1->Move1.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (PlayerParty.P1->Move1.PP <= 0) {
+    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+      YourTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+    }
     }
     else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,PlayerParty.P1->Move4.Move->Name) == 0) {
        YourTurn = &PlayerParty.P1->Move4;
-      if(PlayerParty.P1->Move4.Move == &Nothing || PlayerParty.P1->Move4.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+       if(PlayerParty.P1->Move1.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
-    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P2->Poke->Name)) == 0 || strcmp(x,PlayerParty.P2->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
+  } else if (PlayerParty.P1->Move1.PP <= 0) {
+    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+      YourTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+    }
+    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P2->Poke->Name)) == 0 || strcmp(x,PlayerParty.P2->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
        PlayerSwitchSave = &PlayerParty.P2;
        PlayerSwitch = 1;
       if(PlayerParty.P2->Poke->Name == "NoPoke" || PlayerParty.P2->CurrentHp <= 0) {
@@ -411,31 +439,59 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
      x[strcspn(x, "\n")] = 0;
       if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,EnemyParty.P1->Move1.Move->Name) == 0) {
       EnemyTurn = &EnemyParty.P1->Move1;
-      if(EnemyParty.P1->Move1.Move == &Nothing || EnemyParty.P1->Move1.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(EnemyParty.P1->Move1.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (EnemyParty.P1->Move1.PP <= 0) {
+    if (EnemyParty.P1->Move2.PP <= 0 && EnemyParty.P1->Move3.PP <= 0 && EnemyParty.P1->Move4.PP <= 0) {
+      EnemyTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+  }
     }
     else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,EnemyParty.P1->Move2.Move->Name) == 0) {
        EnemyTurn = &EnemyParty.P1->Move2;
-      if(EnemyParty.P1->Move2.Move == &Nothing || EnemyParty.P1->Move1.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(EnemyParty.P1->Move2.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (EnemyParty.P1->Move2.PP <= 0) {
+    if (EnemyParty.P1->Move1.PP <= 0 && EnemyParty.P1->Move3.PP <= 0 && EnemyParty.P1->Move4.PP <= 0) {
+      EnemyTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+  }
     }
     else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,EnemyParty.P1->Move3.Move->Name) == 0) {
        EnemyTurn = &EnemyParty.P1->Move3;
-      if(EnemyParty.P1->Move3.Move == &Nothing || EnemyParty.P1->Move1.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(EnemyParty.P1->Move3.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (EnemyParty.P1->Move3.PP <= 0) {
+    if (EnemyParty.P1->Move1.PP <= 0 && EnemyParty.P1->Move2.PP <= 0 && EnemyParty.P1->Move4.PP <= 0) {
+      EnemyTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+  }
     }
     else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,EnemyParty.P1->Move4.Move->Name) == 0) {
        EnemyTurn = &EnemyParty.P1->Move4;
-      if(EnemyParty.P1->Move4.Move == &Nothing || EnemyParty.P1->Move1.PP <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(EnemyParty.P1->Move4.Move == &Nothing) {
+        printf("There is no move in that slot.");
         Reset = 1;
-      }
+  } else if (EnemyParty.P1->Move4.PP <= 0) {
+    if (EnemyParty.P1->Move1.PP <= 0 && EnemyParty.P1->Move2.PP <= 0 && EnemyParty.P1->Move3.PP <= 0) {
+      EnemyTurn = &Struggle_Slot;
+    } else {
+      printf("There no more PP left in that move");
+      Reset = 1;
+    }
+  }
     }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P2->Poke->Name)) == 0 || strcmp(x,EnemyParty.P2->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
        EnemySwitchSave = &EnemyParty.P2;
        EnemySwitch = 1;
@@ -643,7 +699,7 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
           }
         else if (YourTurn->Move->Category == 1) {
         if (PlayerParty.P1->CurrentHp > 0) {
-        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->Move->BP / EnemyParty.P1->Def) / 50) + 2) * STAB * (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerHit;
+        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->Atk * YourTurn->Move->BP / (EnemyParty.P1->Def*statboostmult(EnemyParty.P1->StatBoosts[1]))) / 50) + 2) * STAB * (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerHit;
         YourTurn->Move->movefunc(1,0);
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
         YourTurn->PP--;
@@ -651,7 +707,7 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
           }
           } else if (YourTurn->Move->Category == 2) {
         if (PlayerParty.P1->CurrentHp > 0) {
-        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->Move->BP / EnemyParty.P1->SpD) / 50) + 2) * STAB * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerHit;
+        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * PlayerParty.P1->SpA * YourTurn->Move->BP / (EnemyParty.P1->SpD*statboostmult(EnemyParty.P1->StatBoosts[3]))) / 50) + 2) * STAB * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerHit;
         YourTurn->Move->movefunc(1,0);
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
         YourTurn->PP--;
@@ -676,7 +732,7 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
           }
         else if (EnemyTurn->Move->Category == 1) {
         if (EnemyParty.P1->CurrentHp > 0) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->Atk * EnemyTurn->Move->BP / PlayerParty.P1->Def) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->Atk * EnemyTurn->Move->BP / (PlayerParty.P1->Def*statboostmult(PlayerParty.P1->StatBoosts[1]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
@@ -685,7 +741,7 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
           }
         else if (EnemyTurn->Move->Category == 2) {
         if (EnemyParty.P1->CurrentHp > 0) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->SpA * EnemyTurn->Move->BP / PlayerParty.P1->SpD) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->SpA * EnemyTurn->Move->BP / (PlayerParty.P1->SpD*statboostmult(PlayerParty.P1->StatBoosts[3]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
@@ -705,10 +761,11 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
         }
         if (EnemyTurn->Move->Category == 0) {
          EnemyTurn->Move->movefunc(1,1);
+         EnemyTurn->PP--;
           }
         else if (EnemyTurn->Move->Category == 1) {
         if (EnemyParty.P1->CurrentHp > 0) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->Atk * EnemyTurn->Move->BP / PlayerParty.P1->Def) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->Atk * EnemyTurn->Move->BP / (PlayerParty.P1->Def*statboostmult(PlayerParty.P1->StatBoosts[1]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
@@ -717,13 +774,13 @@ if (PlayerParty.P1->Move1.Move == &Nothing || PlayerParty.P1->Move1.PP <= 0) {
           }
         else if (EnemyTurn->Move->Category == 2) {
         if (EnemyParty.P1->CurrentHp > 0) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->SpA * EnemyTurn->Move->BP / PlayerParty.P1->SpD) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * EnemyParty.P1->SpA * EnemyTurn->Move->BP / (PlayerParty.P1->SpD*statboostmult(PlayerParty.P1->StatBoosts[3]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
         EnemyTurn->Move->movefunc(2,1);
           }
-          }
+          } 
       } else {
          Switcheroo4(&EnemySwitchSave);
          EnemyHit = 1;

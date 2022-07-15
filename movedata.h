@@ -1,4 +1,5 @@
 struct Move Nothing = {"Nothing",0,0,0,0,0,0,{0,0,0,0,0,0,0,0,0},&Nothingf};
+struct Move Struggle = {"Struggle",50,100,1,0,1,0,{0,0,0,0,0,0,0,0,0},&Strugglef};
 struct Move Scratch = {"Scratch",40,100,35,1,1,0,{0,0,0,0,0,0,0,0,0},&Scratchf};
 struct Move Water_Gun = {"Water Gun",40,100,25,3,2,0,{0,0,0,0,0,0,0,0,0},&Water_Gunf};
 struct Move Vine_Whip = {"Vine Whip",45,100,35,5,1,0,{0,0,0,0,0,0,0,0,0},&Vine_Whipf};
@@ -9,4 +10,5 @@ struct Move Stone_Edge = {"Stone Edge",100,80,5,13,1,0,{0,0,0,0,0,0,0,0,0},&Ston
 struct Move Gust = {"Gust",40,100,35,10,2,0,{0,0,0,0,0,0,0,0,0},&Gustf};
 struct Move Thunder_Shock = {"Thunder Shock",40,100,30,4,2,0,{0,0,10,0,0,0,0,0,0},&Thunder_Shockf};
 struct Move Thunder_Wave = {"Thunder Wave",0,90,20,4,0,0,{0,0,0,0,0,0,0,0,0},&Thunder_Wavef};
-MoveSlot Empty_slot = {&Nothing,0,0};
+MoveSlot Empty_slot = {&Nothing,5,1};
+MoveSlot Struggle_Slot = {&Struggle,5,1};

@@ -46,6 +46,14 @@ int boolcheck (char mem, char digit) {
   } else {return -1;}
 }
 
+double statboostmult(char statboost) {
+  if (statboost >= 0) {
+    return (statboost*0.5)+1;
+  } else {
+    return 1/((statboost*0.5)+1);
+  }
+}
+
 struct PokemonDex {
 char Name[12];
 char Type1;
@@ -106,9 +114,7 @@ struct Move {
  unsigned char Type;
  unsigned char Category;
  char Priority;
- unsigned char AE [16]; // [0]=Burn [1]=Poison [2]=Para [3]=Toxic [5]=Sleep [6]=Freeze [7]Frostbite [8] Flinch
- int (*movefunc)(unsigned char,bool);
-};
+ unsigned char AE [16]
 
 struct Nature {
   float Atk;
@@ -117,7 +123,7 @@ struct Nature {
   float SpD;
   float Spe;
   char indexNumber;
-  char NatureName [8]
+  char NatureName [8];
 };
 
 struct Nature Hardy = {1,1,1,1,1,0,"Hardy"};
@@ -180,7 +186,8 @@ float PPmult;
  unsigned int SpD;
  unsigned int Spe;
  unsigned char Non_Volatile_Status;
- char Volatile_Status [8];
+ unsigned char Volatile_Status [8];
+ char StatBoosts [7];
 };
 
 struct Party {
@@ -196,3 +203,23 @@ struct Party PlayerParty;
 struct Party EnemyParty;
 MoveSlot *YourTurn;
 MoveSlot *EnemyTurn;
+struct MyPokemon **PlayerSwitchSave;
+struct MyPokemon **EnemySwitchSave;
+struct MyPokemon **Temp;
+bool StatCalc = 1;
+bool BattleMode = 0;
+bool Retrieve = 0;
+bool Execute = 0;
+bool Reset = 0;
+bool First = 0;
+bool Display = 0;
+bool PlayerSwitch = 0;
+bool EnemySwitch = 0;
+bool PlayerHit = 0;
+bool EnemyHit = 0;
+bool Skip = 0;
+char x[32];
+int Damage;
+int EnemyDamage;
+float STAB;
+float EnemySTAB;
