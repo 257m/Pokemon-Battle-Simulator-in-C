@@ -1,0 +1,3 @@
+x | Setup up moves
+x | have status moves not have their effects if move misses
+o | Make non volatile status conditions
