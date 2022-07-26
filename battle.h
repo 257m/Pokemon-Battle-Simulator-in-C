@@ -726,6 +726,15 @@ int Battle() {
           }
           if (PlayerSleep == 1) PlayerParty.P1->Counter++;
           else {PlayerParty.P1->Counter = 0; PlayerParty.P1->Non_Volatile_Status = 0; printf("%s woke up\n",PlayerParty.P1->Poke->Name);}
+          } else if (PlayerParty.P1->Non_Volatile_Status == 6) {
+          PlayerFrozen = (map2(rand(),5,RAND_MAX) != 0);
+          if (PlayerFrozen) {
+            PlayerCanMove = 0;
+          }
+          else {
+          PlayerParty.P1->Non_Volatile_Status = 0;
+          printf("%s thawed out\n",PlayerParty.P1->Poke->Name); 
+          }
           }
         YourTurn->Move->movefunc(3,1);
       if (PlayerParty.P1->CurrentHp > 0 && PlayerHit == 1 && PlayerCanMove == 1) {
@@ -777,6 +786,15 @@ int Battle() {
           }
           if (EnemySleep == 1) EnemyParty.P1->Counter++;
           else {EnemyParty.P1->Counter = 0; EnemyParty.P1->Non_Volatile_Status = 0; printf("The opposing %s woke up\n",EnemyParty.P1->Poke->Name);}
+          } else if (EnemyParty.P1->Non_Volatile_Status == 6) {
+          EnemyFrozen = (map2(rand(),5,RAND_MAX) != 0);
+          if (EnemyFrozen) {
+            EnemyCanMove = 0;
+          }
+          else {
+          EnemyParty.P1->Non_Volatile_Status = 0;
+          printf("The opposing %s thawed out\n",EnemyParty.P1->Poke->Name); 
+          }
           }
         EnemyTurn->Move->movefunc(3,1);
         if (EnemyParty.P1->CurrentHp > 0 && EnemyHit == 1 && EnemyCanMove == 1) {
@@ -829,7 +847,16 @@ int Battle() {
           }
           if (EnemySleep == 1) EnemyParty.P1->Counter++;
           else {EnemyParty.P1->Counter = 0; EnemyParty.P1->Non_Volatile_Status = 0; printf("The opposing %s woke up\n",EnemyParty.P1->Poke->Name);}
-         }
+         } else if (EnemyParty.P1->Non_Volatile_Status == 6) {
+          EnemyFrozen = (map2(rand(),5,RAND_MAX) != 0);
+          if (EnemyFrozen) {
+            EnemyCanMove = 0;
+          }
+          else {
+          EnemyParty.P1->Non_Volatile_Status = 0;
+          printf("The opposing %s thawed out\n",EnemyParty.P1->Poke->Name); 
+          }
+          }
           EnemyTurn->Move->movefunc(3,1);
         if (EnemyParty.P1->CurrentHp > 0 && EnemyHit == 1 && EnemyCanMove == 1) {
         if (EnemyTurn->Move->Category == 0) {
@@ -881,6 +908,15 @@ int Battle() {
           }
           if (PlayerSleep == 1) PlayerParty.P1->Counter++;
           else {PlayerParty.P1->Counter = 0; PlayerParty.P1->Non_Volatile_Status = 0; printf("%s woke up\n",PlayerParty.P1->Poke->Name);} 
+          } else if (PlayerParty.P1->Non_Volatile_Status == 6) {
+          PlayerFrozen = (map2(rand(),5,RAND_MAX) != 0);
+          if (PlayerFrozen) {
+            PlayerCanMove = 0;
+          }
+          else {
+          PlayerParty.P1->Non_Volatile_Status = 0;
+          printf("%s thawed out\n",PlayerParty.P1->Poke->Name); 
+          }
           }
         YourTurn->Move->movefunc(3,1);
       if (PlayerParty.P1->CurrentHp > 0 && PlayerHit == 1 && PlayerCanMove == 1) {
@@ -919,12 +955,12 @@ int Battle() {
         printf("Your %s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
       } else if (PlayerParty.P1->Non_Volatile_Status == 2) {
         PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp/8;
-        printf("%s took some damage because it's poisoned!\n",PlayerParty.P1->Poke->Name);
+        printf("%s is hurt poison!\n",PlayerParty.P1->Poke->Name);
         printf("Your %s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
       } else if (PlayerParty.P1->Non_Volatile_Status == 5) {
         if (PlayerParty.P1->Counter < 16) PlayerParty.P1->Counter++;
         PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp*((double)PlayerParty.P1->Counter/16);
-        printf("%s took some damage because it's intoxicated!\n",PlayerParty.P1->Poke->Name);
+        printf("The opposing %s is hurt by poison! (it's badly poisoned)\n",EnemyParty.P1->Poke->Name);
         printf("Your %s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
       }
 
@@ -940,12 +976,12 @@ int Battle() {
         printf("The opposing %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
       } else if (EnemyParty.P1->Non_Volatile_Status == 2) {
         EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp/8;
-        printf("The opposing %s took some damage because it's poisoned!\n",EnemyParty.P1->Poke->Name);
+        printf("The opposing %s is hurt by poison!\n",EnemyParty.P1->Poke->Name);
         printf("Your %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
       } else if (EnemyParty.P1->Non_Volatile_Status == 5) {
         if (EnemyParty.P1->Counter < 16) EnemyParty.P1->Counter++;
         EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp*((double)EnemyParty.P1->Counter/16);
-        printf("The opposing %s took some damage because it's intoxicated!\n",EnemyParty.P1->Poke->Name);
+        printf("The opposing %s is hurt by poison! (it's badly poisoned)\n",EnemyParty.P1->Poke->Name);
         printf("Your %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
       }
 

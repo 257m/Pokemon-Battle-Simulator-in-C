@@ -4,8 +4,9 @@ void display (bool eop) {
         if (PlayerCanMove == 1) printf("%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
         else {
           printf("%s couldn't move\n",PlayerParty.P1->Poke->Name);
-          if (PlayerPara == 1) printf("It was paralyzed!\n");
-          else if (PlayerSleep = 1) printf("It is asleep\n");
+          if (PlayerPara) printf("It was paralyzed!\n");
+          else if (PlayerSleep) printf("It is asleep\n");
+          else if (PlayerFrozen) printf("It is frozen!\n");
           }
         if (PlayerHit == 1 && PlayerCanMove == 1) {
         if (YourTurn->Move->Category != 0) {
@@ -63,8 +64,9 @@ void display (bool eop) {
          if (EnemyCanMove == 1) printf("The opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
         else {
           printf("The opposing %s couldn't move\n",EnemyParty.P1->Poke->Name);
-          if (EnemyPara == 1) printf("It was paralyzed!\n");
-          else if (EnemySleep = 1) printf("It is asleep\n");
+          if (EnemyPara) printf("It was paralyzed!\n");
+          else if (EnemySleep) printf("It is asleep\n");
+          else if (EnemyFrozen) printf("It is frozen!\n");
           }      
           if (EnemyHit == 1 && EnemyCanMove == 1) {        
         if (EnemyTurn->Move->Category != 0) {

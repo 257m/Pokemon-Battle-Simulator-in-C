@@ -16,7 +16,9 @@ struct Move Will_O_Wisp = {"Will-O-Wisp",0,90,15,2,0,0,&Will_O_Wispf,{0,0,0,0,0,
 struct Move Spore = {"Spore",0,100,10,5,0,0,&Sporef,
 {0,0,0,0,0,0,0},100};
 struct Move Toxic = {"Toxic",0,90,10,8,0,0,&Toxicf,
-{0,0,0,0,0,0,0},100};
+{0,0,0,0,0,0,0},100}; 
+struct Move Freeze = {"Freeze",0,60,10,6,0,0,&Freezef,
+{0,0,0,0,0,0,0},100}; 
 
 MoveSlot Empty_slot = {&Nothing,5,1};
 MoveSlot Struggle_Slot = {&Struggle,5,1};

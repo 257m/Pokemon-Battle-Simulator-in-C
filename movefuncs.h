@@ -139,3 +139,14 @@ int Toxicf(unsigned char et,bool eop) {
   }
   return 0;
 }
+
+int Freezef(unsigned char et,bool eop) {
+  if (et == 2) {
+    if (!eop) {
+      if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 6;
+    } else {
+      if (PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 6;
+    }
+  }
+  return 0;
+}
