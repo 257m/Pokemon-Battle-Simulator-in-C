@@ -121,3 +121,21 @@ int Sporef(unsigned char et,bool eop) {
   }
   return 0;
 }
+
+int Toxicf(unsigned char et,bool eop) {
+  if (et == 2) {
+    if (eop == 0) {
+     if (EnemyParty.P1->Poke->Type1 != 8 || EnemyParty.P1->Poke->Type2 != 8 || EnemyParty.P1->Poke->Type1 != 17 || EnemyParty.P1->Poke->Type2 != 17 || EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 5;
+    } else {
+     if (PlayerParty.P1->Poke->Type1 != 8 || PlayerParty.P1->Poke->Type2 != 8 || PlayerParty.P1->Poke->Type1 != 17 || PlayerParty.P1->Poke->Type2 != 17 || PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 5;
+    }
+  }
+  if (et == 3) {
+    if (!eop) {
+      if (PlayerParty.P1->Poke->Type1 == 8 || PlayerParty.P1->Poke->Type2 == 8) PlayerHit = 1;
+    } else {
+      if (EnemyParty.P1->Poke->Type1 == 8 || EnemyParty.P1->Poke->Type2 == 8) EnemyHit = 1;
+    }
+  }
+  return 0;
+}

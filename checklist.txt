@@ -1,4 +1,4 @@
 x | Setup up moves
 x | have status moves not have their effects if move misses
-o | Make non volatile status conditions(3/6)
+o | Make non volatile status conditions(5/6)
 o | Learn more Vim commands and master the ones already learned
