@@ -302,7 +302,7 @@ int Battle() {
        PlayerSwitchSave = &PlayerParty.P2;
        PlayerSwitch = 1;
       if(PlayerParty.P2->Poke->Name == "NoPoke" || PlayerParty.P2->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
+        printf("Move Selection Failed. Pilease retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P3->Poke->Name)) == 0 || strcmp(x,PlayerParty.P3->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
@@ -640,9 +640,17 @@ int Battle() {
 
     
     while (Execute == 1) {
-      // reset damage counter 
+      // reset damage counters, temporary mults and flags 
       Damage = 0;
       EnemyDamage = 0;
+      PlayerTM = 1;
+      EnemyTM = 1;
+      PlayerSpeedTM = 1;
+      EnemySpeedTM = 1;
+      PlayerCanMove = 1;
+      EnemyCanMove = 1;
+      PlayerPara = 0;
+      EnemyPara = 0;
       // sets stabs
       if (YourTurn->Move->Type == PlayerParty.P1->Poke->Type1 || YourTurn->Move->Type == PlayerParty.P1->Poke->Type2) {
         STAB = 1.5;
@@ -655,12 +663,15 @@ int Battle() {
       } else {
         EnemySTAB = 1;
       }
+      // Change speed temp mult based on status
+      if (PlayerParty.P1->Non_Volatile_Status == 3) PlayerSpeedTM /= 2;
+      if (EnemyParty.P1->Non_Volatile_Status == 3) EnemySpeedTM /= 2;
       // sees who moves first
       if (YourTurn->Move->Priority == EnemyTurn->Move->Priority) {
-      if ((floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4])) == floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4])))) {
+      if (floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM == floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM) {
         First = (rand() % 2);
       } else {
-        First = (floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4])) > floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4])));
+        First = floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM > floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM;
       }
         } else {
         First = (YourTurn->Move->Priority > EnemyTurn->Move->Priority);
@@ -670,24 +681,28 @@ int Battle() {
       }
       // post speed,stab and reset funcs
       YourTurn->Move->movefunc(0,0);
-      EnemyTurn->Move->movefunc(0,1);
-      
+      EnemyTurn->Move->movefunc(0,1);      
       if (First == 1) {
         if (PlayerSwitch == 0) {
         PlayerHit = (map2(rand(),100,RAND_MAX) < (YourTurn->Move->Accuracy*statboostmult(PlayerParty.P1->StatBoosts[5])));
-        if (PlayerParty.P1->CurrentHp > 0 && PlayerHit == 1) {
+        if (PlayerParty.P1->Non_Volatile_Status == 3) {
+          PlayerPara = (rand() % 4 == 0);
+          if (PlayerPara == 1) PlayerCanMove = 0;
+          }
+        else if (PlayerParty.P1->Non_Volatile_Status == 1) PlayerTM /= 2;
+      if (PlayerParty.P1->CurrentHp > 0 && PlayerHit == 1 && PlayerCanMove == 1) {
         if (YourTurn->Move->Category == 0) {
          YourTurn->Move->movefunc(1,0);
          YourTurn->PP--;
           }
         else if (YourTurn->Move->Category == 1) {
-        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->Atk*statboostmult(PlayerParty.P1->StatBoosts[0])) * YourTurn->Move->BP / (EnemyParty.P1->Def*statboostmult(EnemyParty.P1->StatBoosts[1]))) / 50) + 2) * STAB * (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerHit;
+        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->Atk*statboostmult(PlayerParty.P1->StatBoosts[0])) * YourTurn->Move->BP / (EnemyParty.P1->Def*statboostmult(EnemyParty.P1->StatBoosts[1]))) / 50) + 2) * STAB * (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerTM;
         YourTurn->Move->movefunc(1,0);
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
         YourTurn->PP--;
         YourTurn->Move->movefunc(2,0);
           } else if (YourTurn->Move->Category == 2) {
-        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->SpA*statboostmult(PlayerParty.P1->StatBoosts[2])) * YourTurn->Move->BP / (EnemyParty.P1->SpD*statboostmult(EnemyParty.P1->StatBoosts[3]))) / 50) + 2) * STAB * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerHit;
+        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->SpA*statboostmult(PlayerParty.P1->StatBoosts[2])) * YourTurn->Move->BP / (EnemyParty.P1->SpD*statboostmult(EnemyParty.P1->StatBoosts[3]))) / 50) + 2) * STAB * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerTM;
         YourTurn->Move->movefunc(1,0);
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage; 
         YourTurn->PP--;
@@ -699,22 +714,22 @@ int Battle() {
       } 
         if (EnemySwitch == 0) {
         EnemyHit = (map2(rand(),100,RAND_MAX) < (EnemyTurn->Move->Accuracy*statboostmult(EnemyParty.P1->StatBoosts[5])));
+        if (EnemyParty.P1->Non_Volatile_Status == 3) EnemyCanMove = 0;
+        else if (EnemyParty.P1->Non_Volatile_Status == 1) EnemyTM /= 2; 
+        if (EnemyParty.P1->CurrentHp > 0 && EnemyHit == 1 && EnemyCanMove == 1) {
         if (EnemyTurn->Move->Category == 0) {
          EnemyTurn->Move->movefunc(1,1);
          EnemyTurn->PP--;
           }
         else if (EnemyTurn->Move->Category == 1) {
-        if (EnemyParty.P1->CurrentHp > 0) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->Atk*statboostmult(EnemyParty.P1->StatBoosts[0])) * EnemyTurn->Move->BP / (PlayerParty.P1->Def*statboostmult(PlayerParty.P1->StatBoosts[1]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->Atk*statboostmult(EnemyParty.P1->StatBoosts[0])) * EnemyTurn->Move->BP / (PlayerParty.P1->Def*statboostmult(PlayerParty.P1->StatBoosts[1]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
         EnemyTurn->Move->movefunc(2,1);
           }
-          }
         else if (EnemyTurn->Move->Category == 2) {
-        if (EnemyParty.P1->CurrentHp > 0) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->SpA*statboostmult(EnemyParty.P1->StatBoosts[2])) * EnemyTurn->Move->BP / (PlayerParty.P1->SpD*statboostmult(PlayerParty.P1->StatBoosts[3]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->SpA*statboostmult(EnemyParty.P1->StatBoosts[2])) * EnemyTurn->Move->BP / (PlayerParty.P1->SpD*statboostmult(PlayerParty.P1->StatBoosts[3]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
@@ -727,20 +742,22 @@ int Battle() {
         } else {
         if (EnemySwitch == 0) {
         EnemyHit = (map2(rand(),100,RAND_MAX) < (EnemyTurn->Move->Accuracy*statboostmult(EnemyParty.P1->StatBoosts[5])));
-        if (EnemyParty.P1->CurrentHp > 0 && EnemyHit == 1) {
+       if (EnemyParty.P1->Non_Volatile_Status == 3) EnemyCanMove = 0;
+       else if (EnemyParty.P1->Non_Volatile_Status == 1) EnemyTM /= 2; 
+        if (EnemyParty.P1->CurrentHp > 0 && EnemyHit == 1 && EnemyCanMove == 1) {
         if (EnemyTurn->Move->Category == 0) {
          EnemyTurn->Move->movefunc(1,1);
          EnemyTurn->PP--;
           }
         else if (EnemyTurn->Move->Category == 1) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->Atk*statboostmult(EnemyParty.P1->StatBoosts[0])) * EnemyTurn->Move->BP / (PlayerParty.P1->Def*statboostmult(PlayerParty.P1->StatBoosts[1]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->Atk*statboostmult(EnemyParty.P1->StatBoosts[0])) * EnemyTurn->Move->BP / (PlayerParty.P1->Def*statboostmult(PlayerParty.P1->StatBoosts[1]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
         EnemyTurn->Move->movefunc(2,1);
           }
         else if (EnemyTurn->Move->Category == 2) {
-        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->SpA*statboostmult(EnemyParty.P1->StatBoosts[2])) * EnemyTurn->Move->BP / (PlayerParty.P1->SpD*statboostmult(PlayerParty.P1->StatBoosts[3]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyHit;
+        EnemyDamage = (((((2 * EnemyParty.P1->Level / 5 + 2) * (EnemyParty.P1->SpA*statboostmult(EnemyParty.P1->StatBoosts[2])) * EnemyTurn->Move->BP / (PlayerParty.P1->SpD*statboostmult(PlayerParty.P1->StatBoosts[3]))) / 50) + 2) * EnemySTAB * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM;
         EnemyTurn->Move->movefunc(1,1);
         PlayerParty.P1->CurrentHp = PlayerParty.P1->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
@@ -750,23 +767,25 @@ int Battle() {
       } else {
          Switcheroo4(&EnemySwitchSave);
       }
-      
+        
       if (PlayerSwitch == 0) {
         PlayerHit = (map2(rand(),100,RAND_MAX) < (YourTurn->Move->Accuracy*statboostmult(PlayerParty.P1->StatBoosts[5])));
-        if (PlayerParty.P1->CurrentHp > 0 && PlayerHit == 1) {
+        if (PlayerParty.P1->Non_Volatile_Status == 3) PlayerCanMove = 0;
+        else if (PlayerParty.P1->Non_Volatile_Status == 1) PlayerTM /= 2;
+      if (PlayerParty.P1->CurrentHp > 0 && PlayerHit == 1 && PlayerCanMove == 1) {
         if (YourTurn->Move->Category == 0) {
          YourTurn->Move->movefunc(1,0);
          YourTurn->PP--;
           }
         else if (YourTurn->Move->Category == 1) {
-        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->Atk*statboostmult(PlayerParty.P1->StatBoosts[0])) * YourTurn->Move->BP /  (EnemyParty.P1->Def*statboostmult(EnemyParty.P1->StatBoosts[1]))) / 50) + 2) * STAB * (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100);
+        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->Atk*statboostmult(PlayerParty.P1->StatBoosts[0])) * YourTurn->Move->BP /  (EnemyParty.P1->Def*statboostmult(EnemyParty.P1->StatBoosts[1]))) / 50) + 2) * STAB * (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerTM;
         YourTurn->Move->movefunc(1,0);
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
         YourTurn->PP--;
         YourTurn->Move->movefunc(2,0);
           }
         else if (YourTurn->Move->Category == 2) {
-        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->SpA*statboostmult(PlayerParty.P1->StatBoosts[2])) * YourTurn->Move->BP /  (EnemyParty.P1->SpD*statboostmult(EnemyParty.P1->StatBoosts[3]))) / 50) + 2) * STAB * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100);
+        Damage = (((((2 * PlayerParty.P1->Level / 5 + 2) * (PlayerParty.P1->SpA*statboostmult(PlayerParty.P1->StatBoosts[2])) * YourTurn->Move->BP /  (EnemyParty.P1->SpD*statboostmult(EnemyParty.P1->StatBoosts[3]))) / 50) + 2) * STAB * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerTM;
         YourTurn->Move->movefunc(1,0);
         EnemyParty.P1->CurrentHp = EnemyParty.P1->CurrentHp - Damage;
         YourTurn->PP--;
@@ -777,14 +796,26 @@ int Battle() {
          Switcheroo3(&PlayerSwitchSave);
       }
         }
+      if (PlayerParty.P1->Non_Volatile_Status == 1) {
+        PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp/8;
+      }
+      if (EnemyParty.P1->Non_Volatile_Status == 1) {
+        EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp/8;
+      }
+      
       Execute = 0;
       Display = 1;
     }
     while (Display == 1) {
       if (First == 1) {
         if (PlayerSwitch == 0) {
-        printf("\n%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
+        if (PlayerCanMove == 1) printf("\n%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
+        else {
+          printf("\n%s couldn't move\n",PlayerParty.P1->Poke->Name);
+          if (PlayerPara == 1) printf("It was paralyzed!");
+          }
         if (PlayerHit == 1) {
+        if (YourTurn->Move->Category != 0) {
         printf("It did %d damage!\n",Damage);
         if (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
@@ -793,6 +824,35 @@ int Battle() {
           printf("It was not very effective!\n");
         }
         printf("The opposing %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
+          }
+           if (YourTurn->Move->BoostRate[0] != 0) {
+             if (YourTurn->Move->BoostRate[0] != 0) printf("%s Attack rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[0]);
+            else printf("%s Attack fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[0]);
+           }
+          if (YourTurn->Move->BoostRate[1] != 0) {
+             if (YourTurn->Move->BoostRate[1] != 0) printf("%s Defense rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[1]);
+            else printf("%s Defense fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[1]);
+            }
+          if (YourTurn->Move->BoostRate[2] != 0) {
+             if (YourTurn->Move->BoostRate[2] != 0) printf("%s Special Attack rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[2]);
+            else printf("%s Special Attack fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[2]);
+            }
+          if (YourTurn->Move->BoostRate[3] != 0) {
+             if (YourTurn->Move->BoostRate[3] != 0) printf("%s Special Defense rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[3]);
+            else printf("%s Special Defense fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[3]);
+            }
+          if (YourTurn->Move->BoostRate[4] != 0) {
+             if (YourTurn->Move->BoostRate[4] != 0) printf("%s Speed rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[4]);
+            else printf("%s Speed fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[4]);
+          }
+          if (YourTurn->Move->BoostRate[5] != 0) {
+             if (YourTurn->Move->BoostRate[5] != 0) printf("%s Accuracy rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[5]);
+            else printf("%s Accuracy fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[5]);
+          }
+          if (YourTurn->Move->BoostRate[6] != 0) {
+             if (YourTurn->Move->BoostRate[6] != 0) printf("%s Crit Chance rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[6]);
+            else printf("%s Crit Chance fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[6]);
+          }
           } else {
           printf("But it missed!\n");
           }
@@ -805,8 +865,13 @@ int Battle() {
           SwitchIn(0);
         } else {
         if (EnemySwitch == 0) {
-        printf("\nThe opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
-        if (EnemyHit == 1) {
+        if (EnemyCanMove == 1) printf("\nThe opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
+        else {
+          printf("\n%s couldn't move\n",EnemyParty.P1->Poke->Name);
+          if (EnemyPara == 1) printf("It was paralyzed!");
+          }
+          if (EnemyHit == 1) {
+        if (EnemyTurn->Move->Category != 0) {
         printf("It did %d damage!\n",EnemyDamage);
         if (TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
@@ -815,6 +880,35 @@ int Battle() {
           printf("It was not very effective!\n");
         }
         printf("Your %s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
+            } 
+          if (EnemyTurn->Move->BoostRate[0] != 0) {
+             if (EnemyTurn->Move->BoostRate[0] != 0) printf("%s Attack rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[0]);
+            else printf("%s Attack fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[0]);
+           }
+          if (EnemyTurn->Move->BoostRate[1] != 0) {
+             if (EnemyTurn->Move->BoostRate[1] != 0) printf("%s Defense rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[1]);
+            else printf("%s Defense fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[1]);
+            }
+          if (EnemyTurn->Move->BoostRate[2] != 0) {
+             if (EnemyTurn->Move->BoostRate[2] != 0) printf("%s Special Attack rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[2]);
+            else printf("%s Special Attack fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[2]);
+            }
+          if (EnemyTurn->Move->BoostRate[3] != 0) {
+             if (EnemyTurn->Move->BoostRate[3] != 0) printf("%s Special Defense rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[3]);
+            else printf("%s Special Defense fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[3]);
+            }
+          if (EnemyTurn->Move->BoostRate[4] != 0) {
+             if (EnemyTurn->Move->BoostRate[4] != 0) printf("%s Speed rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[4]);
+            else printf("%s Speed fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[4]);
+          }
+          if (EnemyTurn->Move->BoostRate[5] != 0) {
+             if (EnemyTurn->Move->BoostRate[5] != 0) printf("%s Accuracy rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[5]);
+            else printf("%s Accuracy fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[5]);
+          }
+          if (EnemyTurn->Move->BoostRate[6] != 0) {
+             if (EnemyTurn->Move->BoostRate[6] != 0) printf("%s Crit Chance rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[6]);
+            else printf("%s Crit Chance fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[6]);
+          }
           } else {
           printf("But it missed!\n");
           }
@@ -829,8 +923,13 @@ int Battle() {
       }
       else {
         if (EnemySwitch == 0) {
-        printf("\nThe opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
-        if (EnemyHit == 1) {
+         if (EnemyCanMove == 1) printf("\nThe opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
+        else {
+          printf("\n%s couldn't move\n",EnemyParty.P1->Poke->Name);
+          if (EnemyPara == 1) printf("It was paralyzed!");
+          }      
+          if (EnemyHit == 1) {        
+        if (EnemyTurn->Move->Category != 0) {
         printf("It did %d damage!\n",EnemyDamage);
         if (TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
@@ -839,6 +938,35 @@ int Battle() {
           printf("It was not very effective!\n");
         }
         printf("Your %s is at %d/%d hp\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
+          } 
+          if (EnemyTurn->Move->BoostRate[0] != 0) {
+             if (EnemyTurn->Move->BoostRate[0] != 0) printf("%s Attack rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[0]);
+            else printf("%s Attack fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[0]);
+           }
+          if (EnemyTurn->Move->BoostRate[1] != 0) {
+             if (EnemyTurn->Move->BoostRate[1] != 0) printf("%s Defense rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[1]);
+            else printf("%s Defense fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[1]);
+            }
+          if (EnemyTurn->Move->BoostRate[2] != 0) {
+             if (EnemyTurn->Move->BoostRate[2] != 0) printf("%s Special Attack rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[2]);
+            else printf("%s Special Attack fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[2]);
+            }
+          if (EnemyTurn->Move->BoostRate[3] != 0) {
+             if (EnemyTurn->Move->BoostRate[3] != 0) printf("%s Special Defense rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[3]);
+            else printf("%s Special Defense fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[3]);
+            }
+          if (EnemyTurn->Move->BoostRate[4] != 0) {
+             if (EnemyTurn->Move->BoostRate[4] != 0) printf("%s Speed rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[4]);
+            else printf("%s Speed fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[4]);
+          }
+          if (EnemyTurn->Move->BoostRate[5] != 0) {
+             if (EnemyTurn->Move->BoostRate[5] != 0) printf("%s Accuracy rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[5]);
+            else printf("%s Accuracy fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[5]);
+          }
+          if (EnemyTurn->Move->BoostRate[6] != 0) {
+             if (EnemyTurn->Move->BoostRate[6] != 0) printf("%s Crit Chance rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[6]);
+            else printf("%s Crit Chance fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[6]);
+          }
           } else {
           printf("But it missed!\n");
           }
@@ -850,8 +978,13 @@ int Battle() {
           SwitchIn(1);
         } else {
         if (PlayerSwitch == 0) {
-        printf("\n%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
+        if (PlayerCanMove == 1) printf("\n%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
+        else {
+          printf("\n%s couldn't move\n",PlayerParty.P1->Poke->Name);
+          if (PlayerPara == 1) printf("It was paralyzed!");
+          }
         if (PlayerHit == 1) {
+        if (YourTurn->Move->Category != 0) {
         printf("It did %d damage!\n",Damage);
         if (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
@@ -860,6 +993,35 @@ int Battle() {
           printf("It was not very effective!\n");
         }
         printf("The opposing %s is at %d/%d hp\n\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
+          } 
+          if (YourTurn->Move->BoostRate[0] != 0) {
+             if (YourTurn->Move->BoostRate[0] != 0) printf("%s Attack rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[0]);
+            else printf("%s Attack fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[0]);
+           }
+          if (YourTurn->Move->BoostRate[1] != 0) {
+             if (YourTurn->Move->BoostRate[1] != 0) printf("%s Defense rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[1]);
+            else printf("%s Defense fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[1]);
+            }
+          if (YourTurn->Move->BoostRate[2] != 0) {
+             if (YourTurn->Move->BoostRate[2] != 0) printf("%s Special Attack rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[2]);
+            else printf("%s Special Attack fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[2]);
+            }
+          if (YourTurn->Move->BoostRate[3] != 0) {
+             if (YourTurn->Move->BoostRate[3] != 0) printf("%s Special Defense rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[3]);
+            else printf("%s Special Defense fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[3]);
+            }
+          if (YourTurn->Move->BoostRate[4] != 0) {
+             if (YourTurn->Move->BoostRate[4] != 0) printf("%s Speed rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[4]);
+            else printf("%s Speed fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[4]);
+          }
+          if (YourTurn->Move->BoostRate[5] != 0) {
+             if (YourTurn->Move->BoostRate[5] != 0) printf("%s Accuracy rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[5]);
+            else printf("%s Accuracy fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[5]);
+          }
+          if (YourTurn->Move->BoostRate[6] != 0) {
+             if (YourTurn->Move->BoostRate[6] != 0) printf("%s Crit Chance rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[6]);
+            else printf("%s Crit Chance fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[6]);
+          }
           } else {
           printf("But it missed!\n");
           }
@@ -872,6 +1034,16 @@ int Battle() {
           }
           }
       }
+      
+      if (PlayerParty.P1->Non_Volatile_Status == 1) {
+        printf("\n%s took some damage from its burn\n",PlayerParty.P1->Poke->Name);
+        printf("Your %s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
+      }
+      if (EnemyParty.P1->Non_Volatile_Status == 1) {
+        printf("\nThe opposing %s took some damage from its burn\n",EnemyParty.P1->Poke->Name);
+        printf("The opposing %s is at %d/%d hp\n\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
+      }
+      
       Display = 0;
       Retrieve = 1;
     }

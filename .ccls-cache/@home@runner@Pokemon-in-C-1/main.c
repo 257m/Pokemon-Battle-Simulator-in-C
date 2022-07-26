@@ -13,7 +13,9 @@
 #include "battle.h"
 
 int main(void) {
+  system("clear");
   srand(time(NULL));
+  Pokemon1.Non_Volatile_Status = 3;
   printf("%d\n",time(0));
   Battle();
   return 0;

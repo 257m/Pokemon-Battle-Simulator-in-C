@@ -68,11 +68,10 @@ int Thunder_Shockf(unsigned char et, bool eop) {
 int Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
   if (eop == 0) {
-    EnemyParty.P1->Non_Volatile_Status = 3;
+    if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 3;
   } else {
-    PlayerParty.P1->Non_Volatile_Status = 3;
+    if (PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 3;
   }
-    return 0;
   }
   return 0;
 }
@@ -96,6 +95,17 @@ int Dragon_Dancef(unsigned char et,bool eop) {
     } else {
       Boost(0,1,EnemyParty.P1);
       Boost(4,1,EnemyParty.P1);
+    }
+  }
+  return 0;
+}
+
+int Will_O_Wispf(unsigned char et,bool eop) {
+  if (et == 1) {
+    if (eop == 0) {
+     if (EnemyParty.P1->Poke->Type1 != 2 && EnemyParty.P1->Poke->Type1 != 2 && EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 1;
+    } else {
+     if (PlayerParty.P1->Poke->Type1 != 2 && PlayerParty.P1->Poke->Type2 != 2 && PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 1;
     }
   }
   return 0;
