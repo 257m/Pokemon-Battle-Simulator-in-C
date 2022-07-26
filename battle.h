@@ -276,8 +276,8 @@ int Battle() {
       if(PlayerParty.P1->Move1.Move == &Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move1.PP <= 0) {
-    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+  } else if (PlayerParty.P1->Move2.PP <= 0) {
+    if (PlayerParty.P1->Move1.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -290,8 +290,8 @@ int Battle() {
        if(PlayerParty.P1->Move1.Move == &Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move1.PP <= 0) {
-    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+  } else if (PlayerParty.P1->Move3.PP <= 0) {
+    if (PlayerParty.P1->Move1.PP <= 0 && PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -304,8 +304,8 @@ int Battle() {
        if(PlayerParty.P1->Move1.Move == &Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move1.PP <= 0) {
-    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+  } else if (PlayerParty.P1->Move4.PP <= 0) {
+    if (PlayerParty.P1->Move1.PP <= 0 && PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");

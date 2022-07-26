@@ -1,14 +1,14 @@
 void display (bool eop) {
   if (!eop) {
-    if (PlayerSwitch == 0) {
-        if (PlayerCanMove == 1) printf("%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
+    if (!PlayerSwitch) {
+        if (PlayerCanMove) printf("%s used %s!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->Name);
         else {
           printf("%s couldn't move\n",PlayerParty.P1->Poke->Name);
           if (PlayerPara) printf("It was paralyzed!\n");
           else if (PlayerSleep) printf("It is asleep\n");
           else if (PlayerFrozen) printf("It is frozen!\n");
           }
-        if (PlayerHit == 1 && PlayerCanMove == 1) {
+        if (PlayerHit && PlayerCanMove) {
         if (YourTurn->Move->Category != 0) {
         printf("It did %d damage!\n",Damage);
         if (TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type1] * TypeChart[YourTurn->Move->Type][EnemyParty.P1->Poke->Type2] >= 2) {
@@ -47,7 +47,7 @@ void display (bool eop) {
              if (YourTurn->Move->BoostRate[6] != 0) printf("%s Crit Chance rose by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[6]);
             else printf("%s Crit Chance fell by %d stages!\n",PlayerParty.P1->Poke->Name,YourTurn->Move->BoostRate[6]);
           }
-          } else if (PlayerHit == 0) printf("But it missed!\n");
+          } else if (!PlayerHit && PlayerCanMove) printf("But it missed!\n");
           } else {
           printf("You switched out to %s\n",PlayerParty.P1->Poke->Name);
           }
@@ -60,15 +60,15 @@ void display (bool eop) {
     printf("\n");
   } 
   else {
-   if (EnemySwitch == 0) {
-         if (EnemyCanMove == 1) printf("The opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
+   if (!EnemySwitch) {
+         if (EnemyCanMove) printf("The opposing %s used %s!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->Name);
         else {
           printf("The opposing %s couldn't move\n",EnemyParty.P1->Poke->Name);
           if (EnemyPara) printf("It was paralyzed!\n");
           else if (EnemySleep) printf("It is asleep\n");
           else if (EnemyFrozen) printf("It is frozen!\n");
           }      
-          if (EnemyHit == 1 && EnemyCanMove == 1) {        
+          if (EnemyHit && EnemyCanMove) {        
         if (EnemyTurn->Move->Category != 0) {
         printf("It did %d damage!\n",EnemyDamage);
         if (TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type1] * TypeChart[EnemyTurn->Move->Type][PlayerParty.P1->Poke->Type2] >= 2) {
@@ -107,7 +107,7 @@ void display (bool eop) {
              if (EnemyTurn->Move->BoostRate[6] != 0) printf("%s Crit Chance rose by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[6]);
             else printf("%s Crit Chance fell by %d stages!\n",EnemyParty.P1->Poke->Name,EnemyTurn->Move->BoostRate[6]);
           }
-          } else if (EnemyHit == 0) printf("But it missed!\n");
+          } else if (!EnemyHit && EnemyCanMove) printf("But it missed!\n");
           } else {
           printf("The Enemy switched out to %s\n",EnemyParty.P1->Poke->Name);
           }

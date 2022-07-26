@@ -2,4 +2,4 @@ x | Setup up moves
 x | have status moves not have their effects if move misses
 x | Make non volatile status conditions(6/6)
 o | Learn more Vim commands and master the ones already learned
-o | Make it so that when a setup moves misses or dosen't have its boost the boosts aren't displayed to user
+o | Make it so that when a setup moves misses or dosen't have its boost the boosts aren't displayed to user(Probably create an array that stores the users boosts this turn or something of that like)
