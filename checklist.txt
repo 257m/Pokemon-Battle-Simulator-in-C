@@ -1,5 +1,23 @@
 x | Setup up moves
+
 x | have status moves not have their effects if move misses
-x | Make non volatile status conditions(6/6)
-o | Learn more Vim commands and master the ones already learned
-o | Make it so that when a setup moves misses or dosen't have its boost the boosts aren't displayed to user(Probably create an array that stores the users boosts this turn or something of that like)
+
+x | Make non volatile status conditions(6/6) // Easier than I thought para was a nightmare though(because I was looking in the wrong place for the bug). Displaying it to the user wasn't to hard either just had to do some reformatting to make it look nice 
+
+o | Learn more Vim commands and master the ones already learned // vim is great but f copy pasting something outside the project
+
+x | Make it so that when a setup moves misses or dosen't have its boost the boosts aren't displayed to user(Probably create an array that stores the users boosts this turn or something of that like) // Sidenote probably better to call movefuncs in display for it // It probably be smart to just split the display func instead but that a lot of work i might just have to fork the project
+
+o | Volatile Status conditions // Retrieve will have to start check poke status data prob have to create a new data structure to keep to track of legal options for the player and then have the retrieve loop access that or create a function that takes in input from the conditional and have that determine a moves validity // Just look at the bulbapedia of volatile statuses and f this there are so many and most timers and shit but none of them are similar enough to put into a convinient data structure
+
+o | Abilities // Will have to change the data structures for PokemonDex and MyPokemon. You can't just store the abilities in pokemondex(and have the MyPokemon store a num) because the pokemon ability has to be subject to change and not reliant on the pokedata for moves like simple beam or skill swap or just to have special mystery gift pokemon in the main game. Overall the Abilities will work alot like the moves do in that there will be func pointers that will call the ability funcs in a versatile way while also leaving enough data/flags behind for the display to piece together what happened during execution
+
+o | Held Items // Same as abilities and moves really in the sense that there will item funcs with ets and eops. Although unlike those there will have to be the ability for a item to be knocked or not be in use but still be in memory because you have things like harvest that revive items that have been consumed/knocked and given the prevalence of Knock Off in the competitive scene the absence will be notice if you are lazy and don't add for the sake of allocating a byte or two
+
+o | Weather // This is both very straight forward and difficult (better than complex and difficult but still bad) It should be simple to store what weather it is a simple char will suffice for that but then you have things like the time of weather and displaying it to the user and then the effects of weather having to edit a bunch to have it check and take into account weather in things like speed calcs,damage calcs, ablities and items activation
+
+o | Typing // Will have to temp typing in MyPokemon for moves like soak and burn up but its not really of importance right now 
+
+o | Entry Hazards // This will be fun i guess straightforward enough it dosen't really need a blurb but i just need two numbers or gorups of bools where each bit will tell if a certain hazard is up or not and then edit switcheroo and switch functions to apply affects
+
+o | Critical Hits

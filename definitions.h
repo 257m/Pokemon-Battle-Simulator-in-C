@@ -1,3 +1,5 @@
+const unsigned int bits [] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384};
+
 char c[64];
 char d[64];
 
@@ -46,6 +48,11 @@ int boolcheck (char mem, char digit) {
   } else return -1;
 }
 
+int boolcheck2(int mem, unsigned char digit) {
+  if (mem & bits[digit]) return 1;
+  else return 0;
+}
+
 double statboostmult(char statboost) {
   if (statboost >= 0 || statboost == NULL) {
     return (statboost*0.5)+1;
@@ -63,6 +70,19 @@ unsigned int map2(unsigned int num,unsigned int newmax,unsigned int currentmax) 
   if (currentmax==NULL) currentmax = RAND_MAX;
   if (num > currentmax-(currentmax % newmax)) return map2(rand(),newmax,currentmax);
   else return (num % newmax);
+}
+
+unsigned int power2(char num) {
+  unsigned int total = 1;
+  for (int i = 0;i < num;i++) {
+    total*2;
+  }
+  return total;
+}
+
+double tt(bool condition,double ifcon,double elsecon) {
+  if (condition) return ifcon;
+  else return elsecon;
 }
 
 struct PokemonDex {
@@ -132,7 +152,7 @@ struct Move {
  unsigned char Category;
  char Priority;
  int (*movefunc)(unsigned char,bool);
- char BoostRate [7];
+ char BoostRate [8];
  unsigned char BoostChance;
  StatusChance_t StatusChance [];
 };
@@ -209,7 +229,7 @@ float PPmult;
  unsigned char Counter;
  unsigned char Non_Volatile_Status;
  unsigned char Volatile_Status [8];
- char StatBoosts [7];
+ char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit 
 };
 
 struct Party {
@@ -220,6 +240,12 @@ struct Party {
  struct MyPokemon *P5;
  struct MyPokemon *P6;
 };
+
+typedef struct {
+char Name [14];
+} Statname;
+
+Statname Stagenames [8] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 
 struct Party PlayerParty;
 struct Party EnemyParty;
@@ -261,3 +287,5 @@ bool PlayerSleep;
 bool EnemySleep;
 bool PlayerFrozen;
 bool EnemyFrozen;
+bool PlayerCrit;
+bool EnemyCrit;

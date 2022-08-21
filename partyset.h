@@ -1,5 +1,5 @@
-struct MyPokemon Pokemon1 = {&Charmander,5,20,&Jolly,31,31,31,31,31,31,
-{&Thunder_Wave,0,1.6},{&Toxic,0,1.6},{&Will_O_Wisp,0,1.6},{&Freeze,0,1.6},
+struct MyPokemon Pokemon1 = {&Charmander,5,0,&Jolly,31,31,31,31,31,31,
+{&Quick_Attack,0,1.6},{&Stone_Edge,0,1.6},{&Dragon_Dance,0,1.6},{&Vine_Whip,0,1.6},
 0,180,92,4,0,236};
 
 struct MyPokemon Pokemon2 = {&Pidgey,5,20,&Naive,31,31,31,31,31,31,
@@ -14,7 +14,7 @@ struct MyPokemon Pokemon4 = {&Squirtle,5,21,&Impish,31,31,31,31,31,31,
 {&Quick_Attack,0,1.6},{&Stone_Edge,0,1.6},{&Will_O_Wisp,0,1.6},{&Vine_Whip,0,1.6},
 4,212,156,36,84,12};
 
-struct MyPokemon Pokemon5 = {&Charmander,5,20,&Jolly,31,31,31,31,31,31,
+struct MyPokemon Pokemon5 = {&Charmander,5,0,&Jolly,31,31,31,31,31,31,
 {&Quick_Attack,0,1.6},{&Stone_Edge,0,1.6},{&Vine_Whip,0,1.6},{&Ember,0,1.6},
 0,180,92,4,0,236};
 
@@ -23,7 +23,7 @@ struct MyPokemon Pokemon6 = {&Pidgey,5,20,&Naive,31,31,31,31,31,31,
 0,236,36,4,0,228};
 
 struct MyPokemon EnemyPokemon1 = {&Charmander,5,20,&Jolly,31,31,31,31,31,31,
-{&Thunder_Wave,0,1.6},{&Toxic,0,1.6},{&Will_O_Wisp,0,1.6},{&Freeze,0,1.6},
+{&Quick_Attack,0,1.6},{&Stone_Edge,0,1.6},{&Swords_Dance,0,1.6},{&Vine_Whip,0,1.6},
 0,180,92,4,0,236};
 
 struct MyPokemon EnemyPokemon2 = {&Pidgey,5,20,&Naive,31,31,31,31,31,31,
