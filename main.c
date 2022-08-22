@@ -10,7 +10,10 @@
 #include "pokedata.h"
 #include "partyset.h"
 #include "switching.h"
+#include "itemfuncs.h"
+#include "helditems.h"
 #include "displayfuncs.h"
+#include "execution.h"
 #include "battle.h"
 
 int main(void) {

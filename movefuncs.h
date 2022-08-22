@@ -158,30 +158,30 @@ void ResetBoosts(struct MyPokemon* pokemon) {
   pokemon->StatBoosts[7] = 0;
 }
 
-int Nothingf(unsigned char et, bool eop) {
+void Nothingf(unsigned char et, bool eop) {
   return 0;
 }
-int Strugglef(unsigned char et, bool eop) {
+void Strugglef(unsigned char et, bool eop) {
   YourTurn->PP++;
   if (et == 2) {
     if (eop == 0) {
-      PlayerParty.P1->CurrentHp -= Damage/4;
+      PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp/4;
     } else {
-      EnemyParty.P1->CurrentHp -= EnemyDamage/4;
+      EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp/4;
     }
   }
   return 0;
 }
-int Scratchf(unsigned char et, bool eop) {
+void Scratchf(unsigned char et, bool eop) {
   return 0;
 }
-int Water_Gunf(unsigned char et, bool eop) {
+void Water_Gunf(unsigned char et, bool eop) {
   return 0;
 }
-int Vine_Whipf(unsigned char et, bool eop) {
+void Vine_Whipf(unsigned char et, bool eop) {
   return 0;
 }
-int Emberf(unsigned char et, bool eop) {
+void Emberf(unsigned char et, bool eop) {
   if (et == 2) {
   if (eop == 0) {
   if (map2(rand(),100,RAND_MAX) < 10) {
@@ -195,22 +195,22 @@ int Emberf(unsigned char et, bool eop) {
     }
   return 0;
 }
-int Quick_Attackf(unsigned char et, bool eop) {
+void Quick_Attackf(unsigned char et, bool eop) {
   return 0;
 }
-int Super_Attackf(unsigned char et, bool eop) {
+void Super_Attackf(unsigned char et, bool eop) {
   return 0;
 }
-int Stone_Edgef(unsigned char et, bool eop) {
+void Stone_Edgef(unsigned char et, bool eop) {
   return 0;
 }
-int Gustf(unsigned char et, bool eop) {
+void Gustf(unsigned char et, bool eop) {
   return 0;
 }
-int Thunder_Shockf(unsigned char et, bool eop) {
+void Thunder_Shockf(unsigned char et, bool eop) {
   return 0;
 }
-int Thunder_Wavef(unsigned char et, bool eop) {
+void Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
   if (eop == 0) {
     if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 3;
@@ -221,8 +221,8 @@ int Thunder_Wavef(unsigned char et, bool eop) {
   return 0;
 }
 
-int Swords_Dancef(unsigned char et, bool eop) {
-  if (et == 1) {
+void Swords_Dancef(unsigned char et, bool eop) {
+  if (et == 2) {
     if (eop == 0) {
       Boostandprint(0,2,PlayerParty.P1,0);
     } else {
@@ -232,8 +232,8 @@ int Swords_Dancef(unsigned char et, bool eop) {
   return 0;
   }
 
-int Dragon_Dancef(unsigned char et,bool eop) {
-  if (et == 1) {
+void Dragon_Dancef(unsigned char et,bool eop) {
+  if (et == 2) {
     if (eop == 0) {
       Boostandprint(0,1,PlayerParty.P1,0);
       Boostandprint(4,1,PlayerParty.P1,0);
@@ -245,7 +245,7 @@ int Dragon_Dancef(unsigned char et,bool eop) {
   return 0;
 }
 
-int Will_O_Wispf(unsigned char et,bool eop) {
+void Will_O_Wispf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
      if (EnemyParty.P1->Poke->Type1 != 2 && EnemyParty.P1->Poke->Type1 != 2 && EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 1;
@@ -256,7 +256,7 @@ int Will_O_Wispf(unsigned char et,bool eop) {
   return 0;
 }
 
-int Sporef(unsigned char et,bool eop) {
+void Sporef(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
      if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 4;
@@ -267,7 +267,7 @@ int Sporef(unsigned char et,bool eop) {
   return 0;
 }
 
-int Toxicf(unsigned char et,bool eop) {
+void Toxicf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
      if (EnemyParty.P1->Poke->Type1 != 8 && EnemyParty.P1->Poke->Type2 != 8 && EnemyParty.P1->Poke->Type1 != 17 && EnemyParty.P1->Poke->Type2 != 17 && EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 5;
@@ -285,12 +285,25 @@ int Toxicf(unsigned char et,bool eop) {
   return 0;
 }
 
-int Freezef(unsigned char et,bool eop) {
+void Freezef(unsigned char et,bool eop) {
   if (et == 2) {
     if (!eop) {
       if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 6;
     } else {
       if (PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 6;
+    }
+  }
+  return 0;
+}
+
+void Bulk_Upf(unsigned char et,bool eop) {
+  if (et == 2) {
+    if (eop == 0) {
+      Boostandprint(0,1,PlayerParty.P1,0);
+      Boostandprint(1,1,PlayerParty.P1,0);
+    } else {
+      Boostandprint(0,1,EnemyParty.P1,1);
+      Boostandprint(1,1,EnemyParty.P1,1);
     }
   }
   return 0;

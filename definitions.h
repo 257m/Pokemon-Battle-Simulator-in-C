@@ -73,6 +73,7 @@ unsigned int map2(unsigned int num,unsigned int newmax,unsigned int currentmax) 
 }
 
 unsigned int power2(char num) {
+  if (num < 0) return 0;
   unsigned int total = 1;
   for (int i = 0;i < num;i++) {
     total*2;
@@ -144,18 +145,15 @@ unsigned char Chance;
 } StatusChance_t;
 
 struct Move {
- char Name[20];
+ char Name[15];
  unsigned char BP;
  unsigned char Accuracy;
  unsigned char PP;
  unsigned char Type;
  unsigned char Category;
  char Priority;
- int (*movefunc)(unsigned char,bool);
- char BoostRate [8];
- unsigned char BoostChance;
- StatusChance_t StatusChance [];
-};
+ void (*movefunc)(unsigned char,bool);
+}__attribute__((__packed__));
 
 struct Nature {
   float Atk;
@@ -199,10 +197,16 @@ unsigned char PP;
 float PPmult;
 } MoveSlot;
 
+typedef struct { 
+char Name [12];
+void (*itemfunc)(char,bool);
+} Item;
+
  struct MyPokemon {
  struct PokemonDex *Poke;
  int Level;
  int CurrentHp;
+ unsigned char Item;
  struct Nature *Nature;
  unsigned char IVHp;
  unsigned char IVAtk;
@@ -242,7 +246,7 @@ struct Party {
 };
 
 typedef struct {
-char Name [14];
+char Name [15];
 } Statname;
 
 Statname Stagenames [8] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
