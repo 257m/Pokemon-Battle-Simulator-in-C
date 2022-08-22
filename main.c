@@ -8,14 +8,14 @@
 #include "movefuncs.h"
 #include "movedata.h"
 #include "pokedata.h"
-#include "switching.h"
 #include "itemfuncs.h"
 #include "helditems.h"
+#include "displayparty.h"
+#include "switching.h"
 #include "displayfuncs.h"
 #include "execution.h"
 #include "endofturn.h"
 #include "partyset.h"
-#include "displayparty.h"
 #include "battle.h"
 
 int main(void) {

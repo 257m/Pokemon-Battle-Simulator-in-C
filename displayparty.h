@@ -19,10 +19,11 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",PlayerParty.P1->SpD);
       printf("Speed: %d\n",PlayerParty.P1->Spe);
       printf("Nature: %s\n",PlayerParty.P1->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",PlayerParty.P1->Move1.Move->Name,PlayerParty.P1->Move1.PP,PlayerParty.P1->Move1.Move->PP * PlayerParty.P1->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",PlayerParty.P1->Move2.Move->Name,PlayerParty.P1->Move2.PP,PlayerParty.P1->Move2.Move->PP * PlayerParty.P1->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",PlayerParty.P1->Move3.Move->Name,PlayerParty.P1->Move3.PP,PlayerParty.P1->Move3.Move->PP * PlayerParty.P1->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",PlayerParty.P1->Move4.Move->Name,PlayerParty.P1->Move4.PP,PlayerParty.P1->Move4.Move->PP * PlayerParty.P1->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.P1->Move1.Move].Name,PlayerParty.P1->Move1.PP,MoveList[PlayerParty.P1->Move1.Move].PP * PlayerParty.P1->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.P1->Move2.Move].Name,PlayerParty.P1->Move2.PP,MoveList[PlayerParty.P1->Move2.Move].PP * PlayerParty.P1->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.P1->Move3.Move].Name,PlayerParty.P1->Move3.PP,MoveList[PlayerParty.P1->Move3.Move].PP * PlayerParty.P1->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[PlayerParty.P1->Move4.Move].Name,PlayerParty.P1->Move4.PP,MoveList[PlayerParty.P1->Move4.Move].PP * PlayerParty.P1->Move4.PPmult);
+      printf("Item: %s (%s)",ItemList[PlayerParty.P1->Item].Name,Itemtext[PlayerParty.P1->ItemUsable]);
       } else if (strcmp(x,"P2") == 0) {
       printf("\e[1;37m\nP2:\e[0m\n");
       printf("Pokemon: %s\n",PlayerParty.P2->Poke->Name);
@@ -33,10 +34,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",PlayerParty.P2->SpD);
       printf("Speed: %d\n",PlayerParty.P2->Spe);
       printf("Nature: %s\n",PlayerParty.P2->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",PlayerParty.P2->Move1.Move->Name,PlayerParty.P2->Move1.PP,PlayerParty.P2->Move1.Move->PP * PlayerParty.P2->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",PlayerParty.P2->Move2.Move->Name,PlayerParty.P2->Move2.PP,PlayerParty.P2->Move2.Move->PP * PlayerParty.P2->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",PlayerParty.P2->Move3.Move->Name,PlayerParty.P2->Move3.PP,PlayerParty.P2->Move3.Move->PP * PlayerParty.P2->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",PlayerParty.P2->Move4.Move->Name,PlayerParty.P2->Move4.PP,PlayerParty.P2->Move4.Move->PP * PlayerParty.P2->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.P2->Move1.Move].Name,PlayerParty.P2->Move1.PP,MoveList[PlayerParty.P2->Move1.Move].PP * PlayerParty.P2->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.P2->Move2.Move].Name,PlayerParty.P2->Move2.PP,MoveList[PlayerParty.P2->Move2.Move].PP * PlayerParty.P2->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.P2->Move3.Move].Name,PlayerParty.P2->Move3.PP,MoveList[PlayerParty.P2->Move3.Move].PP * PlayerParty.P2->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[PlayerParty.P2->Move4.Move].Name,PlayerParty.P2->Move4.PP,MoveList[PlayerParty.P2->Move4.Move].PP * PlayerParty.P2->Move4.PPmult);
       } else if (strcmp(x,"P3") == 0) {
       printf("\e[1;37m\nP3:\e[0m\n");
       printf("Pokemon: %s\n",PlayerParty.P3->Poke->Name);
@@ -46,11 +47,11 @@ void displayparty(bool eop) {
       printf("Special Attack: %d\n",PlayerParty.P3->SpA);
       printf("Special Defense: %d\n",PlayerParty.P3->SpD);
       printf("Speed: %d\n",PlayerParty.P3->Spe);
-      printf("Nature: %s\n",PlayerParty.P3->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",PlayerParty.P3->Move1.Move->Name,PlayerParty.P3->Move1.PP,PlayerParty.P3->Move1.Move->PP * PlayerParty.P3->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",PlayerParty.P3->Move2.Move->Name,PlayerParty.P3->Move2.PP,PlayerParty.P3->Move2.Move->PP * PlayerParty.P3->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",PlayerParty.P3->Move3.Move->Name,PlayerParty.P3->Move3.PP,PlayerParty.P3->Move3.Move->PP * PlayerParty.P3->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",PlayerParty.P3->Move4.Move->Name,PlayerParty.P3->Move4.PP,PlayerParty.P3->Move4.Move->PP * PlayerParty.P3->Move4.PPmult);
+      printf("Nature :%s\n",PlayerParty.P3->Nature->NatureName);
+      printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.P3->Move1.Move].Name,PlayerParty.P3->Move1.PP,MoveList[PlayerParty.P3->Move1.Move].PP * PlayerParty.P3->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.P3->Move2.Move].Name,PlayerParty.P3->Move2.PP,MoveList[PlayerParty.P3->Move2.Move].PP * PlayerParty.P3->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.P3->Move3.Move].Name,PlayerParty.P3->Move3.PP,MoveList[PlayerParty.P3->Move3.Move].PP * PlayerParty.P3->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[PlayerParty.P3->Move4.Move].Name,PlayerParty.P3->Move4.PP,MoveList[PlayerParty.P3->Move4.Move].PP * PlayerParty.P3->Move4.PPmult);
       } else if (strcmp(x,"P4") == 0) {
       printf("\e[1;37m\nP4:\e[0m\n");
       printf("Pokemon: %s\n",PlayerParty.P4->Poke->Name);
@@ -61,10 +62,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",PlayerParty.P4->SpD);
       printf("Speed: %d\n",PlayerParty.P4->Spe);
       printf("Nature: %s\n",PlayerParty.P4->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",PlayerParty.P4->Move1.Move->Name,PlayerParty.P4->Move1.PP,PlayerParty.P4->Move1.Move->PP * PlayerParty.P4->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",PlayerParty.P4->Move2.Move->Name,PlayerParty.P4->Move2.PP,PlayerParty.P4->Move2.Move->PP * PlayerParty.P4->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",PlayerParty.P4->Move3.Move->Name,PlayerParty.P4->Move3.PP,PlayerParty.P4->Move3.Move->PP * PlayerParty.P4->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",PlayerParty.P4->Move4.Move->Name,PlayerParty.P4->Move4.PP,PlayerParty.P4->Move4.Move->PP * PlayerParty.P4->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.P4->Move1.Move].Name,PlayerParty.P4->Move1.PP,MoveList[PlayerParty.P4->Move1.Move].PP * PlayerParty.P4->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.P4->Move2.Move].Name,PlayerParty.P4->Move2.PP,MoveList[PlayerParty.P4->Move2.Move].PP * PlayerParty.P4->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.P4->Move3.Move].Name,PlayerParty.P4->Move3.PP,MoveList[PlayerParty.P4->Move3.Move].PP * PlayerParty.P4->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[PlayerParty.P4->Move4.Move].Name,PlayerParty.P4->Move4.PP,MoveList[PlayerParty.P4->Move4.Move].PP * PlayerParty.P4->Move4.PPmult);
       } else if (strcmp(x,"P5") == 0) {
       printf("\e[1;37m\nP5:\e[0m\n");
       printf("Pokemon: %s\n",PlayerParty.P5->Poke->Name);
@@ -75,10 +76,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",PlayerParty.P5->SpD);
       printf("Speed: %d\n",PlayerParty.P5->Spe);
       printf("Nature: %s\n",PlayerParty.P5->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",PlayerParty.P5->Move1.Move->Name,PlayerParty.P5->Move1.PP,PlayerParty.P5->Move1.Move->PP * PlayerParty.P5->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",PlayerParty.P5->Move2.Move->Name,PlayerParty.P5->Move2.PP,PlayerParty.P5->Move2.Move->PP * PlayerParty.P5->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",PlayerParty.P5->Move3.Move->Name,PlayerParty.P5->Move3.PP,PlayerParty.P5->Move3.Move->PP * PlayerParty.P5->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",PlayerParty.P5->Move4.Move->Name,PlayerParty.P5->Move4.PP,PlayerParty.P5->Move4.Move->PP * PlayerParty.P5->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.P5->Move1.Move].Name,PlayerParty.P5->Move1.PP,MoveList[PlayerParty.P5->Move1.Move].PP * PlayerParty.P5->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.P5->Move2.Move].Name,PlayerParty.P5->Move2.PP,MoveList[PlayerParty.P5->Move2.Move].PP * PlayerParty.P5->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.P5->Move3.Move].Name,PlayerParty.P5->Move3.PP,MoveList[PlayerParty.P5->Move3.Move].PP * PlayerParty.P5->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[PlayerParty.P5->Move4.Move].Name,PlayerParty.P5->Move4.PP,MoveList[PlayerParty.P5->Move4.Move].PP * PlayerParty.P5->Move4.PPmult);
       } else if (strcmp(x,"P6") == 0) {
       printf("\e[1;37m\nP6:\e[0m\n");
       printf("Pokemon: %s\n",PlayerParty.P6->Poke->Name);
@@ -89,13 +90,14 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",PlayerParty.P6->SpD);
       printf("Speed: %d\n",PlayerParty.P6->Spe);
       printf("Nature: %s\n",PlayerParty.P6->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",PlayerParty.P6->Move1.Move->Name,PlayerParty.P6->Move1.PP,PlayerParty.P6->Move1.Move->PP * PlayerParty.P6->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",PlayerParty.P6->Move2.Move->Name,PlayerParty.P6->Move2.PP,PlayerParty.P6->Move2.Move->PP * PlayerParty.P6->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",PlayerParty.P6->Move3.Move->Name,PlayerParty.P6->Move3.PP,PlayerParty.P6->Move3.Move->PP * PlayerParty.P6->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",PlayerParty.P6->Move4.Move->Name,PlayerParty.P6->Move4.PP,PlayerParty.P6->Move4.Move->PP * PlayerParty.P6->Move4.PPmult);
-  }
+      printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.P6->Move1.Move].Name,PlayerParty.P6->Move1.PP,MoveList[PlayerParty.P6->Move1.Move].PP * PlayerParty.P6->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.P6->Move2.Move].Name,PlayerParty.P6->Move2.PP,MoveList[PlayerParty.P6->Move2.Move].PP * PlayerParty.P6->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.P6->Move3.Move].Name,PlayerParty.P6->Move3.PP,MoveList[PlayerParty.P6->Move3.Move].PP * PlayerParty.P6->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[PlayerParty.P6->Move4.Move].Name,PlayerParty.P6->Move4.PP,MoveList[PlayerParty.P6->Move4.Move].PP * PlayerParty.P6->Move4.PPmult);
+    }
+
   } else {
-  printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
+   printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
       printf("\e[1;37mP2:\e[0m %s %d/%d\n",EnemyParty.P2->Poke->Name,EnemyParty.P2->CurrentHp,EnemyParty.P2->Hp);
       printf("\e[1;37mP3:\e[0m %s %d/%d\n",EnemyParty.P3->Poke->Name,EnemyParty.P3->CurrentHp,EnemyParty.P3->Hp);
       printf("\e[1;37mP4:\e[0m %s %d/%d\n",EnemyParty.P4->Poke->Name,EnemyParty.P4->CurrentHp,EnemyParty.P4->Hp);
@@ -114,10 +116,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",EnemyParty.P1->SpD);
       printf("Speed: %d\n",EnemyParty.P1->Spe);
       printf("Nature: %s\n",EnemyParty.P1->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",EnemyParty.P1->Move1.Move->Name,EnemyParty.P1->Move1.PP,EnemyParty.P1->Move1.Move->PP * EnemyParty.P1->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",EnemyParty.P1->Move2.Move->Name,EnemyParty.P1->Move2.PP,EnemyParty.P1->Move2.Move->PP * EnemyParty.P1->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",EnemyParty.P1->Move3.Move->Name,EnemyParty.P1->Move3.PP,EnemyParty.P1->Move3.Move->PP * EnemyParty.P1->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",EnemyParty.P1->Move4.Move->Name,EnemyParty.P1->Move4.PP,EnemyParty.P1->Move4.Move->PP * EnemyParty.P1->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.P1->Move1.Move].Name,EnemyParty.P1->Move1.PP,MoveList[EnemyParty.P1->Move1.Move].PP * EnemyParty.P1->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.P1->Move2.Move].Name,EnemyParty.P1->Move2.PP,MoveList[EnemyParty.P1->Move2.Move].PP * EnemyParty.P1->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.P1->Move3.Move].Name,EnemyParty.P1->Move3.PP,MoveList[EnemyParty.P1->Move3.Move].PP * EnemyParty.P1->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[EnemyParty.P1->Move4.Move].Name,EnemyParty.P1->Move4.PP,MoveList[EnemyParty.P1->Move4.Move].PP * EnemyParty.P1->Move4.PPmult);
       } else if (strcmp(x,"P2") == 0) {
       printf("\e[1;37m\nP2:\e[0m\n");
       printf("Pokemon: %s\n",EnemyParty.P2->Poke->Name);
@@ -128,10 +130,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",EnemyParty.P2->SpD);
       printf("Speed: %d\n",EnemyParty.P2->Spe);
       printf("Nature: %s\n",EnemyParty.P2->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",EnemyParty.P2->Move1.Move->Name,EnemyParty.P2->Move1.PP,EnemyParty.P2->Move1.Move->PP * EnemyParty.P2->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",EnemyParty.P2->Move2.Move->Name,EnemyParty.P2->Move2.PP,EnemyParty.P2->Move2.Move->PP * EnemyParty.P2->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",EnemyParty.P2->Move3.Move->Name,EnemyParty.P2->Move3.PP,EnemyParty.P2->Move3.Move->PP * EnemyParty.P2->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",EnemyParty.P2->Move4.Move->Name,EnemyParty.P2->Move4.PP,EnemyParty.P2->Move4.Move->PP * EnemyParty.P2->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.P2->Move1.Move].Name,EnemyParty.P2->Move1.PP,MoveList[EnemyParty.P2->Move1.Move].PP * EnemyParty.P2->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.P2->Move2.Move].Name,EnemyParty.P2->Move2.PP,MoveList[EnemyParty.P2->Move2.Move].PP * EnemyParty.P2->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.P2->Move3.Move].Name,EnemyParty.P2->Move3.PP,MoveList[EnemyParty.P2->Move3.Move].PP * EnemyParty.P2->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[EnemyParty.P2->Move4.Move].Name,EnemyParty.P2->Move4.PP,MoveList[EnemyParty.P2->Move4.Move].PP * EnemyParty.P2->Move4.PPmult);
       } else if (strcmp(x,"P3") == 0) {
       printf("\e[1;37m\nP3:\e[0m\n");
       printf("Pokemon: %s\n",EnemyParty.P3->Poke->Name);
@@ -141,11 +143,11 @@ void displayparty(bool eop) {
       printf("Special Attack: %d\n",EnemyParty.P3->SpA);
       printf("Special Defense: %d\n",EnemyParty.P3->SpD);
       printf("Speed: %d\n",EnemyParty.P3->Spe);
-      printf("Nature: %s\n",EnemyParty.P3->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",EnemyParty.P3->Move1.Move->Name,EnemyParty.P3->Move1.PP,EnemyParty.P3->Move1.Move->PP * EnemyParty.P3->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",EnemyParty.P3->Move2.Move->Name,EnemyParty.P3->Move2.PP,EnemyParty.P3->Move2.Move->PP * EnemyParty.P3->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",EnemyParty.P3->Move3.Move->Name,EnemyParty.P3->Move3.PP,EnemyParty.P3->Move3.Move->PP * EnemyParty.P3->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",EnemyParty.P3->Move4.Move->Name,EnemyParty.P3->Move4.PP,EnemyParty.P3->Move4.Move->PP * EnemyParty.P3->Move4.PPmult);
+      printf("Nature :%s\n",EnemyParty.P3->Nature->NatureName);
+      printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.P3->Move1.Move].Name,EnemyParty.P3->Move1.PP,MoveList[EnemyParty.P3->Move1.Move].PP * EnemyParty.P3->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.P3->Move2.Move].Name,EnemyParty.P3->Move2.PP,MoveList[EnemyParty.P3->Move2.Move].PP * EnemyParty.P3->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.P3->Move3.Move].Name,EnemyParty.P3->Move3.PP,MoveList[EnemyParty.P3->Move3.Move].PP * EnemyParty.P3->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[EnemyParty.P3->Move4.Move].Name,EnemyParty.P3->Move4.PP,MoveList[EnemyParty.P3->Move4.Move].PP * EnemyParty.P3->Move4.PPmult);
       } else if (strcmp(x,"P4") == 0) {
       printf("\e[1;37m\nP4:\e[0m\n");
       printf("Pokemon: %s\n",EnemyParty.P4->Poke->Name);
@@ -156,10 +158,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",EnemyParty.P4->SpD);
       printf("Speed: %d\n",EnemyParty.P4->Spe);
       printf("Nature: %s\n",EnemyParty.P4->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",EnemyParty.P4->Move1.Move->Name,EnemyParty.P4->Move1.PP,EnemyParty.P4->Move1.Move->PP * EnemyParty.P4->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",EnemyParty.P4->Move2.Move->Name,EnemyParty.P4->Move2.PP,EnemyParty.P4->Move2.Move->PP * EnemyParty.P4->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",EnemyParty.P4->Move3.Move->Name,EnemyParty.P4->Move3.PP,EnemyParty.P4->Move3.Move->PP * EnemyParty.P4->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",EnemyParty.P4->Move4.Move->Name,EnemyParty.P4->Move4.PP,EnemyParty.P4->Move4.Move->PP * EnemyParty.P4->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.P4->Move1.Move].Name,EnemyParty.P4->Move1.PP,MoveList[EnemyParty.P4->Move1.Move].PP * EnemyParty.P4->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.P4->Move2.Move].Name,EnemyParty.P4->Move2.PP,MoveList[EnemyParty.P4->Move2.Move].PP * EnemyParty.P4->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.P4->Move3.Move].Name,EnemyParty.P4->Move3.PP,MoveList[EnemyParty.P4->Move3.Move].PP * EnemyParty.P4->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[EnemyParty.P4->Move4.Move].Name,EnemyParty.P4->Move4.PP,MoveList[EnemyParty.P4->Move4.Move].PP * EnemyParty.P4->Move4.PPmult);
       } else if (strcmp(x,"P5") == 0) {
       printf("\e[1;37m\nP5:\e[0m\n");
       printf("Pokemon: %s\n",EnemyParty.P5->Poke->Name);
@@ -170,10 +172,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",EnemyParty.P5->SpD);
       printf("Speed: %d\n",EnemyParty.P5->Spe);
       printf("Nature: %s\n",EnemyParty.P5->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",EnemyParty.P5->Move1.Move->Name,EnemyParty.P5->Move1.PP,EnemyParty.P5->Move1.Move->PP * EnemyParty.P5->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",EnemyParty.P5->Move2.Move->Name,EnemyParty.P5->Move2.PP,EnemyParty.P5->Move2.Move->PP * EnemyParty.P5->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",EnemyParty.P5->Move3.Move->Name,EnemyParty.P5->Move3.PP,EnemyParty.P5->Move3.Move->PP * EnemyParty.P5->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",EnemyParty.P5->Move4.Move->Name,EnemyParty.P5->Move4.PP,EnemyParty.P5->Move4.Move->PP * EnemyParty.P5->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.P5->Move1.Move].Name,EnemyParty.P5->Move1.PP,MoveList[EnemyParty.P5->Move1.Move].PP * EnemyParty.P5->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.P5->Move2.Move].Name,EnemyParty.P5->Move2.PP,MoveList[EnemyParty.P5->Move2.Move].PP * EnemyParty.P5->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.P5->Move3.Move].Name,EnemyParty.P5->Move3.PP,MoveList[EnemyParty.P5->Move3.Move].PP * EnemyParty.P5->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[EnemyParty.P5->Move4.Move].Name,EnemyParty.P5->Move4.PP,MoveList[EnemyParty.P5->Move4.Move].PP * EnemyParty.P5->Move4.PPmult);
       } else if (strcmp(x,"P6") == 0) {
       printf("\e[1;37m\nP6:\e[0m\n");
       printf("Pokemon: %s\n",EnemyParty.P6->Poke->Name);
@@ -184,10 +186,10 @@ void displayparty(bool eop) {
       printf("Special Defense: %d\n",EnemyParty.P6->SpD);
       printf("Speed: %d\n",EnemyParty.P6->Spe);
       printf("Nature: %s\n",EnemyParty.P6->Nature->NatureName);
-      printf("Move1: %s %d/%.0f\n",EnemyParty.P6->Move1.Move->Name,EnemyParty.P6->Move1.PP,EnemyParty.P6->Move1.Move->PP * EnemyParty.P6->Move1.PPmult);
-      printf("Move2: %s %d/%.0f\n",EnemyParty.P6->Move2.Move->Name,EnemyParty.P6->Move2.PP,EnemyParty.P6->Move2.Move->PP * EnemyParty.P6->Move2.PPmult);
-      printf("Move3: %s %d/%.0f\n",EnemyParty.P6->Move3.Move->Name,EnemyParty.P6->Move3.PP,EnemyParty.P6->Move3.Move->PP * EnemyParty.P6->Move3.PPmult);
-      printf("Move4: %s %d/%.0f\n",EnemyParty.P6->Move4.Move->Name,EnemyParty.P6->Move4.PP,EnemyParty.P6->Move4.Move->PP * EnemyParty.P6->Move4.PPmult);
+      printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.P6->Move1.Move].Name,EnemyParty.P6->Move1.PP,MoveList[EnemyParty.P6->Move1.Move].PP * EnemyParty.P6->Move1.PPmult);
+      printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.P6->Move2.Move].Name,EnemyParty.P6->Move2.PP,MoveList[EnemyParty.P6->Move2.Move].PP * EnemyParty.P6->Move2.PPmult);
+      printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.P6->Move3.Move].Name,EnemyParty.P6->Move3.PP,MoveList[EnemyParty.P6->Move3.Move].PP * EnemyParty.P6->Move3.PPmult);
+      printf("Move4: %s %d/%.0f\n",MoveList[EnemyParty.P6->Move4.Move].Name,EnemyParty.P6->Move4.PP,MoveList[EnemyParty.P6->Move4.Move].PP * EnemyParty.P6->Move4.PPmult);
     }
         }
 }

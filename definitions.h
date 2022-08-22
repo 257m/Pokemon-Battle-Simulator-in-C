@@ -192,7 +192,7 @@ struct Nature Careful = {1,1,0.9,1.1,1,23,"Careful"};
 struct Nature Quirky = {1,1,1,1.1,1,24,"Quirky"};
 
 typedef struct {
-struct Move *Move;
+unsigned char Move;
 unsigned char PP;
 float PPmult;
 } MoveSlot;
@@ -246,11 +246,9 @@ struct Party {
  struct MyPokemon *P6;
 };
 
-typedef struct {
-char Name [15];
-} Statname;
+char Stagenames [8][15] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 
-Statname Stagenames [8] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
+char Itemtext[2][11] = {"Not Usable", "Usable"};
 
 struct Party PlayerParty;
 struct Party EnemyParty;

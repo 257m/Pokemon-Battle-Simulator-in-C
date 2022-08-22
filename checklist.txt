@@ -28,4 +28,4 @@ x | Condense View Party in to a func for easier editing as I have to update it f
 
 o | Update displayparty as it hasn't been given the opportunity to catch up with the rest of the game
 
-o | Change Moveslot struct so that it stores a char not a pointer to save space like items do
+x | Change Moveslot struct so that it stores a char not a pointer to save space like items do
