@@ -26,4 +26,6 @@ x | Condense execution in to a func for easier editing
 
 x | Condense View Party in to a func for easier editing as I have to update it for items and such
 
-o | Update displayparty as it hasen't been given the opportunity to catch up with the rest of the game
+o | Update displayparty as it hasn't been given the opportunity to catch up with the rest of the game
+
+o | Change Moveslot struct so that it stores a char not a pointer to save space like items do
