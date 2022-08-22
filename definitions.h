@@ -147,11 +147,11 @@ unsigned char Chance;
 struct Move {
  char Name[15];
  unsigned char BP;
- unsigned char Accuracy;
- unsigned char PP;
- unsigned char Type;
- unsigned char Category;
- char Priority;
+ unsigned int Accuracy : 7;
+ unsigned int PP : 6;
+ unsigned int Type : 5;
+ unsigned int Category : 2;
+ int Priority : 4;
  void (*movefunc)(unsigned char,bool);
 }__attribute__((__packed__));
 

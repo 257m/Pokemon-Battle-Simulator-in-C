@@ -24,4 +24,6 @@ x | Critical Hits
 
 x | Condense execution in to a func for easier editing
 
-o | Condense View Party in to a func for easier editing as I have to update it for items and such
+x | Condense View Party in to a func for easier editing as I have to update it for items and such
+
+o | Update displayparty as it hasen't been given the opportunity to catch up with the rest of the game

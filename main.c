@@ -15,6 +15,7 @@
 #include "execution.h"
 #include "endofturn.h"
 #include "partyset.h"
+#include "displayparty.h"
 #include "battle.h"
 
 int main(void) {
