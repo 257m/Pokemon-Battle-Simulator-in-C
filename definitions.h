@@ -1,4 +1,4 @@
-const unsigned int bits [] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384};
+const unsigned int bits [] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536};
 
 char c[64];
 char d[64];
@@ -233,7 +233,8 @@ void (*itemfunc)(char,bool);
  unsigned char Counter;
  unsigned char Non_Volatile_Status;
  unsigned char Volatile_Status [8];
- char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit 
+ char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
+ unsigned int ItemUsable : 1;
 };
 
 struct Party {
@@ -293,3 +294,4 @@ bool PlayerFrozen;
 bool EnemyFrozen;
 bool PlayerCrit;
 bool EnemyCrit;
+bool EndFirst;

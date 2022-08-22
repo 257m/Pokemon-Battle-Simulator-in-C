@@ -237,6 +237,21 @@ int Battle() {
       EnemyParty.P4->Non_Volatile_Status = 0;
       EnemyParty.P5->Non_Volatile_Status = 0;
       EnemyParty.P6->Non_Volatile_Status = 0;
+
+      PlayerParty.P1->ItemUsable = 1; 
+      PlayerParty.P2->ItemUsable = 1;
+      PlayerParty.P3->ItemUsable = 1;
+      PlayerParty.P4->ItemUsable = 1;
+      PlayerParty.P5->ItemUsable = 1;
+      PlayerParty.P6->ItemUsable = 1;
+
+      EnemyParty.P1->ItemUsable = 1;
+      EnemyParty.P2->ItemUsable = 1;
+      EnemyParty.P3->ItemUsable = 1;
+      EnemyParty.P4->ItemUsable = 1;
+      EnemyParty.P5->ItemUsable = 1;
+      EnemyParty.P6->ItemUsable = 1;
+
     }
     printf("\033[1A");
     printf("\033[2K");
@@ -711,52 +726,16 @@ int Battle() {
         ExecuteMove(0);
         }
       
-      if (PlayerParty.P1->Non_Volatile_Status == 1) {
-        PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp/8;
-        printf("%s took some damage from its burn!\n",PlayerParty.P1->Poke->Name);
-        printf("%s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
-      } else if (PlayerParty.P1->Non_Volatile_Status == 2) {
-        PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp/8;
-        printf("%s is hurt poison!\n",PlayerParty.P1->Poke->Name);
-        printf("%s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
-      } else if (PlayerParty.P1->Non_Volatile_Status == 5) {
-        if (PlayerParty.P1->Counter < 16) PlayerParty.P1->Counter++;
-        PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp*((double)PlayerParty.P1->Counter/16);
-        printf("%s is hurt by poison! (it's badly poisoned)\n",EnemyParty.P1->Poke->Name);
-        printf("%s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
+      if (floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM == floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM) {
+        EndFirst = (rand() % 2);
+      } else {
+        EndFirst = floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM > floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM;
       }
 
-      if (PlayerParty.P1->CurrentHp <= 0) {
-        printf("\033[1F%s fainted!\n",PlayerParty.P1->Poke->Name);
-        SwitchIn(1);
-        printf("\n");
-      } else {
-      ItemList[PlayerParty.P1->Item].itemfunc(5,0);
-      }
+      endturn(!EndFirst);
+      endturn(EndFirst);
       
-      if (EnemyParty.P1->Non_Volatile_Status == 1) {
-        EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp/8;
-        printf("The opposing %s took some damage from its burn!\n",EnemyParty.P1->Poke->Name);
-        printf("The opposing %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
-      } else if (EnemyParty.P1->Non_Volatile_Status == 2) {
-        EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp/8;
-        printf("The opposing %s is hurt by poison!\n",EnemyParty.P1->Poke->Name);
-        printf("The opposing %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
-      } else if (EnemyParty.P1->Non_Volatile_Status == 5) {
-        if (EnemyParty.P1->Counter < 16) EnemyParty.P1->Counter++;
-        EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp*((double)EnemyParty.P1->Counter/16);
-        printf("The opposing %s is hurt by poison! (it's badly poisoned)\n",EnemyParty.P1->Poke->Name);
-        printf("The opposing %s is at %d/%d hp\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
-      }
-
-      if (EnemyParty.P1->CurrentHp <= 0) {
-        printf("The opposing %s fainted!\n",EnemyParty.P1->Poke->Name);
-        SwitchIn(0);
-        //printf("The Enemy switched out to %s\n",PlayerParty.P1->Poke->Name);
-      } else {
-      ItemList[EnemyParty.P1->Item].itemfunc(5,1);
-      }
-        printf("\n\n");
+      printf("\n");
 
       Execute = 0;
       Retrieve = 1;

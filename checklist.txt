@@ -12,7 +12,7 @@ o | Volatile Status conditions // Retrieve will have to start check poke status 
 
 o | Abilities // Will have to change the data structures for PokemonDex and MyPokemon. You can't just store the abilities in pokemondex(and have the MyPokemon store a num) because the pokemon ability has to be subject to change and not reliant on the pokedata for moves like simple beam or skill swap or just to have special mystery gift pokemon in the main game. Overall the Abilities will work alot like the moves do in that there will be func pointers that will call the ability funcs in a versatile way while also leaving enough data/flags behind for the display to piece together what happened during execution
 
-o | Held Items // Same as abilities and moves really in the sense that there will item funcs with ets and eops. Although unlike those there will have to be the ability for a item to be knocked or not be in use but still be in memory because you have things like harvest that revive items that have been consumed/knocked and given the prevalence of Knock Off in the competitive scene the absence will be noticed if you are lazy and don't add for the sake of allocating a byte or two // Actually with bitfields it prob just be one bit
+x | Held Items // Same as abilities and moves really in the sense that there will item funcs with ets and eops. Although unlike those there will have to be the ability for a item to be knocked or not be in use but still be in memory because you have things like harvest that revive items that have been consumed/knocked and given the prevalence of Knock Off in the competitive scene the absence will be noticed if you are lazy and don't add for the sake of allocating a byte or two // Actually with bitfields it prob just be one bit
 
 o | Weather // This is both very straight forward and difficult (better than complex and difficult but still bad) It should be simple to store what weather it is a simple char will suffice for that but then you have things like the time of weather and displaying it to the user and then the effects of weather having to edit a bunch to have it check and take into account weather in things like speed calcs,damage calcs, ablities and items activation
 
@@ -23,3 +23,5 @@ o | Entry Hazards // This will be fun i guess straightforward enough it dosen't 
 x | Critical Hits
 
 x | Condense execution in to a func for easier editing
+
+o | Condense View Party in to a func for easier editing as I have to update it for items and such
