@@ -7,6 +7,8 @@
 #include "definitions.h"
 #include "movefuncs.h"
 #include "movedata.h"
+#include "abilityfuncs.h"
+#include "abilities.h"
 #include "pokedata.h"
 #include "itemfuncs.h"
 #include "helditems.h"

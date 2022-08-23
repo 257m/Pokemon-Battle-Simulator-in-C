@@ -529,6 +529,8 @@ int Battle() {
         First = PlayerSwitch;
       }
       // post speed,stab and reset funcs
+      AbilityList[PlayerParty.P1->Ability].abilityfunc(1,0);
+      AbilityList[EnemyParty.P1->Ability].abilityfunc(1,1);
       MoveList[YourTurn->Move].movefunc(0,0);
       MoveList[EnemyTurn->Move].movefunc(0,1);
       if (First == 1) {

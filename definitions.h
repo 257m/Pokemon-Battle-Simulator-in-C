@@ -202,11 +202,17 @@ char Name [12];
 void (*itemfunc)(char,bool);
 } Item;
 
+typedef struct {
+char Name [12];
+void (*abilityfunc)(char,bool);
+} Ability;
+
  struct MyPokemon {
  struct PokemonDex *Poke;
  int Level;
  int CurrentHp;
  unsigned char Item;
+ unsigned char Ability;
  struct Nature *Nature;
  unsigned char IVHp;
  unsigned char IVAtk;

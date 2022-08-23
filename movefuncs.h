@@ -117,28 +117,25 @@ void Boost(unsigned char stat,char boostrate,struct MyPokemon* pokemon) {
 }
 
 void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,bool eop) {
-  pokemon->StatBoosts[stat] += boostrate;
-  if (pokemon->StatBoosts[stat] > 6) {
+  char EOPTEXT [16] = "";
+  if (eop) strcpy(EOPTEXT,"The opposing ");
+  if (pokemon->StatBoosts[stat] >= 6) {
     pokemon->StatBoosts[stat] = 6;
-    printf("%s's %s can't go any higher\n",pokemon->Poke->Name,Stagenames[stat]);
-  } else if (pokemon->StatBoosts[stat] < -6) {
+    printf("%s%s's %s can't go any higher\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat]);
+  } else if (pokemon->StatBoosts[stat] <= -6) {
     pokemon->StatBoosts[stat] = -6;
-    printf("%s's %s can't go any lower\n",pokemon->Poke->Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any lower\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat]);
   } else {
-    if (!eop) {
     if (boostrate > 0) {
-    printf("%s's %s rose by %d stages\n",pokemon->Poke->Name,Stagenames[stat],boostrate);
+    if (pokemon->StatBoosts[stat] + boostrate > 6) boostrate = pokemon->StatBoosts[stat] + boostrate - 6;
+    pokemon->StatBoosts[stat] += boostrate;
+    printf("%s%s's %s rose by %d stages\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat],boostrate);
     } else if (boostrate < 0) {
-    printf("%s's %s fell by %d stages\n",pokemon->Poke->Name,Stagenames[stat],boostrate);
-    }
-      } else {
-      if (boostrate > 0) {
-    printf("The opposing %s's %s rose by %d stages\n",pokemon->Poke->Name,Stagenames[stat],boostrate);
-    } else if (boostrate < 0) {
-    printf("The opposing %s's %s fell by %d stages\n",pokemon->Poke->Name,Stagenames[stat],boostrate);
+    if (pokemon->StatBoosts[stat] + boostrate < -6) boostrate = pokemon->StatBoosts[stat] + boostrate + 6;
+    pokemon->StatBoosts[stat] += boostrate;
+    printf("%s%s's %s fell by %d stages\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat],boostrate);
     }
       }
-}
   }
 
 void BoostChance(unsigned char statc,char boostratec,struct MyPokemon* pokemonc,unsigned char Chance) {
@@ -307,4 +304,14 @@ void Bulk_Upf(unsigned char et,bool eop) {
     }
   }
   return 0;
+}
+
+void Charmf(unsigned char et,bool eop) {
+  if (et == 2) {
+    if (eop == 0) {
+      Boostandprint(0,-2,EnemyParty.P1,1);
+    } else {
+      Boostandprint(0,-2,PlayerParty.P1,0);
+    }
+  }
 }
