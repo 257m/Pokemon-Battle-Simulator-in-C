@@ -1,256 +1,256 @@
 int Battle() {
   printf("%lu\n",sizeof(struct Move));
   while (StatCalc == 1) {
-  PlayerParty.P1->Hp =  ((PlayerParty.P1->IVHp + 2 * PlayerParty.P1->Poke->Hp + (PlayerParty.P1->EVHp/4)) * PlayerParty.P1->Level/100 ) + 10 +PlayerParty.P1->Level;
+  PlayerParty.Member[0]->Hp =  ((PlayerParty.Member[0]->IVHp + 2 * PlayerParty.Member[0]->Poke->Hp + (PlayerParty.Member[0]->EVHp/4)) * PlayerParty.Member[0]->Level/100 ) + 10 +PlayerParty.Member[0]->Level;
   
-  PlayerParty.P1->Atk = (((PlayerParty.P1->IVAtk + 2 * PlayerParty.P1->Poke->Atk + (PlayerParty.P1->EVAtk/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->Atk;
+  PlayerParty.Member[0]->Atk = (((PlayerParty.Member[0]->IVAtk + 2 * PlayerParty.Member[0]->Poke->Atk + (PlayerParty.Member[0]->EVAtk/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->Atk;
   
-  PlayerParty.P1->Def = (((PlayerParty.P1->IVDef + 2 * PlayerParty.P1->Poke->Def + (PlayerParty.P1->EVDef/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->Def;
+  PlayerParty.Member[0]->Def = (((PlayerParty.Member[0]->IVDef + 2 * PlayerParty.Member[0]->Poke->Def + (PlayerParty.Member[0]->EVDef/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->Def;
   
-  PlayerParty.P1->SpA = (((PlayerParty.P1->IVSpA + 2 * PlayerParty.P1->Poke->SpA + (PlayerParty.P1->EVSpA/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->SpA;
+  PlayerParty.Member[0]->SpA = (((PlayerParty.Member[0]->IVSpA + 2 * PlayerParty.Member[0]->Poke->SpA + (PlayerParty.Member[0]->EVSpA/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->SpA;
   
-  PlayerParty.P1->SpD = (((PlayerParty.P1->IVSpD + 2 * PlayerParty.P1->Poke->SpD + (PlayerParty.P1->EVSpD/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->SpD;
+  PlayerParty.Member[0]->SpD = (((PlayerParty.Member[0]->IVSpD + 2 * PlayerParty.Member[0]->Poke->SpD + (PlayerParty.Member[0]->EVSpD/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->SpD;
 
-  PlayerParty.P1->Spe = (((PlayerParty.P1->IVSpe + 2 * PlayerParty.P1->Poke->Spe + (PlayerParty.P1->EVSpe/4) ) * PlayerParty.P1->Level/100 ) + 5) * PlayerParty.P1->Nature->Spe;
+  PlayerParty.Member[0]->Spe = (((PlayerParty.Member[0]->IVSpe + 2 * PlayerParty.Member[0]->Poke->Spe + (PlayerParty.Member[0]->EVSpe/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->Spe;
 
-  PlayerParty.P1->Move1.PP = MoveList[PlayerParty.P1->Move1.Move].PP * PlayerParty.P1->Move1.PPmult;
-  PlayerParty.P1->Move2.PP = MoveList[PlayerParty.P1->Move2.Move].PP * PlayerParty.P1->Move2.PPmult;
-  PlayerParty.P1->Move3.PP = MoveList[PlayerParty.P1->Move3.Move].PP * PlayerParty.P1->Move3.PPmult;
-  PlayerParty.P1->Move4.PP = MoveList[PlayerParty.P1->Move4.Move].PP * PlayerParty.P1->Move4.PPmult;
+  PlayerParty.Member[0]->Move1.PP = MoveList[PlayerParty.Member[0]->Move1.Move].PP * PlayerParty.Member[0]->Move1.PPmult;
+  PlayerParty.Member[0]->Move2.PP = MoveList[PlayerParty.Member[0]->Move2.Move].PP * PlayerParty.Member[0]->Move2.PPmult;
+  PlayerParty.Member[0]->Move3.PP = MoveList[PlayerParty.Member[0]->Move3.Move].PP * PlayerParty.Member[0]->Move3.PPmult;
+  PlayerParty.Member[0]->Move4.PP = MoveList[PlayerParty.Member[0]->Move4.Move].PP * PlayerParty.Member[0]->Move4.PPmult;
   
-  PlayerParty.P2->Hp =  ((PlayerParty.P2->IVHp + 2 * PlayerParty.P2->Poke->Hp + (PlayerParty.P2->EVHp/4)) * PlayerParty.P2->Level/100 ) + 10 +PlayerParty.P2->Level;
+  PlayerParty.Member[1]->Hp =  ((PlayerParty.Member[1]->IVHp + 2 * PlayerParty.Member[1]->Poke->Hp + (PlayerParty.Member[1]->EVHp/4)) * PlayerParty.Member[1]->Level/100 ) + 10 +PlayerParty.Member[1]->Level;
   
-  PlayerParty.P2->Atk = (((PlayerParty.P2->IVAtk + 2 * PlayerParty.P2->Poke->Atk + (PlayerParty.P2->EVAtk/4) ) * PlayerParty.P2->Level/100 ) + 5) * PlayerParty.P2->Nature->Atk;
+  PlayerParty.Member[1]->Atk = (((PlayerParty.Member[1]->IVAtk + 2 * PlayerParty.Member[1]->Poke->Atk + (PlayerParty.Member[1]->EVAtk/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->Atk;
   
-  PlayerParty.P2->Def = (((PlayerParty.P2->IVDef + 2 * PlayerParty.P2->Poke->Def + (PlayerParty.P2->EVDef/4) ) * PlayerParty.P2->Level/100 ) + 5) * PlayerParty.P2->Nature->Def;
+  PlayerParty.Member[1]->Def = (((PlayerParty.Member[1]->IVDef + 2 * PlayerParty.Member[1]->Poke->Def + (PlayerParty.Member[1]->EVDef/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->Def;
   
-  PlayerParty.P2->SpA = (((PlayerParty.P2->IVSpA + 2 * PlayerParty.P2->Poke->SpA + (PlayerParty.P2->EVSpA/4) ) * PlayerParty.P2->Level/100 ) + 5) * PlayerParty.P2->Nature->SpA;
+  PlayerParty.Member[1]->SpA = (((PlayerParty.Member[1]->IVSpA + 2 * PlayerParty.Member[1]->Poke->SpA + (PlayerParty.Member[1]->EVSpA/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->SpA;
   
-  PlayerParty.P2->SpD = (((PlayerParty.P2->IVSpD + 2 * PlayerParty.P2->Poke->SpD + (PlayerParty.P2->EVSpD/4) ) * PlayerParty.P2->Level/100 ) + 5) * PlayerParty.P2->Nature->SpD;
+  PlayerParty.Member[1]->SpD = (((PlayerParty.Member[1]->IVSpD + 2 * PlayerParty.Member[1]->Poke->SpD + (PlayerParty.Member[1]->EVSpD/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->SpD;
 
-  PlayerParty.P2->Spe = (((PlayerParty.P2->IVSpe + 2 * PlayerParty.P2->Poke->Spe + (PlayerParty.P2->EVSpe/4) ) * PlayerParty.P2->Level/100 ) + 5) * PlayerParty.P2->Nature->Spe;
+  PlayerParty.Member[1]->Spe = (((PlayerParty.Member[1]->IVSpe + 2 * PlayerParty.Member[1]->Poke->Spe + (PlayerParty.Member[1]->EVSpe/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->Spe;
 
-  PlayerParty.P2->Move1.PP = MoveList[PlayerParty.P2->Move1.Move].PP * PlayerParty.P2->Move1.PPmult;
-  PlayerParty.P2->Move2.PP = MoveList[PlayerParty.P2->Move2.Move].PP * PlayerParty.P2->Move2.PPmult;
-  PlayerParty.P2->Move3.PP = MoveList[PlayerParty.P2->Move3.Move].PP * PlayerParty.P2->Move3.PPmult;
-  PlayerParty.P2->Move4.PP = MoveList[PlayerParty.P2->Move4.Move].PP * PlayerParty.P2->Move4.PPmult;
+  PlayerParty.Member[1]->Move1.PP = MoveList[PlayerParty.Member[1]->Move1.Move].PP * PlayerParty.Member[1]->Move1.PPmult;
+  PlayerParty.Member[1]->Move2.PP = MoveList[PlayerParty.Member[1]->Move2.Move].PP * PlayerParty.Member[1]->Move2.PPmult;
+  PlayerParty.Member[1]->Move3.PP = MoveList[PlayerParty.Member[1]->Move3.Move].PP * PlayerParty.Member[1]->Move3.PPmult;
+  PlayerParty.Member[1]->Move4.PP = MoveList[PlayerParty.Member[1]->Move4.Move].PP * PlayerParty.Member[1]->Move4.PPmult;
     
-   PlayerParty.P3->Hp =  ((PlayerParty.P3->IVHp + 2 * PlayerParty.P3->Poke->Hp + (PlayerParty.P3->EVHp/4)) * PlayerParty.P3->Level/100 ) + 10 +PlayerParty.P3->Level;
+   PlayerParty.Member[2]->Hp =  ((PlayerParty.Member[2]->IVHp + 2 * PlayerParty.Member[2]->Poke->Hp + (PlayerParty.Member[2]->EVHp/4)) * PlayerParty.Member[2]->Level/100 ) + 10 +PlayerParty.Member[2]->Level;
   
-  PlayerParty.P3->Atk = (((PlayerParty.P3->IVAtk + 2 * PlayerParty.P3->Poke->Atk + (PlayerParty.P3->EVAtk/4) ) * PlayerParty.P3->Level/100 ) + 5) * PlayerParty.P3->Nature->Atk;
+  PlayerParty.Member[2]->Atk = (((PlayerParty.Member[2]->IVAtk + 2 * PlayerParty.Member[2]->Poke->Atk + (PlayerParty.Member[2]->EVAtk/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->Atk;
   
-  PlayerParty.P3->Def = (((PlayerParty.P3->IVDef + 2 * PlayerParty.P3->Poke->Def + (PlayerParty.P3->EVDef/4) ) * PlayerParty.P3->Level/100 ) + 5) * PlayerParty.P3->Nature->Def;
+  PlayerParty.Member[2]->Def = (((PlayerParty.Member[2]->IVDef + 2 * PlayerParty.Member[2]->Poke->Def + (PlayerParty.Member[2]->EVDef/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->Def;
   
-  PlayerParty.P3->SpA = (((PlayerParty.P3->IVSpA + 2 * PlayerParty.P3->Poke->SpA + (PlayerParty.P3->EVSpA/4) ) * PlayerParty.P3->Level/100 ) + 5) * PlayerParty.P3->Nature->SpA;
+  PlayerParty.Member[2]->SpA = (((PlayerParty.Member[2]->IVSpA + 2 * PlayerParty.Member[2]->Poke->SpA + (PlayerParty.Member[2]->EVSpA/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->SpA;
   
-  PlayerParty.P3->SpD = (((PlayerParty.P3->IVSpD + 2 * PlayerParty.P3->Poke->SpD + (PlayerParty.P3->EVSpD/4) ) * PlayerParty.P3->Level/100 ) + 5) * PlayerParty.P3->Nature->SpD;
+  PlayerParty.Member[2]->SpD = (((PlayerParty.Member[2]->IVSpD + 2 * PlayerParty.Member[2]->Poke->SpD + (PlayerParty.Member[2]->EVSpD/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->SpD;
 
-  PlayerParty.P3->Spe = (((PlayerParty.P3->IVSpe + 2 * PlayerParty.P3->Poke->Spe + (PlayerParty.P3->EVSpe/4) ) * PlayerParty.P3->Level/100 ) + 5) * PlayerParty.P3->Nature->Spe; 
+  PlayerParty.Member[2]->Spe = (((PlayerParty.Member[2]->IVSpe + 2 * PlayerParty.Member[2]->Poke->Spe + (PlayerParty.Member[2]->EVSpe/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->Spe; 
 
-  PlayerParty.P3->Move1.PP = MoveList[PlayerParty.P3->Move1.Move].PP * PlayerParty.P3->Move1.PPmult;
-  PlayerParty.P3->Move2.PP = MoveList[PlayerParty.P3->Move2.Move].PP * PlayerParty.P3->Move2.PPmult;
-  PlayerParty.P3->Move3.PP = MoveList[PlayerParty.P3->Move3.Move].PP * PlayerParty.P3->Move3.PPmult;
-  PlayerParty.P3->Move4.PP = MoveList[PlayerParty.P3->Move4.Move].PP * PlayerParty.P3->Move4.PPmult;
+  PlayerParty.Member[2]->Move1.PP = MoveList[PlayerParty.Member[2]->Move1.Move].PP * PlayerParty.Member[2]->Move1.PPmult;
+  PlayerParty.Member[2]->Move2.PP = MoveList[PlayerParty.Member[2]->Move2.Move].PP * PlayerParty.Member[2]->Move2.PPmult;
+  PlayerParty.Member[2]->Move3.PP = MoveList[PlayerParty.Member[2]->Move3.Move].PP * PlayerParty.Member[2]->Move3.PPmult;
+  PlayerParty.Member[2]->Move4.PP = MoveList[PlayerParty.Member[2]->Move4.Move].PP * PlayerParty.Member[2]->Move4.PPmult;
 
-   PlayerParty.P4->Hp =  ((PlayerParty.P4->IVHp + 2 * PlayerParty.P4->Poke->Hp + (PlayerParty.P4->EVHp/4)) * PlayerParty.P4->Level/100 ) + 10 +PlayerParty.P4->Level;
+   PlayerParty.Member[3]->Hp =  ((PlayerParty.Member[3]->IVHp + 2 * PlayerParty.Member[3]->Poke->Hp + (PlayerParty.Member[3]->EVHp/4)) * PlayerParty.Member[3]->Level/100 ) + 10 +PlayerParty.Member[3]->Level;
   
-  PlayerParty.P4->Atk = (((PlayerParty.P4->IVAtk + 2 * PlayerParty.P4->Poke->Atk + (PlayerParty.P4->EVAtk/4) ) * PlayerParty.P4->Level/100 ) + 5) * PlayerParty.P4->Nature->Atk;
+  PlayerParty.Member[3]->Atk = (((PlayerParty.Member[3]->IVAtk + 2 * PlayerParty.Member[3]->Poke->Atk + (PlayerParty.Member[3]->EVAtk/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->Atk;
   
-  PlayerParty.P4->Def = (((PlayerParty.P4->IVDef + 2 * PlayerParty.P4->Poke->Def + (PlayerParty.P4->EVDef/4) ) * PlayerParty.P4->Level/100 ) + 5) * PlayerParty.P4->Nature->Def;
+  PlayerParty.Member[3]->Def = (((PlayerParty.Member[3]->IVDef + 2 * PlayerParty.Member[3]->Poke->Def + (PlayerParty.Member[3]->EVDef/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->Def;
   
-  PlayerParty.P4->SpA = (((PlayerParty.P4->IVSpA + 2 * PlayerParty.P4->Poke->SpA + (PlayerParty.P4->EVSpA/4) ) * PlayerParty.P4->Level/100 ) + 5) * PlayerParty.P4->Nature->SpA;
+  PlayerParty.Member[3]->SpA = (((PlayerParty.Member[3]->IVSpA + 2 * PlayerParty.Member[3]->Poke->SpA + (PlayerParty.Member[3]->EVSpA/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->SpA;
   
-  PlayerParty.P4->SpD = (((PlayerParty.P4->IVSpD + 2 * PlayerParty.P4->Poke->SpD + (PlayerParty.P4->EVSpD/4) ) * PlayerParty.P4->Level/100 ) + 5) * PlayerParty.P4->Nature->SpD;
+  PlayerParty.Member[3]->SpD = (((PlayerParty.Member[3]->IVSpD + 2 * PlayerParty.Member[3]->Poke->SpD + (PlayerParty.Member[3]->EVSpD/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->SpD;
 
-  PlayerParty.P4->Spe = (((PlayerParty.P4->IVSpe + 2 * PlayerParty.P4->Poke->Spe + (PlayerParty.P4->EVSpe/4) ) * PlayerParty.P4->Level/100 ) + 5) * PlayerParty.P4->Nature->Spe;
+  PlayerParty.Member[3]->Spe = (((PlayerParty.Member[3]->IVSpe + 2 * PlayerParty.Member[3]->Poke->Spe + (PlayerParty.Member[3]->EVSpe/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->Spe;
 
-  PlayerParty.P4->Move1.PP = MoveList[PlayerParty.P4->Move1.Move].PP * PlayerParty.P4->Move1.PPmult;
-  PlayerParty.P4->Move2.PP = MoveList[PlayerParty.P4->Move2.Move].PP * PlayerParty.P4->Move2.PPmult;
-  PlayerParty.P4->Move3.PP = MoveList[PlayerParty.P4->Move3.Move].PP * PlayerParty.P4->Move3.PPmult;
-  PlayerParty.P4->Move4.PP = MoveList[PlayerParty.P4->Move4.Move].PP * PlayerParty.P4->Move4.PPmult;
+  PlayerParty.Member[3]->Move1.PP = MoveList[PlayerParty.Member[3]->Move1.Move].PP * PlayerParty.Member[3]->Move1.PPmult;
+  PlayerParty.Member[3]->Move2.PP = MoveList[PlayerParty.Member[3]->Move2.Move].PP * PlayerParty.Member[3]->Move2.PPmult;
+  PlayerParty.Member[3]->Move3.PP = MoveList[PlayerParty.Member[3]->Move3.Move].PP * PlayerParty.Member[3]->Move3.PPmult;
+  PlayerParty.Member[3]->Move4.PP = MoveList[PlayerParty.Member[3]->Move4.Move].PP * PlayerParty.Member[3]->Move4.PPmult;
 
-  PlayerParty.P5->Hp =  ((PlayerParty.P5->IVHp + 2 * PlayerParty.P5->Poke->Hp + (PlayerParty.P5->EVHp/4)) * PlayerParty.P5->Level/100 ) + 10 +PlayerParty.P5->Level;
+  PlayerParty.Member[4]->Hp =  ((PlayerParty.Member[4]->IVHp + 2 * PlayerParty.Member[4]->Poke->Hp + (PlayerParty.Member[4]->EVHp/4)) * PlayerParty.Member[4]->Level/100 ) + 10 +PlayerParty.Member[4]->Level;
   
-  PlayerParty.P5->Atk = (((PlayerParty.P5->IVAtk + 2 * PlayerParty.P5->Poke->Atk + (PlayerParty.P5->EVAtk/4) ) * PlayerParty.P5->Level/100 ) + 5) * PlayerParty.P5->Nature->Atk;
+  PlayerParty.Member[4]->Atk = (((PlayerParty.Member[4]->IVAtk + 2 * PlayerParty.Member[4]->Poke->Atk + (PlayerParty.Member[4]->EVAtk/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->Atk;
   
-  PlayerParty.P5->Def = (((PlayerParty.P5->IVDef + 2 * PlayerParty.P5->Poke->Def + (PlayerParty.P5->EVDef/4) ) * PlayerParty.P5->Level/100 ) + 5) * PlayerParty.P5->Nature->Def;
+  PlayerParty.Member[4]->Def = (((PlayerParty.Member[4]->IVDef + 2 * PlayerParty.Member[4]->Poke->Def + (PlayerParty.Member[4]->EVDef/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->Def;
   
-  PlayerParty.P5->SpA = (((PlayerParty.P5->IVSpA + 2 * PlayerParty.P5->Poke->SpA + (PlayerParty.P5->EVSpA/4) ) * PlayerParty.P5->Level/100 ) + 5) * PlayerParty.P5->Nature->SpA;
+  PlayerParty.Member[4]->SpA = (((PlayerParty.Member[4]->IVSpA + 2 * PlayerParty.Member[4]->Poke->SpA + (PlayerParty.Member[4]->EVSpA/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->SpA;
   
-  PlayerParty.P5->SpD = (((PlayerParty.P5->IVSpD + 2 * PlayerParty.P5->Poke->SpD + (PlayerParty.P5->EVSpD/4) ) * PlayerParty.P5->Level/100 ) + 5) * PlayerParty.P5->Nature->SpD;
+  PlayerParty.Member[4]->SpD = (((PlayerParty.Member[4]->IVSpD + 2 * PlayerParty.Member[4]->Poke->SpD + (PlayerParty.Member[4]->EVSpD/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->SpD;
 
-  PlayerParty.P5->Spe = (((PlayerParty.P5->IVSpe + 2 * PlayerParty.P5->Poke->Spe + (PlayerParty.P5->EVSpe/4) ) * PlayerParty.P5->Level/100 ) + 5) * PlayerParty.P5->Nature->Spe;
+  PlayerParty.Member[4]->Spe = (((PlayerParty.Member[4]->IVSpe + 2 * PlayerParty.Member[4]->Poke->Spe + (PlayerParty.Member[4]->EVSpe/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->Spe;
 
-  PlayerParty.P5->Move1.PP = MoveList[PlayerParty.P5->Move1.Move].PP * PlayerParty.P5->Move1.PPmult;
-  PlayerParty.P5->Move2.PP = MoveList[PlayerParty.P5->Move2.Move].PP * PlayerParty.P5->Move2.PPmult;
-  PlayerParty.P5->Move3.PP = MoveList[PlayerParty.P5->Move3.Move].PP * PlayerParty.P5->Move3.PPmult;
-  PlayerParty.P5->Move4.PP = MoveList[PlayerParty.P5->Move4.Move].PP * PlayerParty.P5->Move4.PPmult;
+  PlayerParty.Member[4]->Move1.PP = MoveList[PlayerParty.Member[4]->Move1.Move].PP * PlayerParty.Member[4]->Move1.PPmult;
+  PlayerParty.Member[4]->Move2.PP = MoveList[PlayerParty.Member[4]->Move2.Move].PP * PlayerParty.Member[4]->Move2.PPmult;
+  PlayerParty.Member[4]->Move3.PP = MoveList[PlayerParty.Member[4]->Move3.Move].PP * PlayerParty.Member[4]->Move3.PPmult;
+  PlayerParty.Member[4]->Move4.PP = MoveList[PlayerParty.Member[4]->Move4.Move].PP * PlayerParty.Member[4]->Move4.PPmult;
 
-  PlayerParty.P6->Hp =  ((PlayerParty.P6->IVHp + 2 * PlayerParty.P6->Poke->Hp + (PlayerParty.P6->EVHp/4)) * PlayerParty.P6->Level/100 ) + 10 +PlayerParty.P6->Level;
+  PlayerParty.Member[5]->Hp =  ((PlayerParty.Member[5]->IVHp + 2 * PlayerParty.Member[5]->Poke->Hp + (PlayerParty.Member[5]->EVHp/4)) * PlayerParty.Member[5]->Level/100 ) + 10 +PlayerParty.Member[5]->Level;
   
-  PlayerParty.P6->Atk = (((PlayerParty.P6->IVAtk + 2 * PlayerParty.P6->Poke->Atk + (PlayerParty.P6->EVAtk/4) ) * PlayerParty.P6->Level/100 ) + 5) * PlayerParty.P6->Nature->Atk;
+  PlayerParty.Member[5]->Atk = (((PlayerParty.Member[5]->IVAtk + 2 * PlayerParty.Member[5]->Poke->Atk + (PlayerParty.Member[5]->EVAtk/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->Atk;
   
-  PlayerParty.P6->Def = (((PlayerParty.P6->IVDef + 2 * PlayerParty.P6->Poke->Def + (PlayerParty.P6->EVDef/4) ) * PlayerParty.P6->Level/100 ) + 5) * PlayerParty.P6->Nature->Def;
+  PlayerParty.Member[5]->Def = (((PlayerParty.Member[5]->IVDef + 2 * PlayerParty.Member[5]->Poke->Def + (PlayerParty.Member[5]->EVDef/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->Def;
   
-  PlayerParty.P6->SpA = (((PlayerParty.P6->IVSpA + 2 * PlayerParty.P6->Poke->SpA + (PlayerParty.P6->EVSpA/4) ) * PlayerParty.P6->Level/100 ) + 5) * PlayerParty.P6->Nature->SpA;
+  PlayerParty.Member[5]->SpA = (((PlayerParty.Member[5]->IVSpA + 2 * PlayerParty.Member[5]->Poke->SpA + (PlayerParty.Member[5]->EVSpA/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->SpA;
   
-  PlayerParty.P6->SpD = (((PlayerParty.P6->IVSpD + 2 * PlayerParty.P6->Poke->SpD + (PlayerParty.P6->EVSpD/4) ) * PlayerParty.P6->Level/100 ) + 5) * PlayerParty.P6->Nature->SpD;
+  PlayerParty.Member[5]->SpD = (((PlayerParty.Member[5]->IVSpD + 2 * PlayerParty.Member[5]->Poke->SpD + (PlayerParty.Member[5]->EVSpD/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->SpD;
 
-  PlayerParty.P6->Spe = (((PlayerParty.P6->IVSpe + 2 * PlayerParty.P6->Poke->Spe + (PlayerParty.P6->EVSpe/4) ) * PlayerParty.P6->Level/100 ) + 5) * PlayerParty.P6->Nature->Spe;
+  PlayerParty.Member[5]->Spe = (((PlayerParty.Member[5]->IVSpe + 2 * PlayerParty.Member[5]->Poke->Spe + (PlayerParty.Member[5]->EVSpe/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->Spe;
 
-  PlayerParty.P6->Move1.PP = MoveList[PlayerParty.P6->Move1.Move].PP * PlayerParty.P6->Move1.PPmult;
-  PlayerParty.P6->Move2.PP = MoveList[PlayerParty.P6->Move2.Move].PP * PlayerParty.P6->Move2.PPmult;
-  PlayerParty.P6->Move3.PP = MoveList[PlayerParty.P6->Move3.Move].PP * PlayerParty.P6->Move3.PPmult;
-  PlayerParty.P6->Move4.PP = MoveList[PlayerParty.P6->Move4.Move].PP * PlayerParty.P6->Move4.PPmult;
+  PlayerParty.Member[5]->Move1.PP = MoveList[PlayerParty.Member[5]->Move1.Move].PP * PlayerParty.Member[5]->Move1.PPmult;
+  PlayerParty.Member[5]->Move2.PP = MoveList[PlayerParty.Member[5]->Move2.Move].PP * PlayerParty.Member[5]->Move2.PPmult;
+  PlayerParty.Member[5]->Move3.PP = MoveList[PlayerParty.Member[5]->Move3.Move].PP * PlayerParty.Member[5]->Move3.PPmult;
+  PlayerParty.Member[5]->Move4.PP = MoveList[PlayerParty.Member[5]->Move4.Move].PP * PlayerParty.Member[5]->Move4.PPmult;
 
-  EnemyParty.P1->Hp =  ((EnemyParty.P1->IVHp + 2 * EnemyParty.P1->Poke->Hp + (EnemyParty.P1->EVHp/4)) * EnemyParty.P1->Level/100 ) + 10 +EnemyParty.P1->Level;
+  EnemyParty.Member[0]->Hp =  ((EnemyParty.Member[0]->IVHp + 2 * EnemyParty.Member[0]->Poke->Hp + (EnemyParty.Member[0]->EVHp/4)) * EnemyParty.Member[0]->Level/100 ) + 10 +EnemyParty.Member[0]->Level;
   
-  EnemyParty.P1->Atk = (((EnemyParty.P1->IVAtk + 2 * EnemyParty.P1->Poke->Atk + (EnemyParty.P1->EVAtk/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->Atk;
+  EnemyParty.Member[0]->Atk = (((EnemyParty.Member[0]->IVAtk + 2 * EnemyParty.Member[0]->Poke->Atk + (EnemyParty.Member[0]->EVAtk/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->Atk;
   
-  EnemyParty.P1->Def = (((EnemyParty.P1->IVDef + 2 * EnemyParty.P1->Poke->Def + (EnemyParty.P1->EVDef/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->Def;
+  EnemyParty.Member[0]->Def = (((EnemyParty.Member[0]->IVDef + 2 * EnemyParty.Member[0]->Poke->Def + (EnemyParty.Member[0]->EVDef/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->Def;
   
-  EnemyParty.P1->SpA = (((EnemyParty.P1->IVSpA + 2 * EnemyParty.P1->Poke->SpA + (EnemyParty.P1->EVSpA/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->SpA;
+  EnemyParty.Member[0]->SpA = (((EnemyParty.Member[0]->IVSpA + 2 * EnemyParty.Member[0]->Poke->SpA + (EnemyParty.Member[0]->EVSpA/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->SpA;
   
-  EnemyParty.P1->SpD = (((EnemyParty.P1->IVSpD + 2 * EnemyParty.P1->Poke->SpD + (EnemyParty.P1->EVSpD/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->SpD;
+  EnemyParty.Member[0]->SpD = (((EnemyParty.Member[0]->IVSpD + 2 * EnemyParty.Member[0]->Poke->SpD + (EnemyParty.Member[0]->EVSpD/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->SpD;
 
-  EnemyParty.P1->Spe = (((EnemyParty.P1->IVSpe + 2 * EnemyParty.P1->Poke->Spe + (EnemyParty.P1->EVSpe/4) ) * EnemyParty.P1->Level/100 ) + 5) * EnemyParty.P1->Nature->Spe;
+  EnemyParty.Member[0]->Spe = (((EnemyParty.Member[0]->IVSpe + 2 * EnemyParty.Member[0]->Poke->Spe + (EnemyParty.Member[0]->EVSpe/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->Spe;
 
-  EnemyParty.P1->Move1.PP = MoveList[EnemyParty.P1->Move1.Move].PP * EnemyParty.P1->Move1.PPmult;
-  EnemyParty.P1->Move2.PP = MoveList[EnemyParty.P1->Move2.Move].PP * EnemyParty.P1->Move2.PPmult;
-  EnemyParty.P1->Move3.PP = MoveList[EnemyParty.P1->Move3.Move].PP * EnemyParty.P1->Move3.PPmult;
-  EnemyParty.P1->Move4.PP = MoveList[EnemyParty.P1->Move4.Move].PP * EnemyParty.P1->Move4.PPmult;
+  EnemyParty.Member[0]->Move1.PP = MoveList[EnemyParty.Member[0]->Move1.Move].PP * EnemyParty.Member[0]->Move1.PPmult;
+  EnemyParty.Member[0]->Move2.PP = MoveList[EnemyParty.Member[0]->Move2.Move].PP * EnemyParty.Member[0]->Move2.PPmult;
+  EnemyParty.Member[0]->Move3.PP = MoveList[EnemyParty.Member[0]->Move3.Move].PP * EnemyParty.Member[0]->Move3.PPmult;
+  EnemyParty.Member[0]->Move4.PP = MoveList[EnemyParty.Member[0]->Move4.Move].PP * EnemyParty.Member[0]->Move4.PPmult;
 
-  EnemyParty.P2->Hp =  ((EnemyParty.P2->IVHp + 2 * EnemyParty.P2->Poke->Hp + (EnemyParty.P2->EVHp/4)) * EnemyParty.P2->Level/100 ) + 10 +EnemyParty.P2->Level;
+  EnemyParty.Member[1]->Hp =  ((EnemyParty.Member[1]->IVHp + 2 * EnemyParty.Member[1]->Poke->Hp + (EnemyParty.Member[1]->EVHp/4)) * EnemyParty.Member[1]->Level/100 ) + 10 +EnemyParty.Member[1]->Level;
   
-  EnemyParty.P2->Atk = (((EnemyParty.P2->IVAtk + 2 * EnemyParty.P2->Poke->Atk + (EnemyParty.P2->EVAtk/4) ) * EnemyParty.P2->Level/100 ) + 5) * EnemyParty.P2->Nature->Atk;
+  EnemyParty.Member[1]->Atk = (((EnemyParty.Member[1]->IVAtk + 2 * EnemyParty.Member[1]->Poke->Atk + (EnemyParty.Member[1]->EVAtk/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->Atk;
   
-  EnemyParty.P2->Def = (((EnemyParty.P2->IVDef + 2 * EnemyParty.P2->Poke->Def + (EnemyParty.P2->EVDef/4) ) * EnemyParty.P2->Level/100 ) + 5) * EnemyParty.P2->Nature->Def;
+  EnemyParty.Member[1]->Def = (((EnemyParty.Member[1]->IVDef + 2 * EnemyParty.Member[1]->Poke->Def + (EnemyParty.Member[1]->EVDef/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->Def;
   
-  EnemyParty.P2->SpA = (((EnemyParty.P2->IVSpA + 2 * EnemyParty.P2->Poke->SpA + (EnemyParty.P2->EVSpA/4) ) * EnemyParty.P2->Level/100 ) + 5) * EnemyParty.P2->Nature->SpA;
+  EnemyParty.Member[1]->SpA = (((EnemyParty.Member[1]->IVSpA + 2 * EnemyParty.Member[1]->Poke->SpA + (EnemyParty.Member[1]->EVSpA/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->SpA;
   
-  EnemyParty.P2->SpD = (((EnemyParty.P2->IVSpD + 2 * EnemyParty.P2->Poke->SpD + (EnemyParty.P2->EVSpD/4) ) * EnemyParty.P2->Level/100 ) + 5) * EnemyParty.P2->Nature->SpD;
+  EnemyParty.Member[1]->SpD = (((EnemyParty.Member[1]->IVSpD + 2 * EnemyParty.Member[1]->Poke->SpD + (EnemyParty.Member[1]->EVSpD/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->SpD;
 
-  EnemyParty.P2->Spe = (((EnemyParty.P2->IVSpe + 2 * EnemyParty.P2->Poke->Spe + (EnemyParty.P2->EVSpe/4) ) * EnemyParty.P2->Level/100 ) + 5) * EnemyParty.P2->Nature->Spe;
+  EnemyParty.Member[1]->Spe = (((EnemyParty.Member[1]->IVSpe + 2 * EnemyParty.Member[1]->Poke->Spe + (EnemyParty.Member[1]->EVSpe/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->Spe;
 
-  EnemyParty.P2->Move1.PP = MoveList[EnemyParty.P2->Move1.Move].PP * EnemyParty.P2->Move1.PPmult;
-  EnemyParty.P2->Move2.PP = MoveList[EnemyParty.P2->Move2.Move].PP * EnemyParty.P2->Move2.PPmult;
-  EnemyParty.P2->Move3.PP = MoveList[EnemyParty.P2->Move3.Move].PP * EnemyParty.P2->Move3.PPmult;
-  EnemyParty.P2->Move4.PP = MoveList[EnemyParty.P2->Move4.Move].PP * EnemyParty.P2->Move4.PPmult;
+  EnemyParty.Member[1]->Move1.PP = MoveList[EnemyParty.Member[1]->Move1.Move].PP * EnemyParty.Member[1]->Move1.PPmult;
+  EnemyParty.Member[1]->Move2.PP = MoveList[EnemyParty.Member[1]->Move2.Move].PP * EnemyParty.Member[1]->Move2.PPmult;
+  EnemyParty.Member[1]->Move3.PP = MoveList[EnemyParty.Member[1]->Move3.Move].PP * EnemyParty.Member[1]->Move3.PPmult;
+  EnemyParty.Member[1]->Move4.PP = MoveList[EnemyParty.Member[1]->Move4.Move].PP * EnemyParty.Member[1]->Move4.PPmult;
 
-   EnemyParty.P3->Hp =  ((EnemyParty.P3->IVHp + 2 * EnemyParty.P3->Poke->Hp + (EnemyParty.P3->EVHp/4)) * EnemyParty.P3->Level/100 ) + 10 +EnemyParty.P3->Level;
+   EnemyParty.Member[2]->Hp =  ((EnemyParty.Member[2]->IVHp + 2 * EnemyParty.Member[2]->Poke->Hp + (EnemyParty.Member[2]->EVHp/4)) * EnemyParty.Member[2]->Level/100 ) + 10 +EnemyParty.Member[2]->Level;
   
-  EnemyParty.P3->Atk = (((EnemyParty.P3->IVAtk + 2 * EnemyParty.P3->Poke->Atk + (EnemyParty.P3->EVAtk/4) ) * EnemyParty.P3->Level/100 ) + 5) * EnemyParty.P3->Nature->Atk;
+  EnemyParty.Member[2]->Atk = (((EnemyParty.Member[2]->IVAtk + 2 * EnemyParty.Member[2]->Poke->Atk + (EnemyParty.Member[2]->EVAtk/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->Atk;
   
-  EnemyParty.P3->Def = (((EnemyParty.P3->IVDef + 2 * EnemyParty.P3->Poke->Def + (EnemyParty.P3->EVDef/4) ) * EnemyParty.P3->Level/100 ) + 5) * EnemyParty.P3->Nature->Def;
+  EnemyParty.Member[2]->Def = (((EnemyParty.Member[2]->IVDef + 2 * EnemyParty.Member[2]->Poke->Def + (EnemyParty.Member[2]->EVDef/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->Def;
   
-  EnemyParty.P3->SpA = (((EnemyParty.P3->IVSpA + 2 * EnemyParty.P3->Poke->SpA + (EnemyParty.P3->EVSpA/4) ) * EnemyParty.P3->Level/100 ) + 5) * EnemyParty.P3->Nature->SpA;
+  EnemyParty.Member[2]->SpA = (((EnemyParty.Member[2]->IVSpA + 2 * EnemyParty.Member[2]->Poke->SpA + (EnemyParty.Member[2]->EVSpA/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->SpA;
   
-  EnemyParty.P3->SpD = (((EnemyParty.P3->IVSpD + 2 * EnemyParty.P3->Poke->SpD + (EnemyParty.P3->EVSpD/4) ) * EnemyParty.P3->Level/100 ) + 5) * EnemyParty.P3->Nature->SpD;
+  EnemyParty.Member[2]->SpD = (((EnemyParty.Member[2]->IVSpD + 2 * EnemyParty.Member[2]->Poke->SpD + (EnemyParty.Member[2]->EVSpD/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->SpD;
 
-  EnemyParty.P3->Spe = (((EnemyParty.P3->IVSpe + 2 * EnemyParty.P3->Poke->Spe + (EnemyParty.P3->EVSpe/4) ) * EnemyParty.P3->Level/100 ) + 5) * EnemyParty.P3->Nature->Spe; 
+  EnemyParty.Member[2]->Spe = (((EnemyParty.Member[2]->IVSpe + 2 * EnemyParty.Member[2]->Poke->Spe + (EnemyParty.Member[2]->EVSpe/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->Spe; 
 
-  EnemyParty.P3->Move1.PP = MoveList[EnemyParty.P3->Move1.Move].PP * EnemyParty.P3->Move1.PPmult;
-  EnemyParty.P3->Move2.PP = MoveList[EnemyParty.P3->Move2.Move].PP * EnemyParty.P3->Move2.PPmult;
-  EnemyParty.P3->Move3.PP = MoveList[EnemyParty.P3->Move3.Move].PP * EnemyParty.P3->Move3.PPmult;
-  EnemyParty.P3->Move4.PP = MoveList[EnemyParty.P3->Move4.Move].PP * EnemyParty.P3->Move4.PPmult;
+  EnemyParty.Member[2]->Move1.PP = MoveList[EnemyParty.Member[2]->Move1.Move].PP * EnemyParty.Member[2]->Move1.PPmult;
+  EnemyParty.Member[2]->Move2.PP = MoveList[EnemyParty.Member[2]->Move2.Move].PP * EnemyParty.Member[2]->Move2.PPmult;
+  EnemyParty.Member[2]->Move3.PP = MoveList[EnemyParty.Member[2]->Move3.Move].PP * EnemyParty.Member[2]->Move3.PPmult;
+  EnemyParty.Member[2]->Move4.PP = MoveList[EnemyParty.Member[2]->Move4.Move].PP * EnemyParty.Member[2]->Move4.PPmult;
 
-   EnemyParty.P4->Hp =  ((EnemyParty.P4->IVHp + 2 * EnemyParty.P4->Poke->Hp + (EnemyParty.P4->EVHp/4)) * EnemyParty.P4->Level/100 ) + 10 +EnemyParty.P4->Level;
+   EnemyParty.Member[3]->Hp =  ((EnemyParty.Member[3]->IVHp + 2 * EnemyParty.Member[3]->Poke->Hp + (EnemyParty.Member[3]->EVHp/4)) * EnemyParty.Member[3]->Level/100 ) + 10 +EnemyParty.Member[3]->Level;
   
-  EnemyParty.P4->Atk = (((EnemyParty.P4->IVAtk + 2 * EnemyParty.P4->Poke->Atk + (EnemyParty.P4->EVAtk/4) ) * EnemyParty.P4->Level/100 ) + 5) * EnemyParty.P4->Nature->Atk;
+  EnemyParty.Member[3]->Atk = (((EnemyParty.Member[3]->IVAtk + 2 * EnemyParty.Member[3]->Poke->Atk + (EnemyParty.Member[3]->EVAtk/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->Atk;
   
-  EnemyParty.P4->Def = (((EnemyParty.P4->IVDef + 2 * EnemyParty.P4->Poke->Def + (EnemyParty.P4->EVDef/4) ) * EnemyParty.P4->Level/100 ) + 5) * EnemyParty.P4->Nature->Def;
+  EnemyParty.Member[3]->Def = (((EnemyParty.Member[3]->IVDef + 2 * EnemyParty.Member[3]->Poke->Def + (EnemyParty.Member[3]->EVDef/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->Def;
   
-  EnemyParty.P4->SpA = (((EnemyParty.P4->IVSpA + 2 * EnemyParty.P4->Poke->SpA + (EnemyParty.P4->EVSpA/4) ) * EnemyParty.P4->Level/100 ) + 5) * EnemyParty.P4->Nature->SpA;
+  EnemyParty.Member[3]->SpA = (((EnemyParty.Member[3]->IVSpA + 2 * EnemyParty.Member[3]->Poke->SpA + (EnemyParty.Member[3]->EVSpA/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->SpA;
   
-  EnemyParty.P4->SpD = (((EnemyParty.P4->IVSpD + 2 * EnemyParty.P4->Poke->SpD + (EnemyParty.P4->EVSpD/4) ) * EnemyParty.P4->Level/100 ) + 5) * EnemyParty.P4->Nature->SpD;
+  EnemyParty.Member[3]->SpD = (((EnemyParty.Member[3]->IVSpD + 2 * EnemyParty.Member[3]->Poke->SpD + (EnemyParty.Member[3]->EVSpD/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->SpD;
 
-  EnemyParty.P4->Spe = (((EnemyParty.P4->IVSpe + 2 * EnemyParty.P4->Poke->Spe + (EnemyParty.P4->EVSpe/4) ) * EnemyParty.P4->Level/100 ) + 5) * EnemyParty.P4->Nature->Spe;
+  EnemyParty.Member[3]->Spe = (((EnemyParty.Member[3]->IVSpe + 2 * EnemyParty.Member[3]->Poke->Spe + (EnemyParty.Member[3]->EVSpe/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->Spe;
 
-  EnemyParty.P4->Move1.PP = MoveList[EnemyParty.P4->Move1.Move].PP * EnemyParty.P4->Move1.PPmult;
-  EnemyParty.P4->Move2.PP = MoveList[EnemyParty.P4->Move2.Move].PP * EnemyParty.P4->Move2.PPmult;
-  EnemyParty.P4->Move3.PP = MoveList[EnemyParty.P4->Move3.Move].PP * EnemyParty.P4->Move3.PPmult;
-  EnemyParty.P4->Move4.PP = MoveList[EnemyParty.P4->Move4.Move].PP * EnemyParty.P4->Move4.PPmult;
+  EnemyParty.Member[3]->Move1.PP = MoveList[EnemyParty.Member[3]->Move1.Move].PP * EnemyParty.Member[3]->Move1.PPmult;
+  EnemyParty.Member[3]->Move2.PP = MoveList[EnemyParty.Member[3]->Move2.Move].PP * EnemyParty.Member[3]->Move2.PPmult;
+  EnemyParty.Member[3]->Move3.PP = MoveList[EnemyParty.Member[3]->Move3.Move].PP * EnemyParty.Member[3]->Move3.PPmult;
+  EnemyParty.Member[3]->Move4.PP = MoveList[EnemyParty.Member[3]->Move4.Move].PP * EnemyParty.Member[3]->Move4.PPmult;
     
-  EnemyParty.P5->Hp =  ((EnemyParty.P5->IVHp + 2 * EnemyParty.P5->Poke->Hp + (EnemyParty.P5->EVHp/4)) * EnemyParty.P5->Level/100 ) + 10 +EnemyParty.P5->Level;
+  EnemyParty.Member[4]->Hp =  ((EnemyParty.Member[4]->IVHp + 2 * EnemyParty.Member[4]->Poke->Hp + (EnemyParty.Member[4]->EVHp/4)) * EnemyParty.Member[4]->Level/100 ) + 10 +EnemyParty.Member[4]->Level;
   
-  EnemyParty.P5->Atk = (((EnemyParty.P5->IVAtk + 2 * EnemyParty.P5->Poke->Atk + (EnemyParty.P5->EVAtk/4) ) * EnemyParty.P5->Level/100 ) + 5) * EnemyParty.P5->Nature->Atk;
+  EnemyParty.Member[4]->Atk = (((EnemyParty.Member[4]->IVAtk + 2 * EnemyParty.Member[4]->Poke->Atk + (EnemyParty.Member[4]->EVAtk/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->Atk;
   
-  EnemyParty.P5->Def = (((EnemyParty.P5->IVDef + 2 * EnemyParty.P5->Poke->Def + (EnemyParty.P5->EVDef/4) ) * EnemyParty.P5->Level/100 ) + 5) * EnemyParty.P5->Nature->Def;
+  EnemyParty.Member[4]->Def = (((EnemyParty.Member[4]->IVDef + 2 * EnemyParty.Member[4]->Poke->Def + (EnemyParty.Member[4]->EVDef/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->Def;
   
-  EnemyParty.P5->SpA = (((EnemyParty.P5->IVSpA + 2 * EnemyParty.P5->Poke->SpA + (EnemyParty.P5->EVSpA/4) ) * EnemyParty.P5->Level/100 ) + 5) * EnemyParty.P5->Nature->SpA;
+  EnemyParty.Member[4]->SpA = (((EnemyParty.Member[4]->IVSpA + 2 * EnemyParty.Member[4]->Poke->SpA + (EnemyParty.Member[4]->EVSpA/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->SpA;
   
-  EnemyParty.P5->SpD = (((EnemyParty.P5->IVSpD + 2 * EnemyParty.P5->Poke->SpD + (EnemyParty.P5->EVSpD/4) ) * EnemyParty.P5->Level/100 ) + 5) * EnemyParty.P5->Nature->SpD;
+  EnemyParty.Member[4]->SpD = (((EnemyParty.Member[4]->IVSpD + 2 * EnemyParty.Member[4]->Poke->SpD + (EnemyParty.Member[4]->EVSpD/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->SpD;
 
-  EnemyParty.P5->Spe = (((EnemyParty.P5->IVSpe + 2 * EnemyParty.P5->Poke->Spe + (EnemyParty.P5->EVSpe/4) ) * EnemyParty.P5->Level/100 ) + 5) * EnemyParty.P5->Nature->Spe;
+  EnemyParty.Member[4]->Spe = (((EnemyParty.Member[4]->IVSpe + 2 * EnemyParty.Member[4]->Poke->Spe + (EnemyParty.Member[4]->EVSpe/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->Spe;
 
-  EnemyParty.P5->Move1.PP = MoveList[EnemyParty.P5->Move1.Move].PP * EnemyParty.P5->Move1.PPmult;
-  EnemyParty.P5->Move2.PP = MoveList[EnemyParty.P5->Move2.Move].PP * EnemyParty.P5->Move2.PPmult;
-  EnemyParty.P5->Move3.PP = MoveList[EnemyParty.P5->Move3.Move].PP * EnemyParty.P5->Move3.PPmult;
-  EnemyParty.P5->Move4.PP = MoveList[EnemyParty.P5->Move4.Move].PP * EnemyParty.P5->Move4.PPmult;
+  EnemyParty.Member[4]->Move1.PP = MoveList[EnemyParty.Member[4]->Move1.Move].PP * EnemyParty.Member[4]->Move1.PPmult;
+  EnemyParty.Member[4]->Move2.PP = MoveList[EnemyParty.Member[4]->Move2.Move].PP * EnemyParty.Member[4]->Move2.PPmult;
+  EnemyParty.Member[4]->Move3.PP = MoveList[EnemyParty.Member[4]->Move3.Move].PP * EnemyParty.Member[4]->Move3.PPmult;
+  EnemyParty.Member[4]->Move4.PP = MoveList[EnemyParty.Member[4]->Move4.Move].PP * EnemyParty.Member[4]->Move4.PPmult;
 
-  EnemyParty.P6->Hp =  ((EnemyParty.P6->IVHp + 2 * EnemyParty.P6->Poke->Hp + (EnemyParty.P6->EVHp/4)) * EnemyParty.P6->Level/100 ) + 10 +EnemyParty.P6->Level;
+  EnemyParty.Member[5]->Hp =  ((EnemyParty.Member[5]->IVHp + 2 * EnemyParty.Member[5]->Poke->Hp + (EnemyParty.Member[5]->EVHp/4)) * EnemyParty.Member[5]->Level/100 ) + 10 +EnemyParty.Member[5]->Level;
   
-  EnemyParty.P6->Atk = (((EnemyParty.P6->IVAtk + 2 * EnemyParty.P6->Poke->Atk + (EnemyParty.P6->EVAtk/4) ) * EnemyParty.P6->Level/100 ) + 5) * EnemyParty.P6->Nature->Atk;
+  EnemyParty.Member[5]->Atk = (((EnemyParty.Member[5]->IVAtk + 2 * EnemyParty.Member[5]->Poke->Atk + (EnemyParty.Member[5]->EVAtk/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->Atk;
   
-  EnemyParty.P6->Def = (((EnemyParty.P6->IVDef + 2 * EnemyParty.P6->Poke->Def + (EnemyParty.P6->EVDef/4) ) * EnemyParty.P6->Level/100 ) + 5) * EnemyParty.P6->Nature->Def;
+  EnemyParty.Member[5]->Def = (((EnemyParty.Member[5]->IVDef + 2 * EnemyParty.Member[5]->Poke->Def + (EnemyParty.Member[5]->EVDef/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->Def;
   
-  EnemyParty.P6->SpA = (((EnemyParty.P6->IVSpA + 2 * EnemyParty.P6->Poke->SpA + (EnemyParty.P6->EVSpA/4) ) * EnemyParty.P6->Level/100 ) + 5) * EnemyParty.P6->Nature->SpA;
+  EnemyParty.Member[5]->SpA = (((EnemyParty.Member[5]->IVSpA + 2 * EnemyParty.Member[5]->Poke->SpA + (EnemyParty.Member[5]->EVSpA/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->SpA;
   
-  EnemyParty.P6->SpD = (((EnemyParty.P6->IVSpD + 2 * EnemyParty.P6->Poke->SpD + (EnemyParty.P6->EVSpD/4) ) * EnemyParty.P6->Level/100 ) + 5) * EnemyParty.P6->Nature->SpD;
+  EnemyParty.Member[5]->SpD = (((EnemyParty.Member[5]->IVSpD + 2 * EnemyParty.Member[5]->Poke->SpD + (EnemyParty.Member[5]->EVSpD/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->SpD;
 
-  EnemyParty.P6->Spe = (((EnemyParty.P6->IVSpe + 2 * EnemyParty.P6->Poke->Spe + (EnemyParty.P6->EVSpe/4) ) * EnemyParty.P6->Level/100 ) + 5) * EnemyParty.P6->Nature->Spe;
+  EnemyParty.Member[5]->Spe = (((EnemyParty.Member[5]->IVSpe + 2 * EnemyParty.Member[5]->Poke->Spe + (EnemyParty.Member[5]->EVSpe/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->Spe;
 
-  EnemyParty.P6->Move1.PP = MoveList[EnemyParty.P6->Move1.Move].PP * EnemyParty.P6->Move1.PPmult;
-  EnemyParty.P6->Move2.PP = MoveList[EnemyParty.P6->Move2.Move].PP * EnemyParty.P6->Move2.PPmult;
-  EnemyParty.P6->Move3.PP = MoveList[EnemyParty.P6->Move3.Move].PP * EnemyParty.P6->Move3.PPmult;
-  EnemyParty.P6->Move4.PP = MoveList[EnemyParty.P6->Move4.Move].PP * EnemyParty.P6->Move4.PPmult;
+  EnemyParty.Member[5]->Move1.PP = MoveList[EnemyParty.Member[5]->Move1.Move].PP * EnemyParty.Member[5]->Move1.PPmult;
+  EnemyParty.Member[5]->Move2.PP = MoveList[EnemyParty.Member[5]->Move2.Move].PP * EnemyParty.Member[5]->Move2.PPmult;
+  EnemyParty.Member[5]->Move3.PP = MoveList[EnemyParty.Member[5]->Move3.Move].PP * EnemyParty.Member[5]->Move3.PPmult;
+  EnemyParty.Member[5]->Move4.PP = MoveList[EnemyParty.Member[5]->Move4.Move].PP * EnemyParty.Member[5]->Move4.PPmult;
 
 
     printf("\nHeal?:");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"y") == 0) {
-      PlayerParty.P1->CurrentHp = PlayerParty.P1->Hp;
-      PlayerParty.P2->CurrentHp = PlayerParty.P2->Hp;
-      PlayerParty.P3->CurrentHp = PlayerParty.P3->Hp;
-      PlayerParty.P4->CurrentHp = PlayerParty.P4->Hp;
-      PlayerParty.P5->CurrentHp = PlayerParty.P5->Hp;
-      PlayerParty.P6->CurrentHp = PlayerParty.P6->Hp;
+      PlayerParty.Member[0]->CurrentHp = PlayerParty.Member[0]->Hp;
+      PlayerParty.Member[1]->CurrentHp = PlayerParty.Member[1]->Hp;
+      PlayerParty.Member[2]->CurrentHp = PlayerParty.Member[2]->Hp;
+      PlayerParty.Member[3]->CurrentHp = PlayerParty.Member[3]->Hp;
+      PlayerParty.Member[4]->CurrentHp = PlayerParty.Member[4]->Hp;
+      PlayerParty.Member[5]->CurrentHp = PlayerParty.Member[5]->Hp;
 
-      EnemyParty.P1->CurrentHp = EnemyParty.P1->Hp;
-      EnemyParty.P2->CurrentHp = EnemyParty.P2->Hp;
-      EnemyParty.P3->CurrentHp = EnemyParty.P3->Hp;
-      EnemyParty.P4->CurrentHp = EnemyParty.P4->Hp;
-      EnemyParty.P5->CurrentHp = EnemyParty.P5->Hp;
-      EnemyParty.P6->CurrentHp = EnemyParty.P6->Hp;
+      EnemyParty.Member[0]->CurrentHp = EnemyParty.Member[0]->Hp;
+      EnemyParty.Member[1]->CurrentHp = EnemyParty.Member[1]->Hp;
+      EnemyParty.Member[2]->CurrentHp = EnemyParty.Member[2]->Hp;
+      EnemyParty.Member[3]->CurrentHp = EnemyParty.Member[3]->Hp;
+      EnemyParty.Member[4]->CurrentHp = EnemyParty.Member[4]->Hp;
+      EnemyParty.Member[5]->CurrentHp = EnemyParty.Member[5]->Hp;
       
-      PlayerParty.P1->Non_Volatile_Status = 0; 
-      PlayerParty.P2->Non_Volatile_Status = 0;
-      PlayerParty.P3->Non_Volatile_Status = 0;
-      PlayerParty.P4->Non_Volatile_Status = 0;
-      PlayerParty.P5->Non_Volatile_Status = 0;
-      PlayerParty.P6->Non_Volatile_Status = 0;
+      PlayerParty.Member[0]->Non_Volatile_Status = 0; 
+      PlayerParty.Member[1]->Non_Volatile_Status = 0;
+      PlayerParty.Member[2]->Non_Volatile_Status = 0;
+      PlayerParty.Member[3]->Non_Volatile_Status = 0;
+      PlayerParty.Member[4]->Non_Volatile_Status = 0;
+      PlayerParty.Member[5]->Non_Volatile_Status = 0;
 
-      EnemyParty.P1->Non_Volatile_Status = 0;
-      EnemyParty.P2->Non_Volatile_Status = 0;
-      EnemyParty.P3->Non_Volatile_Status = 0;
-      EnemyParty.P4->Non_Volatile_Status = 0;
-      EnemyParty.P5->Non_Volatile_Status = 0;
-      EnemyParty.P6->Non_Volatile_Status = 0;
+      EnemyParty.Member[0]->Non_Volatile_Status = 0;
+      EnemyParty.Member[1]->Non_Volatile_Status = 0;
+      EnemyParty.Member[2]->Non_Volatile_Status = 0;
+      EnemyParty.Member[3]->Non_Volatile_Status = 0;
+      EnemyParty.Member[4]->Non_Volatile_Status = 0;
+      EnemyParty.Member[5]->Non_Volatile_Status = 0;
 
-      PlayerParty.P1->ItemUsable = 1; 
-      PlayerParty.P2->ItemUsable = 1;
-      PlayerParty.P3->ItemUsable = 1;
-      PlayerParty.P4->ItemUsable = 1;
-      PlayerParty.P5->ItemUsable = 1;
-      PlayerParty.P6->ItemUsable = 1;
+      PlayerParty.Member[0]->ItemUsable = 1; 
+      PlayerParty.Member[1]->ItemUsable = 1;
+      PlayerParty.Member[2]->ItemUsable = 1;
+      PlayerParty.Member[3]->ItemUsable = 1;
+      PlayerParty.Member[4]->ItemUsable = 1;
+      PlayerParty.Member[5]->ItemUsable = 1;
 
-      EnemyParty.P1->ItemUsable = 1;
-      EnemyParty.P2->ItemUsable = 1;
-      EnemyParty.P3->ItemUsable = 1;
-      EnemyParty.P4->ItemUsable = 1;
-      EnemyParty.P5->ItemUsable = 1;
-      EnemyParty.P6->ItemUsable = 1;
+      EnemyParty.Member[0]->ItemUsable = 1;
+      EnemyParty.Member[1]->ItemUsable = 1;
+      EnemyParty.Member[2]->ItemUsable = 1;
+      EnemyParty.Member[3]->ItemUsable = 1;
+      EnemyParty.Member[4]->ItemUsable = 1;
+      EnemyParty.Member[5]->ItemUsable = 1;
 
     }
     printf("\033[1A");
@@ -260,8 +260,8 @@ int Battle() {
     Retrieve = 1;
   }
   
-  printf("Go %s!\n",PlayerParty.P1->Poke->Name);
-  printf("The Enemy sent out %s!\n\n", EnemyParty.P1->Poke->Name);
+  printf("Go %s!\n",PlayerParty.Member[0]->Poke->Name);
+  printf("The Enemy sent out %s!\n\n", EnemyParty.Member[0]->Poke->Name);
   YourTurn = &Empty_slot;
   EnemyTurn = &Empty_slot;
   while(BattleMode == 1) {
@@ -272,13 +272,13 @@ int Battle() {
     printf("Enter your move: ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
-    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[PlayerParty.P1->Move1.Move].Name) == 0) {
-      YourTurn = &PlayerParty.P1->Move1;
-      if(PlayerParty.P1->Move1.Move == Nothing) {
+    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[PlayerParty.Member[0]->Move1.Move].Name) == 0) {
+      YourTurn = &PlayerParty.Member[0]->Move1;
+      if(PlayerParty.Member[0]->Move1.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move1.PP <= 0) {
-    if (PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+  } else if (PlayerParty.Member[0]->Move1.PP <= 0) {
+    if (PlayerParty.Member[0]->Move2.PP <= 0 && PlayerParty.Member[0]->Move3.PP <= 0 && PlayerParty.Member[0]->Move4.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -286,13 +286,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[PlayerParty.P1->Move2.Move].Name) == 0) {
-       YourTurn = &PlayerParty.P1->Move2;
-      if(PlayerParty.P1->Move1.Move == Nothing) {
+    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[PlayerParty.Member[0]->Move2.Move].Name) == 0) {
+       YourTurn = &PlayerParty.Member[0]->Move2;
+      if(PlayerParty.Member[0]->Move1.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move2.PP <= 0) {
-    if (PlayerParty.P1->Move1.PP <= 0 && PlayerParty.P1->Move3.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+  } else if (PlayerParty.Member[0]->Move2.PP <= 0) {
+    if (PlayerParty.Member[0]->Move1.PP <= 0 && PlayerParty.Member[0]->Move3.PP <= 0 && PlayerParty.Member[0]->Move4.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -300,13 +300,13 @@ int Battle() {
     }
     }
     }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[PlayerParty.P1->Move3.Move].Name) == 0) {
-       YourTurn = &PlayerParty.P1->Move3;
-       if(PlayerParty.P1->Move1.Move == Nothing) {
+    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[PlayerParty.Member[0]->Move3.Move].Name) == 0) {
+       YourTurn = &PlayerParty.Member[0]->Move3;
+       if(PlayerParty.Member[0]->Move1.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move3.PP <= 0) {
-    if (PlayerParty.P1->Move1.PP <= 0 && PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move4.PP <= 0) {
+  } else if (PlayerParty.Member[0]->Move3.PP <= 0) {
+    if (PlayerParty.Member[0]->Move1.PP <= 0 && PlayerParty.Member[0]->Move2.PP <= 0 && PlayerParty.Member[0]->Move4.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -314,51 +314,51 @@ int Battle() {
     }
     }
     }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[PlayerParty.P1->Move4.Move].Name) == 0) {
-       YourTurn = &PlayerParty.P1->Move4;
-       if(PlayerParty.P1->Move1.Move == Nothing) {
+    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[PlayerParty.Member[0]->Move4.Move].Name) == 0) {
+       YourTurn = &PlayerParty.Member[0]->Move4;
+       if(PlayerParty.Member[0]->Move1.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (PlayerParty.P1->Move4.PP <= 0) {
-    if (PlayerParty.P1->Move1.PP <= 0 && PlayerParty.P1->Move2.PP <= 0 && PlayerParty.P1->Move3.PP <= 0) {
+  } else if (PlayerParty.Member[0]->Move4.PP <= 0) {
+    if (PlayerParty.Member[0]->Move1.PP <= 0 && PlayerParty.Member[0]->Move2.PP <= 0 && PlayerParty.Member[0]->Move3.PP <= 0) {
       YourTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
       Reset = 1;
     }
     }
-    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P2->Poke->Name)) == 0 || strcmp(x,PlayerParty.P2->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
-       PlayerSwitchSave = &PlayerParty.P2;
+    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[1]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
+       PlayerSwitchSave = &PlayerParty.Member[1];
        PlayerSwitch = 1;
-      if(PlayerParty.P2->Poke->Name == "NoPoke" || PlayerParty.P2->CurrentHp <= 0) {
+      if(PlayerParty.Member[1]->Poke->Name == "NoPoke" || PlayerParty.Member[1]->CurrentHp <= 0) {
         printf("Move Selection Failed. Pilease retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P3->Poke->Name)) == 0 || strcmp(x,PlayerParty.P3->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
-       PlayerSwitchSave = &PlayerParty.P3;
+    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[2]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
+       PlayerSwitchSave = &PlayerParty.Member[2];
        PlayerSwitch = 1;
-      if(PlayerParty.P3->Poke->Name == "NoPoke" || PlayerParty.P3->CurrentHp <= 0) {
+      if(PlayerParty.Member[2]->Poke->Name == "NoPoke" || PlayerParty.Member[2]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P4->Poke->Name)) == 0 || strcmp(x,PlayerParty.P4->Poke->Name) == 0  || strcmp(x,"P4") == 0) {
-       PlayerSwitchSave = &PlayerParty.P4;
+    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[3]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[3]->Poke->Name) == 0  || strcmp(x,"P4") == 0) {
+       PlayerSwitchSave = &PlayerParty.Member[3];
        PlayerSwitch = 1;
-      if(PlayerParty.P4->Poke->Name == "NoPoke" || PlayerParty.P4->CurrentHp <= 0) {
+      if(PlayerParty.Member[3]->Poke->Name == "NoPoke" || PlayerParty.Member[3]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P5->Poke->Name)) == 0 || strcmp(x,PlayerParty.P5->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
-       PlayerSwitchSave = &PlayerParty.P5;
+    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[4]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
+       PlayerSwitchSave = &PlayerParty.Member[4];
        PlayerSwitch = 1;
-      if(PlayerParty.P5->Poke->Name == "NoPoke" || PlayerParty.P5->CurrentHp <= 0) {
+      if(PlayerParty.Member[4]->Poke->Name == "NoPoke" || PlayerParty.Member[4]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.P6->Poke->Name)) == 0 || strcmp(x,PlayerParty.P6->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
-       PlayerSwitchSave = &PlayerParty.P6;
+    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[5]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
+       PlayerSwitchSave = &PlayerParty.Member[5];
        PlayerSwitch = 1;
-      if(PlayerParty.P6->Poke->Name == "NoPoke" || PlayerParty.P6->CurrentHp <= 0) {
+      if(PlayerParty.Member[5]->Poke->Name == "NoPoke" || PlayerParty.Member[5]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
@@ -373,13 +373,13 @@ int Battle() {
      printf("\nEnter enemy's move: ");
      fgets(x,31,stdin);
      x[strcspn(x, "\n")] = 0;
-      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[EnemyParty.P1->Move1.Move].Name) == 0) {
-      EnemyTurn = &EnemyParty.P1->Move1;
-      if(EnemyParty.P1->Move1.Move == Nothing) {
+      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[EnemyParty.Member[0]->Move1.Move].Name) == 0) {
+      EnemyTurn = &EnemyParty.Member[0]->Move1;
+      if(EnemyParty.Member[0]->Move1.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (EnemyParty.P1->Move1.PP <= 0) {
-    if (EnemyParty.P1->Move2.PP <= 0 && EnemyParty.P1->Move3.PP <= 0 && EnemyParty.P1->Move4.PP <= 0) {
+  } else if (EnemyParty.Member[0]->Move1.PP <= 0) {
+    if (EnemyParty.Member[0]->Move2.PP <= 0 && EnemyParty.Member[0]->Move3.PP <= 0 && EnemyParty.Member[0]->Move4.PP <= 0) {
       EnemyTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -387,13 +387,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[EnemyParty.P1->Move2.Move].Name) == 0) {
-       EnemyTurn = &EnemyParty.P1->Move2;
-      if(EnemyParty.P1->Move2.Move == Nothing) {
+    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[EnemyParty.Member[0]->Move2.Move].Name) == 0) {
+       EnemyTurn = &EnemyParty.Member[0]->Move2;
+      if(EnemyParty.Member[0]->Move2.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (EnemyParty.P1->Move2.PP <= 0) {
-    if (EnemyParty.P1->Move1.PP <= 0 && EnemyParty.P1->Move3.PP <= 0 && EnemyParty.P1->Move4.PP <= 0) {
+  } else if (EnemyParty.Member[0]->Move2.PP <= 0) {
+    if (EnemyParty.Member[0]->Move1.PP <= 0 && EnemyParty.Member[0]->Move3.PP <= 0 && EnemyParty.Member[0]->Move4.PP <= 0) {
       EnemyTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -401,13 +401,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[EnemyParty.P1->Move3.Move].Name) == 0) {
-       EnemyTurn = &EnemyParty.P1->Move3;
-      if(EnemyParty.P1->Move3.Move == Nothing) {
+    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[EnemyParty.Member[0]->Move3.Move].Name) == 0) {
+       EnemyTurn = &EnemyParty.Member[0]->Move3;
+      if(EnemyParty.Member[0]->Move3.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (EnemyParty.P1->Move3.PP <= 0) {
-    if (EnemyParty.P1->Move1.PP <= 0 && EnemyParty.P1->Move2.PP <= 0 && EnemyParty.P1->Move4.PP <= 0) {
+  } else if (EnemyParty.Member[0]->Move3.PP <= 0) {
+    if (EnemyParty.Member[0]->Move1.PP <= 0 && EnemyParty.Member[0]->Move2.PP <= 0 && EnemyParty.Member[0]->Move4.PP <= 0) {
       EnemyTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -415,51 +415,51 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[EnemyParty.P1->Move4.Move].Name) == 0) {
-       EnemyTurn = &EnemyParty.P1->Move4;
-      if(EnemyParty.P1->Move4.Move == Nothing) {
+    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[EnemyParty.Member[0]->Move4.Move].Name) == 0) {
+       EnemyTurn = &EnemyParty.Member[0]->Move4;
+      if(EnemyParty.Member[0]->Move4.Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (EnemyParty.P1->Move4.PP <= 0) {
-    if (EnemyParty.P1->Move1.PP <= 0 && EnemyParty.P1->Move2.PP <= 0 && EnemyParty.P1->Move3.PP <= 0) {
+  } else if (EnemyParty.Member[0]->Move4.PP <= 0) {
+    if (EnemyParty.Member[0]->Move1.PP <= 0 && EnemyParty.Member[0]->Move2.PP <= 0 && EnemyParty.Member[0]->Move3.PP <= 0) {
       EnemyTurn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
       Reset = 1;
     }
   }
-    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P2->Poke->Name)) == 0 || strcmp(x,EnemyParty.P2->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
-       EnemySwitchSave = &EnemyParty.P2;
+    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[1]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
+       EnemySwitchSave = &EnemyParty.Member[1];
        EnemySwitch = 1;
-      if(EnemyParty.P2->Poke->Name == "NoPoke" || EnemyParty.P2->CurrentHp <= 0) {
+      if(EnemyParty.Member[1]->Poke->Name == "NoPoke" || EnemyParty.Member[1]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P3->Poke->Name)) == 0 || strcmp(x,EnemyParty.P3->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
-       EnemySwitchSave = &EnemyParty.P3;
+    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[2]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
+       EnemySwitchSave = &EnemyParty.Member[2];
        EnemySwitch = 1;
-      if(EnemyParty.P3->Poke->Name == "NoPoke" || EnemyParty.P3->CurrentHp <= 0) {
+      if(EnemyParty.Member[2]->Poke->Name == "NoPoke" || EnemyParty.Member[2]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P4->Poke->Name)) == 0 || strcmp(x,EnemyParty.P4->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
-       EnemySwitchSave = &EnemyParty.P4;
+    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[3]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[3]->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
+       EnemySwitchSave = &EnemyParty.Member[3];
        EnemySwitch = 1;
-      if(EnemyParty.P4->Poke->Name == "NoPoke" || EnemyParty.P4->CurrentHp <= 0) {
+      if(EnemyParty.Member[3]->Poke->Name == "NoPoke" || EnemyParty.Member[3]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P5->Poke->Name)) == 0 || strcmp(x,EnemyParty.P5->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
-       EnemySwitchSave = &EnemyParty.P5;
+    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[4]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
+       EnemySwitchSave = &EnemyParty.Member[4];
        EnemySwitch = 1;
-      if(EnemyParty.P5->Poke->Name == "NoPoke" || EnemyParty.P5->CurrentHp <= 0) {
+      if(EnemyParty.Member[4]->Poke->Name == "NoPoke" || EnemyParty.Member[4]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.P6->Poke->Name)) == 0 || strcmp(x,EnemyParty.P6->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
-       EnemySwitchSave = &EnemyParty.P6;
+    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[5]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
+       EnemySwitchSave = &EnemyParty.Member[5];
        EnemySwitch = 1;
-      if(EnemyParty.P6->Poke->Name == "NoPoke" || EnemyParty.P6->CurrentHp <= 0) {
+      if(EnemyParty.Member[5]->Poke->Name == "NoPoke" || EnemyParty.Member[5]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
@@ -501,26 +501,26 @@ int Battle() {
       PlayerSleep = 0;
       EnemySleep = 0;
       // sets stabs
-      if (MoveList[YourTurn->Move].Type == PlayerParty.P1->Poke->Type1 || MoveList[YourTurn->Move].Type == PlayerParty.P1->Poke->Type2) {
+      if (MoveList[YourTurn->Move].Type == PlayerParty.Member[0]->Poke->Type1 || MoveList[YourTurn->Move].Type == PlayerParty.Member[0]->Poke->Type2) {
         STAB = 1.5;
       } else {
         STAB = 1;
       }
 
-      if (MoveList[EnemyTurn->Move].Type == EnemyParty.P1->Poke->Type1 || MoveList[EnemyTurn->Move].Type == EnemyParty.P1->Poke->Type2) {
+      if (MoveList[EnemyTurn->Move].Type == EnemyParty.Member[0]->Poke->Type1 || MoveList[EnemyTurn->Move].Type == EnemyParty.Member[0]->Poke->Type2) {
         EnemySTAB = 1.5;
       } else {
         EnemySTAB = 1;
       }
       // Change speed temp mult based on status
-      if (PlayerParty.P1->Non_Volatile_Status == 3) PlayerSpeedTM /= 2;
-      if (EnemyParty.P1->Non_Volatile_Status == 3) EnemySpeedTM /= 2;
+      if (PlayerParty.Member[0]->Non_Volatile_Status == 3) PlayerSpeedTM /= 2;
+      if (EnemyParty.Member[0]->Non_Volatile_Status == 3) EnemySpeedTM /= 2;
       // sees who moves first
       if (MoveList[YourTurn->Move].Priority == MoveList[EnemyTurn->Move].Priority) {
-      if (floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM == floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM) {
+      if (floor(PlayerParty.Member[0]->Spe*statboostmult(PlayerParty.Member[0]->StatBoosts[4]))*PlayerSpeedTM == floor(EnemyParty.Member[0]->Spe*statboostmult(EnemyParty.Member[0]->StatBoosts[4]))*EnemySpeedTM) {
         First = (rand() % 2);
       } else {
-        First = floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM > floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM;
+        First = floor(PlayerParty.Member[0]->Spe*statboostmult(PlayerParty.Member[0]->StatBoosts[4]))*PlayerSpeedTM > floor(EnemyParty.Member[0]->Spe*statboostmult(EnemyParty.Member[0]->StatBoosts[4]))*EnemySpeedTM;
       }
         } else {
         First = (MoveList[YourTurn->Move].Priority > MoveList[EnemyTurn->Move].Priority);
@@ -529,8 +529,8 @@ int Battle() {
         First = PlayerSwitch;
       }
       // post speed,stab and reset funcs
-      AbilityList[PlayerParty.P1->Ability].abilityfunc(1,0);
-      AbilityList[EnemyParty.P1->Ability].abilityfunc(1,1);
+      AbilityList[PlayerParty.Member[0]->Ability].abilityfunc(1,0);
+      AbilityList[EnemyParty.Member[0]->Ability].abilityfunc(1,1);
       MoveList[YourTurn->Move].movefunc(0,0);
       MoveList[EnemyTurn->Move].movefunc(0,1);
       ACTIVATE_EFFECTS(0,0);
@@ -543,10 +543,10 @@ int Battle() {
         ExecuteMove(0);
         }
       
-      if (floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM == floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM) {
+      if (floor(PlayerParty.Member[0]->Spe*statboostmult(PlayerParty.Member[0]->StatBoosts[4]))*PlayerSpeedTM == floor(EnemyParty.Member[0]->Spe*statboostmult(EnemyParty.Member[0]->StatBoosts[4]))*EnemySpeedTM) {
         EndFirst = (rand() % 2);
       } else {
-        EndFirst = floor(PlayerParty.P1->Spe*statboostmult(PlayerParty.P1->StatBoosts[4]))*PlayerSpeedTM > floor(EnemyParty.P1->Spe*statboostmult(EnemyParty.P1->StatBoosts[4]))*EnemySpeedTM;
+        EndFirst = floor(PlayerParty.Member[0]->Spe*statboostmult(PlayerParty.Member[0]->StatBoosts[4]))*PlayerSpeedTM > floor(EnemyParty.Member[0]->Spe*statboostmult(EnemyParty.Member[0]->StatBoosts[4]))*EnemySpeedTM;
       }
 
       endturn(!EndFirst);

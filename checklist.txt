@@ -24,8 +24,10 @@ x | Condense execution in to a func for easier editing
 
 x | Condense View Party in to a func for easier editing as I have to update it for items and such
 
-o | Update displayparty as it hasn't been given the opportunity to catch up with the rest of the game
+x | Update displayparty as it hasn't been given the opportunity to catch up with the rest of the game
 
 x | Change Moveslot struct so that it stores a char not a pointer to save space like items do
 
-o | Change PlayerParty struct so that it stores party members in array and not seperately
+x | Change PlayerParty struct so that it stores party members in array and not seperately
+
+o | Put Natures into to an array and have the MyPokemon struct store natures as a unsigned char or a bitfield

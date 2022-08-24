@@ -53,9 +53,9 @@ void Strugglef(unsigned char et, bool eop) {
   YourTurn->PP++;
   if (et == 2) {
     if (eop == 0) {
-      PlayerParty.P1->CurrentHp -= PlayerParty.P1->Hp/4;
+      PlayerParty.Member[0]->CurrentHp -= PlayerParty.Member[0]->Hp/4;
     } else {
-      EnemyParty.P1->CurrentHp -= EnemyParty.P1->Hp/4;
+      EnemyParty.Member[0]->CurrentHp -= EnemyParty.Member[0]->Hp/4;
     }
   }
   return 0;
@@ -73,11 +73,11 @@ void Emberf(unsigned char et, bool eop) {
   if (et == 2) {
   if (eop == 0) {
   if (map2(rand(),100,RAND_MAX) < 10) {
-    EnemyParty.P1->Non_Volatile_Status = 1;
+    EnemyParty.Member[0]->Non_Volatile_Status = 1;
   }
     } else if (eop == 1) {
   if (map2(rand(),100,RAND_MAX) < 10) {
-    PlayerParty.P1->Non_Volatile_Status = 1;
+    PlayerParty.Member[0]->Non_Volatile_Status = 1;
   }
     }
     }
@@ -101,9 +101,9 @@ void Thunder_Shockf(unsigned char et, bool eop) {
 void Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
   if (eop == 0) {
-    if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 3;
+    if (EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 3;
   } else {
-    if (PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 3;
+    if (PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 3;
   }
   }
   return 0;
@@ -112,9 +112,9 @@ void Thunder_Wavef(unsigned char et, bool eop) {
 void Swords_Dancef(unsigned char et, bool eop) {
   if (et == 2) {
     if (eop == 0) {
-      Boostandprint(0,2,PlayerParty.P1,0);
+      Boostandprint(0,2,PlayerParty.Member[0],0);
     } else {
-      Boostandprint(0,2,EnemyParty.P1,1);
+      Boostandprint(0,2,EnemyParty.Member[0],1);
     }
   }
   return 0;
@@ -123,11 +123,11 @@ void Swords_Dancef(unsigned char et, bool eop) {
 void Dragon_Dancef(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-      Boostandprint(0,1,PlayerParty.P1,0);
-      Boostandprint(4,1,PlayerParty.P1,0);
+      Boostandprint(0,1,PlayerParty.Member[0],0);
+      Boostandprint(4,1,PlayerParty.Member[0],0);
     } else {
-      Boostandprint(0,1,EnemyParty.P1,1);
-      Boostandprint(4,1,EnemyParty.P1,1);
+      Boostandprint(0,1,EnemyParty.Member[0],1);
+      Boostandprint(4,1,EnemyParty.Member[0],1);
     }
   }
   return 0;
@@ -136,9 +136,9 @@ void Dragon_Dancef(unsigned char et,bool eop) {
 void Will_O_Wispf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-     if (EnemyParty.P1->Poke->Type1 != 2 && EnemyParty.P1->Poke->Type1 != 2 && EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 1;
+     if (EnemyParty.Member[0]->Poke->Type1 != 2 && EnemyParty.Member[0]->Poke->Type1 != 2 && EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 1;
     } else {
-     if (PlayerParty.P1->Poke->Type1 != 2 && PlayerParty.P1->Poke->Type2 != 2 && PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 1;
+     if (PlayerParty.Member[0]->Poke->Type1 != 2 && PlayerParty.Member[0]->Poke->Type2 != 2 && PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 1;
     }
   }
   return 0;
@@ -147,9 +147,9 @@ void Will_O_Wispf(unsigned char et,bool eop) {
 void Sporef(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-     if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 4;
+     if (EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 4;
     } else {
-     if (PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 4;
+     if (PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 4;
     }
   }
   return 0;
@@ -158,16 +158,16 @@ void Sporef(unsigned char et,bool eop) {
 void Toxicf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-     if (EnemyParty.P1->Poke->Type1 != 8 && EnemyParty.P1->Poke->Type2 != 8 && EnemyParty.P1->Poke->Type1 != 17 && EnemyParty.P1->Poke->Type2 != 17 && EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 5;
+     if (EnemyParty.Member[0]->Poke->Type1 != 8 && EnemyParty.Member[0]->Poke->Type2 != 8 && EnemyParty.Member[0]->Poke->Type1 != 17 && EnemyParty.Member[0]->Poke->Type2 != 17 && EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 5;
     } else {
-     if (PlayerParty.P1->Poke->Type1 != 8 && PlayerParty.P1->Poke->Type2 != 8 && PlayerParty.P1->Poke->Type1 != 17 && PlayerParty.P1->Poke->Type2 != 17 && PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 5;
+     if (PlayerParty.Member[0]->Poke->Type1 != 8 && PlayerParty.Member[0]->Poke->Type2 != 8 && PlayerParty.Member[0]->Poke->Type1 != 17 && PlayerParty.Member[0]->Poke->Type2 != 17 && PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 5;
     }
   }
   if (et == 3) {
     if (!eop) {
-      if (PlayerParty.P1->Poke->Type1 == 8 || PlayerParty.P1->Poke->Type2 == 8) PlayerHit = 1;
+      if (PlayerParty.Member[0]->Poke->Type1 == 8 || PlayerParty.Member[0]->Poke->Type2 == 8) PlayerHit = 1;
     } else {
-      if (EnemyParty.P1->Poke->Type1 == 8 || EnemyParty.P1->Poke->Type2 == 8) EnemyHit = 1;
+      if (EnemyParty.Member[0]->Poke->Type1 == 8 || EnemyParty.Member[0]->Poke->Type2 == 8) EnemyHit = 1;
     }
   }
   return 0;
@@ -176,9 +176,9 @@ void Toxicf(unsigned char et,bool eop) {
 void Freezef(unsigned char et,bool eop) {
   if (et == 2) {
     if (!eop) {
-      if (EnemyParty.P1->Non_Volatile_Status == 0) EnemyParty.P1->Non_Volatile_Status = 6;
+      if (EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 6;
     } else {
-      if (PlayerParty.P1->Non_Volatile_Status == 0) PlayerParty.P1->Non_Volatile_Status = 6;
+      if (PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 6;
     }
   }
   return 0;
@@ -187,11 +187,11 @@ void Freezef(unsigned char et,bool eop) {
 void Bulk_Upf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-      Boostandprint(0,1,PlayerParty.P1,0);
-      Boostandprint(1,1,PlayerParty.P1,0);
+      Boostandprint(0,1,PlayerParty.Member[0],0);
+      Boostandprint(1,1,PlayerParty.Member[0],0);
     } else {
-      Boostandprint(0,1,EnemyParty.P1,1);
-      Boostandprint(1,1,EnemyParty.P1,1);
+      Boostandprint(0,1,EnemyParty.Member[0],1);
+      Boostandprint(1,1,EnemyParty.Member[0],1);
     }
   }
   return 0;
@@ -200,9 +200,9 @@ void Bulk_Upf(unsigned char et,bool eop) {
 void Charmf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-      Boostandprint(0,-2,EnemyParty.P1,1);
+      Boostandprint(0,-2,EnemyParty.Member[0],1);
     } else {
-      Boostandprint(0,-2,PlayerParty.P1,0);
+      Boostandprint(0,-2,PlayerParty.Member[0],0);
     }
   }
 }
@@ -210,11 +210,11 @@ void Charmf(unsigned char et,bool eop) {
 void Leerf(unsigned char et,bool eop) {
   if (!eop) {
   if (et == 2) {
-  if (!(EnemyParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,EnemyParty.P1,1);
+  if (!(EnemyParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,EnemyParty.Member[0],1);
     }
   } else {
   if (et == 2) {
-  if (!(PlayerParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,PlayerParty.P1,0);
+  if (!(PlayerParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,PlayerParty.Member[0],0);
   }
     }
 }

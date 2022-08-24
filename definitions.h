@@ -240,19 +240,13 @@ void (*abilityfunc)(char,bool);
  unsigned int Spe;
  unsigned char Counter;
  unsigned char Non_Volatile_Status;
- unsigned char Volatile_Status [8];
  char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
  unsigned int ItemUsable : 1;
 };
 
 struct Party {
- struct MyPokemon *P1;
- struct MyPokemon *P2;
- struct MyPokemon *P3;
- struct MyPokemon *P4;
- struct MyPokemon *P5;
- struct MyPokemon *P6;
- unsigned int EFFECT_FLAGS [2];
+ struct MyPokemon *Member [6];
+ uint64_t EFFECT_FLAGS [2];
 };
 
 char Stagenames [8][15] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};

@@ -3,22 +3,22 @@ void NoItemf(char et,bool eop) {
 
 void Leftoversf(char et,bool eop) {
   if (!eop) {
-    if (PlayerParty.P1->ItemUsable) {  
+    if (PlayerParty.Member[0]->ItemUsable) {  
     if (et == 5) {
-        if (PlayerParty.P1->CurrentHp < PlayerParty.P1->Hp) {
-        PlayerParty.P1->CurrentHp += PlayerParty.P1->Hp/16;
-        printf("%s restored a little HP using its Leftovers\n",PlayerParty.P1->Poke->Name);
-        printf("%s is at %d/%d hp\n\n",PlayerParty.P1->Poke->Name,PlayerParty.P1->CurrentHp,PlayerParty.P1->Hp);
+        if (PlayerParty.Member[0]->CurrentHp < PlayerParty.Member[0]->Hp) {
+        PlayerParty.Member[0]->CurrentHp += PlayerParty.Member[0]->Hp/16;
+        printf("%s restored a little HP using its Leftovers\n",PlayerParty.Member[0]->Poke->Name);
+        printf("%s is at %d/%d hp\n\n",PlayerParty.Member[0]->Poke->Name,PlayerParty.Member[0]->CurrentHp,PlayerParty.Member[0]->Hp);
           }
       }
       }
   } else {
-      if (EnemyParty.P1->ItemUsable) {
+      if (EnemyParty.Member[0]->ItemUsable) {
       if (et == 5) {
-      if (EnemyParty.P1->CurrentHp < EnemyParty.P1->Hp) {
-      EnemyParty.P1->CurrentHp += EnemyParty.P1->Hp/16;
-      printf("The opposing %s restored a little HP using its Leftovers\n",EnemyParty.P1->Poke->Name);
-      printf("The opposing %s is at %d/%d hp\n\n",EnemyParty.P1->Poke->Name,EnemyParty.P1->CurrentHp,EnemyParty.P1->Hp);
+      if (EnemyParty.Member[0]->CurrentHp < EnemyParty.Member[0]->Hp) {
+      EnemyParty.Member[0]->CurrentHp += EnemyParty.Member[0]->Hp/16;
+      printf("The opposing %s restored a little HP using its Leftovers\n",EnemyParty.Member[0]->Poke->Name);
+      printf("The opposing %s is at %d/%d hp\n\n",EnemyParty.Member[0]->Poke->Name,EnemyParty.Member[0]->CurrentHp,EnemyParty.Member[0]->Hp);
       }
         }
         }
@@ -27,22 +27,22 @@ void Leftoversf(char et,bool eop) {
 
 void Focus_Sashf(char et,bool eop) {
   if (!eop) {
-    if (PlayerParty.P1->ItemUsable) {
+    if (PlayerParty.Member[0]->ItemUsable) {
     if (et == -1) {
-    if (PlayerParty.P1->CurrentHp == PlayerParty.P1->Hp && EnemyDamage >= PlayerParty.P1->Hp) {
-      EnemyDamage = PlayerParty.P1->Hp-1;
-      printf("%s hung on with its Focus Sash!\n",PlayerParty.P1->Poke->Name);
-      PlayerParty.P1->ItemUsable = 0;
+    if (PlayerParty.Member[0]->CurrentHp == PlayerParty.Member[0]->Hp && EnemyDamage >= PlayerParty.Member[0]->Hp) {
+      EnemyDamage = PlayerParty.Member[0]->Hp-1;
+      printf("%s hung on with its Focus Sash!\n",PlayerParty.Member[0]->Poke->Name);
+      PlayerParty.Member[0]->ItemUsable = 0;
       }
     }
       }
   } else {
-    if (EnemyParty.P1->ItemUsable) {
+    if (EnemyParty.Member[0]->ItemUsable) {
     if (et == -1) {
-    if (EnemyParty.P1->CurrentHp == EnemyParty.P1->Hp && Damage >= EnemyParty.P1->Hp) {
-        Damage = EnemyParty.P1->Hp-1;
-        printf("The opposing %s hung on with its Focus Sash!\n",EnemyParty.P1->Poke->Name);
-        EnemyParty.P1->ItemUsable = 0;
+    if (EnemyParty.Member[0]->CurrentHp == EnemyParty.Member[0]->Hp && Damage >= EnemyParty.Member[0]->Hp) {
+        Damage = EnemyParty.Member[0]->Hp-1;
+        printf("The opposing %s hung on with its Focus Sash!\n",EnemyParty.Member[0]->Poke->Name);
+        EnemyParty.Member[0]->ItemUsable = 0;
       }
       }
     }

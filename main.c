@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <stdint.h>
 #include "definitions.h"
 #include "enumdefs.h"
 #include "effectfuncs.h"
