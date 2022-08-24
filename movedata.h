@@ -18,31 +18,10 @@ struct Move MoveList [] = {
 {"Toxic",0,90,10,8,0,0,&Toxicf},
 {"Freeze",0,60,10,6,0,0,&Freezef},
 {"Bulk Up",0,100,20,7,0,0,&Bulk_Upf},
-{"Charm",0,100,20,18,0,0,&Charmf}
+{"Charm",0,100,20,18,0,0,&Charmf},
+{"Leer",0,100,20,1,0,0,&Leerf}
 };
 
-enum {
-Nothing,
-Struggle,
-Scratch,
-Water_Gun,
-Vine_Whip,
-Ember,
-Quick_Attack,
-Super_Attack,
-Stone_Edge,
-Gust,
-Thunder_Shock,
-Thunder_Wave,
-Swords_Dance,
-Dragon_Dance,
-Will_O_Wisp,
-Spore,
-Toxic,
-Freeze,
-Bulk_Up,
-Charm
-};
 
 MoveSlot Empty_slot = {Nothing,5,1};
 MoveSlot Struggle_Slot = {Struggle,5,1};

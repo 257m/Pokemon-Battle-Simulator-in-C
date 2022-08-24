@@ -5,6 +5,9 @@
 #include <string.h>
 #include <math.h>
 #include "definitions.h"
+#include "enumdefs.h"
+#include "effectfuncs.h"
+#include "effects.h"
 #include "movefuncs.h"
 #include "movedata.h"
 #include "abilityfuncs.h"

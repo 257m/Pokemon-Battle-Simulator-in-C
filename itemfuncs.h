@@ -1,7 +1,6 @@
 void NoItemf(char et,bool eop) {
 }
 
-
 void Leftoversf(char et,bool eop) {
   if (!eop) {
     if (PlayerParty.P1->ItemUsable) {  

@@ -1,112 +1,3 @@
-void printBoosts(unsigned char Stat,char num,bool eop) {
-  if (!eop) {
-    if (num > 0) {
-    if (Stat == 0) {
-    printf("Your %s's Attack rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-      }
-    else if (Stat == 1) {
-    printf("Your %s's Defense rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 2) {
-    printf("Your %s's Special Attack rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 3) {
-    printf("Your %s's Speical Defense rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 4) {
-    printf("Your %s's Speed rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 5) {
-    printf("Your %s's Accuracy rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 6) {
-    printf("Your %s's Evasion rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 7) {
-    printf("Your %s's Crit Chance rose by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    } 
-    } else if (num < 0) {
-      if (Stat == 0) {
-    printf("Your %s's Attack fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-      }
-    else if (Stat == 1) {
-    printf("Your %s's Defense fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 2) {
-    printf("Your %s's Special Attack fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 3) {
-    printf("Your %s's Speical Defense fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 4) {
-    printf("Your %s's Speed fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 5) {
-    printf("Your %s's Accuracy fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 6) {
-    printf("Your %s's Evasion fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 7) {
-    printf("Your %s's Crit Chance fell by %d stages\n",PlayerParty.P1->Poke->Name,num);
-    }
-      }
-  } else {
-    if (num > 0) {
-    if (Stat == 0) {
-    printf("Your %s's Attack rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-      }
-    else if (Stat == 1) {
-    printf("Your %s's Defense rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 2) {
-    printf("Your %s's Special Attack rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 3) {
-    printf("Your %s's Speical Defense rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 4) {
-    printf("Your %s's Speed rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 5) {
-    printf("Your %s's Accuracy rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 6) {
-    printf("Your %s's Evasion rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 7) {
-    printf("Your %s's Crit Chance rose by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    } 
-    } else if (num < 0) {
-      if (Stat == 0) {
-    printf("Your %s's Attack fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-      }
-    else if (Stat == 1) {
-    printf("Your %s's Defense fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 2) {
-    printf("Your %s's Special Attack fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 3) {
-    printf("Your %s's Speical Defense fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 4) {
-    printf("Your %s's Speed fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 5) {
-    printf("Your %s's Accuracy fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 6) {
-    printf("Your %s's Evasion fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-    else if (Stat == 7) {
-    printf("Your %s's Crit Chance fell by %d stages\n",EnemyParty.P1->Poke->Name,num);
-    }
-  }
-}
-  }
-
-
 void Boost(unsigned char stat,char boostrate,struct MyPokemon* pokemon) {
   pokemon->StatBoosts[stat] += boostrate;
   if (pokemon->StatBoosts[stat] > 6) {
@@ -133,7 +24,7 @@ void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,b
     } else if (boostrate < 0) {
     if (pokemon->StatBoosts[stat] + boostrate < -6) boostrate = pokemon->StatBoosts[stat] + boostrate + 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s fell by %d stages\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat],boostrate);
+    printf("%s%s's %s fell by %d stages\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat],boostrate*-1);
     }
       }
   }
@@ -314,4 +205,16 @@ void Charmf(unsigned char et,bool eop) {
       Boostandprint(0,-2,PlayerParty.P1,0);
     }
   }
+}
+
+void Leerf(unsigned char et,bool eop) {
+  if (!eop) {
+  if (et == 2) {
+  if (!(EnemyParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,EnemyParty.P1,1);
+    }
+  } else {
+  if (et == 2) {
+  if (!(PlayerParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,PlayerParty.P1,0);
+  }
+    }
 }

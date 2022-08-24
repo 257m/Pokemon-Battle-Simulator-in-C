@@ -533,6 +533,8 @@ int Battle() {
       AbilityList[EnemyParty.P1->Ability].abilityfunc(1,1);
       MoveList[YourTurn->Move].movefunc(0,0);
       MoveList[EnemyTurn->Move].movefunc(0,1);
+      ACTIVATE_EFFECTS(0,0);
+      ACTIVATE_EFFECTS(0,1);
       if (First == 1) {
         ExecuteMove(0);
         ExecuteMove(1);

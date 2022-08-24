@@ -3,6 +3,8 @@ const unsigned int bits [] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,1
 char c[64];
 char d[64];
 
+typedef void (*gpf)(char,bool);
+
 int stratt (a,b) {
   strcpy(c,"");
   strcpy(d,"");
@@ -250,6 +252,7 @@ struct Party {
  struct MyPokemon *P4;
  struct MyPokemon *P5;
  struct MyPokemon *P6;
+ unsigned int EFFECT_FLAGS [2];
 };
 
 char Stagenames [8][15] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
