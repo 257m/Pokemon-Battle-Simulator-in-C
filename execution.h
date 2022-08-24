@@ -67,6 +67,7 @@ void ExecuteMove(bool eop) {
           }  else {
         if (PlayerParty.Member[0]->Non_Volatile_Status == 5) PlayerParty.Member[0]->Counter = 0; 
          ResetBoosts(&PlayerParty.Member[0]);
+         PlayerParty.EFFECT_FLAGS = 0;
          Switcheroo3(&PlayerSwitchSave);
          printf("You switched out to %s\n",PlayerParty.Member[0]->Poke->Name);
       }
@@ -142,6 +143,7 @@ void ExecuteMove(bool eop) {
       } else {
         if (EnemyParty.Member[0]->Non_Volatile_Status == 5) EnemyParty.Member[0]->Counter = 0; 
         ResetBoosts(&EnemyParty.Member[0]);
+        EnemyParty.EFFECT_FLAGS = 0;
         Switcheroo4(&EnemySwitchSave);
         printf("The Enemy switched out to %s\n",EnemyParty.Member[0]->Poke->Name);
           }
