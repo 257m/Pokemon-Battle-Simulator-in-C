@@ -25,8 +25,6 @@ int Switcheroo4(struct MyPokemon ***S4) {
   return 0;
   }
 
-
-
 int SwitchIn(PlayerOrEnemy) {
           if (PlayerOrEnemy == 0) {
           printf("EnemySwitch-In: ");
@@ -34,26 +32,31 @@ int SwitchIn(PlayerOrEnemy) {
           x[strcspn(x, "\n")] = 0;
           if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[1]->Poke->Name)) == 0 || strcmp(x,"P2") == 0) {
             if (EnemyParty.Member[1]->CurrentHp > 0) {
+            AbilityList[EnemyParty.Member[1]->Ability].abilityfunc(12,1);
             Switcheroo2(&EnemyParty.Member[1]);
             printf("Go! %s!\n",EnemyParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
           }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[2]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
             if (EnemyParty.Member[2]->CurrentHp > 0) {
+            AbilityList[EnemyParty.Member[2]->Ability].abilityfunc(12,1);
             Switcheroo2(&EnemyParty.Member[2]);
             printf("Go! %s!\n",EnemyParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
           }  else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[3]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[3]->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
             if (EnemyParty.Member[3]->CurrentHp > 0) {
+            AbilityList[EnemyParty.Member[3]->Ability].abilityfunc(12,1);
             Switcheroo2(&EnemyParty.Member[3]);
               printf("Go! %s!\n",EnemyParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
           }  else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[4]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
             if (EnemyParty.Member[4]->CurrentHp > 0) {
+            AbilityList[EnemyParty.Member[4]->Ability].abilityfunc(12,1);
             Switcheroo2(&EnemyParty.Member[4]);
               printf("Go! %s!\n",EnemyParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
           }  else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",EnemyParty.Member[5]->Poke->Name)) == 0 || strcmp(x,EnemyParty.Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
             if (EnemyParty.Member[5]->CurrentHp > 0) {
+            AbilityList[EnemyParty.Member[5]->Ability].abilityfunc(12,1);
             Switcheroo2(&EnemyParty.Member[5]);
               printf("Go! %s!\n",EnemyParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(0);}
@@ -70,26 +73,31 @@ int SwitchIn(PlayerOrEnemy) {
           x[strcspn(x, "\n")] = 0;
           if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[1]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
             if (PlayerParty.Member[1]->CurrentHp > 0) {
+            AbilityList[PlayerParty.Member[1]->Ability].abilityfunc(12,0);
             Switcheroo(&PlayerParty.Member[1]);
               printf("Go! %s!\n",PlayerParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
           }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[2]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
             if (PlayerParty.Member[2]->CurrentHp > 0) {
+            AbilityList[PlayerParty.Member[2]->Ability].abilityfunc(12,0);
             Switcheroo(&PlayerParty.Member[2]);
               printf("Go! %s!\n",PlayerParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
           }  else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[3]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[3]->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
             if (PlayerParty.Member[3]->CurrentHp > 0) {
+            AbilityList[PlayerParty.Member[3]->Ability].abilityfunc(12,0);
             Switcheroo(&PlayerParty.Member[3]);
               printf("Go! %s!\n",PlayerParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
           }  else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[4]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
             if (PlayerParty.Member[4]->CurrentHp > 0) {
+            AbilityList[PlayerParty.Member[4]->Ability].abilityfunc(12,0);
             Switcheroo(&PlayerParty.Member[4]);
               printf("Go! %s!\n",PlayerParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
           }  else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",PlayerParty.Member[5]->Poke->Name)) == 0 || strcmp(x,PlayerParty.Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
             if (PlayerParty.Member[5]->CurrentHp > 0) {
+            AbilityList[PlayerParty.Member[5]->Ability].abilityfunc(12,0);
             Switcheroo(&PlayerParty.Member[5]);
               printf("Go! %s!\n",PlayerParty.Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(1);}

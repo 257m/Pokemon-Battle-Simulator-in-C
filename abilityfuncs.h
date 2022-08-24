@@ -1,7 +1,6 @@
 void NoAbilityf(char et,bool eop) {
 }
 
-
 void Overgrowf(char et,bool eop) {
   if (!eop) {
   if (et == 1) {
@@ -39,4 +38,17 @@ void Torrentf(char et,bool eop) {
   }
 
 void Big_Pecksf(char et,bool eop) {
+  if (!eop) {
+  if (et == 12) {
+  CLR_BIT(PlayerParty.EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
+  } else {
+  SET_BIT(PlayerParty.EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
+    }
+  } else {
+  if (et == 12) {
+  CLR_BIT(PlayerParty.EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
+  } else {
+  SET_BIT(EnemyParty.EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
+    }
+  }
 }

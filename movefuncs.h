@@ -158,16 +158,16 @@ void Sporef(unsigned char et,bool eop) {
 void Toxicf(unsigned char et,bool eop) {
   if (et == 2) {
     if (eop == 0) {
-     if (EnemyParty.Member[0]->Poke->Type1 != 8 && EnemyParty.Member[0]->Poke->Type2 != 8 && EnemyParty.Member[0]->Poke->Type1 != 17 && EnemyParty.Member[0]->Poke->Type2 != 17 && EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 5;
+     if (EnemyParty.Member[0]->Poke->Type1 != POISON && EnemyParty.Member[0]->Poke->Type2 != POISON && EnemyParty.Member[0]->Poke->Type1 != STEEL && EnemyParty.Member[0]->Poke->Type2 != STEEL && EnemyParty.Member[0]->Non_Volatile_Status == 0) EnemyParty.Member[0]->Non_Volatile_Status = 5;
     } else {
-     if (PlayerParty.Member[0]->Poke->Type1 != 8 && PlayerParty.Member[0]->Poke->Type2 != 8 && PlayerParty.Member[0]->Poke->Type1 != 17 && PlayerParty.Member[0]->Poke->Type2 != 17 && PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 5;
+     if (PlayerParty.Member[0]->Poke->Type1 != POISON && PlayerParty.Member[0]->Poke->Type2 != POISON && PlayerParty.Member[0]->Poke->Type1 != STEEL && PlayerParty.Member[0]->Poke->Type2 != STEEL && PlayerParty.Member[0]->Non_Volatile_Status == 0) PlayerParty.Member[0]->Non_Volatile_Status = 5;
     }
   }
   if (et == 3) {
     if (!eop) {
-      if (PlayerParty.Member[0]->Poke->Type1 == 8 || PlayerParty.Member[0]->Poke->Type2 == 8) PlayerHit = 1;
+      if (PlayerParty.Member[0]->Poke->Type1 == POISON || PlayerParty.Member[0]->Poke->Type2 == POISON) PlayerHit = 1;
     } else {
-      if (EnemyParty.Member[0]->Poke->Type1 == 8 || EnemyParty.Member[0]->Poke->Type2 == 8) EnemyHit = 1;
+      if (EnemyParty.Member[0]->Poke->Type1 == POISON || EnemyParty.Member[0]->Poke->Type2 == POISON) EnemyHit = 1;
     }
   }
   return 0;
@@ -210,11 +210,11 @@ void Charmf(unsigned char et,bool eop) {
 void Leerf(unsigned char et,bool eop) {
   if (!eop) {
   if (et == 2) {
-  if (!(EnemyParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,EnemyParty.Member[0],1);
+  if (!CHK_BIT(EnemyParty.EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,EnemyParty.Member[0],1);
     }
   } else {
   if (et == 2) {
-  if (!(PlayerParty.EFFECT_FLAGS[0] & EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,PlayerParty.Member[0],0);
+  if (!CHK_BIT(PlayerParty.EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,PlayerParty.Member[0],0);
   }
     }
 }

@@ -1,5 +1,9 @@
 const unsigned int bits [] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536};
 
+#define SET_BIT(BF, N) BF |= ((uint64_t)0x0000000000000001 << N)
+#define CLR_BIT(BF, N) BF &= ~((uint64_t)0x0000000000000001 << N)
+#define CHK_BIT(BF, N) ((BF >> N) & 0x1)
+
 char c[64];
 char d[64];
 
@@ -90,15 +94,15 @@ double tt(bool condition,double ifcon,double elsecon) {
 
 struct PokemonDex {
 char Name[12];
-char Type1;
-char Type2;
+unsigned int Type1 : 5;
+unsigned int Type2 : 5;
 char Hp;
 char Atk;
 char Def;
 char SpA;
 char SpD;
 char Spe;
-};
+}__attribute__((__packed__));
 
 float TypeChart[19][19] = {
 {1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 },
@@ -142,7 +146,7 @@ float TypeChart[19][19] = {
 };
 
 typedef struct {
-unsigned char Status; // Burn=0 Poison=1 Toxic=2 Para=3 Sleep=4 Freeze=5 Frostbite=6 Flinch=7 Drowsy=8
+unsigned char Status; // Burn=0 Poison=1 Toxic=2 Para=3 Sleep=4 Freeze=5 Frostbite=6
 unsigned char Chance;
 } StatusChance_t;
 
@@ -163,35 +167,36 @@ struct Nature {
   float SpA;
   float SpD;
   float Spe;
-  char indexNumber;
   char NatureName [8];
 };
 
-struct Nature Hardy = {1,1,1,1,1,0,"Hardy"};
-struct Nature Lonely = {1.1,0.9,1,1,1,1,"Lonely"};
-struct Nature Brave = {1.1,1,1,1,0.9,2,"Brave"};
-struct Nature Adamant = {1.1,1,0.9,1,1,3,"Adamant"};
-struct Nature Naughty = {1.1,1,1,0.9,1,4,"Naughty"};
-struct Nature Bold = {0.9,1.1,1,1,1,5,"Bold"};
-struct Nature Docile = {1,1,1,1,1,6,"Docile"};
-struct Nature Relaxed = {1,1.1,1,1,0.9,7,"Relaxed"};
-struct Nature Impish = {1,1.1,0.9,1,1,8,"Impish"};
-struct Nature Lax = {1,1.1,1,0.9,1,9,"Lax"};
-struct Nature Timid = {0.9,1,1,1,1.1,10,"Timid"};
-struct Nature Hasty = {1,0.9,1,1,1.1,11,"Hasty"};
-struct Nature Serious = {1,1,1,1,1,12,"Serious"};
-struct Nature Jolly = {1,1,0.9,1,1.1,13,"Jolly"};
-struct Nature Naive = {1,1,1,0.9,1.1,14,"Naive"};
-struct Nature Modest = {0.9,1,1.1,1,1,15,"Modest"};
-struct Nature Mild = {1,0.9,1.1,1,1,16,"Mild"};
-struct Nature Quiet = {1,1,1.1,1,0.9,17,"Quiet"};
-struct Nature Bashful = {1,1,1,1,1,18,"Bashful"};
-struct Nature Rash = {1,1,1.1,0.9,1,19,"Rash"};
-struct Nature Calm = {0.9,1,1,1.1,1,20,"Calm"};
-struct Nature Gentle = {1,0.9,1,1.1,1,21,"Gentle"};
-struct Nature Sassy = {1,1,1,1.1,0.9,22,"Sassy"};
-struct Nature Careful = {1,1,0.9,1.1,1,23,"Careful"};
-struct Nature Quirky = {1,1,1,1.1,1,24,"Quirky"};
+struct Nature NATURE_LIST [] = {
+{1,1,1,1,1,"Hardy"},
+{1.1,0.9,1,1,1,"Lonely"},
+{1.1,1,1,1,0.9,"Brave"},
+{1.1,1,0.9,1,1,"Adamant"},
+{1.1,1,1,0.9,1,"Naughty"},
+{0.9,1.1,1,1,1,"Bold"},
+{1,1,1,1,1,"Docile"},
+{1,1.1,1,1,0.9,"Relaxed"},
+{1,1.1,0.9,1,1,"Impish"},
+{1,1.1,1,0.9,1,"Lax"},
+{0.9,1,1,1,1.1,"Timid"},
+{1,0.9,1,1,1.1,"Hasty"},
+{1,1,1,1,1,"Serious"},
+{1,1,0.9,1,1.1,"Jolly"},
+{1,1,1,0.9,1.1,"Naive"},
+{0.9,1,1.1,1,1,"Modest"},
+{1,0.9,1.1,1,1,"Mild"},
+{1,1,1.1,1,0.9,"Quiet"},
+{1,1,1,1,1,"Bashful"},
+{1,1,1.1,0.9,1,"Rash"},
+{0.9,1,1,1.1,1,"Calm"},
+{1,0.9,1,1.1,1,"Gentle"},
+{1,1,1,1.1,0.9,"Sassy"},
+{1,1,0.9,1.1,1,"Careful"},
+{1,1,1,1.1,1,"Quirky"}
+};
 
 typedef struct {
 unsigned char Move;
@@ -215,7 +220,7 @@ void (*abilityfunc)(char,bool);
  int CurrentHp;
  unsigned char Item;
  unsigned char Ability;
- struct Nature *Nature;
+ unsigned int Nature : 5;
  unsigned char IVHp;
  unsigned char IVAtk;
  unsigned char IVDef;

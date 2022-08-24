@@ -8,7 +8,7 @@ void displaymember(unsigned int PartyMember,bool eop) {
     printf("Special Attack: %d\n",PlayerParty.Member[PartyMember]->SpA);
     printf("Special Defense: %d\n",PlayerParty.Member[PartyMember]->SpD);
     printf("Speed: %d\n",PlayerParty.Member[PartyMember]->Spe);
-    printf("Nature: %s\n",PlayerParty.Member[PartyMember]->Nature->NatureName);
+    printf("Nature: %s\n",NATURE_LIST[PlayerParty.Member[PartyMember]->Nature].NatureName);
     printf("Move1: %s %d/%.0f\n",MoveList[PlayerParty.Member[PartyMember]->Move1.Move].Name,PlayerParty.Member[PartyMember]->Move1.PP,MoveList[PlayerParty.Member[PartyMember]->Move1.Move].PP * PlayerParty.Member[PartyMember]->Move1.PPmult);
     printf("Move2: %s %d/%.0f\n",MoveList[PlayerParty.Member[PartyMember]->Move2.Move].Name,PlayerParty.Member[PartyMember]->Move2.PP,MoveList[PlayerParty.Member[PartyMember]->Move2.Move].PP * PlayerParty.Member[PartyMember]->Move2.PPmult);
     printf("Move3: %s %d/%.0f\n",MoveList[PlayerParty.Member[PartyMember]->Move3.Move].Name,PlayerParty.Member[PartyMember]->Move3.PP,MoveList[PlayerParty.Member[PartyMember]->Move3.Move].PP * PlayerParty.Member[PartyMember]->Move3.PPmult);
@@ -23,7 +23,7 @@ void displaymember(unsigned int PartyMember,bool eop) {
     printf("Special Attack: %d\n",EnemyParty.Member[PartyMember]->SpA);
     printf("Special Defense: %d\n",EnemyParty.Member[PartyMember]->SpD);
     printf("Speed: %d\n",EnemyParty.Member[PartyMember]->Spe);
-    printf("Nature: %s\n",EnemyParty.Member[PartyMember]->Nature->NatureName);
+    printf("Nature: %s\n",NATURE_LIST[EnemyParty.Member[PartyMember]->Nature].NatureName);
     printf("Move1: %s %d/%.0f\n",MoveList[EnemyParty.Member[PartyMember]->Move1.Move].Name,EnemyParty.Member[PartyMember]->Move1.PP,MoveList[EnemyParty.Member[PartyMember]->Move1.Move].PP * EnemyParty.Member[PartyMember]->Move1.PPmult);
     printf("Move2: %s %d/%.0f\n",MoveList[EnemyParty.Member[PartyMember]->Move2.Move].Name,EnemyParty.Member[PartyMember]->Move2.PP,MoveList[EnemyParty.Member[PartyMember]->Move2.Move].PP * EnemyParty.Member[PartyMember]->Move2.PPmult);
     printf("Move3: %s %d/%.0f\n",MoveList[EnemyParty.Member[PartyMember]->Move3.Move].Name,EnemyParty.Member[PartyMember]->Move3.PP,MoveList[EnemyParty.Member[PartyMember]->Move3.Move].PP * EnemyParty.Member[PartyMember]->Move3.PPmult);

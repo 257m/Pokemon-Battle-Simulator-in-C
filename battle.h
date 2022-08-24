@@ -3,15 +3,15 @@ int Battle() {
   while (StatCalc == 1) {
   PlayerParty.Member[0]->Hp =  ((PlayerParty.Member[0]->IVHp + 2 * PlayerParty.Member[0]->Poke->Hp + (PlayerParty.Member[0]->EVHp/4)) * PlayerParty.Member[0]->Level/100 ) + 10 +PlayerParty.Member[0]->Level;
   
-  PlayerParty.Member[0]->Atk = (((PlayerParty.Member[0]->IVAtk + 2 * PlayerParty.Member[0]->Poke->Atk + (PlayerParty.Member[0]->EVAtk/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->Atk;
+  PlayerParty.Member[0]->Atk = (((PlayerParty.Member[0]->IVAtk + 2 * PlayerParty.Member[0]->Poke->Atk + (PlayerParty.Member[0]->EVAtk/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[0]->Nature].Atk;
   
-  PlayerParty.Member[0]->Def = (((PlayerParty.Member[0]->IVDef + 2 * PlayerParty.Member[0]->Poke->Def + (PlayerParty.Member[0]->EVDef/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->Def;
+  PlayerParty.Member[0]->Def = (((PlayerParty.Member[0]->IVDef + 2 * PlayerParty.Member[0]->Poke->Def + (PlayerParty.Member[0]->EVDef/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[0]->Nature].Def;
   
-  PlayerParty.Member[0]->SpA = (((PlayerParty.Member[0]->IVSpA + 2 * PlayerParty.Member[0]->Poke->SpA + (PlayerParty.Member[0]->EVSpA/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->SpA;
+  PlayerParty.Member[0]->SpA = (((PlayerParty.Member[0]->IVSpA + 2 * PlayerParty.Member[0]->Poke->SpA + (PlayerParty.Member[0]->EVSpA/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[0]->Nature].SpA;
   
-  PlayerParty.Member[0]->SpD = (((PlayerParty.Member[0]->IVSpD + 2 * PlayerParty.Member[0]->Poke->SpD + (PlayerParty.Member[0]->EVSpD/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->SpD;
+  PlayerParty.Member[0]->SpD = (((PlayerParty.Member[0]->IVSpD + 2 * PlayerParty.Member[0]->Poke->SpD + (PlayerParty.Member[0]->EVSpD/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[0]->Nature].SpD;
 
-  PlayerParty.Member[0]->Spe = (((PlayerParty.Member[0]->IVSpe + 2 * PlayerParty.Member[0]->Poke->Spe + (PlayerParty.Member[0]->EVSpe/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * PlayerParty.Member[0]->Nature->Spe;
+  PlayerParty.Member[0]->Spe = (((PlayerParty.Member[0]->IVSpe + 2 * PlayerParty.Member[0]->Poke->Spe + (PlayerParty.Member[0]->EVSpe/4) ) * PlayerParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[0]->Nature].Spe;
 
   PlayerParty.Member[0]->Move1.PP = MoveList[PlayerParty.Member[0]->Move1.Move].PP * PlayerParty.Member[0]->Move1.PPmult;
   PlayerParty.Member[0]->Move2.PP = MoveList[PlayerParty.Member[0]->Move2.Move].PP * PlayerParty.Member[0]->Move2.PPmult;
@@ -20,15 +20,15 @@ int Battle() {
   
   PlayerParty.Member[1]->Hp =  ((PlayerParty.Member[1]->IVHp + 2 * PlayerParty.Member[1]->Poke->Hp + (PlayerParty.Member[1]->EVHp/4)) * PlayerParty.Member[1]->Level/100 ) + 10 +PlayerParty.Member[1]->Level;
   
-  PlayerParty.Member[1]->Atk = (((PlayerParty.Member[1]->IVAtk + 2 * PlayerParty.Member[1]->Poke->Atk + (PlayerParty.Member[1]->EVAtk/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->Atk;
+  PlayerParty.Member[1]->Atk = (((PlayerParty.Member[1]->IVAtk + 2 * PlayerParty.Member[1]->Poke->Atk + (PlayerParty.Member[1]->EVAtk/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[1]->Nature].Atk;
   
-  PlayerParty.Member[1]->Def = (((PlayerParty.Member[1]->IVDef + 2 * PlayerParty.Member[1]->Poke->Def + (PlayerParty.Member[1]->EVDef/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->Def;
+  PlayerParty.Member[1]->Def = (((PlayerParty.Member[1]->IVDef + 2 * PlayerParty.Member[1]->Poke->Def + (PlayerParty.Member[1]->EVDef/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[1]->Nature].Def;
   
-  PlayerParty.Member[1]->SpA = (((PlayerParty.Member[1]->IVSpA + 2 * PlayerParty.Member[1]->Poke->SpA + (PlayerParty.Member[1]->EVSpA/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->SpA;
+  PlayerParty.Member[1]->SpA = (((PlayerParty.Member[1]->IVSpA + 2 * PlayerParty.Member[1]->Poke->SpA + (PlayerParty.Member[1]->EVSpA/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[1]->Nature].SpA;
   
-  PlayerParty.Member[1]->SpD = (((PlayerParty.Member[1]->IVSpD + 2 * PlayerParty.Member[1]->Poke->SpD + (PlayerParty.Member[1]->EVSpD/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->SpD;
+  PlayerParty.Member[1]->SpD = (((PlayerParty.Member[1]->IVSpD + 2 * PlayerParty.Member[1]->Poke->SpD + (PlayerParty.Member[1]->EVSpD/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[1]->Nature].SpD;
 
-  PlayerParty.Member[1]->Spe = (((PlayerParty.Member[1]->IVSpe + 2 * PlayerParty.Member[1]->Poke->Spe + (PlayerParty.Member[1]->EVSpe/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * PlayerParty.Member[1]->Nature->Spe;
+  PlayerParty.Member[1]->Spe = (((PlayerParty.Member[1]->IVSpe + 2 * PlayerParty.Member[1]->Poke->Spe + (PlayerParty.Member[1]->EVSpe/4) ) * PlayerParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[1]->Nature].Spe;
 
   PlayerParty.Member[1]->Move1.PP = MoveList[PlayerParty.Member[1]->Move1.Move].PP * PlayerParty.Member[1]->Move1.PPmult;
   PlayerParty.Member[1]->Move2.PP = MoveList[PlayerParty.Member[1]->Move2.Move].PP * PlayerParty.Member[1]->Move2.PPmult;
@@ -37,15 +37,15 @@ int Battle() {
     
    PlayerParty.Member[2]->Hp =  ((PlayerParty.Member[2]->IVHp + 2 * PlayerParty.Member[2]->Poke->Hp + (PlayerParty.Member[2]->EVHp/4)) * PlayerParty.Member[2]->Level/100 ) + 10 +PlayerParty.Member[2]->Level;
   
-  PlayerParty.Member[2]->Atk = (((PlayerParty.Member[2]->IVAtk + 2 * PlayerParty.Member[2]->Poke->Atk + (PlayerParty.Member[2]->EVAtk/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->Atk;
+  PlayerParty.Member[2]->Atk = (((PlayerParty.Member[2]->IVAtk + 2 * PlayerParty.Member[2]->Poke->Atk + (PlayerParty.Member[2]->EVAtk/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[2]->Nature].Atk;
   
-  PlayerParty.Member[2]->Def = (((PlayerParty.Member[2]->IVDef + 2 * PlayerParty.Member[2]->Poke->Def + (PlayerParty.Member[2]->EVDef/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->Def;
+  PlayerParty.Member[2]->Def = (((PlayerParty.Member[2]->IVDef + 2 * PlayerParty.Member[2]->Poke->Def + (PlayerParty.Member[2]->EVDef/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[2]->Nature].Def;
   
-  PlayerParty.Member[2]->SpA = (((PlayerParty.Member[2]->IVSpA + 2 * PlayerParty.Member[2]->Poke->SpA + (PlayerParty.Member[2]->EVSpA/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->SpA;
+  PlayerParty.Member[2]->SpA = (((PlayerParty.Member[2]->IVSpA + 2 * PlayerParty.Member[2]->Poke->SpA + (PlayerParty.Member[2]->EVSpA/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[2]->Nature].SpA;
   
-  PlayerParty.Member[2]->SpD = (((PlayerParty.Member[2]->IVSpD + 2 * PlayerParty.Member[2]->Poke->SpD + (PlayerParty.Member[2]->EVSpD/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->SpD;
+  PlayerParty.Member[2]->SpD = (((PlayerParty.Member[2]->IVSpD + 2 * PlayerParty.Member[2]->Poke->SpD + (PlayerParty.Member[2]->EVSpD/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[2]->Nature].SpD;
 
-  PlayerParty.Member[2]->Spe = (((PlayerParty.Member[2]->IVSpe + 2 * PlayerParty.Member[2]->Poke->Spe + (PlayerParty.Member[2]->EVSpe/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * PlayerParty.Member[2]->Nature->Spe; 
+  PlayerParty.Member[2]->Spe = (((PlayerParty.Member[2]->IVSpe + 2 * PlayerParty.Member[2]->Poke->Spe + (PlayerParty.Member[2]->EVSpe/4) ) * PlayerParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[2]->Nature].Spe; 
 
   PlayerParty.Member[2]->Move1.PP = MoveList[PlayerParty.Member[2]->Move1.Move].PP * PlayerParty.Member[2]->Move1.PPmult;
   PlayerParty.Member[2]->Move2.PP = MoveList[PlayerParty.Member[2]->Move2.Move].PP * PlayerParty.Member[2]->Move2.PPmult;
@@ -54,15 +54,15 @@ int Battle() {
 
    PlayerParty.Member[3]->Hp =  ((PlayerParty.Member[3]->IVHp + 2 * PlayerParty.Member[3]->Poke->Hp + (PlayerParty.Member[3]->EVHp/4)) * PlayerParty.Member[3]->Level/100 ) + 10 +PlayerParty.Member[3]->Level;
   
-  PlayerParty.Member[3]->Atk = (((PlayerParty.Member[3]->IVAtk + 2 * PlayerParty.Member[3]->Poke->Atk + (PlayerParty.Member[3]->EVAtk/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->Atk;
+  PlayerParty.Member[3]->Atk = (((PlayerParty.Member[3]->IVAtk + 2 * PlayerParty.Member[3]->Poke->Atk + (PlayerParty.Member[3]->EVAtk/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[3]->Nature].Atk;
   
-  PlayerParty.Member[3]->Def = (((PlayerParty.Member[3]->IVDef + 2 * PlayerParty.Member[3]->Poke->Def + (PlayerParty.Member[3]->EVDef/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->Def;
+  PlayerParty.Member[3]->Def = (((PlayerParty.Member[3]->IVDef + 2 * PlayerParty.Member[3]->Poke->Def + (PlayerParty.Member[3]->EVDef/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[3]->Nature].Def;
   
-  PlayerParty.Member[3]->SpA = (((PlayerParty.Member[3]->IVSpA + 2 * PlayerParty.Member[3]->Poke->SpA + (PlayerParty.Member[3]->EVSpA/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->SpA;
+  PlayerParty.Member[3]->SpA = (((PlayerParty.Member[3]->IVSpA + 2 * PlayerParty.Member[3]->Poke->SpA + (PlayerParty.Member[3]->EVSpA/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[3]->Nature].SpA;
   
-  PlayerParty.Member[3]->SpD = (((PlayerParty.Member[3]->IVSpD + 2 * PlayerParty.Member[3]->Poke->SpD + (PlayerParty.Member[3]->EVSpD/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->SpD;
+  PlayerParty.Member[3]->SpD = (((PlayerParty.Member[3]->IVSpD + 2 * PlayerParty.Member[3]->Poke->SpD + (PlayerParty.Member[3]->EVSpD/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[3]->Nature].SpD;
 
-  PlayerParty.Member[3]->Spe = (((PlayerParty.Member[3]->IVSpe + 2 * PlayerParty.Member[3]->Poke->Spe + (PlayerParty.Member[3]->EVSpe/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * PlayerParty.Member[3]->Nature->Spe;
+  PlayerParty.Member[3]->Spe = (((PlayerParty.Member[3]->IVSpe + 2 * PlayerParty.Member[3]->Poke->Spe + (PlayerParty.Member[3]->EVSpe/4) ) * PlayerParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[3]->Nature].Spe;
 
   PlayerParty.Member[3]->Move1.PP = MoveList[PlayerParty.Member[3]->Move1.Move].PP * PlayerParty.Member[3]->Move1.PPmult;
   PlayerParty.Member[3]->Move2.PP = MoveList[PlayerParty.Member[3]->Move2.Move].PP * PlayerParty.Member[3]->Move2.PPmult;
@@ -71,15 +71,15 @@ int Battle() {
 
   PlayerParty.Member[4]->Hp =  ((PlayerParty.Member[4]->IVHp + 2 * PlayerParty.Member[4]->Poke->Hp + (PlayerParty.Member[4]->EVHp/4)) * PlayerParty.Member[4]->Level/100 ) + 10 +PlayerParty.Member[4]->Level;
   
-  PlayerParty.Member[4]->Atk = (((PlayerParty.Member[4]->IVAtk + 2 * PlayerParty.Member[4]->Poke->Atk + (PlayerParty.Member[4]->EVAtk/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->Atk;
+  PlayerParty.Member[4]->Atk = (((PlayerParty.Member[4]->IVAtk + 2 * PlayerParty.Member[4]->Poke->Atk + (PlayerParty.Member[4]->EVAtk/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[4]->Nature].Atk;
   
-  PlayerParty.Member[4]->Def = (((PlayerParty.Member[4]->IVDef + 2 * PlayerParty.Member[4]->Poke->Def + (PlayerParty.Member[4]->EVDef/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->Def;
+  PlayerParty.Member[4]->Def = (((PlayerParty.Member[4]->IVDef + 2 * PlayerParty.Member[4]->Poke->Def + (PlayerParty.Member[4]->EVDef/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[4]->Nature].Def;
   
-  PlayerParty.Member[4]->SpA = (((PlayerParty.Member[4]->IVSpA + 2 * PlayerParty.Member[4]->Poke->SpA + (PlayerParty.Member[4]->EVSpA/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->SpA;
+  PlayerParty.Member[4]->SpA = (((PlayerParty.Member[4]->IVSpA + 2 * PlayerParty.Member[4]->Poke->SpA + (PlayerParty.Member[4]->EVSpA/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[4]->Nature].SpA;
   
-  PlayerParty.Member[4]->SpD = (((PlayerParty.Member[4]->IVSpD + 2 * PlayerParty.Member[4]->Poke->SpD + (PlayerParty.Member[4]->EVSpD/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->SpD;
+  PlayerParty.Member[4]->SpD = (((PlayerParty.Member[4]->IVSpD + 2 * PlayerParty.Member[4]->Poke->SpD + (PlayerParty.Member[4]->EVSpD/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[4]->Nature].SpD;
 
-  PlayerParty.Member[4]->Spe = (((PlayerParty.Member[4]->IVSpe + 2 * PlayerParty.Member[4]->Poke->Spe + (PlayerParty.Member[4]->EVSpe/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * PlayerParty.Member[4]->Nature->Spe;
+  PlayerParty.Member[4]->Spe = (((PlayerParty.Member[4]->IVSpe + 2 * PlayerParty.Member[4]->Poke->Spe + (PlayerParty.Member[4]->EVSpe/4) ) * PlayerParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[4]->Nature].Spe;
 
   PlayerParty.Member[4]->Move1.PP = MoveList[PlayerParty.Member[4]->Move1.Move].PP * PlayerParty.Member[4]->Move1.PPmult;
   PlayerParty.Member[4]->Move2.PP = MoveList[PlayerParty.Member[4]->Move2.Move].PP * PlayerParty.Member[4]->Move2.PPmult;
@@ -88,15 +88,15 @@ int Battle() {
 
   PlayerParty.Member[5]->Hp =  ((PlayerParty.Member[5]->IVHp + 2 * PlayerParty.Member[5]->Poke->Hp + (PlayerParty.Member[5]->EVHp/4)) * PlayerParty.Member[5]->Level/100 ) + 10 +PlayerParty.Member[5]->Level;
   
-  PlayerParty.Member[5]->Atk = (((PlayerParty.Member[5]->IVAtk + 2 * PlayerParty.Member[5]->Poke->Atk + (PlayerParty.Member[5]->EVAtk/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->Atk;
+  PlayerParty.Member[5]->Atk = (((PlayerParty.Member[5]->IVAtk + 2 * PlayerParty.Member[5]->Poke->Atk + (PlayerParty.Member[5]->EVAtk/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[5]->Nature].Atk;
   
-  PlayerParty.Member[5]->Def = (((PlayerParty.Member[5]->IVDef + 2 * PlayerParty.Member[5]->Poke->Def + (PlayerParty.Member[5]->EVDef/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->Def;
+  PlayerParty.Member[5]->Def = (((PlayerParty.Member[5]->IVDef + 2 * PlayerParty.Member[5]->Poke->Def + (PlayerParty.Member[5]->EVDef/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[5]->Nature].Def;
   
-  PlayerParty.Member[5]->SpA = (((PlayerParty.Member[5]->IVSpA + 2 * PlayerParty.Member[5]->Poke->SpA + (PlayerParty.Member[5]->EVSpA/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->SpA;
+  PlayerParty.Member[5]->SpA = (((PlayerParty.Member[5]->IVSpA + 2 * PlayerParty.Member[5]->Poke->SpA + (PlayerParty.Member[5]->EVSpA/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[5]->Nature].SpA;
   
-  PlayerParty.Member[5]->SpD = (((PlayerParty.Member[5]->IVSpD + 2 * PlayerParty.Member[5]->Poke->SpD + (PlayerParty.Member[5]->EVSpD/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->SpD;
+  PlayerParty.Member[5]->SpD = (((PlayerParty.Member[5]->IVSpD + 2 * PlayerParty.Member[5]->Poke->SpD + (PlayerParty.Member[5]->EVSpD/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[5]->Nature].SpD;
 
-  PlayerParty.Member[5]->Spe = (((PlayerParty.Member[5]->IVSpe + 2 * PlayerParty.Member[5]->Poke->Spe + (PlayerParty.Member[5]->EVSpe/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * PlayerParty.Member[5]->Nature->Spe;
+  PlayerParty.Member[5]->Spe = (((PlayerParty.Member[5]->IVSpe + 2 * PlayerParty.Member[5]->Poke->Spe + (PlayerParty.Member[5]->EVSpe/4) ) * PlayerParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[PlayerParty.Member[5]->Nature].Spe;
 
   PlayerParty.Member[5]->Move1.PP = MoveList[PlayerParty.Member[5]->Move1.Move].PP * PlayerParty.Member[5]->Move1.PPmult;
   PlayerParty.Member[5]->Move2.PP = MoveList[PlayerParty.Member[5]->Move2.Move].PP * PlayerParty.Member[5]->Move2.PPmult;
@@ -105,15 +105,15 @@ int Battle() {
 
   EnemyParty.Member[0]->Hp =  ((EnemyParty.Member[0]->IVHp + 2 * EnemyParty.Member[0]->Poke->Hp + (EnemyParty.Member[0]->EVHp/4)) * EnemyParty.Member[0]->Level/100 ) + 10 +EnemyParty.Member[0]->Level;
   
-  EnemyParty.Member[0]->Atk = (((EnemyParty.Member[0]->IVAtk + 2 * EnemyParty.Member[0]->Poke->Atk + (EnemyParty.Member[0]->EVAtk/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->Atk;
+  EnemyParty.Member[0]->Atk = (((EnemyParty.Member[0]->IVAtk + 2 * EnemyParty.Member[0]->Poke->Atk + (EnemyParty.Member[0]->EVAtk/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[0]->Nature].Atk;
   
-  EnemyParty.Member[0]->Def = (((EnemyParty.Member[0]->IVDef + 2 * EnemyParty.Member[0]->Poke->Def + (EnemyParty.Member[0]->EVDef/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->Def;
+  EnemyParty.Member[0]->Def = (((EnemyParty.Member[0]->IVDef + 2 * EnemyParty.Member[0]->Poke->Def + (EnemyParty.Member[0]->EVDef/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[0]->Nature].Def;
   
-  EnemyParty.Member[0]->SpA = (((EnemyParty.Member[0]->IVSpA + 2 * EnemyParty.Member[0]->Poke->SpA + (EnemyParty.Member[0]->EVSpA/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->SpA;
+  EnemyParty.Member[0]->SpA = (((EnemyParty.Member[0]->IVSpA + 2 * EnemyParty.Member[0]->Poke->SpA + (EnemyParty.Member[0]->EVSpA/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[0]->Nature].SpA;
   
-  EnemyParty.Member[0]->SpD = (((EnemyParty.Member[0]->IVSpD + 2 * EnemyParty.Member[0]->Poke->SpD + (EnemyParty.Member[0]->EVSpD/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->SpD;
+  EnemyParty.Member[0]->SpD = (((EnemyParty.Member[0]->IVSpD + 2 * EnemyParty.Member[0]->Poke->SpD + (EnemyParty.Member[0]->EVSpD/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[0]->Nature].SpD;
 
-  EnemyParty.Member[0]->Spe = (((EnemyParty.Member[0]->IVSpe + 2 * EnemyParty.Member[0]->Poke->Spe + (EnemyParty.Member[0]->EVSpe/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * EnemyParty.Member[0]->Nature->Spe;
+  EnemyParty.Member[0]->Spe = (((EnemyParty.Member[0]->IVSpe + 2 * EnemyParty.Member[0]->Poke->Spe + (EnemyParty.Member[0]->EVSpe/4) ) * EnemyParty.Member[0]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[0]->Nature].Spe;
 
   EnemyParty.Member[0]->Move1.PP = MoveList[EnemyParty.Member[0]->Move1.Move].PP * EnemyParty.Member[0]->Move1.PPmult;
   EnemyParty.Member[0]->Move2.PP = MoveList[EnemyParty.Member[0]->Move2.Move].PP * EnemyParty.Member[0]->Move2.PPmult;
@@ -122,15 +122,15 @@ int Battle() {
 
   EnemyParty.Member[1]->Hp =  ((EnemyParty.Member[1]->IVHp + 2 * EnemyParty.Member[1]->Poke->Hp + (EnemyParty.Member[1]->EVHp/4)) * EnemyParty.Member[1]->Level/100 ) + 10 +EnemyParty.Member[1]->Level;
   
-  EnemyParty.Member[1]->Atk = (((EnemyParty.Member[1]->IVAtk + 2 * EnemyParty.Member[1]->Poke->Atk + (EnemyParty.Member[1]->EVAtk/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->Atk;
+  EnemyParty.Member[1]->Atk = (((EnemyParty.Member[1]->IVAtk + 2 * EnemyParty.Member[1]->Poke->Atk + (EnemyParty.Member[1]->EVAtk/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[1]->Nature].Atk;
   
-  EnemyParty.Member[1]->Def = (((EnemyParty.Member[1]->IVDef + 2 * EnemyParty.Member[1]->Poke->Def + (EnemyParty.Member[1]->EVDef/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->Def;
+  EnemyParty.Member[1]->Def = (((EnemyParty.Member[1]->IVDef + 2 * EnemyParty.Member[1]->Poke->Def + (EnemyParty.Member[1]->EVDef/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[1]->Nature].Def;
   
-  EnemyParty.Member[1]->SpA = (((EnemyParty.Member[1]->IVSpA + 2 * EnemyParty.Member[1]->Poke->SpA + (EnemyParty.Member[1]->EVSpA/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->SpA;
+  EnemyParty.Member[1]->SpA = (((EnemyParty.Member[1]->IVSpA + 2 * EnemyParty.Member[1]->Poke->SpA + (EnemyParty.Member[1]->EVSpA/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[1]->Nature].SpA;
   
-  EnemyParty.Member[1]->SpD = (((EnemyParty.Member[1]->IVSpD + 2 * EnemyParty.Member[1]->Poke->SpD + (EnemyParty.Member[1]->EVSpD/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->SpD;
+  EnemyParty.Member[1]->SpD = (((EnemyParty.Member[1]->IVSpD + 2 * EnemyParty.Member[1]->Poke->SpD + (EnemyParty.Member[1]->EVSpD/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[1]->Nature].SpD;
 
-  EnemyParty.Member[1]->Spe = (((EnemyParty.Member[1]->IVSpe + 2 * EnemyParty.Member[1]->Poke->Spe + (EnemyParty.Member[1]->EVSpe/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * EnemyParty.Member[1]->Nature->Spe;
+  EnemyParty.Member[1]->Spe = (((EnemyParty.Member[1]->IVSpe + 2 * EnemyParty.Member[1]->Poke->Spe + (EnemyParty.Member[1]->EVSpe/4) ) * EnemyParty.Member[1]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[1]->Nature].Spe;
 
   EnemyParty.Member[1]->Move1.PP = MoveList[EnemyParty.Member[1]->Move1.Move].PP * EnemyParty.Member[1]->Move1.PPmult;
   EnemyParty.Member[1]->Move2.PP = MoveList[EnemyParty.Member[1]->Move2.Move].PP * EnemyParty.Member[1]->Move2.PPmult;
@@ -139,15 +139,15 @@ int Battle() {
 
    EnemyParty.Member[2]->Hp =  ((EnemyParty.Member[2]->IVHp + 2 * EnemyParty.Member[2]->Poke->Hp + (EnemyParty.Member[2]->EVHp/4)) * EnemyParty.Member[2]->Level/100 ) + 10 +EnemyParty.Member[2]->Level;
   
-  EnemyParty.Member[2]->Atk = (((EnemyParty.Member[2]->IVAtk + 2 * EnemyParty.Member[2]->Poke->Atk + (EnemyParty.Member[2]->EVAtk/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->Atk;
+  EnemyParty.Member[2]->Atk = (((EnemyParty.Member[2]->IVAtk + 2 * EnemyParty.Member[2]->Poke->Atk + (EnemyParty.Member[2]->EVAtk/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[2]->Nature].Atk;
   
-  EnemyParty.Member[2]->Def = (((EnemyParty.Member[2]->IVDef + 2 * EnemyParty.Member[2]->Poke->Def + (EnemyParty.Member[2]->EVDef/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->Def;
+  EnemyParty.Member[2]->Def = (((EnemyParty.Member[2]->IVDef + 2 * EnemyParty.Member[2]->Poke->Def + (EnemyParty.Member[2]->EVDef/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[2]->Nature].Def;
   
-  EnemyParty.Member[2]->SpA = (((EnemyParty.Member[2]->IVSpA + 2 * EnemyParty.Member[2]->Poke->SpA + (EnemyParty.Member[2]->EVSpA/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->SpA;
+  EnemyParty.Member[2]->SpA = (((EnemyParty.Member[2]->IVSpA + 2 * EnemyParty.Member[2]->Poke->SpA + (EnemyParty.Member[2]->EVSpA/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[2]->Nature].SpA;
   
-  EnemyParty.Member[2]->SpD = (((EnemyParty.Member[2]->IVSpD + 2 * EnemyParty.Member[2]->Poke->SpD + (EnemyParty.Member[2]->EVSpD/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->SpD;
+  EnemyParty.Member[2]->SpD = (((EnemyParty.Member[2]->IVSpD + 2 * EnemyParty.Member[2]->Poke->SpD + (EnemyParty.Member[2]->EVSpD/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[2]->Nature].SpD;
 
-  EnemyParty.Member[2]->Spe = (((EnemyParty.Member[2]->IVSpe + 2 * EnemyParty.Member[2]->Poke->Spe + (EnemyParty.Member[2]->EVSpe/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * EnemyParty.Member[2]->Nature->Spe; 
+  EnemyParty.Member[2]->Spe = (((EnemyParty.Member[2]->IVSpe + 2 * EnemyParty.Member[2]->Poke->Spe + (EnemyParty.Member[2]->EVSpe/4) ) * EnemyParty.Member[2]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[2]->Nature].Spe; 
 
   EnemyParty.Member[2]->Move1.PP = MoveList[EnemyParty.Member[2]->Move1.Move].PP * EnemyParty.Member[2]->Move1.PPmult;
   EnemyParty.Member[2]->Move2.PP = MoveList[EnemyParty.Member[2]->Move2.Move].PP * EnemyParty.Member[2]->Move2.PPmult;
@@ -156,15 +156,15 @@ int Battle() {
 
    EnemyParty.Member[3]->Hp =  ((EnemyParty.Member[3]->IVHp + 2 * EnemyParty.Member[3]->Poke->Hp + (EnemyParty.Member[3]->EVHp/4)) * EnemyParty.Member[3]->Level/100 ) + 10 +EnemyParty.Member[3]->Level;
   
-  EnemyParty.Member[3]->Atk = (((EnemyParty.Member[3]->IVAtk + 2 * EnemyParty.Member[3]->Poke->Atk + (EnemyParty.Member[3]->EVAtk/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->Atk;
+  EnemyParty.Member[3]->Atk = (((EnemyParty.Member[3]->IVAtk + 2 * EnemyParty.Member[3]->Poke->Atk + (EnemyParty.Member[3]->EVAtk/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[3]->Nature].Atk;
   
-  EnemyParty.Member[3]->Def = (((EnemyParty.Member[3]->IVDef + 2 * EnemyParty.Member[3]->Poke->Def + (EnemyParty.Member[3]->EVDef/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->Def;
+  EnemyParty.Member[3]->Def = (((EnemyParty.Member[3]->IVDef + 2 * EnemyParty.Member[3]->Poke->Def + (EnemyParty.Member[3]->EVDef/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[3]->Nature].Def;
   
-  EnemyParty.Member[3]->SpA = (((EnemyParty.Member[3]->IVSpA + 2 * EnemyParty.Member[3]->Poke->SpA + (EnemyParty.Member[3]->EVSpA/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->SpA;
+  EnemyParty.Member[3]->SpA = (((EnemyParty.Member[3]->IVSpA + 2 * EnemyParty.Member[3]->Poke->SpA + (EnemyParty.Member[3]->EVSpA/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[3]->Nature].SpA;
   
-  EnemyParty.Member[3]->SpD = (((EnemyParty.Member[3]->IVSpD + 2 * EnemyParty.Member[3]->Poke->SpD + (EnemyParty.Member[3]->EVSpD/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->SpD;
+  EnemyParty.Member[3]->SpD = (((EnemyParty.Member[3]->IVSpD + 2 * EnemyParty.Member[3]->Poke->SpD + (EnemyParty.Member[3]->EVSpD/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[3]->Nature].SpD;
 
-  EnemyParty.Member[3]->Spe = (((EnemyParty.Member[3]->IVSpe + 2 * EnemyParty.Member[3]->Poke->Spe + (EnemyParty.Member[3]->EVSpe/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * EnemyParty.Member[3]->Nature->Spe;
+  EnemyParty.Member[3]->Spe = (((EnemyParty.Member[3]->IVSpe + 2 * EnemyParty.Member[3]->Poke->Spe + (EnemyParty.Member[3]->EVSpe/4) ) * EnemyParty.Member[3]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[3]->Nature].Spe;
 
   EnemyParty.Member[3]->Move1.PP = MoveList[EnemyParty.Member[3]->Move1.Move].PP * EnemyParty.Member[3]->Move1.PPmult;
   EnemyParty.Member[3]->Move2.PP = MoveList[EnemyParty.Member[3]->Move2.Move].PP * EnemyParty.Member[3]->Move2.PPmult;
@@ -173,15 +173,15 @@ int Battle() {
     
   EnemyParty.Member[4]->Hp =  ((EnemyParty.Member[4]->IVHp + 2 * EnemyParty.Member[4]->Poke->Hp + (EnemyParty.Member[4]->EVHp/4)) * EnemyParty.Member[4]->Level/100 ) + 10 +EnemyParty.Member[4]->Level;
   
-  EnemyParty.Member[4]->Atk = (((EnemyParty.Member[4]->IVAtk + 2 * EnemyParty.Member[4]->Poke->Atk + (EnemyParty.Member[4]->EVAtk/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->Atk;
+  EnemyParty.Member[4]->Atk = (((EnemyParty.Member[4]->IVAtk + 2 * EnemyParty.Member[4]->Poke->Atk + (EnemyParty.Member[4]->EVAtk/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[4]->Nature].Atk;
   
-  EnemyParty.Member[4]->Def = (((EnemyParty.Member[4]->IVDef + 2 * EnemyParty.Member[4]->Poke->Def + (EnemyParty.Member[4]->EVDef/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->Def;
+  EnemyParty.Member[4]->Def = (((EnemyParty.Member[4]->IVDef + 2 * EnemyParty.Member[4]->Poke->Def + (EnemyParty.Member[4]->EVDef/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[4]->Nature].Def;
   
-  EnemyParty.Member[4]->SpA = (((EnemyParty.Member[4]->IVSpA + 2 * EnemyParty.Member[4]->Poke->SpA + (EnemyParty.Member[4]->EVSpA/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->SpA;
+  EnemyParty.Member[4]->SpA = (((EnemyParty.Member[4]->IVSpA + 2 * EnemyParty.Member[4]->Poke->SpA + (EnemyParty.Member[4]->EVSpA/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[4]->Nature].SpA;
   
-  EnemyParty.Member[4]->SpD = (((EnemyParty.Member[4]->IVSpD + 2 * EnemyParty.Member[4]->Poke->SpD + (EnemyParty.Member[4]->EVSpD/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->SpD;
+  EnemyParty.Member[4]->SpD = (((EnemyParty.Member[4]->IVSpD + 2 * EnemyParty.Member[4]->Poke->SpD + (EnemyParty.Member[4]->EVSpD/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[4]->Nature].SpD;
 
-  EnemyParty.Member[4]->Spe = (((EnemyParty.Member[4]->IVSpe + 2 * EnemyParty.Member[4]->Poke->Spe + (EnemyParty.Member[4]->EVSpe/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * EnemyParty.Member[4]->Nature->Spe;
+  EnemyParty.Member[4]->Spe = (((EnemyParty.Member[4]->IVSpe + 2 * EnemyParty.Member[4]->Poke->Spe + (EnemyParty.Member[4]->EVSpe/4) ) * EnemyParty.Member[4]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[4]->Nature].Spe;
 
   EnemyParty.Member[4]->Move1.PP = MoveList[EnemyParty.Member[4]->Move1.Move].PP * EnemyParty.Member[4]->Move1.PPmult;
   EnemyParty.Member[4]->Move2.PP = MoveList[EnemyParty.Member[4]->Move2.Move].PP * EnemyParty.Member[4]->Move2.PPmult;
@@ -190,15 +190,15 @@ int Battle() {
 
   EnemyParty.Member[5]->Hp =  ((EnemyParty.Member[5]->IVHp + 2 * EnemyParty.Member[5]->Poke->Hp + (EnemyParty.Member[5]->EVHp/4)) * EnemyParty.Member[5]->Level/100 ) + 10 +EnemyParty.Member[5]->Level;
   
-  EnemyParty.Member[5]->Atk = (((EnemyParty.Member[5]->IVAtk + 2 * EnemyParty.Member[5]->Poke->Atk + (EnemyParty.Member[5]->EVAtk/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->Atk;
+  EnemyParty.Member[5]->Atk = (((EnemyParty.Member[5]->IVAtk + 2 * EnemyParty.Member[5]->Poke->Atk + (EnemyParty.Member[5]->EVAtk/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[5]->Nature].Atk;
   
-  EnemyParty.Member[5]->Def = (((EnemyParty.Member[5]->IVDef + 2 * EnemyParty.Member[5]->Poke->Def + (EnemyParty.Member[5]->EVDef/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->Def;
+  EnemyParty.Member[5]->Def = (((EnemyParty.Member[5]->IVDef + 2 * EnemyParty.Member[5]->Poke->Def + (EnemyParty.Member[5]->EVDef/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[5]->Nature].Def;
   
-  EnemyParty.Member[5]->SpA = (((EnemyParty.Member[5]->IVSpA + 2 * EnemyParty.Member[5]->Poke->SpA + (EnemyParty.Member[5]->EVSpA/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->SpA;
+  EnemyParty.Member[5]->SpA = (((EnemyParty.Member[5]->IVSpA + 2 * EnemyParty.Member[5]->Poke->SpA + (EnemyParty.Member[5]->EVSpA/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[5]->Nature].SpA;
   
-  EnemyParty.Member[5]->SpD = (((EnemyParty.Member[5]->IVSpD + 2 * EnemyParty.Member[5]->Poke->SpD + (EnemyParty.Member[5]->EVSpD/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->SpD;
+  EnemyParty.Member[5]->SpD = (((EnemyParty.Member[5]->IVSpD + 2 * EnemyParty.Member[5]->Poke->SpD + (EnemyParty.Member[5]->EVSpD/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[5]->Nature].SpD;
 
-  EnemyParty.Member[5]->Spe = (((EnemyParty.Member[5]->IVSpe + 2 * EnemyParty.Member[5]->Poke->Spe + (EnemyParty.Member[5]->EVSpe/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * EnemyParty.Member[5]->Nature->Spe;
+  EnemyParty.Member[5]->Spe = (((EnemyParty.Member[5]->IVSpe + 2 * EnemyParty.Member[5]->Poke->Spe + (EnemyParty.Member[5]->EVSpe/4) ) * EnemyParty.Member[5]->Level/100 ) + 5) * NATURE_LIST[EnemyParty.Member[5]->Nature].Spe;
 
   EnemyParty.Member[5]->Move1.PP = MoveList[EnemyParty.Member[5]->Move1.Move].PP * EnemyParty.Member[5]->Move1.PPmult;
   EnemyParty.Member[5]->Move2.PP = MoveList[EnemyParty.Member[5]->Move2.Move].PP * EnemyParty.Member[5]->Move2.PPmult;
