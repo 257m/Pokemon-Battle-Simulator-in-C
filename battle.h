@@ -1,7 +1,7 @@
 int Battle() {
   printf("%lu\n",sizeof(struct Move));
   while (StatCalc == 1) {
-  Parties[0].Member[0]->Hp =  ((Parties[0].Member[0]->IVHp + 2 * Parties[0].Member[0]->Poke->Hp + (Parties[0].Member[0]->EVHp/4)) * Parties[0].Member[0]->Level/100 ) + 10 +Parties[0].Member[0]->Level;
+  Parties[0].Member[0]->Hp =  ((Parties[0].Member[0]->IVHp + 2 * Parties[0].Member[0]->Poke->Hp + (Parties[0].Member[0]->EVHp/4)) * Parties[0].Member[0]->Level/100 ) + 10 + Parties[0].Member[0]->Level;
   
   Parties[0].Member[0]->Atk = (((Parties[0].Member[0]->IVAtk + 2 * Parties[0].Member[0]->Poke->Atk + (Parties[0].Member[0]->EVAtk/4) ) * Parties[0].Member[0]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[0]->Nature].Atk;
   
@@ -13,10 +13,10 @@ int Battle() {
 
   Parties[0].Member[0]->Spe = (((Parties[0].Member[0]->IVSpe + 2 * Parties[0].Member[0]->Poke->Spe + (Parties[0].Member[0]->EVSpe/4) ) * Parties[0].Member[0]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[0]->Nature].Spe;
 
-  Parties[0].Member[0]->Move1.PP = MoveList[Parties[0].Member[0]->Move1.Move].PP * Parties[0].Member[0]->Move1.PPmult;
-  Parties[0].Member[0]->Move2.PP = MoveList[Parties[0].Member[0]->Move2.Move].PP * Parties[0].Member[0]->Move2.PPmult;
-  Parties[0].Member[0]->Move3.PP = MoveList[Parties[0].Member[0]->Move3.Move].PP * Parties[0].Member[0]->Move3.PPmult;
-  Parties[0].Member[0]->Move4.PP = MoveList[Parties[0].Member[0]->Move4.Move].PP * Parties[0].Member[0]->Move4.PPmult;
+  Parties[0].Member[0]->Move1.PP = MoveList[Parties[0].Member[0]->Move1.Move].PP * ppboostmult(Parties[0].Member[0]->Move1.PPmult);
+  Parties[0].Member[0]->Move2.PP = MoveList[Parties[0].Member[0]->Move2.Move].PP * ppboostmult(Parties[0].Member[0]->Move2.PPmult);
+  Parties[0].Member[0]->Move3.PP = MoveList[Parties[0].Member[0]->Move3.Move].PP * ppboostmult(Parties[0].Member[0]->Move3.PPmult);
+  Parties[0].Member[0]->Move4.PP = MoveList[Parties[0].Member[0]->Move4.Move].PP * ppboostmult(Parties[0].Member[0]->Move4.PPmult);
   
   Parties[0].Member[1]->Hp =  ((Parties[0].Member[1]->IVHp + 2 * Parties[0].Member[1]->Poke->Hp + (Parties[0].Member[1]->EVHp/4)) * Parties[0].Member[1]->Level/100 ) + 10 +Parties[0].Member[1]->Level;
   
@@ -30,10 +30,10 @@ int Battle() {
 
   Parties[0].Member[1]->Spe = (((Parties[0].Member[1]->IVSpe + 2 * Parties[0].Member[1]->Poke->Spe + (Parties[0].Member[1]->EVSpe/4) ) * Parties[0].Member[1]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[1]->Nature].Spe;
 
-  Parties[0].Member[1]->Move1.PP = MoveList[Parties[0].Member[1]->Move1.Move].PP * Parties[0].Member[1]->Move1.PPmult;
-  Parties[0].Member[1]->Move2.PP = MoveList[Parties[0].Member[1]->Move2.Move].PP * Parties[0].Member[1]->Move2.PPmult;
-  Parties[0].Member[1]->Move3.PP = MoveList[Parties[0].Member[1]->Move3.Move].PP * Parties[0].Member[1]->Move3.PPmult;
-  Parties[0].Member[1]->Move4.PP = MoveList[Parties[0].Member[1]->Move4.Move].PP * Parties[0].Member[1]->Move4.PPmult;
+  Parties[0].Member[1]->Move1.PP = MoveList[Parties[0].Member[1]->Move1.Move].PP * ppboostmult(Parties[0].Member[1]->Move1.PPmult);
+  Parties[0].Member[1]->Move2.PP = MoveList[Parties[0].Member[1]->Move2.Move].PP * ppboostmult(Parties[0].Member[1]->Move2.PPmult);
+  Parties[0].Member[1]->Move3.PP = MoveList[Parties[0].Member[1]->Move3.Move].PP * ppboostmult(Parties[0].Member[1]->Move3.PPmult);
+  Parties[0].Member[1]->Move4.PP = MoveList[Parties[0].Member[1]->Move4.Move].PP * ppboostmult(Parties[0].Member[1]->Move4.PPmult);
     
    Parties[0].Member[2]->Hp =  ((Parties[0].Member[2]->IVHp + 2 * Parties[0].Member[2]->Poke->Hp + (Parties[0].Member[2]->EVHp/4)) * Parties[0].Member[2]->Level/100 ) + 10 +Parties[0].Member[2]->Level;
   
@@ -47,10 +47,10 @@ int Battle() {
 
   Parties[0].Member[2]->Spe = (((Parties[0].Member[2]->IVSpe + 2 * Parties[0].Member[2]->Poke->Spe + (Parties[0].Member[2]->EVSpe/4) ) * Parties[0].Member[2]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[2]->Nature].Spe; 
 
-  Parties[0].Member[2]->Move1.PP = MoveList[Parties[0].Member[2]->Move1.Move].PP * Parties[0].Member[2]->Move1.PPmult;
-  Parties[0].Member[2]->Move2.PP = MoveList[Parties[0].Member[2]->Move2.Move].PP * Parties[0].Member[2]->Move2.PPmult;
-  Parties[0].Member[2]->Move3.PP = MoveList[Parties[0].Member[2]->Move3.Move].PP * Parties[0].Member[2]->Move3.PPmult;
-  Parties[0].Member[2]->Move4.PP = MoveList[Parties[0].Member[2]->Move4.Move].PP * Parties[0].Member[2]->Move4.PPmult;
+  Parties[0].Member[2]->Move1.PP = MoveList[Parties[0].Member[2]->Move1.Move].PP * ppboostmult(Parties[0].Member[2]->Move1.PPmult);
+  Parties[0].Member[2]->Move2.PP = MoveList[Parties[0].Member[2]->Move2.Move].PP * ppboostmult(Parties[0].Member[2]->Move2.PPmult);
+  Parties[0].Member[2]->Move3.PP = MoveList[Parties[0].Member[2]->Move3.Move].PP * ppboostmult(Parties[0].Member[2]->Move3.PPmult);
+  Parties[0].Member[2]->Move4.PP = MoveList[Parties[0].Member[2]->Move4.Move].PP * ppboostmult(Parties[0].Member[2]->Move4.PPmult);
 
    Parties[0].Member[3]->Hp =  ((Parties[0].Member[3]->IVHp + 2 * Parties[0].Member[3]->Poke->Hp + (Parties[0].Member[3]->EVHp/4)) * Parties[0].Member[3]->Level/100 ) + 10 +Parties[0].Member[3]->Level;
   
@@ -64,10 +64,10 @@ int Battle() {
 
   Parties[0].Member[3]->Spe = (((Parties[0].Member[3]->IVSpe + 2 * Parties[0].Member[3]->Poke->Spe + (Parties[0].Member[3]->EVSpe/4) ) * Parties[0].Member[3]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[3]->Nature].Spe;
 
-  Parties[0].Member[3]->Move1.PP = MoveList[Parties[0].Member[3]->Move1.Move].PP * Parties[0].Member[3]->Move1.PPmult;
-  Parties[0].Member[3]->Move2.PP = MoveList[Parties[0].Member[3]->Move2.Move].PP * Parties[0].Member[3]->Move2.PPmult;
-  Parties[0].Member[3]->Move3.PP = MoveList[Parties[0].Member[3]->Move3.Move].PP * Parties[0].Member[3]->Move3.PPmult;
-  Parties[0].Member[3]->Move4.PP = MoveList[Parties[0].Member[3]->Move4.Move].PP * Parties[0].Member[3]->Move4.PPmult;
+  Parties[0].Member[3]->Move1.PP = MoveList[Parties[0].Member[3]->Move1.Move].PP * ppboostmult(Parties[0].Member[3]->Move1.PPmult);
+  Parties[0].Member[3]->Move2.PP = MoveList[Parties[0].Member[3]->Move2.Move].PP * ppboostmult(Parties[0].Member[3]->Move2.PPmult);
+  Parties[0].Member[3]->Move3.PP = MoveList[Parties[0].Member[3]->Move3.Move].PP * ppboostmult(Parties[0].Member[3]->Move3.PPmult);
+  Parties[0].Member[3]->Move4.PP = MoveList[Parties[0].Member[3]->Move4.Move].PP * ppboostmult(Parties[0].Member[3]->Move4.PPmult);
 
   Parties[0].Member[4]->Hp =  ((Parties[0].Member[4]->IVHp + 2 * Parties[0].Member[4]->Poke->Hp + (Parties[0].Member[4]->EVHp/4)) * Parties[0].Member[4]->Level/100 ) + 10 +Parties[0].Member[4]->Level;
   
@@ -81,10 +81,10 @@ int Battle() {
 
   Parties[0].Member[4]->Spe = (((Parties[0].Member[4]->IVSpe + 2 * Parties[0].Member[4]->Poke->Spe + (Parties[0].Member[4]->EVSpe/4) ) * Parties[0].Member[4]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[4]->Nature].Spe;
 
-  Parties[0].Member[4]->Move1.PP = MoveList[Parties[0].Member[4]->Move1.Move].PP * Parties[0].Member[4]->Move1.PPmult;
-  Parties[0].Member[4]->Move2.PP = MoveList[Parties[0].Member[4]->Move2.Move].PP * Parties[0].Member[4]->Move2.PPmult;
-  Parties[0].Member[4]->Move3.PP = MoveList[Parties[0].Member[4]->Move3.Move].PP * Parties[0].Member[4]->Move3.PPmult;
-  Parties[0].Member[4]->Move4.PP = MoveList[Parties[0].Member[4]->Move4.Move].PP * Parties[0].Member[4]->Move4.PPmult;
+  Parties[0].Member[4]->Move1.PP = MoveList[Parties[0].Member[4]->Move1.Move].PP * ppboostmult(Parties[0].Member[4]->Move1.PPmult);
+  Parties[0].Member[4]->Move2.PP = MoveList[Parties[0].Member[4]->Move2.Move].PP * ppboostmult(Parties[0].Member[4]->Move2.PPmult);
+  Parties[0].Member[4]->Move3.PP = MoveList[Parties[0].Member[4]->Move3.Move].PP * ppboostmult(Parties[0].Member[4]->Move3.PPmult);
+  Parties[0].Member[4]->Move4.PP = MoveList[Parties[0].Member[4]->Move4.Move].PP * ppboostmult(Parties[0].Member[4]->Move4.PPmult);
 
   Parties[0].Member[5]->Hp =  ((Parties[0].Member[5]->IVHp + 2 * Parties[0].Member[5]->Poke->Hp + (Parties[0].Member[5]->EVHp/4)) * Parties[0].Member[5]->Level/100 ) + 10 +Parties[0].Member[5]->Level;
   
@@ -98,10 +98,10 @@ int Battle() {
 
   Parties[0].Member[5]->Spe = (((Parties[0].Member[5]->IVSpe + 2 * Parties[0].Member[5]->Poke->Spe + (Parties[0].Member[5]->EVSpe/4) ) * Parties[0].Member[5]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[5]->Nature].Spe;
 
-  Parties[0].Member[5]->Move1.PP = MoveList[Parties[0].Member[5]->Move1.Move].PP * Parties[0].Member[5]->Move1.PPmult;
-  Parties[0].Member[5]->Move2.PP = MoveList[Parties[0].Member[5]->Move2.Move].PP * Parties[0].Member[5]->Move2.PPmult;
-  Parties[0].Member[5]->Move3.PP = MoveList[Parties[0].Member[5]->Move3.Move].PP * Parties[0].Member[5]->Move3.PPmult;
-  Parties[0].Member[5]->Move4.PP = MoveList[Parties[0].Member[5]->Move4.Move].PP * Parties[0].Member[5]->Move4.PPmult;
+  Parties[0].Member[5]->Move1.PP = MoveList[Parties[0].Member[5]->Move1.Move].PP * ppboostmult(Parties[0].Member[5]->Move1.PPmult);
+  Parties[0].Member[5]->Move2.PP = MoveList[Parties[0].Member[5]->Move2.Move].PP * ppboostmult(Parties[0].Member[5]->Move2.PPmult);
+  Parties[0].Member[5]->Move3.PP = MoveList[Parties[0].Member[5]->Move3.Move].PP * ppboostmult(Parties[0].Member[5]->Move3.PPmult);
+  Parties[0].Member[5]->Move4.PP = MoveList[Parties[0].Member[5]->Move4.Move].PP * ppboostmult(Parties[0].Member[5]->Move4.PPmult);
 
   Parties[1].Member[0]->Hp =  ((Parties[1].Member[0]->IVHp + 2 * Parties[1].Member[0]->Poke->Hp + (Parties[1].Member[0]->EVHp/4)) * Parties[1].Member[0]->Level/100 ) + 10 +Parties[1].Member[0]->Level;
   
@@ -115,10 +115,10 @@ int Battle() {
 
   Parties[1].Member[0]->Spe = (((Parties[1].Member[0]->IVSpe + 2 * Parties[1].Member[0]->Poke->Spe + (Parties[1].Member[0]->EVSpe/4) ) * Parties[1].Member[0]->Level/100 ) + 5) * NATURE_LIST[Parties[1].Member[0]->Nature].Spe;
 
-  Parties[1].Member[0]->Move1.PP = MoveList[Parties[1].Member[0]->Move1.Move].PP * Parties[1].Member[0]->Move1.PPmult;
-  Parties[1].Member[0]->Move2.PP = MoveList[Parties[1].Member[0]->Move2.Move].PP * Parties[1].Member[0]->Move2.PPmult;
-  Parties[1].Member[0]->Move3.PP = MoveList[Parties[1].Member[0]->Move3.Move].PP * Parties[1].Member[0]->Move3.PPmult;
-  Parties[1].Member[0]->Move4.PP = MoveList[Parties[1].Member[0]->Move4.Move].PP * Parties[1].Member[0]->Move4.PPmult;
+  Parties[1].Member[0]->Move1.PP = MoveList[Parties[1].Member[0]->Move1.Move].PP * ppboostmult(Parties[1].Member[0]->Move1.PPmult);
+  Parties[1].Member[0]->Move2.PP = MoveList[Parties[1].Member[0]->Move2.Move].PP * ppboostmult(Parties[1].Member[0]->Move2.PPmult);
+  Parties[1].Member[0]->Move3.PP = MoveList[Parties[1].Member[0]->Move3.Move].PP * ppboostmult(Parties[1].Member[0]->Move3.PPmult);
+  Parties[1].Member[0]->Move4.PP = MoveList[Parties[1].Member[0]->Move4.Move].PP * ppboostmult(Parties[1].Member[0]->Move4.PPmult);
 
   Parties[1].Member[1]->Hp =  ((Parties[1].Member[1]->IVHp + 2 * Parties[1].Member[1]->Poke->Hp + (Parties[1].Member[1]->EVHp/4)) * Parties[1].Member[1]->Level/100 ) + 10 +Parties[1].Member[1]->Level;
   
@@ -132,10 +132,10 @@ int Battle() {
 
   Parties[1].Member[1]->Spe = (((Parties[1].Member[1]->IVSpe + 2 * Parties[1].Member[1]->Poke->Spe + (Parties[1].Member[1]->EVSpe/4) ) * Parties[1].Member[1]->Level/100 ) + 5) * NATURE_LIST[Parties[1].Member[1]->Nature].Spe;
 
-  Parties[1].Member[1]->Move1.PP = MoveList[Parties[1].Member[1]->Move1.Move].PP * Parties[1].Member[1]->Move1.PPmult;
-  Parties[1].Member[1]->Move2.PP = MoveList[Parties[1].Member[1]->Move2.Move].PP * Parties[1].Member[1]->Move2.PPmult;
-  Parties[1].Member[1]->Move3.PP = MoveList[Parties[1].Member[1]->Move3.Move].PP * Parties[1].Member[1]->Move3.PPmult;
-  Parties[1].Member[1]->Move4.PP = MoveList[Parties[1].Member[1]->Move4.Move].PP * Parties[1].Member[1]->Move4.PPmult;
+  Parties[1].Member[1]->Move1.PP = MoveList[Parties[1].Member[1]->Move1.Move].PP * ppboostmult(Parties[1].Member[1]->Move1.PPmult);
+  Parties[1].Member[1]->Move2.PP = MoveList[Parties[1].Member[1]->Move2.Move].PP * ppboostmult(Parties[1].Member[1]->Move2.PPmult);
+  Parties[1].Member[1]->Move3.PP = MoveList[Parties[1].Member[1]->Move3.Move].PP * ppboostmult(Parties[1].Member[1]->Move3.PPmult);
+  Parties[1].Member[1]->Move4.PP = MoveList[Parties[1].Member[1]->Move4.Move].PP * ppboostmult(Parties[1].Member[1]->Move4.PPmult);
 
    Parties[1].Member[2]->Hp =  ((Parties[1].Member[2]->IVHp + 2 * Parties[1].Member[2]->Poke->Hp + (Parties[1].Member[2]->EVHp/4)) * Parties[1].Member[2]->Level/100 ) + 10 +Parties[1].Member[2]->Level;
   
@@ -149,10 +149,10 @@ int Battle() {
 
   Parties[1].Member[2]->Spe = (((Parties[1].Member[2]->IVSpe + 2 * Parties[1].Member[2]->Poke->Spe + (Parties[1].Member[2]->EVSpe/4) ) * Parties[1].Member[2]->Level/100 ) + 5) * NATURE_LIST[Parties[1].Member[2]->Nature].Spe; 
 
-  Parties[1].Member[2]->Move1.PP = MoveList[Parties[1].Member[2]->Move1.Move].PP * Parties[1].Member[2]->Move1.PPmult;
-  Parties[1].Member[2]->Move2.PP = MoveList[Parties[1].Member[2]->Move2.Move].PP * Parties[1].Member[2]->Move2.PPmult;
-  Parties[1].Member[2]->Move3.PP = MoveList[Parties[1].Member[2]->Move3.Move].PP * Parties[1].Member[2]->Move3.PPmult;
-  Parties[1].Member[2]->Move4.PP = MoveList[Parties[1].Member[2]->Move4.Move].PP * Parties[1].Member[2]->Move4.PPmult;
+  Parties[1].Member[2]->Move1.PP = MoveList[Parties[1].Member[2]->Move1.Move].PP * ppboostmult(Parties[1].Member[2]->Move1.PPmult);
+  Parties[1].Member[2]->Move2.PP = MoveList[Parties[1].Member[2]->Move2.Move].PP * ppboostmult(Parties[1].Member[2]->Move2.PPmult);
+  Parties[1].Member[2]->Move3.PP = MoveList[Parties[1].Member[2]->Move3.Move].PP * ppboostmult(Parties[1].Member[2]->Move3.PPmult);
+  Parties[1].Member[2]->Move4.PP = MoveList[Parties[1].Member[2]->Move4.Move].PP * ppboostmult(Parties[1].Member[2]->Move4.PPmult);
 
    Parties[1].Member[3]->Hp =  ((Parties[1].Member[3]->IVHp + 2 * Parties[1].Member[3]->Poke->Hp + (Parties[1].Member[3]->EVHp/4)) * Parties[1].Member[3]->Level/100 ) + 10 +Parties[1].Member[3]->Level;
   
@@ -166,10 +166,10 @@ int Battle() {
 
   Parties[1].Member[3]->Spe = (((Parties[1].Member[3]->IVSpe + 2 * Parties[1].Member[3]->Poke->Spe + (Parties[1].Member[3]->EVSpe/4) ) * Parties[1].Member[3]->Level/100 ) + 5) * NATURE_LIST[Parties[1].Member[3]->Nature].Spe;
 
-  Parties[1].Member[3]->Move1.PP = MoveList[Parties[1].Member[3]->Move1.Move].PP * Parties[1].Member[3]->Move1.PPmult;
-  Parties[1].Member[3]->Move2.PP = MoveList[Parties[1].Member[3]->Move2.Move].PP * Parties[1].Member[3]->Move2.PPmult;
-  Parties[1].Member[3]->Move3.PP = MoveList[Parties[1].Member[3]->Move3.Move].PP * Parties[1].Member[3]->Move3.PPmult;
-  Parties[1].Member[3]->Move4.PP = MoveList[Parties[1].Member[3]->Move4.Move].PP * Parties[1].Member[3]->Move4.PPmult;
+  Parties[1].Member[3]->Move1.PP = MoveList[Parties[1].Member[3]->Move1.Move].PP * ppboostmult(Parties[1].Member[3]->Move1.PPmult);
+  Parties[1].Member[3]->Move2.PP = MoveList[Parties[1].Member[3]->Move2.Move].PP * ppboostmult(Parties[1].Member[3]->Move2.PPmult);
+  Parties[1].Member[3]->Move3.PP = MoveList[Parties[1].Member[3]->Move3.Move].PP * ppboostmult(Parties[1].Member[3]->Move3.PPmult);
+  Parties[1].Member[3]->Move4.PP = MoveList[Parties[1].Member[3]->Move4.Move].PP * ppboostmult(Parties[1].Member[3]->Move4.PPmult);
     
   Parties[1].Member[4]->Hp =  ((Parties[1].Member[4]->IVHp + 2 * Parties[1].Member[4]->Poke->Hp + (Parties[1].Member[4]->EVHp/4)) * Parties[1].Member[4]->Level/100 ) + 10 +Parties[1].Member[4]->Level;
   
@@ -183,10 +183,10 @@ int Battle() {
 
   Parties[1].Member[4]->Spe = (((Parties[1].Member[4]->IVSpe + 2 * Parties[1].Member[4]->Poke->Spe + (Parties[1].Member[4]->EVSpe/4) ) * Parties[1].Member[4]->Level/100 ) + 5) * NATURE_LIST[Parties[1].Member[4]->Nature].Spe;
 
-  Parties[1].Member[4]->Move1.PP = MoveList[Parties[1].Member[4]->Move1.Move].PP * Parties[1].Member[4]->Move1.PPmult;
-  Parties[1].Member[4]->Move2.PP = MoveList[Parties[1].Member[4]->Move2.Move].PP * Parties[1].Member[4]->Move2.PPmult;
-  Parties[1].Member[4]->Move3.PP = MoveList[Parties[1].Member[4]->Move3.Move].PP * Parties[1].Member[4]->Move3.PPmult;
-  Parties[1].Member[4]->Move4.PP = MoveList[Parties[1].Member[4]->Move4.Move].PP * Parties[1].Member[4]->Move4.PPmult;
+  Parties[1].Member[4]->Move1.PP = MoveList[Parties[1].Member[4]->Move1.Move].PP * ppboostmult(Parties[1].Member[4]->Move1.PPmult);
+  Parties[1].Member[4]->Move2.PP = MoveList[Parties[1].Member[4]->Move2.Move].PP * ppboostmult(Parties[1].Member[4]->Move2.PPmult);
+  Parties[1].Member[4]->Move3.PP = MoveList[Parties[1].Member[4]->Move3.Move].PP * ppboostmult(Parties[1].Member[4]->Move3.PPmult);
+  Parties[1].Member[4]->Move4.PP = MoveList[Parties[1].Member[4]->Move4.Move].PP * ppboostmult(Parties[1].Member[4]->Move4.PPmult);
 
   Parties[1].Member[5]->Hp =  ((Parties[1].Member[5]->IVHp + 2 * Parties[1].Member[5]->Poke->Hp + (Parties[1].Member[5]->EVHp/4)) * Parties[1].Member[5]->Level/100 ) + 10 +Parties[1].Member[5]->Level;
   
@@ -200,10 +200,10 @@ int Battle() {
 
   Parties[1].Member[5]->Spe = (((Parties[1].Member[5]->IVSpe + 2 * Parties[1].Member[5]->Poke->Spe + (Parties[1].Member[5]->EVSpe/4) ) * Parties[1].Member[5]->Level/100 ) + 5) * NATURE_LIST[Parties[1].Member[5]->Nature].Spe;
 
-  Parties[1].Member[5]->Move1.PP = MoveList[Parties[1].Member[5]->Move1.Move].PP * Parties[1].Member[5]->Move1.PPmult;
-  Parties[1].Member[5]->Move2.PP = MoveList[Parties[1].Member[5]->Move2.Move].PP * Parties[1].Member[5]->Move2.PPmult;
-  Parties[1].Member[5]->Move3.PP = MoveList[Parties[1].Member[5]->Move3.Move].PP * Parties[1].Member[5]->Move3.PPmult;
-  Parties[1].Member[5]->Move4.PP = MoveList[Parties[1].Member[5]->Move4.Move].PP * Parties[1].Member[5]->Move4.PPmult;
+  Parties[1].Member[5]->Move1.PP = MoveList[Parties[1].Member[5]->Move1.Move].PP * ppboostmult(Parties[1].Member[5]->Move1.PPmult);
+  Parties[1].Member[5]->Move2.PP = MoveList[Parties[1].Member[5]->Move2.Move].PP * ppboostmult(Parties[1].Member[5]->Move2.PPmult);
+  Parties[1].Member[5]->Move3.PP = MoveList[Parties[1].Member[5]->Move3.Move].PP * ppboostmult(Parties[1].Member[5]->Move3.PPmult);
+  Parties[1].Member[5]->Move4.PP = MoveList[Parties[1].Member[5]->Move4.Move].PP * ppboostmult(Parties[1].Member[5]->Move4.PPmult);
 
 
     printf("\nHeal?:");

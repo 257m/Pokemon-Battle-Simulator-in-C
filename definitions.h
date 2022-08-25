@@ -67,6 +67,10 @@ double statboostmult(char statboost) {
   }
 }
 
+float ppboostmult(ppboost) {
+  return 1 + (0.2 * ppboost);
+}
+
 unsigned int map(unsigned int num,unsigned int newmax,unsigned int currentmax) {
   if (currentmax==NULL) currentmax = RAND_MAX;
   return num/((double)currentmax/newmax);
@@ -200,8 +204,8 @@ struct Nature NATURE_LIST [] = {
 
 typedef struct {
 unsigned char Move;
-unsigned char PP;
-float PPmult;
+unsigned int PP : 6;
+unsigned int PPmult : 2;
 } MoveSlot;
 
 typedef struct { 
@@ -217,7 +221,7 @@ void (*abilityfunc)(char,bool);
  struct MyPokemon {
  struct PokemonDex *Poke;
  unsigned int Level : 7;
- unsigned int CurrentHp : 10;
+ int CurrentHp;
  unsigned char Item;
  unsigned char Ability;
  unsigned int Nature : 5;

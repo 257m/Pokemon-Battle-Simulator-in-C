@@ -52,11 +52,7 @@ void Nothingf(unsigned char et, bool eop) {
 void Strugglef(unsigned char et, bool eop) {
   YourTurn->PP++;
   if (et == 2) {
-    if (eop == 0) {
-      Parties[0].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
-    } else {
-      Parties[1].Member[0]->CurrentHp -= Parties[1].Member[0]->Hp/4;
-    }
+      Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
   }
   return 0;
 }
@@ -71,17 +67,10 @@ void Vine_Whipf(unsigned char et, bool eop) {
 }
 void Emberf(unsigned char et, bool eop) {
   if (et == 2) {
-  if (eop == 0) {
   if (map2(rand(),100,RAND_MAX) < 10) {
-    Parties[1].Member[0]->Non_Volatile_Status = 1;
-  }
-    } else if (eop == 1) {
-  if (map2(rand(),100,RAND_MAX) < 10) {
-    Parties[0].Member[0]->Non_Volatile_Status = 1;
-  }
+  if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 1;
     }
     }
-  return 0;
 }
 void Quick_Attackf(unsigned char et, bool eop) {
   return 0;
@@ -90,7 +79,6 @@ void Super_Attackf(unsigned char et, bool eop) {
   return 0;
 }
 void Stone_Edgef(unsigned char et, bool eop) {
-  return 0;
 }
 void Gustf(unsigned char et, bool eop) {
   return 0;
@@ -100,121 +88,67 @@ void Thunder_Shockf(unsigned char et, bool eop) {
 }
 void Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
-  if (eop == 0) {
-    if (Parties[1].Member[0]->Non_Volatile_Status == 0) Parties[1].Member[0]->Non_Volatile_Status = 3;
-  } else {
-    if (Parties[0].Member[0]->Non_Volatile_Status == 0) Parties[0].Member[0]->Non_Volatile_Status = 3;
+    if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 3;
   }
-  }
-  return 0;
 }
 
 void Swords_Dancef(unsigned char et, bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-      Boostandprint(0,2,Parties[0].Member[0],0);
-    } else {
-      Boostandprint(0,2,Parties[1].Member[0],1);
-    }
+      Boostandprint(0,2,Parties[eop].Member[0],0);
   }
-  return 0;
   }
 
 void Dragon_Dancef(unsigned char et,bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-      Boostandprint(0,1,Parties[0].Member[0],0);
-      Boostandprint(4,1,Parties[0].Member[0],0);
-    } else {
-      Boostandprint(0,1,Parties[1].Member[0],1);
-      Boostandprint(4,1,Parties[1].Member[0],1);
-    }
+      Boostandprint(0,1,Parties[eop].Member[0],0);
+      Boostandprint(4,1,Parties[eop].Member[0],0);
   }
-  return 0;
 }
 
 void Will_O_Wispf(unsigned char et,bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-     if (Parties[1].Member[0]->Poke->Type1 != 2 && Parties[1].Member[0]->Poke->Type1 != 2 && Parties[1].Member[0]->Non_Volatile_Status == 0) Parties[1].Member[0]->Non_Volatile_Status = 1;
-    } else {
-     if (Parties[0].Member[0]->Poke->Type1 != 2 && Parties[0].Member[0]->Poke->Type2 != 2 && Parties[0].Member[0]->Non_Volatile_Status == 0) Parties[0].Member[0]->Non_Volatile_Status = 1;
-    }
+     if (Parties[!eop].Member[0]->Poke->Type1 != 2 && Parties[!eop].Member[0]->Poke->Type1 != 2 && Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 1;
   }
-  return 0;
 }
 
 void Sporef(unsigned char et,bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-     if (Parties[1].Member[0]->Non_Volatile_Status == 0) Parties[1].Member[0]->Non_Volatile_Status = 4;
-    } else {
-     if (Parties[0].Member[0]->Non_Volatile_Status == 0) Parties[0].Member[0]->Non_Volatile_Status = 4;
-    }
+     if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 4;
   }
-  return 0;
 }
 
 void Toxicf(unsigned char et,bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-     if (Parties[1].Member[0]->Poke->Type1 != POISON && Parties[1].Member[0]->Poke->Type2 != POISON && Parties[1].Member[0]->Poke->Type1 != STEEL && Parties[1].Member[0]->Poke->Type2 != STEEL && Parties[1].Member[0]->Non_Volatile_Status == 0) Parties[1].Member[0]->Non_Volatile_Status = 5;
-    } else {
-     if (Parties[0].Member[0]->Poke->Type1 != POISON && Parties[0].Member[0]->Poke->Type2 != POISON && Parties[0].Member[0]->Poke->Type1 != STEEL && Parties[0].Member[0]->Poke->Type2 != STEEL && Parties[0].Member[0]->Non_Volatile_Status == 0) Parties[0].Member[0]->Non_Volatile_Status = 5;
-    }
+     if (Parties[!eop].Member[0]->Poke->Type1 != POISON && Parties[!eop].Member[0]->Poke->Type2 != POISON && Parties[!eop].Member[0]->Poke->Type1 != STEEL && Parties[!eop].Member[0]->Poke->Type2 != STEEL && Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 5;
   }
   if (et == 3) {
-    if (!eop) {
-      if (Parties[0].Member[0]->Poke->Type1 == POISON || Parties[0].Member[0]->Poke->Type2 == POISON) PlayerHit = 1;
-    } else {
-      if (Parties[1].Member[0]->Poke->Type1 == POISON || Parties[1].Member[0]->Poke->Type2 == POISON) EnemyHit = 1;
-    }
+      if (Parties[eop].Member[0]->Poke->Type1 == POISON || Parties[eop].Member[0]->Poke->Type2 == POISON) PlayerHit = 1;
   }
   return 0;
 }
 
 void Freezef(unsigned char et,bool eop) {
   if (et == 2) {
-    if (!eop) {
-      if (Parties[1].Member[0]->Non_Volatile_Status == 0) Parties[1].Member[0]->Non_Volatile_Status = 6;
-    } else {
-      if (Parties[0].Member[0]->Non_Volatile_Status == 0) Parties[0].Member[0]->Non_Volatile_Status = 6;
-    }
+      if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 6;
   }
   return 0;
 }
 
 void Bulk_Upf(unsigned char et,bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-      Boostandprint(0,1,Parties[0].Member[0],0);
-      Boostandprint(1,1,Parties[0].Member[0],0);
-    } else {
-      Boostandprint(0,1,Parties[1].Member[0],1);
-      Boostandprint(1,1,Parties[1].Member[0],1);
-    }
+      Boostandprint(0,1,Parties[eop].Member[0],0);
+      Boostandprint(1,1,Parties[eop].Member[0],0);
   }
-  return 0;
 }
 
 void Charmf(unsigned char et,bool eop) {
   if (et == 2) {
-    if (eop == 0) {
-      Boostandprint(0,-2,Parties[1].Member[0],1);
-    } else {
-      Boostandprint(0,-2,Parties[0].Member[0],0);
-    }
+      Boostandprint(0,-2,Parties[!eop].Member[0],1);
   }
 }
 
 void Leerf(unsigned char et,bool eop) {
-  if (!eop) {
   if (et == 2) {
-  if (!CHK_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,Parties[1].Member[0],1);
-    }
-  } else {
-  if (et == 2) {
-  if (!CHK_BIT(Parties[0].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,Parties[0].Member[0],0);
-  }
+  if (!CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,Parties[!eop].Member[0],1);
     }
 }

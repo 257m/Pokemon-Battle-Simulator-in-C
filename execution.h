@@ -1,3 +1,12 @@
+void DBOG(bool eop) {
+unsigned int *EOPDAMAGE;
+if (eop) EOPDAMAGE = &EnemyDamage;
+else EOPDAMAGE = &Damage;
+if (Parties[!eop].Member[0]->CurrentHp < *EOPDAMAGE) {
+  *EOPDAMAGE = Parties[!eop].Member[0]->CurrentHp;
+}
+}
+
 void ExecuteMove(bool eop) {
   if (!eop) {
     if (PlayerDead == 0) {
@@ -49,6 +58,7 @@ void ExecuteMove(bool eop) {
         MoveList[YourTurn->Move].movefunc(1,0);
         ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
         ItemList[Parties[1].Member[0]->Item].itemfunc(-1,1);
+        DBOG(0);
         Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->CurrentHp - Damage;
         YourTurn->PP--;
          move_result(0);
@@ -58,6 +68,7 @@ void ExecuteMove(bool eop) {
         MoveList[YourTurn->Move].movefunc(1,0);
         ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
         ItemList[Parties[1].Member[0]->Item].itemfunc(-1,1);
+        DBOG(0);
         Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->CurrentHp - Damage; 
         YourTurn->PP--;
          move_result(0);
@@ -124,6 +135,7 @@ void ExecuteMove(bool eop) {
         MoveList[EnemyTurn->Move].movefunc(1,1);
         ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);
         ItemList[Parties[0].Member[0]->Item].itemfunc(-1,0);
+        DBOG(1);
         Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
         move_result(1);
@@ -134,6 +146,7 @@ void ExecuteMove(bool eop) {
         MoveList[EnemyTurn->Move].movefunc(1,1);
         ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);
         ItemList[Parties[0].Member[0]->Item].itemfunc(-1,0);
+        DBOG(1);
         Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->CurrentHp - EnemyDamage;
         EnemyTurn->PP--;
          move_result(1);

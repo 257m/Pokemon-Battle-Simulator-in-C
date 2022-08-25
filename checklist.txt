@@ -40,4 +40,6 @@ x | implement Big_Pecks // it might be hard? No really it needs to be quite vers
 
 x | change PlayerParty and EnemyParty to array
 
-o | change ppmult so that it store a 2 bit uint
+x | change ppmult so that it store a 2 bit uint
+
+o | change damages into array 
