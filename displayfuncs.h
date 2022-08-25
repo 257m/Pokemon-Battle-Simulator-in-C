@@ -1,10 +1,10 @@
 void display_move(bool eop) {
   if (!eop) {
         if (PlayerCanMove) {
-          printf("%s used %s!\n",PlayerParty.Member[0]->Poke->Name,MoveList[YourTurn->Move].Name);
+          printf("%s used %s!\n",Parties[0].Member[0]->Poke->Name,MoveList[YourTurn->Move].Name);
           if (!PlayerHit) printf("But it missed!\n");
           } else {
-          printf("%s couldn't move\n",PlayerParty.Member[0]->Poke->Name);
+          printf("%s couldn't move\n",Parties[0].Member[0]->Poke->Name);
           if (PlayerPara) printf("It was paralyzed!\n");
           else if (PlayerSleep) printf("It is asleep\n");
           else if (PlayerFrozen) printf("It is frozen!\n");
@@ -12,11 +12,11 @@ void display_move(bool eop) {
   } 
   else {
          if (EnemyCanMove) {
-           printf("The opposing %s used %s!\n",EnemyParty.Member[0]->Poke->Name,MoveList[EnemyTurn->Move].Name);
+           printf("The opposing %s used %s!\n",Parties[1].Member[0]->Poke->Name,MoveList[EnemyTurn->Move].Name);
            if (!EnemyHit) printf("But it missed!\n");
            }
         else {
-          printf("The opposing %s couldn't move\n",EnemyParty.Member[0]->Poke->Name);
+          printf("The opposing %s couldn't move\n",Parties[1].Member[0]->Poke->Name);
           if (EnemyPara) printf("It was paralyzed!\n");
           else if (EnemySleep) printf("It is asleep\n");
           else if (EnemyFrozen) printf("It is frozen!\n");
@@ -29,18 +29,18 @@ void move_result(bool eop) {
         if (PlayerHit && PlayerCanMove) {
         if (MoveList[YourTurn->Move].Category != 0) {
         printf("It did %d damage!\n",Damage);
-        if (TypeChart[MoveList[YourTurn->Move].Type][EnemyParty.Member[0]->Poke->Type1] * TypeChart[MoveList[YourTurn->Move].Type][EnemyParty.Member[0]->Poke->Type2] >= 2) {
+        if (TypeChart[MoveList[YourTurn->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[YourTurn->Move].Type][Parties[1].Member[0]->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
         }
-        else if (TypeChart[MoveList[YourTurn->Move].Type][EnemyParty.Member[0]->Poke->Type1] * TypeChart[MoveList[YourTurn->Move].Type][EnemyParty.Member[0]->Poke->Type2] <= 0.5) {
+        else if (TypeChart[MoveList[YourTurn->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[YourTurn->Move].Type][Parties[1].Member[0]->Poke->Type2] <= 0.5) {
           printf("It was not very effective!\n");
           }
         if (PlayerCrit) printf("It was a critical hit!\n");
-        printf("The opposing %s is at %d/%d hp\n",EnemyParty.Member[0]->Poke->Name,EnemyParty.Member[0]->CurrentHp,EnemyParty.Member[0]->Hp);
+        printf("The opposing %s is at %d/%d hp\n",Parties[1].Member[0]->Poke->Name,Parties[1].Member[0]->CurrentHp,Parties[1].Member[0]->Hp);
           }
           } 
-        if (EnemyParty.Member[0]->CurrentHp <= 0) {
-          printf("The opposing %s fainted!\n",EnemyParty.Member[0]->Poke->Name);
+        if (Parties[1].Member[0]->CurrentHp <= 0) {
+          printf("The opposing %s fainted!\n",Parties[1].Member[0]->Poke->Name);
           SwitchIn(0);
           EnemyDead = 1;
         }
@@ -49,18 +49,18 @@ void move_result(bool eop) {
           if (EnemyHit && EnemyCanMove) {        
         if (MoveList[EnemyTurn->Move].Category != 0) {
         printf("It did %d damage!\n",EnemyDamage);
-        if (TypeChart[MoveList[EnemyTurn->Move].Type][PlayerParty.Member[0]->Poke->Type1] * TypeChart[MoveList[EnemyTurn->Move].Type][PlayerParty.Member[0]->Poke->Type2] >= 2) {
+        if (TypeChart[MoveList[EnemyTurn->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[EnemyTurn->Move].Type][Parties[0].Member[0]->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
         }
-        else if (TypeChart[MoveList[EnemyTurn->Move].Type][PlayerParty.Member[0]->Poke->Type1] * TypeChart[MoveList[EnemyTurn->Move].Type][PlayerParty.Member[0]->Poke->Type2] <= 0.5) {
+        else if (TypeChart[MoveList[EnemyTurn->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[EnemyTurn->Move].Type][Parties[0].Member[0]->Poke->Type2] <= 0.5) {
           printf("It was not very effective!\n");
         }
         if (EnemyCrit) printf("It was a critical hit!\n");
-        printf("Your %s is at %d/%d hp\n",PlayerParty.Member[0]->Poke->Name,PlayerParty.Member[0]->CurrentHp,PlayerParty.Member[0]->Hp);
+        printf("Your %s is at %d/%d hp\n",Parties[0].Member[0]->Poke->Name,Parties[0].Member[0]->CurrentHp,Parties[0].Member[0]->Hp);
           } 
           } 
-        if (PlayerParty.Member[0]->CurrentHp <= 0) {
-          printf("Your %s fainted!\n",PlayerParty.Member[0]->Poke->Name);
+        if (Parties[0].Member[0]->CurrentHp <= 0) {
+          printf("Your %s fainted!\n",Parties[0].Member[0]->Poke->Name);
           SwitchIn(1);
           PlayerDead = 1;
         }

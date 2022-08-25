@@ -45,7 +45,4 @@ struct MyPokemon EnemyPokemon6 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,3
 {Quick_Attack,0,1.6},{Stone_Edge,0,1.6},{Super_Attack,0,1.6},{Gust,0,1.6},
 0,236,36,4,0,228};
 
-struct Party PlayerParty = {&Pokemon1,&Pokemon2,&Pokemon3,&Pokemon4,&Pokemon5,&Pokemon6};
-
-struct Party EnemyParty =
-{&EnemyPokemon1,&EnemyPokemon2,&EnemyPokemon3,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6};
+struct Party Parties [2] = {{&Pokemon1,&Pokemon2,&Pokemon3,&Pokemon4,&Pokemon5,&Pokemon6},{&EnemyPokemon1,&EnemyPokemon2,&EnemyPokemon3,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6}};

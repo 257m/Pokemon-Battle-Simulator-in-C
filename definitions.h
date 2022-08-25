@@ -216,17 +216,17 @@ void (*abilityfunc)(char,bool);
 
  struct MyPokemon {
  struct PokemonDex *Poke;
- int Level;
- int CurrentHp;
+ unsigned int Level : 7;
+ unsigned int CurrentHp : 10;
  unsigned char Item;
  unsigned char Ability;
  unsigned int Nature : 5;
- unsigned char IVHp;
- unsigned char IVAtk;
- unsigned char IVDef;
- unsigned char IVSpA;
- unsigned char IVSpD;
- unsigned char IVSpe;
+ unsigned int IVHp : 5;
+ unsigned int IVAtk : 5;
+ unsigned int IVDef : 5;
+ unsigned int IVSpA : 5;
+ unsigned int IVSpD : 5;
+ unsigned int IVSpe : 5;
  MoveSlot Move1;
  MoveSlot Move2;
  MoveSlot Move3;
@@ -258,8 +258,7 @@ char Stagenames [8][15] = {"Attack","Defense","Special Attack","Special Defense"
 
 char Itemtext[2][11] = {"Not Usable", "Usable"};
 
-struct Party PlayerParty;
-struct Party EnemyParty;
+struct Party Parties [2];
 MoveSlot *YourTurn;
 MoveSlot *EnemyTurn;
 struct MyPokemon **PlayerSwitchSave;
