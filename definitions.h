@@ -1,62 +1,14 @@
-const unsigned int bits [] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536};
-
 #define SET_BIT(BF, N) BF |= ((uint64_t)0x0000000000000001 << N)
 #define CLR_BIT(BF, N) BF &= ~((uint64_t)0x0000000000000001 << N)
 #define CHK_BIT(BF, N) ((BF >> N) & 0x1)
 
-char c[64];
-char d[64];
-
 typedef void (*gpf)(char,bool);
 
-int stratt (a,b) {
-  strcpy(c,"");
-  strcpy(d,"");
+char c [64];
+char stratt (char a [],char b []) {
   strcpy(c,a);
-  strcpy(d,b);
-  strcat(c,d);
+  strcat(c,b);
    return c;
-}
-
-int boolcheck (char mem, char digit) {
-  if (digit == 1) {
-  if (mem % 2 == 1) {
-    return 1;
-  } else return 0;
-  } else if (digit == 2) {
-  if (mem % 4 == 2 || mem % 4 == 3) {
-      return 1;
-    } else return 0;
-  } else if (digit == 3) {
-  if (mem % 8 > 3 && mem % 8 != 0) {
-      return 1;
-    } else return 0;
-  } else if (digit == 4) {
-  if (mem % 16 > 7 && mem % 16 != 0) {
-      return 1;
-    } else return 0;
-  } else if (digit == 5) {
-  if (mem % 32 > 15 && mem % 32 != 0) {
-      return 1;
-    } else return 0;
-  } else if (digit == 6) {
-  if (mem % 64 > 31 && mem % 64 != 0) {
-      return 1;
-    } else return 0;
-  } else if (digit == 7) {
-  if (mem % 128 > 63 && mem % 128 != 0) {
-      return 1;
-    } else return 0;
-  } else if (digit == 8) {
-  if (mem % 256 > 127 && mem % 256 != 0) {
-      return 1;
-    } else return 0;
-  } else return -1;
-}
-
-int boolcheck2(int mem, unsigned char digit) {
-  if (mem & bits[digit]) return 1;
-  else return 0;
 }
 
 double statboostmult(char statboost) {

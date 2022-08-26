@@ -1,84 +1,41 @@
 void displaymember(unsigned int PartyMember,bool eop) {
-  if (!eop) {
     printf("\e[1;37m\nP%d:\e[0m\n",PartyMember+1);
-    printf("Pokemon: %s\n",Parties[0].Member[PartyMember]->Poke->Name);
-    printf("Health: %d/%d\n",Parties[0].Member[PartyMember]->CurrentHp,Parties[0].Member[PartyMember]->Hp);
-    printf("Attack: %d\n",Parties[0].Member[PartyMember]->Atk);
-    printf("Defense: %d\n",Parties[0].Member[PartyMember]->Def);
-    printf("Special Attack: %d\n",Parties[0].Member[PartyMember]->SpA);
-    printf("Special Defense: %d\n",Parties[0].Member[PartyMember]->SpD);
-    printf("Speed: %d\n",Parties[0].Member[PartyMember]->Spe);
-    printf("Nature: %s\n",NATURE_LIST[Parties[0].Member[PartyMember]->Nature].NatureName);
-    printf("Move1: %s %d/%.0f\n",MoveList[Parties[0].Member[PartyMember]->Move1.Move].Name,Parties[0].Member[PartyMember]->Move1.PP,MoveList[Parties[0].Member[PartyMember]->Move1.Move].PP * ppboostmult(Parties[0].Member[PartyMember]->Move1.PPmult));
-    printf("Move2: %s %d/%.0f\n",MoveList[Parties[0].Member[PartyMember]->Move2.Move].Name,Parties[0].Member[PartyMember]->Move2.PP,MoveList[Parties[0].Member[PartyMember]->Move2.Move].PP * ppboostmult(Parties[0].Member[PartyMember]->Move2.PPmult));
-    printf("Move3: %s %d/%.0f\n",MoveList[Parties[0].Member[PartyMember]->Move3.Move].Name,Parties[0].Member[PartyMember]->Move3.PP,MoveList[Parties[0].Member[PartyMember]->Move3.Move].PP * ppboostmult(Parties[0].Member[PartyMember]->Move3.PPmult));
-    printf("Move4: %s %d/%.0f\n",MoveList[Parties[0].Member[PartyMember]->Move4.Move].Name,Parties[0].Member[PartyMember]->Move4.PP,MoveList[Parties[0].Member[PartyMember]->Move4.Move].PP * ppboostmult(Parties[0].Member[PartyMember]->Move4.PPmult));
-    printf("Item: %s (%s)",ItemList[Parties[0].Member[PartyMember]->Item].Name,Itemtext[Parties[0].Member[PartyMember]->ItemUsable]);
-  } else {
-    printf("\e[1;37m\nP%d:\e[0m\n",PartyMember+1);
-    printf("Pokemon: %s\n",Parties[1].Member[PartyMember]->Poke->Name);
-    printf("Health: %d/%d\n",Parties[1].Member[PartyMember]->CurrentHp,Parties[1].Member[PartyMember]->Hp);
-    printf("Attack: %d\n",Parties[1].Member[PartyMember]->Atk);
-    printf("Defense: %d\n",Parties[1].Member[PartyMember]->Def);
-    printf("Special Attack: %d\n",Parties[1].Member[PartyMember]->SpA);
-    printf("Special Defense: %d\n",Parties[1].Member[PartyMember]->SpD);
-    printf("Speed: %d\n",Parties[1].Member[PartyMember]->Spe);
-    printf("Nature: %s\n",NATURE_LIST[Parties[1].Member[PartyMember]->Nature].NatureName);
-    printf("Move1: %s %d/%.0f\n",MoveList[Parties[1].Member[PartyMember]->Move1.Move].Name,Parties[1].Member[PartyMember]->Move1.PP,MoveList[Parties[1].Member[PartyMember]->Move1.Move].PP * ppboostmult(Parties[1].Member[PartyMember]->Move1.PPmult));
-    printf("Move2: %s %d/%.0f\n",MoveList[Parties[1].Member[PartyMember]->Move2.Move].Name,Parties[1].Member[PartyMember]->Move2.PP,MoveList[Parties[1].Member[PartyMember]->Move2.Move].PP * ppboostmult(Parties[1].Member[PartyMember]->Move2.PPmult));
-    printf("Move3: %s %d/%.0f\n",MoveList[Parties[1].Member[PartyMember]->Move3.Move].Name,Parties[1].Member[PartyMember]->Move3.PP,MoveList[Parties[1].Member[PartyMember]->Move3.Move].PP * ppboostmult(Parties[1].Member[PartyMember]->Move3.PPmult));
-    printf("Move4: %s %d/%.0f\n",MoveList[Parties[1].Member[PartyMember]->Move4.Move].Name,Parties[1].Member[PartyMember]->Move4.PP,MoveList[Parties[1].Member[PartyMember]->Move4.Move].PP * ppboostmult(Parties[1].Member[PartyMember]->Move4.PPmult));
-    printf("Item: %s (%s)",ItemList[Parties[1].Member[PartyMember]->Item].Name,Itemtext[Parties[1].Member[PartyMember]->ItemUsable]);
-  }
+    printf("Pokemon: %s\n",Parties[eop].Member[PartyMember]->Poke->Name);
+    printf("Health: %d/%d\n",Parties[eop].Member[PartyMember]->CurrentHp,Parties[eop].Member[PartyMember]->Hp);
+    printf("Attack: %d\n",Parties[eop].Member[PartyMember]->Atk);
+    printf("Defense: %d\n",Parties[eop].Member[PartyMember]->Def);
+    printf("Special Attack: %d\n",Parties[eop].Member[PartyMember]->SpA);
+    printf("Special Defense: %d\n",Parties[eop].Member[PartyMember]->SpD);
+    printf("Speed: %d\n",Parties[eop].Member[PartyMember]->Spe);
+    printf("Nature: %s\n",NATURE_LIST[Parties[eop].Member[PartyMember]->Nature].NatureName);
+    printf("Move1: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move1.Move].Name,Parties[eop].Member[PartyMember]->Move1.PP,MoveList[Parties[eop].Member[PartyMember]->Move1.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move1.PPmult));
+    printf("Move2: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move2.Move].Name,Parties[eop].Member[PartyMember]->Move2.PP,MoveList[Parties[eop].Member[PartyMember]->Move2.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move2.PPmult));
+    printf("Move3: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move3.Move].Name,Parties[eop].Member[PartyMember]->Move3.PP,MoveList[Parties[eop].Member[PartyMember]->Move3.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move3.PPmult));
+    printf("Move4: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move4.Move].Name,Parties[eop].Member[PartyMember]->Move4.PP,MoveList[Parties[eop].Member[PartyMember]->Move4.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move4.PPmult));
+    printf("Item: %s (%s)",ItemList[Parties[eop].Member[PartyMember]->Item].Name,Itemtext[Parties[eop].Member[PartyMember]->ItemUsable]);
 }
 
 void displayparty(bool eop) {
-  if (!eop) {
-    printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",Parties[0].Member[0]->Poke->Name,Parties[0].Member[0]->CurrentHp,Parties[0].Member[0]->Hp);
-      printf("\e[1;37mP2:\e[0m %s %d/%d\n",Parties[0].Member[1]->Poke->Name,Parties[0].Member[1]->CurrentHp,Parties[0].Member[1]->Hp);
-      printf("\e[1;37mP3:\e[0m %s %d/%d\n",Parties[0].Member[2]->Poke->Name,Parties[0].Member[2]->CurrentHp,Parties[0].Member[2]->Hp);
-      printf("\e[1;37mP4:\e[0m %s %d/%d\n",Parties[0].Member[3]->Poke->Name,Parties[0].Member[3]->CurrentHp,Parties[0].Member[3]->Hp);
-      printf("\e[1;37mP5:\e[0m %s %d/%d\n",Parties[0].Member[4]->Poke->Name,Parties[0].Member[4]->CurrentHp,Parties[0].Member[4]->Hp);
-      printf("\e[1;37mP6:\e[0m %s %d/%d\n",Parties[0].Member[5]->Poke->Name,Parties[0].Member[5]->CurrentHp,Parties[0].Member[5]->Hp);
+    printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",Parties[eop].Member[0]->Poke->Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+      printf("\e[1;37mP2:\e[0m %s %d/%d\n",Parties[eop].Member[1]->Poke->Name,Parties[eop].Member[1]->CurrentHp,Parties[eop].Member[1]->Hp);
+      printf("\e[1;37mP3:\e[0m %s %d/%d\n",Parties[eop].Member[2]->Poke->Name,Parties[eop].Member[2]->CurrentHp,Parties[eop].Member[2]->Hp);
+      printf("\e[1;37mP4:\e[0m %s %d/%d\n",Parties[eop].Member[3]->Poke->Name,Parties[eop].Member[3]->CurrentHp,Parties[eop].Member[3]->Hp);
+      printf("\e[1;37mP5:\e[0m %s %d/%d\n",Parties[eop].Member[4]->Poke->Name,Parties[eop].Member[4]->CurrentHp,Parties[eop].Member[4]->Hp);
+      printf("\e[1;37mP6:\e[0m %s %d/%d\n",Parties[eop].Member[5]->Poke->Name,Parties[eop].Member[5]->CurrentHp,Parties[eop].Member[5]->Hp);
       printf("\nPartyMember: ");
       fgets(x,31,stdin);
       x[strcspn(x, "\n")] = 0;
       if (strcmp(x,"P1") == 0) {
-      displaymember(0,0);
+      displaymember(0,eop);
       } else if (strcmp(x,"P2") == 0) {
-      displaymember(1,0);
+      displaymember(1,eop);
       } else if (strcmp(x,"P3") == 0) {
-      displaymember(2,0);
+      displaymember(2,eop);
       } else if (strcmp(x,"P4") == 0) {
-      displaymember(3,0);
+      displaymember(3,eop);
       } else if (strcmp(x,"P5") == 0) {
-      displaymember(4,0);
+      displaymember(4,eop);
       } else if (strcmp(x,"P6") == 0) {
-      displaymember(5,0);
+      displaymember(5,eop);
     }
-
-  } else {
-   printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",Parties[1].Member[0]->Poke->Name,Parties[1].Member[0]->CurrentHp,Parties[1].Member[0]->Hp);
-      printf("\e[1;37mP2:\e[0m %s %d/%d\n",Parties[1].Member[1]->Poke->Name,Parties[1].Member[1]->CurrentHp,Parties[1].Member[1]->Hp);
-      printf("\e[1;37mP3:\e[0m %s %d/%d\n",Parties[1].Member[2]->Poke->Name,Parties[1].Member[2]->CurrentHp,Parties[1].Member[2]->Hp);
-      printf("\e[1;37mP4:\e[0m %s %d/%d\n",Parties[1].Member[3]->Poke->Name,Parties[1].Member[3]->CurrentHp,Parties[1].Member[3]->Hp);
-      printf("\e[1;37mP5:\e[0m %s %d/%d\n",Parties[1].Member[4]->Poke->Name,Parties[1].Member[4]->CurrentHp,Parties[1].Member[4]->Hp);
-      printf("\e[1;37mP6:\e[0m %s %d/%d\n",Parties[1].Member[5]->Poke->Name,Parties[1].Member[5]->CurrentHp,Parties[1].Member[5]->Hp);
-      printf("\nPartyMember: ");
-      fgets(x,31,stdin);
-      x[strcspn(x, "\n")] = 0;
-      if (strcmp(x,"P1") == 0) {
-      displaymember(0,1);
-      } else if (strcmp(x,"P2") == 0) {
-      displaymember(1,1);
-      } else if (strcmp(x,"P3") == 0) {
-      displaymember(2,1);
-      } else if (strcmp(x,"P4") == 0) {
-      displaymember(3,1);
-      } else if (strcmp(x,"P5") == 0) {
-      displaymember(4,1);
-      } else if (strcmp(x,"P6") == 0) {
-      displaymember(5,1);
-    }
-        }
 }

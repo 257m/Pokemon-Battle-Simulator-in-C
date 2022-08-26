@@ -29,6 +29,7 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
+  printf("%lu\n",sizeof(float));
   Battle();
   return 0;
   }

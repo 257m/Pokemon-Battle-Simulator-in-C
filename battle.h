@@ -1,5 +1,4 @@
 int Battle() {
-  printf("%lu\n",sizeof(struct Move));
   while (StatCalc == 1) {
   Parties[0].Member[0]->Hp =  ((Parties[0].Member[0]->IVHp + 2 * Parties[0].Member[0]->Poke->Hp + (Parties[0].Member[0]->EVHp/4)) * Parties[0].Member[0]->Level/100 ) + 10 + Parties[0].Member[0]->Level;
   
@@ -535,13 +534,9 @@ int Battle() {
       MoveList[EnemyTurn->Move].movefunc(0,1);
       ACTIVATE_EFFECTS(0,0);
       ACTIVATE_EFFECTS(0,1);
-      if (First == 1) {
-        ExecuteMove(0);
-        ExecuteMove(1);
-        } else {
-        ExecuteMove(1);
-        ExecuteMove(0);
-        }
+      
+        ExecuteMove(!First);
+        ExecuteMove(First);
       
       if (floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*PlayerSpeedTM == floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*EnemySpeedTM) {
         EndFirst = (rand() % 2);

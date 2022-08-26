@@ -22,6 +22,5 @@ struct Move MoveList [] = {
 {"Leer",0,100,20,1,0,0,&Leerf}
 };
 
-
 MoveSlot Empty_slot = {Nothing,5,1};
 MoveSlot Struggle_Slot = {Struggle,5,1};
