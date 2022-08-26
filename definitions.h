@@ -4,8 +4,8 @@
 
 typedef void (*gpf)(char,bool);
 
-char c [64];
-char stratt (char a [],char b []) {
+static char c [64];
+int stratt (a,b) {
   strcpy(c,a);
   strcat(c,b);
    return c;
