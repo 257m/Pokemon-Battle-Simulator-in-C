@@ -2302,14 +2302,11 @@ displayparty:                           # @displayparty
 Switcheroo:                             # @Switcheroo
 	.cfi_startproc
 # %bb.0:
+	movq	Temp@GOTPCREL(%rip), %rax
+	movq	%rdi, (%rax)
 	movq	(%rdi), %rax
-	movq	Temp@GOTPCREL(%rip), %rcx
+	movq	Parties@GOTPCREL(%rip), %rcx
 	movq	%rax, (%rcx)
-	movq	Parties@GOTPCREL(%rip), %rax
-	movq	(%rax), %rdx
-	movq	%rdx, (%rdi)
-	movq	(%rcx), %rcx
-	movq	%rcx, (%rax)
 	xorl	%eax, %eax
 	retq
 .Lfunc_end54:
@@ -2322,14 +2319,11 @@ Switcheroo:                             # @Switcheroo
 Switcheroo2:                            # @Switcheroo2
 	.cfi_startproc
 # %bb.0:
+	movq	Temp@GOTPCREL(%rip), %rax
+	movq	%rdi, (%rax)
 	movq	(%rdi), %rax
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	Parties@GOTPCREL(%rip), %rax
-	movq	64(%rax), %rdx
-	movq	%rdx, (%rdi)
-	movq	(%rcx), %rcx
-	movq	%rcx, 64(%rax)
+	movq	Parties@GOTPCREL(%rip), %rcx
+	movq	%rax, 64(%rcx)
 	xorl	%eax, %eax
 	retq
 .Lfunc_end55:
@@ -2343,13 +2337,12 @@ Switcheroo3:                            # @Switcheroo3
 	.cfi_startproc
 # %bb.0:
 	movq	(%rdi), %rax
-	movq	(%rax), %rax
 	movq	Temp@GOTPCREL(%rip), %rcx
 	movq	%rax, (%rcx)
 	movq	Parties@GOTPCREL(%rip), %rax
 	movq	(%rax), %rdx
-	movq	(%rdi), %rsi
-	movq	%rdx, (%rsi)
+	movq	%rdx, (%rdi)
+	movq	(%rcx), %rcx
 	movq	(%rcx), %rcx
 	movq	%rcx, (%rax)
 	xorl	%eax, %eax
@@ -2365,13 +2358,12 @@ Switcheroo4:                            # @Switcheroo4
 	.cfi_startproc
 # %bb.0:
 	movq	(%rdi), %rax
-	movq	(%rax), %rax
 	movq	Temp@GOTPCREL(%rip), %rcx
 	movq	%rax, (%rcx)
 	movq	Parties@GOTPCREL(%rip), %rax
 	movq	64(%rax), %rdx
-	movq	(%rdi), %rsi
-	movq	%rdx, (%rsi)
+	movq	%rdx, (%rdi)
+	movq	(%rcx), %rcx
 	movq	(%rcx), %rcx
 	movq	%rcx, 64(%rax)
 	xorl	%eax, %eax
@@ -2456,8 +2448,8 @@ SwitchIn:                               # @SwitchIn
 .LBB58_1:                               # =>This Inner Loop Header: Depth=1
 	movl	$1, %edi
 	testl	%r13d, %r13d
-	je	.LBB58_28
-# %bb.2:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_2
+# %bb.52:                               #   in Loop: Header=BB58_1 Depth=1
 	leaq	.L.str.52(%rip), %rsi
 	xorl	%eax, %eax
 	callq	__printf_chk@PLT
@@ -2476,8 +2468,8 @@ SwitchIn:                               # @SwitchIn
 	movabsq	$14161849074589800, %rdx        # imm = 0x3250206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_26
-# %bb.3:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_56
+# %bb.53:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	8(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2493,30 +2485,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_26
-# %bb.4:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_56
+# %bb.54:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	8(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_26
-# %bb.5:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_56
+# %bb.55:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$12880, %ecx                    # imm = 0x3250
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_26
-# %bb.6:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_56
+# %bb.61:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$14443324051300456, %rdx        # imm = 0x3350206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_53
-# %bb.7:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_65
+# %bb.62:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	16(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2532,30 +2524,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_53
-# %bb.8:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_65
+# %bb.63:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	16(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_53
-# %bb.9:                                #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_65
+# %bb.64:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13136, %ecx                    # imm = 0x3350
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_53
-# %bb.10:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_65
+# %bb.69:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$14724799028011112, %rdx        # imm = 0x3450206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_58
-# %bb.11:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_73
+# %bb.70:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	24(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2571,30 +2563,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_58
-# %bb.12:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_73
+# %bb.71:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	24(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_58
-# %bb.13:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_73
+# %bb.72:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13392, %ecx                    # imm = 0x3450
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_58
-# %bb.14:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_73
+# %bb.77:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$15006274004721768, %rdx        # imm = 0x3550206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_60
-# %bb.15:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_81
+# %bb.78:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	32(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2610,30 +2602,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_60
-# %bb.16:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_81
+# %bb.79:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	32(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_60
-# %bb.17:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_81
+# %bb.80:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13648, %ecx                    # imm = 0x3550
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_60
-# %bb.18:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_81
+# %bb.85:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$15287748981432424, %rdx        # imm = 0x3650206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_62
-# %bb.19:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_89
+# %bb.86:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	40(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2649,22 +2641,22 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_62
-# %bb.20:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_89
+# %bb.87:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	40(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_62
-# %bb.21:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_89
+# %bb.88:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13904, %ecx                    # imm = 0x3650
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_62
-# %bb.22:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_89
+# %bb.94:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	movabsq	$8241956893437028694, %rcx      # imm = 0x7261502077656956
 	xorq	%rcx, %rax
@@ -2672,35 +2664,35 @@ SwitchIn:                               # @SwitchIn
 	movabsq	$34186506789724279, %rdx        # imm = 0x79747261502077
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_64
-# %bb.23:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_97
+# %bb.95:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$2003134806, %ecx               # imm = 0x77656956
 	xorl	%ecx, %eax
 	movzbl	4(%rbx), %ecx
 	orl	%eax, %ecx
-	je	.LBB58_64
-# %bb.24:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_97
+# %bb.96:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$1953653072, %ecx               # imm = 0x74726150
 	xorl	%ecx, %eax
 	movzwl	4(%rbx), %ecx
 	xorl	$121, %ecx
 	orl	%eax, %ecx
-	je	.LBB58_64
-# %bb.25:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_97
+# %bb.98:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	$1, %r13d
 	jmp	.LBB58_51
 	.p2align	4, 0x90
-.LBB58_26:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_56:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	8(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jg	.LBB58_66
-.LBB58_27:                              #   in Loop: Header=BB58_1 Depth=1
+	jg	.LBB58_57
+.LBB58_93:                              #   in Loop: Header=BB58_1 Depth=1
 	movl	$1, %r13d
-	jmp	.LBB58_56
+	jmp	.LBB58_12
 	.p2align	4, 0x90
-.LBB58_28:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_2:                               #   in Loop: Header=BB58_1 Depth=1
 	leaq	.L.str.39(%rip), %rsi
 	xorl	%eax, %eax
 	callq	__printf_chk@PLT
@@ -2719,8 +2711,8 @@ SwitchIn:                               # @SwitchIn
 	movabsq	$14161849074589800, %rdx        # imm = 0x3250206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_52
-# %bb.29:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_5
+# %bb.3:                                #   in Loop: Header=BB58_1 Depth=1
 	movq	72(%r12), %rax
 	movslq	(%rax), %rbp
 	movl	$64, %edx
@@ -2735,23 +2727,23 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_52
-# %bb.30:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_5
+# %bb.4:                                #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$12880, %ecx                    # imm = 0x3250
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_52
-# %bb.31:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_5
+# %bb.14:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$14443324051300456, %rdx        # imm = 0x3350206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_54
-# %bb.32:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_18
+# %bb.15:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	80(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2767,30 +2759,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_54
-# %bb.33:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_18
+# %bb.16:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	80(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_54
-# %bb.34:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_18
+# %bb.17:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13136, %ecx                    # imm = 0x3350
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_54
-# %bb.35:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_18
+# %bb.22:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$14724799028011112, %rdx        # imm = 0x3450206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_59
-# %bb.36:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_26
+# %bb.23:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	88(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2806,30 +2798,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_59
-# %bb.37:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_26
+# %bb.24:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	88(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_59
-# %bb.38:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_26
+# %bb.25:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13392, %ecx                    # imm = 0x3450
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_59
-# %bb.39:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_26
+# %bb.30:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$15006274004721768, %rdx        # imm = 0x3550206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_61
-# %bb.40:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_34
+# %bb.31:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	96(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2845,30 +2837,30 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_61
-# %bb.41:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_34
+# %bb.32:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	96(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_61
-# %bb.42:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_34
+# %bb.33:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13648, %ecx                    # imm = 0x3550
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_61
-# %bb.43:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_34
+# %bb.38:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	xorq	%r15, %rax
 	movq	5(%rbx), %rcx
 	movabsq	$15287748981432424, %rdx        # imm = 0x3650206F742068
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_63
-# %bb.44:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_42
+# %bb.39:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	104(%r12), %rax
 	movslq	(%rax), %rbp
 	leaq	.L.str.41(%rip), %rax
@@ -2884,22 +2876,22 @@ SwitchIn:                               # @SwitchIn
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_63
-# %bb.45:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_42
+# %bb.40:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	104(%r12), %rax
 	movq	(%rax), %rsi
 	movq	%rbx, %rdi
 	callq	strcmp@PLT
 	testl	%eax, %eax
-	je	.LBB58_63
-# %bb.46:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_42
+# %bb.41:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$13904, %ecx                    # imm = 0x3650
 	xorl	%ecx, %eax
 	movzbl	2(%rbx), %ecx
 	orw	%ax, %cx
-	je	.LBB58_63
-# %bb.47:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_42
+# %bb.46:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	(%rbx), %rax
 	movabsq	$8241956893437028694, %rcx      # imm = 0x7261502077656956
 	xorq	%rcx, %rax
@@ -2907,92 +2899,206 @@ SwitchIn:                               # @SwitchIn
 	movabsq	$34186506789724279, %rdx        # imm = 0x79747261502077
 	xorq	%rdx, %rcx
 	orq	%rax, %rcx
-	je	.LBB58_65
-# %bb.48:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_49
+# %bb.47:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$2003134806, %ecx               # imm = 0x77656956
 	xorl	%ecx, %eax
 	movzbl	4(%rbx), %ecx
 	orl	%eax, %ecx
-	je	.LBB58_65
-# %bb.49:                               #   in Loop: Header=BB58_1 Depth=1
+	je	.LBB58_49
+# %bb.48:                               #   in Loop: Header=BB58_1 Depth=1
 	movl	(%rbx), %eax
 	movl	$1953653072, %ecx               # imm = 0x74726150
 	xorl	%ecx, %eax
 	movzwl	4(%rbx), %ecx
 	xorl	$121, %ecx
 	orl	%eax, %ecx
-	je	.LBB58_65
+	je	.LBB58_49
 # %bb.50:                               #   in Loop: Header=BB58_1 Depth=1
 	xorl	%r13d, %r13d
 .LBB58_51:                              #   in Loop: Header=BB58_1 Depth=1
 	movl	$1, %edi
 	leaq	.L.str.51(%rip), %rsi
-	jmp	.LBB58_57
+	jmp	.LBB58_13
 	.p2align	4, 0x90
-.LBB58_52:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_5:                               #   in Loop: Header=BB58_1 Depth=1
 	movq	72(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_55
-	jmp	.LBB58_70
-.LBB58_53:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_11
+	jmp	.LBB58_6
+.LBB58_65:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	16(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_27
-	jmp	.LBB58_73
-.LBB58_54:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_93
+	jmp	.LBB58_66
+.LBB58_18:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	80(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jg	.LBB58_76
-.LBB58_55:                              #   in Loop: Header=BB58_1 Depth=1
+	jg	.LBB58_19
+.LBB58_11:                              #   in Loop: Header=BB58_1 Depth=1
 	xorl	%r13d, %r13d
-.LBB58_56:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_12:                              #   in Loop: Header=BB58_1 Depth=1
 	movl	$1, %edi
 	leaq	.L.str.43(%rip), %rsi
-.LBB58_57:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_13:                              #   in Loop: Header=BB58_1 Depth=1
 	xorl	%eax, %eax
 	callq	__printf_chk@PLT
 	jmp	.LBB58_1
-.LBB58_58:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_73:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	24(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_27
-	jmp	.LBB58_81
-.LBB58_59:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_93
+	jmp	.LBB58_74
+.LBB58_26:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	88(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_55
-	jmp	.LBB58_84
-.LBB58_60:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_11
+	jmp	.LBB58_27
+.LBB58_81:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	32(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_27
-	jmp	.LBB58_87
-.LBB58_61:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_93
+	jmp	.LBB58_82
+.LBB58_34:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	96(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_55
-	jmp	.LBB58_90
-.LBB58_62:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_11
+	jmp	.LBB58_35
+.LBB58_89:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	40(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_27
-	jmp	.LBB58_93
-.LBB58_63:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_93
+	jmp	.LBB58_90
+.LBB58_42:                              #   in Loop: Header=BB58_1 Depth=1
 	movq	104(%r12), %rax
 	cmpl	$0, 12(%rax)
-	jle	.LBB58_55
-	jmp	.LBB58_96
-.LBB58_64:                              #   in Loop: Header=BB58_1 Depth=1
+	jle	.LBB58_11
+	jmp	.LBB58_43
+.LBB58_97:                              #   in Loop: Header=BB58_1 Depth=1
 	xorl	%edi, %edi
 	callq	displayparty@PLT
 	movl	$1, %r13d
 	jmp	.LBB58_1
-.LBB58_65:                              #   in Loop: Header=BB58_1 Depth=1
+.LBB58_49:                              #   in Loop: Header=BB58_1 Depth=1
 	movl	$1, %edi
 	callq	displayparty@PLT
 	xorl	%r13d, %r13d
 	jmp	.LBB58_1
+.LBB58_57:
+	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
+	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
+	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+	movl	$64, %ecx
+	movdqa	.LCPI58_2(%rip), %xmm3          # xmm3 = [1,1]
+	movdqa	.LCPI58_3(%rip), %xmm8          # xmm8 = [2,2]
+	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
+	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
+	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
+	.p2align	4, 0x90
+.LBB58_58:                              # =>This Inner Loop Header: Depth=1
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm0, %xmm7
+	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
+	movdqa	%xmm3, %xmm1
+	psllq	%xmm2, %xmm1
+	movsd	%xmm7, %xmm1                    # xmm1 = xmm7[0],xmm1[1]
+	movdqa	%xmm0, %xmm2
+	paddq	%xmm8, %xmm2
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm2, %xmm7
+	andnpd	%xmm6, %xmm1
+	pshufd	$238, %xmm2, %xmm2              # xmm2 = xmm2[2,3,2,3]
+	movdqa	%xmm3, %xmm6
+	psllq	%xmm2, %xmm6
+	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
+	movdqa	%xmm0, %xmm2
+	paddq	%xmm9, %xmm2
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm2, %xmm7
+	andnpd	%xmm1, %xmm6
+	pshufd	$238, %xmm2, %xmm1              # xmm1 = xmm2[2,3,2,3]
+	movdqa	%xmm3, %xmm2
+	psllq	%xmm1, %xmm2
+	movsd	%xmm7, %xmm2                    # xmm2 = xmm7[0],xmm2[1]
+	movdqa	%xmm0, %xmm1
+	paddq	%xmm4, %xmm1
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm1, %xmm7
+	andnpd	%xmm6, %xmm2
+	pshufd	$238, %xmm1, %xmm1              # xmm1 = xmm1[2,3,2,3]
+	movdqa	%xmm3, %xmm6
+	psllq	%xmm1, %xmm6
+	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
+	andnpd	%xmm2, %xmm6
+	paddq	%xmm5, %xmm0
+	addq	$-8, %rcx
+	jne	.LBB58_58
+# %bb.59:
+	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
+	pand	%xmm6, %xmm0
+	movq	%xmm0, 48(%r12)
+	leaq	8(%r12), %rcx
+.LBB58_60:
+	movq	Temp@GOTPCREL(%rip), %rdx
+	movq	%rcx, (%rdx)
+	movq	%rax, (%r12)
+	jmp	.LBB58_10
+.LBB58_6:
+	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
+	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
+	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+	movl	$64, %ecx
+	movdqa	.LCPI58_2(%rip), %xmm3          # xmm3 = [1,1]
+	movdqa	.LCPI58_3(%rip), %xmm8          # xmm8 = [2,2]
+	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
+	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
+	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
+	.p2align	4, 0x90
+.LBB58_7:                               # =>This Inner Loop Header: Depth=1
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm0, %xmm7
+	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
+	movdqa	%xmm3, %xmm1
+	psllq	%xmm2, %xmm1
+	movsd	%xmm7, %xmm1                    # xmm1 = xmm7[0],xmm1[1]
+	movdqa	%xmm0, %xmm2
+	paddq	%xmm8, %xmm2
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm2, %xmm7
+	andnpd	%xmm6, %xmm1
+	pshufd	$238, %xmm2, %xmm2              # xmm2 = xmm2[2,3,2,3]
+	movdqa	%xmm3, %xmm6
+	psllq	%xmm2, %xmm6
+	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
+	movdqa	%xmm0, %xmm2
+	paddq	%xmm9, %xmm2
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm2, %xmm7
+	andnpd	%xmm1, %xmm6
+	pshufd	$238, %xmm2, %xmm1              # xmm1 = xmm2[2,3,2,3]
+	movdqa	%xmm3, %xmm2
+	psllq	%xmm1, %xmm2
+	movsd	%xmm7, %xmm2                    # xmm2 = xmm7[0],xmm2[1]
+	movdqa	%xmm0, %xmm1
+	paddq	%xmm4, %xmm1
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm1, %xmm7
+	andnpd	%xmm6, %xmm2
+	pshufd	$238, %xmm1, %xmm1              # xmm1 = xmm1[2,3,2,3]
+	movdqa	%xmm3, %xmm6
+	psllq	%xmm1, %xmm6
+	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
+	andnpd	%xmm2, %xmm6
+	paddq	%xmm5, %xmm0
+	addq	$-8, %rcx
+	jne	.LBB58_7
+# %bb.8:
+	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
+	pand	%xmm6, %xmm0
+	movq	%xmm0, 48(%r12)
+	leaq	72(%r12), %rcx
+	jmp	.LBB58_9
 .LBB58_66:
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
@@ -3046,14 +3152,9 @@ SwitchIn:                               # @SwitchIn
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	(%r12), %rcx
-	movq	%rcx, 8(%r12)
-.LBB58_69:
-	movq	%rax, (%r12)
-	jmp	.LBB58_80
-.LBB58_70:
+	leaq	16(%r12), %rcx
+	jmp	.LBB58_60
+.LBB58_19:
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
 	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
@@ -3064,7 +3165,7 @@ SwitchIn:                               # @SwitchIn
 	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
 	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
 	.p2align	4, 0x90
-.LBB58_71:                              # =>This Inner Loop Header: Depth=1
+.LBB58_20:                              # =>This Inner Loop Header: Depth=1
 	movdqa	%xmm3, %xmm7
 	psllq	%xmm0, %xmm7
 	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
@@ -3101,134 +3202,17 @@ SwitchIn:                               # @SwitchIn
 	andnpd	%xmm2, %xmm6
 	paddq	%xmm5, %xmm0
 	addq	$-8, %rcx
-	jne	.LBB58_71
-# %bb.72:
+	jne	.LBB58_20
+# %bb.21:
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	64(%r12), %rcx
-	movq	%rcx, 72(%r12)
-	jmp	.LBB58_79
-.LBB58_73:
-	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
-	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
-	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
-	movl	$64, %ecx
-	movdqa	.LCPI58_2(%rip), %xmm3          # xmm3 = [1,1]
-	movdqa	.LCPI58_3(%rip), %xmm8          # xmm8 = [2,2]
-	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
-	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
-	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
-	.p2align	4, 0x90
-.LBB58_74:                              # =>This Inner Loop Header: Depth=1
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm0, %xmm7
-	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
-	movdqa	%xmm3, %xmm1
-	psllq	%xmm2, %xmm1
-	movsd	%xmm7, %xmm1                    # xmm1 = xmm7[0],xmm1[1]
-	movdqa	%xmm0, %xmm2
-	paddq	%xmm8, %xmm2
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm2, %xmm7
-	andnpd	%xmm6, %xmm1
-	pshufd	$238, %xmm2, %xmm2              # xmm2 = xmm2[2,3,2,3]
-	movdqa	%xmm3, %xmm6
-	psllq	%xmm2, %xmm6
-	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
-	movdqa	%xmm0, %xmm2
-	paddq	%xmm9, %xmm2
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm2, %xmm7
-	andnpd	%xmm1, %xmm6
-	pshufd	$238, %xmm2, %xmm1              # xmm1 = xmm2[2,3,2,3]
-	movdqa	%xmm3, %xmm2
-	psllq	%xmm1, %xmm2
-	movsd	%xmm7, %xmm2                    # xmm2 = xmm7[0],xmm2[1]
-	movdqa	%xmm0, %xmm1
-	paddq	%xmm4, %xmm1
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm1, %xmm7
-	andnpd	%xmm6, %xmm2
-	pshufd	$238, %xmm1, %xmm1              # xmm1 = xmm1[2,3,2,3]
-	movdqa	%xmm3, %xmm6
-	psllq	%xmm1, %xmm6
-	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
-	andnpd	%xmm2, %xmm6
-	paddq	%xmm5, %xmm0
-	addq	$-8, %rcx
-	jne	.LBB58_74
-# %bb.75:
-	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
-	pand	%xmm6, %xmm0
-	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	(%r12), %rcx
-	movq	%rcx, 16(%r12)
-	jmp	.LBB58_69
-.LBB58_76:
-	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
-	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
-	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
-	movl	$64, %ecx
-	movdqa	.LCPI58_2(%rip), %xmm3          # xmm3 = [1,1]
-	movdqa	.LCPI58_3(%rip), %xmm8          # xmm8 = [2,2]
-	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
-	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
-	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
-	.p2align	4, 0x90
-.LBB58_77:                              # =>This Inner Loop Header: Depth=1
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm0, %xmm7
-	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
-	movdqa	%xmm3, %xmm1
-	psllq	%xmm2, %xmm1
-	movsd	%xmm7, %xmm1                    # xmm1 = xmm7[0],xmm1[1]
-	movdqa	%xmm0, %xmm2
-	paddq	%xmm8, %xmm2
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm2, %xmm7
-	andnpd	%xmm6, %xmm1
-	pshufd	$238, %xmm2, %xmm2              # xmm2 = xmm2[2,3,2,3]
-	movdqa	%xmm3, %xmm6
-	psllq	%xmm2, %xmm6
-	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
-	movdqa	%xmm0, %xmm2
-	paddq	%xmm9, %xmm2
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm2, %xmm7
-	andnpd	%xmm1, %xmm6
-	pshufd	$238, %xmm2, %xmm1              # xmm1 = xmm2[2,3,2,3]
-	movdqa	%xmm3, %xmm2
-	psllq	%xmm1, %xmm2
-	movsd	%xmm7, %xmm2                    # xmm2 = xmm7[0],xmm2[1]
-	movdqa	%xmm0, %xmm1
-	paddq	%xmm4, %xmm1
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm1, %xmm7
-	andnpd	%xmm6, %xmm2
-	pshufd	$238, %xmm1, %xmm1              # xmm1 = xmm1[2,3,2,3]
-	movdqa	%xmm3, %xmm6
-	psllq	%xmm1, %xmm6
-	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
-	andnpd	%xmm2, %xmm6
-	paddq	%xmm5, %xmm0
-	addq	$-8, %rcx
-	jne	.LBB58_77
-# %bb.78:
-	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
-	pand	%xmm6, %xmm0
-	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	64(%r12), %rcx
-	movq	%rcx, 80(%r12)
-.LBB58_79:
+	leaq	80(%r12), %rcx
+.LBB58_9:
+	movq	Temp@GOTPCREL(%rip), %rdx
+	movq	%rcx, (%rdx)
 	movq	%rax, 64(%r12)
-.LBB58_80:
+.LBB58_10:
 	movq	(%rax), %rdx
 	leaq	.L.str.42(%rip), %rsi
 	movl	$1, %edi
@@ -3250,7 +3234,7 @@ SwitchIn:                               # @SwitchIn
 	popq	%rbp
 	.cfi_def_cfa_offset 8
 	retq
-.LBB58_81:
+.LBB58_74:
 	.cfi_def_cfa_offset 64
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
@@ -3262,7 +3246,7 @@ SwitchIn:                               # @SwitchIn
 	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
 	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
 	.p2align	4, 0x90
-.LBB58_82:                              # =>This Inner Loop Header: Depth=1
+.LBB58_75:                              # =>This Inner Loop Header: Depth=1
 	movdqa	%xmm3, %xmm7
 	psllq	%xmm0, %xmm7
 	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
@@ -3299,17 +3283,14 @@ SwitchIn:                               # @SwitchIn
 	andnpd	%xmm2, %xmm6
 	paddq	%xmm5, %xmm0
 	addq	$-8, %rcx
-	jne	.LBB58_82
-# %bb.83:
+	jne	.LBB58_75
+# %bb.76:
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	(%r12), %rcx
-	movq	%rcx, 24(%r12)
-	jmp	.LBB58_69
-.LBB58_84:
+	leaq	24(%r12), %rcx
+	jmp	.LBB58_60
+.LBB58_27:
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
 	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
@@ -3320,7 +3301,7 @@ SwitchIn:                               # @SwitchIn
 	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
 	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
 	.p2align	4, 0x90
-.LBB58_85:                              # =>This Inner Loop Header: Depth=1
+.LBB58_28:                              # =>This Inner Loop Header: Depth=1
 	movdqa	%xmm3, %xmm7
 	psllq	%xmm0, %xmm7
 	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
@@ -3357,17 +3338,14 @@ SwitchIn:                               # @SwitchIn
 	andnpd	%xmm2, %xmm6
 	paddq	%xmm5, %xmm0
 	addq	$-8, %rcx
-	jne	.LBB58_85
-# %bb.86:
+	jne	.LBB58_28
+# %bb.29:
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	64(%r12), %rcx
-	movq	%rcx, 88(%r12)
-	jmp	.LBB58_79
-.LBB58_87:
+	leaq	88(%r12), %rcx
+	jmp	.LBB58_9
+.LBB58_82:
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
 	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
@@ -3377,7 +3355,7 @@ SwitchIn:                               # @SwitchIn
 	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
 	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
 	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
-.LBB58_88:                              # =>This Inner Loop Header: Depth=1
+.LBB58_83:                              # =>This Inner Loop Header: Depth=1
 	movdqa	%xmm3, %xmm7
 	psllq	%xmm0, %xmm7
 	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
@@ -3414,16 +3392,67 @@ SwitchIn:                               # @SwitchIn
 	andnpd	%xmm2, %xmm6
 	paddq	%xmm5, %xmm0
 	addq	$-8, %rcx
-	jne	.LBB58_88
-# %bb.89:
+	jne	.LBB58_83
+# %bb.84:
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	(%r12), %rcx
-	movq	%rcx, 32(%r12)
-	jmp	.LBB58_69
+	leaq	32(%r12), %rcx
+	jmp	.LBB58_60
+.LBB58_35:
+	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
+	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
+	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+	movl	$64, %ecx
+	movdqa	.LCPI58_2(%rip), %xmm3          # xmm3 = [1,1]
+	movdqa	.LCPI58_3(%rip), %xmm8          # xmm8 = [2,2]
+	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
+	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
+	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
+.LBB58_36:                              # =>This Inner Loop Header: Depth=1
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm0, %xmm7
+	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
+	movdqa	%xmm3, %xmm1
+	psllq	%xmm2, %xmm1
+	movsd	%xmm7, %xmm1                    # xmm1 = xmm7[0],xmm1[1]
+	movdqa	%xmm0, %xmm2
+	paddq	%xmm8, %xmm2
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm2, %xmm7
+	andnpd	%xmm6, %xmm1
+	pshufd	$238, %xmm2, %xmm2              # xmm2 = xmm2[2,3,2,3]
+	movdqa	%xmm3, %xmm6
+	psllq	%xmm2, %xmm6
+	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
+	movdqa	%xmm0, %xmm2
+	paddq	%xmm9, %xmm2
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm2, %xmm7
+	andnpd	%xmm1, %xmm6
+	pshufd	$238, %xmm2, %xmm1              # xmm1 = xmm2[2,3,2,3]
+	movdqa	%xmm3, %xmm2
+	psllq	%xmm1, %xmm2
+	movsd	%xmm7, %xmm2                    # xmm2 = xmm7[0],xmm2[1]
+	movdqa	%xmm0, %xmm1
+	paddq	%xmm4, %xmm1
+	movdqa	%xmm3, %xmm7
+	psllq	%xmm1, %xmm7
+	andnpd	%xmm6, %xmm2
+	pshufd	$238, %xmm1, %xmm1              # xmm1 = xmm1[2,3,2,3]
+	movdqa	%xmm3, %xmm6
+	psllq	%xmm1, %xmm6
+	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
+	andnpd	%xmm2, %xmm6
+	paddq	%xmm5, %xmm0
+	addq	$-8, %rcx
+	jne	.LBB58_36
+# %bb.37:
+	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
+	pand	%xmm6, %xmm0
+	movq	%xmm0, 48(%r12)
+	leaq	96(%r12), %rcx
+	jmp	.LBB58_9
 .LBB58_90:
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
@@ -3476,12 +3505,9 @@ SwitchIn:                               # @SwitchIn
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	64(%r12), %rcx
-	movq	%rcx, 96(%r12)
-	jmp	.LBB58_79
-.LBB58_93:
+	leaq	40(%r12), %rcx
+	jmp	.LBB58_60
+.LBB58_43:
 	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
 	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
 	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
@@ -3491,7 +3517,7 @@ SwitchIn:                               # @SwitchIn
 	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
 	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
 	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
-.LBB58_94:                              # =>This Inner Loop Header: Depth=1
+.LBB58_44:                              # =>This Inner Loop Header: Depth=1
 	movdqa	%xmm3, %xmm7
 	psllq	%xmm0, %xmm7
 	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
@@ -3528,73 +3554,13 @@ SwitchIn:                               # @SwitchIn
 	andnpd	%xmm2, %xmm6
 	paddq	%xmm5, %xmm0
 	addq	$-8, %rcx
-	jne	.LBB58_94
-# %bb.95:
+	jne	.LBB58_44
+# %bb.45:
 	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	(%r12), %rcx
-	movq	%rcx, 40(%r12)
-	jmp	.LBB58_69
-.LBB58_96:
-	movapd	.LCPI58_0(%rip), %xmm6          # xmm6 = <u,18446744073709551615>
-	movlpd	48(%r12), %xmm6                 # xmm6 = mem[0],xmm6[1]
-	movdqa	.LCPI58_1(%rip), %xmm0          # xmm0 = [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
-	movl	$64, %ecx
-	movdqa	.LCPI58_2(%rip), %xmm3          # xmm3 = [1,1]
-	movdqa	.LCPI58_3(%rip), %xmm8          # xmm8 = [2,2]
-	movdqa	.LCPI58_4(%rip), %xmm9          # xmm9 = [4,4]
-	movdqa	.LCPI58_5(%rip), %xmm4          # xmm4 = [6,6]
-	movdqa	.LCPI58_6(%rip), %xmm5          # xmm5 = [8,8]
-.LBB58_97:                              # =>This Inner Loop Header: Depth=1
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm0, %xmm7
-	pshufd	$238, %xmm0, %xmm2              # xmm2 = xmm0[2,3,2,3]
-	movdqa	%xmm3, %xmm1
-	psllq	%xmm2, %xmm1
-	movsd	%xmm7, %xmm1                    # xmm1 = xmm7[0],xmm1[1]
-	movdqa	%xmm0, %xmm2
-	paddq	%xmm8, %xmm2
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm2, %xmm7
-	andnpd	%xmm6, %xmm1
-	pshufd	$238, %xmm2, %xmm2              # xmm2 = xmm2[2,3,2,3]
-	movdqa	%xmm3, %xmm6
-	psllq	%xmm2, %xmm6
-	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
-	movdqa	%xmm0, %xmm2
-	paddq	%xmm9, %xmm2
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm2, %xmm7
-	andnpd	%xmm1, %xmm6
-	pshufd	$238, %xmm2, %xmm1              # xmm1 = xmm2[2,3,2,3]
-	movdqa	%xmm3, %xmm2
-	psllq	%xmm1, %xmm2
-	movsd	%xmm7, %xmm2                    # xmm2 = xmm7[0],xmm2[1]
-	movdqa	%xmm0, %xmm1
-	paddq	%xmm4, %xmm1
-	movdqa	%xmm3, %xmm7
-	psllq	%xmm1, %xmm7
-	andnpd	%xmm6, %xmm2
-	pshufd	$238, %xmm1, %xmm1              # xmm1 = xmm1[2,3,2,3]
-	movdqa	%xmm3, %xmm6
-	psllq	%xmm1, %xmm6
-	movsd	%xmm7, %xmm6                    # xmm6 = xmm7[0],xmm6[1]
-	andnpd	%xmm2, %xmm6
-	paddq	%xmm5, %xmm0
-	addq	$-8, %rcx
-	jne	.LBB58_97
-# %bb.98:
-	pshufd	$238, %xmm6, %xmm0              # xmm0 = xmm6[2,3,2,3]
-	pand	%xmm6, %xmm0
-	movq	%xmm0, 48(%r12)
-	movq	Temp@GOTPCREL(%rip), %rcx
-	movq	%rax, (%rcx)
-	movq	64(%r12), %rcx
-	movq	%rcx, 104(%r12)
-	jmp	.LBB58_79
+	leaq	104(%r12), %rcx
+	jmp	.LBB58_9
 .Lfunc_end58:
 	.size	SwitchIn, .Lfunc_end58-SwitchIn
 	.cfi_endproc
@@ -4116,12 +4082,11 @@ ExecuteMove:                            # @ExecuteMove
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%rax)
 	movq	EnemySwitchSave@GOTPCREL(%rip), %rdx
-	movq	(%rdx), %rdx
 	movq	(%rdx), %rsi
 	movq	Temp@GOTPCREL(%rip), %rdi
 	movq	%rsi, (%rdi)
 	movq	%rcx, (%rdx)
-	movq	(%rdi), %rcx
+	movq	(%rsi), %rcx
 	movq	%rcx, 64(%rax)
 	movq	(%rcx), %rdx
 	leaq	.L.str.74(%rip), %rsi
@@ -4211,12 +4176,11 @@ ExecuteMove:                            # @ExecuteMove
 	pand	%xmm6, %xmm0
 	movq	%xmm0, 48(%rax)
 	movq	PlayerSwitchSave@GOTPCREL(%rip), %rdx
-	movq	(%rdx), %rdx
 	movq	(%rdx), %rsi
 	movq	Temp@GOTPCREL(%rip), %rdi
 	movq	%rsi, (%rdi)
 	movq	%rcx, (%rdx)
-	movq	(%rdi), %rcx
+	movq	(%rsi), %rcx
 	movq	%rcx, (%rax)
 	movq	(%rcx), %rdx
 	leaq	.L.str.71(%rip), %rsi

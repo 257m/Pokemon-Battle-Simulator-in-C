@@ -48,18 +48,14 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 
 void Nothingf(unsigned char et, bool eop) {
 }
+
 void Strugglef(unsigned char et, bool eop) {
-  YourTurn->PP++;
+  Turns[eop]->PP++;
   if (et == 2) {
       Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
   }
 }
-void Scratchf(unsigned char et, bool eop) {
-}
-void Water_Gunf(unsigned char et, bool eop) {
-}
-void Vine_Whipf(unsigned char et, bool eop) {
-}
+
 void Emberf(unsigned char et, bool eop) {
   if (et == 2) {
   if (map2(rand(),100,RAND_MAX) < 10) {
@@ -67,32 +63,10 @@ void Emberf(unsigned char et, bool eop) {
     }
     }
 }
-void Quick_Attackf(unsigned char et, bool eop) {
-}
-void Super_Attackf(unsigned char et, bool eop) {
-}
-void Stone_Edgef(unsigned char et, bool eop) {
-}
-void Gustf(unsigned char et, bool eop) {
-}
-void Thunder_Shockf(unsigned char et, bool eop) {
-}
+
 void Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
     if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 3;
-  }
-}
-
-void Swords_Dancef(unsigned char et, bool eop) {
-  if (et == 2) {
-      Boostandprint(0,2,Parties[eop].Member[0],0);
-  }
-  }
-
-void Dragon_Dancef(unsigned char et,bool eop) {
-  if (et == 2) {
-      Boostandprint(0,1,Parties[eop].Member[0],0);
-      Boostandprint(4,1,Parties[eop].Member[0],0);
   }
 }
 
@@ -123,21 +97,52 @@ void Freezef(unsigned char et,bool eop) {
   }
 }
 
-void Bulk_Upf(unsigned char et,bool eop) {
+void SelfBoost(unsigned char et,bool eop) {
+  char temp;
+  char mult;
   if (et == 2) {
-      Boostandprint(0,1,Parties[eop].Member[0],0);
-      Boostandprint(1,1,Parties[eop].Member[0],0);
-  }
-}
-
-void Charmf(unsigned char et,bool eop) {
-  if (et == 2) {
-      Boostandprint(0,-2,Parties[!eop].Member[0],1);
-  }
-}
-
-void Leerf(unsigned char et,bool eop) {
-  if (et == 2) {
-  if (!CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE)) Boostandprint(1,-1,Parties[!eop].Member[0],1);
+    for (int i = 0; i < 8;i++) {  
+    temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
+    mult = 1;
+    if (i % 2 == 0) {
+      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],7)) {
+        CLR_BIT(temp,7);
+        mult = -1;
+      }
+      Boostandprint(i,(temp >> 4)*mult,Parties[eop].Member[0],eop);
+      } else {
+      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
+        CLR_BIT(temp,3);
+        mult = -1;
+      }
+      Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[eop].Member[0],eop);
+      }
     }
+  }
 }
+
+void OtherBoost(unsigned char et,bool eop) {
+  char temp;
+  char mult;
+  if (et == 2) {
+    for (int i = 0; i < 8;i++) {  
+    temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
+    mult = 1;
+    if (i % 2 == 0) {
+      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],7)) {
+        CLR_BIT(temp,7);
+        mult = -1;
+      }
+      Boostandprint(i,(temp >> 4)*mult,Parties[!eop].Member[0],!eop);
+      } else {
+      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
+        CLR_BIT(temp,3);
+        mult = -1;
+      }
+      Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[!eop].Member[0],!eop);
+      }
+    }
+  }
+}
+
+gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&Emberf,&Thunder_Wavef,&SelfBoost,&OtherBoost,&Will_O_Wispf,&Sporef,&Toxicf,&Freezef};

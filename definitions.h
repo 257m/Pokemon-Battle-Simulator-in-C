@@ -114,7 +114,8 @@ struct Move {
  unsigned int Type : 5;
  unsigned int Category : 2;
  int Priority : 4;
- void (*movefunc)(unsigned char,bool);
+ unsigned char movefunc;
+ unsigned char GNRL_PURPOSE [4];
 }__attribute__((__packed__));
 
 struct Nature {
@@ -215,8 +216,7 @@ char Stagenames [8][15] = {"Attack","Defense","Special Attack","Special Defense"
 char Itemtext[2][11] = {"Not Usable", "Usable"};
 
 struct Party Parties [2];
-MoveSlot *YourTurn;
-MoveSlot *EnemyTurn;
+MoveSlot *Turns [2];
 struct MyPokemon **PlayerSwitchSave;
 struct MyPokemon **EnemySwitchSave;
 struct MyPokemon **Temp;

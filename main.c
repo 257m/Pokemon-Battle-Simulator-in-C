@@ -9,8 +9,8 @@
 #include "enumdefs.h"
 #include "effectfuncs.h"
 #include "effects.h"
-#include "movefuncs.h"
 #include "movedata.h"
+#include "movefuncs.h"
 #include "abilityfuncs.h"
 #include "abilities.h"
 #include "pokedata.h"
@@ -29,7 +29,7 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
-  printf("%lu\n",sizeof(float));
+  printf("%lu\n",sizeof(struct Move));
   Battle();
   return 0;
   }

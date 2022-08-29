@@ -83,6 +83,19 @@ Leer
 };
 
 enum {
+MF_Nothing,
+MF_Struggle,
+MF_Ember,
+MF_Thunder_Wave,
+MF_SELFBOOST,
+MF_OTHERBOOST,
+MF_Will_O_Wisp,
+MF_Spore,
+MF_Toxic,
+MF_Freeze,
+};
+
+enum {
 NoItem,
 Leftovers,
 Focus_Sash
