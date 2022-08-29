@@ -1,27 +1,27 @@
 int Switcheroo(struct MyPokemon **S1) {
-  Temp = *S1;
-  *S1 = Parties[0].Member[0];
-  Parties[0].Member[0] = Temp;
+  Temp = S1;
+  S1 = Parties[0].Member[0];
+  Parties[0].Member[0] = *Temp;
   return 0;
   }
 
 int Switcheroo2(struct MyPokemon **S2) {
-  Temp = *S2;
-  *S2 = Parties[1].Member[0];
-  Parties[1].Member[0] = Temp;
+  Temp = S2;
+  S2 = Parties[1].Member[0];
+  Parties[1].Member[0] = *Temp;
   return 0;
   }
 int Switcheroo3(struct MyPokemon ***S3) {
-  Temp = **S3;
-  **S3 = Parties[0].Member[0];
-  Parties[0].Member[0] = Temp;
+  Temp = *S3;
+  *S3 = Parties[0].Member[0];
+  Parties[0].Member[0] = *Temp;
   return 0;
   }
 
 int Switcheroo4(struct MyPokemon ***S4) {
-  Temp = **S4;
-  **S4 = Parties[1].Member[0];
-  Parties[1].Member[0] = Temp;
+  Temp = *S4;
+  *S4 = Parties[1].Member[0];
+  Parties[1].Member[0] = *Temp;
   return 0;
   }
 

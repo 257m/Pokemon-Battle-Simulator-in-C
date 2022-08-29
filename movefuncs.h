@@ -47,23 +47,18 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 }
 
 void Nothingf(unsigned char et, bool eop) {
-  return 0;
 }
 void Strugglef(unsigned char et, bool eop) {
   YourTurn->PP++;
   if (et == 2) {
       Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
   }
-  return 0;
 }
 void Scratchf(unsigned char et, bool eop) {
-  return 0;
 }
 void Water_Gunf(unsigned char et, bool eop) {
-  return 0;
 }
 void Vine_Whipf(unsigned char et, bool eop) {
-  return 0;
 }
 void Emberf(unsigned char et, bool eop) {
   if (et == 2) {
@@ -73,18 +68,14 @@ void Emberf(unsigned char et, bool eop) {
     }
 }
 void Quick_Attackf(unsigned char et, bool eop) {
-  return 0;
 }
 void Super_Attackf(unsigned char et, bool eop) {
-  return 0;
 }
 void Stone_Edgef(unsigned char et, bool eop) {
 }
 void Gustf(unsigned char et, bool eop) {
-  return 0;
 }
 void Thunder_Shockf(unsigned char et, bool eop) {
-  return 0;
 }
 void Thunder_Wavef(unsigned char et, bool eop) {
   if (et == 2) {
@@ -124,14 +115,12 @@ void Toxicf(unsigned char et,bool eop) {
   if (et == 3) {
       if (Parties[eop].Member[0]->Poke->Type1 == POISON || Parties[eop].Member[0]->Poke->Type2 == POISON) PlayerHit = 1;
   }
-  return 0;
 }
 
 void Freezef(unsigned char et,bool eop) {
   if (et == 2) {
       if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 6;
   }
-  return 0;
 }
 
 void Bulk_Upf(unsigned char et,bool eop) {
