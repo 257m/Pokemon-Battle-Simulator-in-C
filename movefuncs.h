@@ -46,6 +46,12 @@ void ResetBoosts(struct MyPokemon* pokemon) {
   pokemon->StatBoosts[7] = 0;
 }
 
+char StatusImmunity(unsigned char status,bool eop) {
+  if (status == STATUS_BURN && Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE) return 0;
+  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && Parties[!eop].Member[0]->Poke->Type1 == POISON && Parties[!eop].Member[0]->Poke->Type2 == POISON && Parties[!eop].Member[0]->Poke->Type1 == STEEL && Parties[!eop].Member[0]->Poke->Type2 == STEEL) return 0;
+  return 1;
+}
+
 void Nothingf(unsigned char et, bool eop) {
 }
 
@@ -147,11 +153,10 @@ void OtherBoost(unsigned char et,bool eop) {
 
 void OtherStatus(unsigned char et,bool eop) {
 if (et == 2) {
-unsigned char temp;
-if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]) {
-  if (MoveList[Turns[eop]->Move].GNRL_PURPOSE[0] != STATE_CONFUSION) {
-    Parties[!eop].Member[0]->Non_Volatile_Status = (unsigned char)MoveList[Turns[eop]->Move].GNRL_PURPOSE[0];
-    }
+if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]) {  
+    if ((StatusImmunity(MoveList[Turns[eop]->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,2)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
+    Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Turns[eop]->Move].GNRL_PURPOSE[0];
+      }
   }
   }
 }
