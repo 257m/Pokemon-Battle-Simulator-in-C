@@ -116,6 +116,7 @@ struct Move {
  int Priority : 4;
  unsigned char movefunc;
  unsigned char GNRL_PURPOSE [4];
+ unsigned int FLAGS : 16; 
 }__attribute__((__packed__));
 
 struct Nature {
@@ -231,7 +232,6 @@ bool PlayerSwitch = 0;
 bool EnemySwitch = 0;
 bool PlayerHit = 0;
 bool EnemyHit = 0;
-bool Skip = 0;
 char x[32];
 int Damage;
 int EnemyDamage;

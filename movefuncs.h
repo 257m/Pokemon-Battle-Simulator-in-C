@@ -145,4 +145,15 @@ void OtherBoost(unsigned char et,bool eop) {
   }
 }
 
-gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&Emberf,&Thunder_Wavef,&SelfBoost,&OtherBoost,&Will_O_Wispf,&Sporef,&Toxicf,&Freezef};
+void OtherStatus(unsigned char et,bool eop) {
+if (et == 2) {
+unsigned char temp;
+if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]) {
+  if (MoveList[Turns[eop]->Move].GNRL_PURPOSE[0] != STATE_CONFUSION) {
+    Parties[!eop].Member[0]->Non_Volatile_Status = (unsigned char)MoveList[Turns[eop]->Move].GNRL_PURPOSE[0];
+    }
+  }
+  }
+}
+
+gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&SelfBoost,&OtherBoost,&OtherStatus};

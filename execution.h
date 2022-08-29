@@ -13,12 +13,12 @@ void ExecuteMove(bool eop) {
         if (PlayerSwitch == 0) {
         PlayerHit = (map2(rand(),100,RAND_MAX) < (MoveList[Turns[0]->Move].Accuracy*statboostmult(Parties[0].Member[0]->StatBoosts[5] / statboostmult(Parties[1].Member[0]->StatBoosts[6]))));
         PlayerCrit = map2(rand(),32,RAND_MAX) < 1*power2(Parties[0].Member[0]->StatBoosts[7]);
-        if (Parties[0].Member[0]->Non_Volatile_Status == 3) {
+        if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           PlayerPara = (rand() % 4 == 0);
           if (PlayerPara == 1) PlayerCanMove = 0;
           }
-        else if (Parties[0].Member[0]->Non_Volatile_Status == 1 && MoveList[Turns[0]->Move].Category == 1) PlayerTM /= 2;
-        else if (Parties[0].Member[0]->Non_Volatile_Status == 4) {
+        else if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_BURN && MoveList[Turns[0]->Move].Category == 1) PlayerTM /= 2;
+        else if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_SLEEP) {
           if (Parties[0].Member[0]->Counter == 0) {
           PlayerCanMove = 0; PlayerSleep = 1;
             } else {
@@ -32,7 +32,7 @@ void ExecuteMove(bool eop) {
           }
           if (PlayerSleep == 1) Parties[0].Member[0]->Counter++;
           else {Parties[0].Member[0]->Counter = 0; Parties[0].Member[0]->Non_Volatile_Status = 0; printf("%s woke up\n",Parties[0].Member[0]->Poke->Name);}
-          } else if (Parties[0].Member[0]->Non_Volatile_Status == 6) {
+          } else if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_FREEZE) {
           PlayerFrozen = (map2(rand(),5,RAND_MAX) != 0);
           if (PlayerFrozen) {
             PlayerCanMove = 0;
@@ -90,12 +90,12 @@ void ExecuteMove(bool eop) {
         if (EnemySwitch == 0) {
         EnemyHit = (map2(rand(),100,RAND_MAX) < (MoveList[Turns[1]->Move].Accuracy*statboostmult(Parties[1].Member[0]->StatBoosts[5] / statboostmult(Parties[0].Member[0]->StatBoosts[6]))));
         EnemyCrit = (map2(rand(),32,RAND_MAX) < 1*power2(Parties[1].Member[0]->StatBoosts[7]));
-        if (Parties[1].Member[0]->Non_Volatile_Status == 3) {
+        if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           EnemyPara = (rand() % 4 == 0);
           if (EnemyPara == 1) EnemyCanMove = 0;
           }
-        else if (Parties[1].Member[0]->Non_Volatile_Status == 1 && MoveList[Turns[1]->Move].Category == 1) EnemyTM /= 2; 
-        else if (Parties[1].Member[0]->Non_Volatile_Status == 4) {
+        else if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_BURN && MoveList[Turns[1]->Move].Category == 1) EnemyTM /= 2; 
+        else if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_SLEEP) {
           if (Parties[1].Member[0]->Counter == 0) {
           EnemyCanMove = 0; EnemySleep = 1;
             } else {
@@ -109,7 +109,7 @@ void ExecuteMove(bool eop) {
           }
           if (EnemySleep == 1) Parties[1].Member[0]->Counter++;
           else {Parties[1].Member[0]->Counter = 0; Parties[1].Member[0]->Non_Volatile_Status = 0; printf("The opposing %s woke up\n",Parties[1].Member[0]->Poke->Name);}
-          } else if (Parties[1].Member[0]->Non_Volatile_Status == 6) {
+          } else if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_FREEZE) {
           EnemyFrozen = (map2(rand(),5,RAND_MAX) != 0);
           if (EnemyFrozen) {
             EnemyCanMove = 0;
