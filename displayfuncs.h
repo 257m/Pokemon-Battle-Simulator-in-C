@@ -28,7 +28,7 @@ void move_result(bool eop) {
   if (!eop) {
         if (PlayerHit && PlayerCanMove) {
         if (MoveList[Turns[0]->Move].Category != 0) {
-        printf("It did %d damage!\n",Damage);
+        printf("It did %d damage!\n",Damages[0]);
         if (TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
         }
@@ -48,7 +48,7 @@ void move_result(bool eop) {
   else {
           if (EnemyHit && EnemyCanMove) {        
         if (MoveList[Turns[1]->Move].Category != 0) {
-        printf("It did %d damage!\n",EnemyDamage);
+        printf("It did %d damage!\n",Damages[1]);
         if (TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
         }

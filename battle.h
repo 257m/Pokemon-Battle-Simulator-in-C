@@ -482,9 +482,9 @@ int Battle() {
 
     
     while (Execute == 1) {
-      // reset damage counters, temporary mults and flags 
-      Damage = 0;
-      EnemyDamage = 0;
+      // reset Damage counters, temporary mults and flags 
+      Damages[0] = 0;
+      Damages[1] = 0;
       PlayerHit = 1;
       EnemyHit = 1;
       PlayerTM = 1;

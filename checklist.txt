@@ -42,9 +42,10 @@ x | change PlayerParty and EnemyParty to array
 
 x | change ppmult so that it store a 2 bit uint
 
-o | change damages into array
-
+x | change damages into array
 
 o | Add flags to items and abilities
 
 x | update display party to show abilties
+
+o | create a universal DBOG

@@ -212,9 +212,11 @@ struct Party {
  uint64_t EFFECT_FLAGS [2];
 };
 
-char Stagenames [8][15] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
+char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 
 char Itemtext[2][11] = {"Not Usable", "Usable"};
+
+char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
 struct Party Parties [2];
 MoveSlot *Turns [2];
@@ -233,8 +235,7 @@ bool EnemySwitch = 0;
 bool PlayerHit = 0;
 bool EnemyHit = 0;
 char x[32];
-int Damage;
-int EnemyDamage;
+int Damages [2];
 double STAB;
 double EnemySTAB;
 double PlayerTM;

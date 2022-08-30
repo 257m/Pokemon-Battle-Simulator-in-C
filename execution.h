@@ -1,9 +1,6 @@
 void DBOG(bool eop) {
-unsigned int *EOPDAMAGE;
-if (eop) EOPDAMAGE = &EnemyDamage;
-else EOPDAMAGE = &Damage;
-if (Parties[!eop].Member[0]->CurrentHp < *EOPDAMAGE) {
-  *EOPDAMAGE = Parties[!eop].Member[0]->CurrentHp;
+if (Parties[!eop].Member[0]->CurrentHp < Damages[eop]) {
+  Damages[eop] = Parties[!eop].Member[0]->CurrentHp;
 }
 }
 
@@ -54,22 +51,22 @@ void ExecuteMove(bool eop) {
          MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](2,0);
           }
         else if (MoveList[Turns[0]->Move].Category == 1) {
-        Damage = (((((2 * Parties[0].Member[0]->Level / 5 + 2) * (Parties[0].Member[0]->Atk*tt(PlayerCrit && (Parties[0].Member[0]->StatBoosts[0] < 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[0]))) * MoveList[Turns[0]->Move].BP / (Parties[1].Member[0]->Def*tt(PlayerCrit && (Parties[1].Member[0]->StatBoosts[1] > 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[1])))) / 50) + 2) * STAB * (TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerTM * tt(PlayerCrit,1.5,1);
+        Damages[0] = (((((2 * Parties[0].Member[0]->Level / 5 + 2) * (Parties[0].Member[0]->Atk*tt(PlayerCrit && (Parties[0].Member[0]->StatBoosts[0] < 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[0]))) * MoveList[Turns[0]->Move].BP / (Parties[1].Member[0]->Def*tt(PlayerCrit && (Parties[1].Member[0]->StatBoosts[1] > 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[1])))) / 50) + 2) * STAB * (TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type2]) * ((rand() % 16) + 85) / 100) * PlayerTM * tt(PlayerCrit,1.5,1);
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](1,0);
         ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
         ItemList[Parties[1].Member[0]->Item].itemfunc(-1,1);
         DBOG(0);
-        Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->CurrentHp - Damage;
+        Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->CurrentHp - Damages[0];
         Turns[0]->PP--;
          move_result(0);
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](2,0);
           } else if (MoveList[Turns[0]->Move].Category == 2) {
-        Damage = (((((2 * Parties[0].Member[0]->Level / 5 + 2) * (Parties[0].Member[0]->SpA*tt(PlayerCrit && (Parties[0].Member[0]->StatBoosts[2] < 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[2]))) * MoveList[Turns[0]->Move].BP / (Parties[1].Member[0]->SpD*tt(PlayerCrit && (Parties[1].Member[0]->StatBoosts[3] > 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[3])))) / 50) + 2) * STAB * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerTM * tt(PlayerCrit,1.5,1);
+        Damages[0] = (((((2 * Parties[0].Member[0]->Level / 5 + 2) * (Parties[0].Member[0]->SpA*tt(PlayerCrit && (Parties[0].Member[0]->StatBoosts[2] < 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[2]))) * MoveList[Turns[0]->Move].BP / (Parties[1].Member[0]->SpD*tt(PlayerCrit && (Parties[1].Member[0]->StatBoosts[3] > 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[3])))) / 50) + 2) * STAB * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[0]->Move].Type][Parties[1].Member[0]->Poke->Type2] * ((rand() % 16) + 85) / 100) * PlayerTM * tt(PlayerCrit,1.5,1);
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](1,0);
         ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
         ItemList[Parties[1].Member[0]->Item].itemfunc(-1,1);
         DBOG(0);
-        Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->CurrentHp - Damage; 
+        Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->CurrentHp - Damages[0]; 
         Turns[0]->PP--;
          move_result(0);
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](2,0);
@@ -131,23 +128,23 @@ void ExecuteMove(bool eop) {
          MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](2,1);
           }
         else if (MoveList[Turns[1]->Move].Category == 1) {
-        EnemyDamage = (((((2 * Parties[1].Member[0]->Level / 5 + 2) * (Parties[1].Member[0]->Atk*tt(EnemyCrit && (Parties[1].Member[0]->StatBoosts[0] < 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[0]))) * MoveList[Turns[1]->Move].BP / (Parties[0].Member[0]->Def*tt(EnemyCrit && (Parties[0].Member[0]->StatBoosts[1] > 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[1])))) / 50) + 2) * EnemySTAB * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM * tt(EnemyCrit,1.5,1);
+        Damages[1] = (((((2 * Parties[1].Member[0]->Level / 5 + 2) * (Parties[1].Member[0]->Atk*tt(EnemyCrit && (Parties[1].Member[0]->StatBoosts[0] < 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[0]))) * MoveList[Turns[1]->Move].BP / (Parties[0].Member[0]->Def*tt(EnemyCrit && (Parties[0].Member[0]->StatBoosts[1] > 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[1])))) / 50) + 2) * EnemySTAB * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM * tt(EnemyCrit,1.5,1);
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](1,1);
         ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);
         ItemList[Parties[0].Member[0]->Item].itemfunc(-1,0);
         DBOG(1);
-        Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->CurrentHp - EnemyDamage;
+        Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->CurrentHp - Damages[1];
         Turns[1]->PP--;
         move_result(1);
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](2,1);
           }
         else if (MoveList[Turns[1]->Move].Category == 2) {
-        EnemyDamage = (((((2 * Parties[1].Member[0]->Level / 5 + 2) * (Parties[1].Member[0]->SpA*tt(EnemyCrit && (Parties[1].Member[0]->StatBoosts[2] < 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[2]))) * MoveList[Turns[1]->Move].BP / (Parties[0].Member[0]->SpD*tt(EnemyCrit && (Parties[0].Member[0]->StatBoosts[3] > 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[3])))) / 50) + 2) * EnemySTAB * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM * tt(EnemyCrit,1.5,1);
+        Damages[1] = (((((2 * Parties[1].Member[0]->Level / 5 + 2) * (Parties[1].Member[0]->SpA*tt(EnemyCrit && (Parties[1].Member[0]->StatBoosts[2] < 0),1,statboostmult(Parties[1].Member[0]->StatBoosts[2]))) * MoveList[Turns[1]->Move].BP / (Parties[0].Member[0]->SpD*tt(EnemyCrit && (Parties[0].Member[0]->StatBoosts[3] > 0),1,statboostmult(Parties[0].Member[0]->StatBoosts[3])))) / 50) + 2) * EnemySTAB * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] * ((rand() % 16) + 85) / 100) * EnemyTM * tt(EnemyCrit,1.5,1);
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](1,1);
         ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);
         ItemList[Parties[0].Member[0]->Item].itemfunc(-1,0);
         DBOG(1);
-        Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->CurrentHp - EnemyDamage;
+        Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->CurrentHp - Damages[1];
         Turns[1]->PP--;
          move_result(1);
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](2,1);
