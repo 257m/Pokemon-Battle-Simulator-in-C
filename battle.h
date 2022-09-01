@@ -427,7 +427,7 @@ int Battle() {
       Reset = 1;
     }
   }
-    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[1]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
+   }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[1]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
        SwitchSaves[1] = 1;
        EnemySwitch = 1;
       if(strcmp(Parties[1].Member[1]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[1]->CurrentHp <= 0) {

@@ -1,4 +1,4 @@
-struct Move MoveList [] = {
+const struct Move MoveList [] = {
 {"Nothing",0,0,0,NOTYPE,0,0,MF_Nothing,{0,0,0,0},0},
 {"Struggle",50,100,1,NOTYPE,1,0,MF_Struggle,{0,0,0,0},FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED},
 {"Scratch",40,100,35,NORMAL,1,0,MF_Nothing,{0,0,0,0},FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_TYPE_IMMUNITY_AFFECTED},
