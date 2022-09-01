@@ -1,5 +1,5 @@
 struct MyPokemon Pokemon1 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Toxic,0,3},{Vine_Whip,0,3},
+{Quick_Attack,0,3},{Stone_Edge,0,3},{Dragon_Dance,0,3},{Vine_Whip,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon Pokemon2 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
@@ -14,7 +14,7 @@ struct MyPokemon Pokemon4 = {&Squirtle,5,21,Leftovers,Blaze,Impish,31,31,31,31,3
 {Quick_Attack,0,3},{Stone_Edge,0,3},{Bulk_Up,0,3},{Vine_Whip,0,3},
 4,212,156,36,84,12};
 
-struct MyPokemon Pokemon5 = {&Charmander,5,0,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
+struct MyPokemon Pokemon5 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
 {Quick_Attack,0,3},{Stone_Edge,0,3},{Vine_Whip,0,3},{Ember,0,3},
 0,180,92,4,0,236};
 

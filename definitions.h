@@ -3,16 +3,19 @@
 #define CHK_BIT(BF, N) ((BF >> N) & 0x1)
 
 typedef void (*gpf)(char,bool);
+typedef void (*ugpf)(unsigned char,bool);
 
-static char c [64];
-int stratt (a,b) {
-  strcpy(c,a);
-  strcat(c,b);
-   return c;
+char* stratt(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
+    // in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
 }
 
 double statboostmult(char statboost) {
-  if (statboost >= 0 || statboost == NULL) {
+  if (statboost >= 0) {
     return (statboost*0.5)+1;
   } else {
     return (double)1/(1+(statboost*-1*0.5));
@@ -24,12 +27,12 @@ float ppboostmult(ppboost) {
 }
 
 unsigned int map(unsigned int num,unsigned int newmax,unsigned int currentmax) {
-  if (currentmax==NULL) currentmax = RAND_MAX;
+  if (currentmax==0) currentmax = RAND_MAX;
   return num/((double)currentmax/newmax);
 }
 
 unsigned int map2(unsigned int num,unsigned int newmax,unsigned int currentmax) {
-  if (currentmax==NULL) currentmax = RAND_MAX;
+  if (currentmax==0) currentmax = RAND_MAX;
   if (num > currentmax-(currentmax % newmax)) return map2(rand(),newmax,currentmax);
   else return (num % newmax);
 }
@@ -220,9 +223,7 @@ char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed"
 
 struct Party Parties [2];
 MoveSlot *Turns [2];
-struct MyPokemon **PlayerSwitchSave;
-struct MyPokemon **EnemySwitchSave;
-struct MyPokemon **Temp;
+unsigned char SwitchSaves [2] = {1,1};
 bool StatCalc = 1;
 bool BattleMode = 0;
 bool Retrieve = 0;

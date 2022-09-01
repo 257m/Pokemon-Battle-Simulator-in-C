@@ -47,63 +47,23 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 }
 
 char StatusImmunity(unsigned char status,bool eop) {
-  if (status == STATUS_BURN && Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE) return 0;
-  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && Parties[!eop].Member[0]->Poke->Type1 == POISON && Parties[!eop].Member[0]->Poke->Type2 == POISON && Parties[!eop].Member[0]->Poke->Type1 == STEEL && Parties[!eop].Member[0]->Poke->Type2 == STEEL) return 0;
+  if (status == STATUS_BURN && (Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE)) return 0;
+  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (Parties[!eop].Member[0]->Poke->Type1 == POISON || Parties[!eop].Member[0]->Poke->Type2 == POISON || Parties[!eop].Member[0]->Poke->Type1 == STEEL || Parties[!eop].Member[0]->Poke->Type2 == STEEL)) return 0;
+  if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS))
   return 1;
 }
 
-void Nothingf(unsigned char et, bool eop) {
+void Nothingf(char et, bool eop) {
 }
 
-void Strugglef(unsigned char et, bool eop) {
+void Strugglef(char et, bool eop) {
   Turns[eop]->PP++;
   if (et == 2) {
       Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
   }
 }
 
-void Emberf(unsigned char et, bool eop) {
-  if (et == 2) {
-  if (map2(rand(),100,RAND_MAX) < 10) {
-  if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 1;
-    }
-    }
-}
-
-void Thunder_Wavef(unsigned char et, bool eop) {
-  if (et == 2) {
-    if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 3;
-  }
-}
-
-void Will_O_Wispf(unsigned char et,bool eop) {
-  if (et == 2) {
-     if (Parties[!eop].Member[0]->Poke->Type1 != 2 && Parties[!eop].Member[0]->Poke->Type1 != 2 && Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 1;
-  }
-}
-
-void Sporef(unsigned char et,bool eop) {
-  if (et == 2) {
-     if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 4;
-  }
-}
-
-void Toxicf(unsigned char et,bool eop) {
-  if (et == 2) {
-     if (Parties[!eop].Member[0]->Poke->Type1 != POISON && Parties[!eop].Member[0]->Poke->Type2 != POISON && Parties[!eop].Member[0]->Poke->Type1 != STEEL && Parties[!eop].Member[0]->Poke->Type2 != STEEL && Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 5;
-  }
-  if (et == 3) {
-      if (Parties[eop].Member[0]->Poke->Type1 == POISON || Parties[eop].Member[0]->Poke->Type2 == POISON) PlayerHit = 1;
-  }
-}
-
-void Freezef(unsigned char et,bool eop) {
-  if (et == 2) {
-      if (Parties[!eop].Member[0]->Non_Volatile_Status == 0) Parties[!eop].Member[0]->Non_Volatile_Status = 6;
-  }
-}
-
-void SelfBoost(unsigned char et,bool eop) {
+void SelfBoost(char et,bool eop) {
   char temp;
   char mult;
   if (et == 2) {
@@ -127,7 +87,7 @@ void SelfBoost(unsigned char et,bool eop) {
   }
 }
 
-void OtherBoost(unsigned char et,bool eop) {
+void OtherBoost(char et,bool eop) {
   char temp;
   char mult;
   if (et == 2) {
@@ -151,10 +111,10 @@ void OtherBoost(unsigned char et,bool eop) {
   }
 }
 
-void OtherStatus(unsigned char et,bool eop) {
+void OtherStatus(char et,bool eop) {
 if (et == 2) {
 if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]) {  
-    if ((StatusImmunity(MoveList[Turns[eop]->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,2)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
+    if ((StatusImmunity(MoveList[Turns[eop]->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
     Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Turns[eop]->Move].GNRL_PURPOSE[0];
       }
   }
