@@ -81,7 +81,6 @@ int SwitchIn(PlayerOrEnemy) {
             if (Parties[0].Member[1]->CurrentHp > 0) {
             CLEAR_EFFECTS(0);
             Switch(&Parties[0].Member[0],&Parties[0].Member[1]);
-            Switch(0,1);
               printf("Go! %s!\n",Parties[0].Member[0]->Poke->Name);
               } else {printf("That pokemon is already fainted\n");SwitchIn(1);}
           }  else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[2]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
