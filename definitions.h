@@ -235,7 +235,7 @@ bool PlayerSwitch = 0;
 bool EnemySwitch = 0;
 bool PlayerHit = 0;
 bool EnemyHit = 0;
-char x[64];
+char x[32];
 int Damages [2];
 double STAB;
 double EnemySTAB;

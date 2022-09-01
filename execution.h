@@ -74,9 +74,9 @@ void ExecuteMove(bool eop) {
           }
           }  else {
         if (Parties[0].Member[0]->Non_Volatile_Status == 5) Parties[0].Member[0]->Counter = 0; 
-         ResetBoosts(&Parties[0].Member[0]);
-         CLEAR_EFFECTS(0);
-         Switch(Parties[0].Member[0],Parties[0].Member[SwitchSaves[0]]);
+         //ResetBoosts(&Parties[0].Member[0]);
+         //CLEAR_EFFECTS(0);
+         Switch(0,SwitchSaves[0]);
          printf("You switched out to %s\n",Parties[0].Member[0]->Poke->Name);
       }
         printf("\n");
@@ -152,9 +152,9 @@ void ExecuteMove(bool eop) {
           }
       } else {
         if (Parties[1].Member[0]->Non_Volatile_Status == 5) Parties[1].Member[0]->Counter = 0; 
-        ResetBoosts(Parties[1].Member[0]);
-        CLEAR_EFFECTS(1);
-        Switch(&Parties[1].Member[0],&Parties[1].Member[SwitchSaves[1]]);
+        //ResetBoosts(Parties[1].Member[0]);
+        //CLEAR_EFFECTS(1);
+        Switch(1,SwitchSaves[1]);
         printf("The Enemy switched out to %s\n",Parties[1].Member[0]->Poke->Name);
           }
           printf("\n");
