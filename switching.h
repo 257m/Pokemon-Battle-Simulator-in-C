@@ -1,8 +1,8 @@
 void Switch(bool party,unsigned char member) {
   struct MyPokemon * PointerSave;
-  PointerSave = Parties[party].Member[0];
-  Parties[party].Member[0] = Parties[party].Member[member];
-  Parties[party].Member[member] = PointerSave;
+  PointerSave = Parties[0].Member[0];
+  Parties[0].Member[0] = Parties[0].Member[1];
+  Parties[1].Member[1] = PointerSave;
 }
 
 int SwitchIn(PlayerOrEnemy) {
