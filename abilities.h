@@ -1,1 +1,1 @@
-Ability AbilityList [] = {{"NoAbility",AF_NOABILITY},{"Overgrow",AF_TB,{GRASS,33,0,0}},{"Blaze",AF_TB,{FIRE,33,0,0}},{"Torrent",AF_TB,{WATER,33,0,0}},{"Big Pecks",AF_BP}};
+Ability AbilityList [] = {{"NoAbility",AF_NOABILITY},{"Overgrow",AF_TB,{GRASS,3,0,0}},{"Blaze",AF_TB,{FIRE,3,0,0}},{"Torrent",AF_TB,{WATER,3,0,0}},{"Big Pecks",AF_BP}};
