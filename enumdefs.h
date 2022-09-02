@@ -105,6 +105,12 @@ Big_Pecks
 };
 
 enum {
+AF_NOABILITY,
+AF_TB,
+AF_BP
+};
+
+enum {
 EFFECT_UTL_ATTACK,
 EFFECT_UTL_DEFENSE,
 EFFECT_UTL_SP_ATK,

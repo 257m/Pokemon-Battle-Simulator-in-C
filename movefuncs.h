@@ -8,6 +8,7 @@ void Boost(unsigned char stat,char boostrate,struct MyPokemon* pokemon) {
 }
 
 void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,bool eop) {
+  if (boostrate == 0) return;
   char EOPTEXT [16] = "";
   if (eop) strcpy(EOPTEXT,"The opposing ");
   if (pokemon->StatBoosts[stat] >= 6) {
@@ -49,7 +50,7 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 char StatusImmunity(unsigned char status,bool eop) {
   if (status == STATUS_BURN && (Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE)) return 0;
   else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (Parties[!eop].Member[0]->Poke->Type1 == POISON || Parties[!eop].Member[0]->Poke->Type2 == POISON || Parties[!eop].Member[0]->Poke->Type1 == STEEL || Parties[!eop].Member[0]->Poke->Type2 == STEEL)) return 0;
-  if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS))
+  if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
   return 1;
 }
 

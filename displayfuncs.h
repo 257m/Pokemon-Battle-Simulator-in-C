@@ -41,7 +41,7 @@ void move_result(bool eop) {
           } 
         if (Parties[1].Member[0]->CurrentHp <= 0) {
           printf("The opposing %s fainted!\n",Parties[1].Member[0]->Poke->Name);
-          SwitchIn(0);
+          SwitchIn(!eop);
           EnemyDead = 1;
         }
   } 
@@ -61,7 +61,7 @@ void move_result(bool eop) {
           } 
         if (Parties[0].Member[0]->CurrentHp <= 0) {
           printf("Your %s fainted!\n",Parties[0].Member[0]->Poke->Name);
-          SwitchIn(1);
+          SwitchIn(!eop);
           PlayerDead = 1;
         }
   }

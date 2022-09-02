@@ -41,7 +41,7 @@ unsigned int power2(char num) {
   if (num < 0) return 0;
   unsigned int total = 1;
   for (int i = 0;i < num;i++) {
-    total*2;
+    total *= 2;
   }
   return total;
 }
@@ -172,7 +172,9 @@ void (*itemfunc)(char,bool);
 
 typedef struct {
 char Name [12];
-void (*abilityfunc)(char,bool);
+unsigned char abilityfunc;
+unsigned char GNRL_PURPOSE [4];
+unsigned int FLAGS : 16; 
 } Ability;
 
  struct MyPokemon {
@@ -239,8 +241,7 @@ char x[32];
 int Damages [2];
 double STAB;
 double EnemySTAB;
-double PlayerTM;
-double EnemyTM;
+double TemporaryMults [2];
 double PlayerSpeedTM;
 double EnemySpeedTM;
 bool PlayerCanMove;

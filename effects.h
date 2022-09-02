@@ -7,7 +7,7 @@ void ACTIVATE_EFFECTS(char et,bool eop) {
 }
 
 void CLEAR_EFFECTS(bool eop) {
-  for (int i = 0;i < 63;i++) {
+  for (int i = 0;i < 64;i++) {
     CLR_BIT(Parties[0].EFFECT_FLAGS[0],i);
   }
 }

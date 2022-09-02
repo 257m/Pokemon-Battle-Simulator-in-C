@@ -11,13 +11,13 @@ void endturn(bool eop) {
       } else if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_TOXIC) {
         if (Parties[0].Member[0]->Counter < 16) Parties[0].Member[0]->Counter++;
         Parties[0].Member[0]->CurrentHp -= tt(Parties[0].Member[0]->Hp*((double)Parties[0].Member[0]->Counter/16) > 1,Parties[0].Member[0]->Hp*((double)Parties[0].Member[0]->Counter/16),1);
-        printf("%s is hurt by poison! (it's badly poisoned)\n",Parties[1].Member[0]->Poke->Name);
+        printf("%s is hurt by poison! (it's badly poisoned)\n",Parties[0].Member[0]->Poke->Name);
         printf("%s is at %d/%d hp\n\n",Parties[0].Member[0]->Poke->Name,Parties[0].Member[0]->CurrentHp,Parties[0].Member[0]->Hp);
       }
 
       if (Parties[0].Member[0]->CurrentHp <= 0) {
         printf("\033[1F%s fainted!\n",Parties[0].Member[0]->Poke->Name);
-        SwitchIn(1);
+        SwitchIn(eop);
         printf("\n");
       } else {
       ItemList[Parties[0].Member[0]->Item].itemfunc(5,0);
@@ -40,8 +40,7 @@ void endturn(bool eop) {
 
       if (Parties[1].Member[0]->CurrentHp <= 0) {
         printf("The opposing %s fainted!\n",Parties[1].Member[0]->Poke->Name);
-        SwitchIn(0);
-        //printf("The Enemy switched out to %s\n",Parties[0].Member[0]->Poke->Name);
+        SwitchIn(eop);
       } else {
       ItemList[Parties[1].Member[0]->Item].itemfunc(5,1);
       }

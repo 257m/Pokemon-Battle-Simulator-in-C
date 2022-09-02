@@ -1,41 +1,15 @@
 void NoAbilityf(char et,bool eop) {
 }
 
-void Overgrowf(char et,bool eop) {
-  if (!eop) {
+void TypeBasedBoost(char et,bool eop) {
   if (et == 1) {
-  if (Parties[0].Member[0]->CurrentHp <= Parties[0].Member[0]->Hp/3 && MoveList[Turns[0]->Move].Type == 5) PlayerTM *= 1.5;
-    }
-    } else {
-  if (et == 1) {
-  if (Parties[1].Member[0]->CurrentHp <= Parties[1].Member[0]->Hp/3 && MoveList[Turns[1]->Move].Type == 5) EnemyTM *= 1.5;
-    }
+  if (AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] == MoveList[Turns[eop]->Move].Type) {
+  if ((Parties[eop].Member[0]->CurrentHp/Parties[eop].Member[0]->Hp) <= (AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100)) {
+    TemporaryMults[eop] *= 1.5;
   }
-  }
-
-void Blazef(char et,bool eop) {
-  if (!eop) {
-  if (et == 1) {
-  if (Parties[0].Member[0]->CurrentHp <= Parties[0].Member[0]->Hp/3 && MoveList[Turns[0]->Move].Type == 2) PlayerTM *= 1.5;
     }
-    } else {
-    if (et == 1) {
-  if (Parties[1].Member[0]->CurrentHp <= Parties[1].Member[0]->Hp/3 && MoveList[Turns[1]->Move].Type == 2) EnemyTM *= 1.5;
-      }
-  }
+    }
 }
-  
-void Torrentf(char et,bool eop) {
-  if (!eop) {
-  if (et == 1) {
-  if (Parties[0].Member[0]->CurrentHp <= Parties[0].Member[0]->Hp/3 && MoveList[Turns[0]->Move].Type == 3) PlayerTM *= 1.5;
-    }
-    } else {
-    if (et == 1) {
-    if (Parties[1].Member[0]->CurrentHp <= Parties[1].Member[0]->Hp/3 && MoveList[Turns[1]->Move].Type == 3) EnemyTM *= 1.5;
-      }
-    }
-  }
 
 void Big_Pecksf(char et,bool eop) {
   if (!eop) {
@@ -44,3 +18,5 @@ void Big_Pecksf(char et,bool eop) {
   SET_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
   }
 }
+
+gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&Big_Pecksf};

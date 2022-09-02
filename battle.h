@@ -487,8 +487,8 @@ int Battle() {
       Damages[1] = 0;
       PlayerHit = 1;
       EnemyHit = 1;
-      PlayerTM = 1;
-      EnemyTM = 1;
+      TemporaryMults[0] = 1;
+      TemporaryMults[1] = 1;
       PlayerSpeedTM = 1;
       EnemySpeedTM = 1;
       PlayerCanMove = 1;
@@ -528,8 +528,8 @@ int Battle() {
         First = PlayerSwitch;
       }
       // post speed,stab and reset funcs
-      AbilityList[Parties[0].Member[0]->Ability].abilityfunc(1,0);
-      AbilityList[Parties[1].Member[0]->Ability].abilityfunc(1,1);
+      ABILITY_FUNC_LIST[AbilityList[Parties[0].Member[0]->Ability].abilityfunc](1,0);
+      ABILITY_FUNC_LIST[AbilityList[Parties[1].Member[0]->Ability].abilityfunc](1,1);
       MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](0,0);
       MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](0,1);
       //ACTIVATE_EFFECTS(0,0);

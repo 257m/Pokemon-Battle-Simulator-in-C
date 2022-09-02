@@ -1,4 +1,4 @@
-struct MyPokemon Pokemon1 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
+struct MyPokemon Pokemon1 = {&Charmander,5,20,Focus_Sash,Overgrow,Jolly,31,31,31,31,31,31,
 {Quick_Attack,0,3},{Stone_Edge,0,3},{Dragon_Dance,0,3},{Vine_Whip,0,3},
 0,180,92,4,0,236};
 
