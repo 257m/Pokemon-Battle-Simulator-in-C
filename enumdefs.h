@@ -89,7 +89,11 @@ Mud_Slap,
 Muddy_Water,
 Night_Daze,
 Octazooka,
-Sand_Attack
+Sand_Attack,
+Smoke_Screen,
+Aurora_Beam,
+Baby_Doll_Eyes,
+Breaking_Swipe
 };
 
 enum {

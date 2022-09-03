@@ -110,7 +110,7 @@ unsigned char Chance;
 } StatusChance_t;
 
 struct Move {
- char Name[15];
+ char Name[16];
  unsigned char BP;
  unsigned int Accuracy : 7;
  unsigned int PP : 6;
@@ -119,7 +119,7 @@ struct Move {
  int Priority : 4;
  unsigned char movefunc;
  unsigned char GNRL_PURPOSE [5];
- unsigned int FLAGS : 8; 
+ unsigned int FLAGS : 12; 
 }__attribute__((__packed__));
 
 struct Nature {
