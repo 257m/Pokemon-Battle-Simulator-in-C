@@ -51,6 +51,8 @@ char StatusImmunity(unsigned char status,bool eop) {
   if (status == STATUS_BURN && (Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE)) return 0;
   else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (Parties[!eop].Member[0]->Poke->Type1 == POISON || Parties[!eop].Member[0]->Poke->Type2 == POISON || Parties[!eop].Member[0]->Poke->Type1 == STEEL || Parties[!eop].Member[0]->Poke->Type2 == STEEL)) return 0;
   if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
+  else if  ((status == STATUS_PARALYSIS) && (Parties[!eop].Member[0]->Poke->Type1 == ELECTRIC || Parties[!eop].Member[0]->Poke->Type2 == ELECTRIC || (Turns[eop]->Move == Thunder_Wave && (Parties[!eop].Member[0]->Poke->Type1 == GROUND || Parties[!eop].Member[0]->Poke->Type2 == GROUND)))) return 0;
+  else if ((status == STATUS_FREEZE) && (Parties[!eop].Member[0]->Poke->Type1 == ICE || Parties[!eop].Member[0]->Poke->Type2 == ICE) return 0;
   return 1;
 }
 
@@ -68,6 +70,7 @@ void SelfBoost(char et,bool eop) {
   char temp;
   char mult;
   if (et == 2) {
+if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[5]) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
     mult = 1;
@@ -76,22 +79,29 @@ void SelfBoost(char et,bool eop) {
         CLR_BIT(temp,7);
         mult = -1;
       }
+      if (!((((temp >> 4)*mult) < 0) && (AbilityList[Parties[eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1],0))) {
       Boostandprint(i,(temp >> 4)*mult,Parties[eop].Member[0],eop);
+        }
       } else {
       if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
         CLR_BIT(temp,3);
         mult = -1;
       }
+      if (!((((temp-((temp >> 4) << 4))*mult) < 0) && (AbilityList[Parties[eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1],0))) {
       Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[eop].Member[0],eop);
+        }
       }
     }
   }
 }
+  }
 
 void OtherBoost(char et,bool eop) {
   char temp;
   char mult;
   if (et == 2) {
+  if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
+if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[5]) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
     mult = 1;
@@ -100,20 +110,26 @@ void OtherBoost(char et,bool eop) {
         CLR_BIT(temp,7);
         mult = -1;
       }
+      if (!((((temp >> 4)*mult) < 0) && (AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[1],1))) {
       Boostandprint(i,(temp >> 4)*mult,Parties[!eop].Member[0],!eop);
+        }
       } else {
       if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
         CLR_BIT(temp,3);
         mult = -1;
       }
+      if (!((((temp-((temp >> 4) << 4))*mult) < 0) && (AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[1],1))) {
       Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[!eop].Member[0],!eop);
+        }
       }
     }
   }
 }
+  }
 
 void OtherStatus(char et,bool eop) {
 if (et == 2) {
+  if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
 if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]) {  
     if ((StatusImmunity(MoveList[Turns[eop]->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
     Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Turns[eop]->Move].GNRL_PURPOSE[0];

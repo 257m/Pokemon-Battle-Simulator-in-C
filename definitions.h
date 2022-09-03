@@ -118,8 +118,8 @@ struct Move {
  unsigned int Category : 2;
  int Priority : 4;
  unsigned char movefunc;
- unsigned char GNRL_PURPOSE [4];
- unsigned int FLAGS : 16; 
+ unsigned char GNRL_PURPOSE [5];
+ unsigned int FLAGS : 8; 
 }__attribute__((__packed__));
 
 struct Nature {
@@ -171,10 +171,9 @@ void (*itemfunc)(char,bool);
 } Item;
 
 typedef struct {
-char Name [12];
+char Name [15];
 unsigned char abilityfunc;
-unsigned char GNRL_PURPOSE [4];
-unsigned int FLAGS : 16; 
+unsigned char GNRL_PURPOSE [2];
 } Ability;
 
  struct MyPokemon {
@@ -259,3 +258,5 @@ bool EnemyFrozen;
 bool PlayerCrit;
 bool EnemyCrit;
 bool EndFirst;
+
+Ability AbilityList [];

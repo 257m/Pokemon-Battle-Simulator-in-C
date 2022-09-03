@@ -11,12 +11,7 @@ void TypeBasedBoost(char et,bool eop) {
     }
 }
 
-void Big_Pecksf(char et,bool eop) {
-  if (!eop) {
-  SET_BIT(Parties[0].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
-  } else {
-  SET_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_UTL_DEFENSE);
-  }
+void StatDecreaseImmunity(char et,bool eop) {
 }
 
-gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&Big_Pecksf};
+gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity};
