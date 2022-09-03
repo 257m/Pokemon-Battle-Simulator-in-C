@@ -50,9 +50,9 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 char StatusImmunity(unsigned char status,bool eop) {
   if (status == STATUS_BURN && (Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE)) return 0;
   else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (Parties[!eop].Member[0]->Poke->Type1 == POISON || Parties[!eop].Member[0]->Poke->Type2 == POISON || Parties[!eop].Member[0]->Poke->Type1 == STEEL || Parties[!eop].Member[0]->Poke->Type2 == STEEL)) return 0;
-  if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
+  else if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
   else if  ((status == STATUS_PARALYSIS) && (Parties[!eop].Member[0]->Poke->Type1 == ELECTRIC || Parties[!eop].Member[0]->Poke->Type2 == ELECTRIC || (Turns[eop]->Move == Thunder_Wave && (Parties[!eop].Member[0]->Poke->Type1 == GROUND || Parties[!eop].Member[0]->Poke->Type2 == GROUND)))) return 0;
-  else if ((status == STATUS_FREEZE) && (Parties[!eop].Member[0]->Poke->Type1 == ICE || Parties[!eop].Member[0]->Poke->Type2 == ICE) return 0;
+  else if ((status == STATUS_FREEZE) && (Parties[!eop].Member[0]->Poke->Type1 == ICE || Parties[!eop].Member[0]->Poke->Type2 == ICE)) return 0;
   return 1;
 }
 
@@ -70,7 +70,7 @@ void SelfBoost(char et,bool eop) {
   char temp;
   char mult;
   if (et == 2) {
-if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[5]) {  
+if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[4]) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
     mult = 1;
@@ -100,8 +100,8 @@ void OtherBoost(char et,bool eop) {
   char temp;
   char mult;
   if (et == 2) {
-  if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
-if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[5]) {  
+  if ((TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
+ if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[4]) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
     mult = 1;

@@ -1,9 +1,9 @@
 struct MyPokemon Pokemon1 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Octazooka,0,3},{Vine_Whip,0,3},
+{Quick_Attack,0,3},{Stone_Edge,0,3},{Flash,0,3},{Vine_Whip,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon Pokemon2 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Gust,0,3},
+{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Mud_Slap,0,3},
 0,236,36,4,0,228};
 
 struct MyPokemon Pokemon3 = {&Bulbasaur,5,22,Leftovers,Blaze,Impish,31,31,31,31,31,31,
@@ -23,11 +23,11 @@ struct MyPokemon Pokemon6 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,
 0,236,36,4,0,228};
 
 struct MyPokemon EnemyPokemon1 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Flash,0,3},{Vine_Whip,0,3},
+{Quick_Attack,0,3},{Stone_Edge,0,3},{Flash,0,3},{Mud_Slap,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon EnemyPokemon2 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Gust,0,3},
+{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Sand_Attack,0,3},
 0,236,36,4,0,228};
 
 struct MyPokemon EnemyPokemon3 = {&Bulbasaur,5,22,Leftovers,Blaze,Impish,31,31,31,31,31,31,

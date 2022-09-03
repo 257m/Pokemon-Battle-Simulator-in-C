@@ -33,7 +33,7 @@ unsigned int map(unsigned int num,unsigned int newmax,unsigned int currentmax) {
 
 unsigned int map2(unsigned int num,unsigned int newmax,unsigned int currentmax) {
   if (currentmax==0) currentmax = RAND_MAX;
-  if (num > currentmax-(currentmax % newmax)) return map2(rand(),newmax,currentmax);
+  if (num > (currentmax-(currentmax % newmax))) return map2(rand(),newmax,currentmax);
   else return (num % newmax);
 }
 
