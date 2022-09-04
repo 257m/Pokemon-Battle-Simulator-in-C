@@ -117,7 +117,7 @@ struct Move {
  unsigned int Type : 5;
  unsigned int Category : 2;
  int Priority : 4;
- unsigned char movefunc;
+ unsigned int movefunc : 5;
  unsigned char GNRL_PURPOSE [5];
  unsigned int FLAGS : 12; 
 }__attribute__((__packed__));
@@ -214,6 +214,7 @@ unsigned char GNRL_PURPOSE [2];
 struct Party {
  struct MyPokemon *Member [6];
  uint64_t EFFECT_FLAGS [2];
+ char EFFECT_COUNTERS [128];
 };
 
 char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
@@ -258,5 +259,7 @@ bool EnemyFrozen;
 bool PlayerCrit;
 bool EnemyCrit;
 bool EndFirst;
+unsigned int TurnCounter = 0;
+bool HideMove = 0;
 
 Ability AbilityList [];

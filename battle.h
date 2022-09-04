@@ -1,5 +1,5 @@
 int Battle() {
-  while (StatCalc == 1) {
+  while (StatCalc) {
   Parties[0].Member[0]->Hp =  ((Parties[0].Member[0]->IVHp + 2 * Parties[0].Member[0]->Poke->Hp + (Parties[0].Member[0]->EVHp/4)) * Parties[0].Member[0]->Level/100 ) + 10 + Parties[0].Member[0]->Level;
   
   Parties[0].Member[0]->Atk = (((Parties[0].Member[0]->IVAtk + 2 * Parties[0].Member[0]->Poke->Atk + (Parties[0].Member[0]->EVAtk/4) ) * Parties[0].Member[0]->Level/100 ) + 5) * NATURE_LIST[Parties[0].Member[0]->Nature].Atk;
@@ -205,7 +205,7 @@ int Battle() {
   Parties[1].Member[5]->Move4.PP = MoveList[Parties[1].Member[5]->Move4.Move].PP * ppboostmult(Parties[1].Member[5]->Move4.PPmult);
 
 
-    printf("\nHeal?:");
+    printf("\nHeal? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"y") == 0) {
@@ -251,7 +251,15 @@ int Battle() {
       Parties[1].Member[4]->ItemUsable = 1;
       Parties[1].Member[5]->ItemUsable = 1;
 
+      CLEAR_EFFECTS(0);
+      CLEAR_EFFECTS(1);
     }
+    printf("\033[1A");
+    printf("\033[2K");
+    printf("Hide Moves? (y/n): ");
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
+    if (strcmp(x,"y") == 0) HideMove = 1;
     printf("\033[1A");
     printf("\033[2K");
     StatCalc = 0;
@@ -263,9 +271,10 @@ int Battle() {
   printf("The Enemy sent out %s!\n\n", Parties[1].Member[0]->Poke->Name);
   Turns[0] = &Empty_slot;
   Turns[1] = &Empty_slot;
-  while(BattleMode == 1) {
-    
-    while(Retrieve == 1) {
+  while(BattleMode) {
+    TurnCounter++;
+    printf("\033[100m\033[3m\033[1mTURN: %d\033[0m\n\n",TurnCounter);
+    while(Retrieve) {
     PlayerSwitch = 0;
     EnemySwitch = 0;
     printf("Enter your move: ");
@@ -369,6 +378,10 @@ int Battle() {
       Reset = 1;
     }
       if (Reset != 1) {
+     if (HideMove) {
+    printf("\033[2A");
+    printf("\033[2K");
+         }
      printf("\nEnter enemy's move: ");
      fgets(x,31,stdin);
      x[strcspn(x, "\n")] = 0;
@@ -532,8 +545,8 @@ int Battle() {
       ABILITY_FUNC_LIST[AbilityList[Parties[1].Member[0]->Ability].abilityfunc](1,1);
       MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](0,0);
       MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](0,1);
-      //ACTIVATE_EFFECTS(0,0);
-      //ACTIVATE_EFFECTS(0,1);
+      ACTIVATE_EFFECTS(0,0);
+      ACTIVATE_EFFECTS(0,1);
       
         ExecuteMove(!First);
         ExecuteMove(First);

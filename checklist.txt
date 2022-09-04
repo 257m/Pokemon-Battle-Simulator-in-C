@@ -49,3 +49,5 @@ x | update display party to show abilties
 o | create a universal DBOG
 
 o | Merge SelfBoost and Otherboost
+
+o | implement protect

@@ -1,4 +1,5 @@
-char EFFECT_COUNTER_LIST [1];
+void PROTECTF(char et,bool eop) {
+}
 
 void LEECH_SEEDF(char et,bool eop) {
 }

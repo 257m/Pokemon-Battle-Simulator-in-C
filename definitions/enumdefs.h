@@ -93,15 +93,16 @@ Sand_Attack,
 Smoke_Screen,
 Aurora_Beam,
 Baby_Doll_Eyes,
-Breaking_Swipe
+Breaking_Swipe,
+Protect
 };
 
 enum {
 MF_Nothing,
 MF_Struggle,
-MF_SELFBOOST,
-MF_OTHERBOOST,
-MF_OTHERSTATUS
+MF_STATMOD,
+MF_OTHERSTATUS,
+MF_PROTECT
 };
 
 enum {
@@ -128,13 +129,10 @@ AF_IMMUNE_TO_STAT_DECREASE
 };
 
 enum {
+EFFECT_PROTECT,
 EFFECT_LEECH_SEED,
 EFFECT_PERISH_SONG,
 EFFECT_CONFUSION,
-};
-
-enum {
-COUNTER_PERISH_SONG
 };
 
 #define FLAG_MAKES_CONTACT 1

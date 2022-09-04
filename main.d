@@ -1,4 +1,7 @@
-main.o main.d : main.c definitions.h enumdefs.h effectfuncs.h effects.h \
-  movedata.h movefuncs.h abilities.h abilityfuncs.h pokedata.h \
-  itemfuncs.h helditems.h displayparty.h win.h switching.h \
-  displayfuncs.h execution.h endofturn.h partyset.h battle.h
+main.o main.d : main.c definitions/definitions.h definitions/enumdefs.h \
+  effects/effectfuncs.h effects/effects.h moves/movedata.h \
+  moves/movefuncs.h abilities/abilities.h abilities/abilityfuncs.h \
+  pokemon/pokedata.h items/itemfuncs.h items/helditems.h \
+  display/displayparty.h other/win.h other/switching.h \
+  display/displayfuncs.h executions/execution.h executions/endofturn.h \
+  pokemon/partyset.h battle.h

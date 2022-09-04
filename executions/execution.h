@@ -9,6 +9,7 @@ void ExecuteMove(bool eop) {
     if (PlayerDead == 0) {
         if (PlayerSwitch == 0) {
         PlayerHit = (map2(rand(),100,RAND_MAX) < (MoveList[Turns[0]->Move].Accuracy*statboostmult(Parties[0].Member[0]->StatBoosts[5] / statboostmult(Parties[1].Member[0]->StatBoosts[6]))));
+        if (MoveList[Turns[0]->Move].Accuracy > 100) PlayerHit = 1;
         PlayerCrit = map2(rand(),32,RAND_MAX) < 1*power2(Parties[0].Member[0]->StatBoosts[7]);
         if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           PlayerPara = (rand() % 4 == 0);
@@ -86,6 +87,7 @@ void ExecuteMove(bool eop) {
     if (EnemyDead == 0) {
         if (EnemySwitch == 0) {
         EnemyHit = (map2(rand(),100,RAND_MAX) < (MoveList[Turns[1]->Move].Accuracy*statboostmult(Parties[1].Member[0]->StatBoosts[5] / statboostmult(Parties[0].Member[0]->StatBoosts[6]))));
+        if (MoveList[Turns[1]->Move].Accuracy > 100) EnemyHit = 1;
         EnemyCrit = (map2(rand(),32,RAND_MAX) < 1*power2(Parties[1].Member[0]->StatBoosts[7]));
         if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           EnemyPara = (rand() % 4 == 0);

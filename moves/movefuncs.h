@@ -66,42 +66,14 @@ void Strugglef(char et, bool eop) {
   }
 }
 
-void SelfBoost(char et,bool eop) {
-  char temp;
-  char mult;
-  if (et == 2) {
-if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[4]) {  
-    for (int i = 0; i < 8;i++) {  
-    temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
-    mult = 1;
-    if (i % 2 == 0) {
-      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],7)) {
-        CLR_BIT(temp,7);
-        mult = -1;
-      }
-      if (!((((temp >> 4)*mult) < 0) && (AbilityList[Parties[eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1],0))) {
-      Boostandprint(i,(temp >> 4)*mult,Parties[eop].Member[0],eop);
-        }
-      } else {
-      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
-        CLR_BIT(temp,3);
-        mult = -1;
-      }
-      if (!((((temp-((temp >> 4) << 4))*mult) < 0) && (AbilityList[Parties[eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1],0))) {
-      Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[eop].Member[0],eop);
-        }
-      }
-    }
-  }
-}
-  }
-
 void OtherBoost(char et,bool eop) {
   char temp;
   char mult;
+  bool soo = eop;
+  if (CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[4],7)) soo = !eop;
   if (et == 2) {
-  if ((TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
- if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[4]) {  
+  if ((TypeChart[MoveList[Turns[eop]->Move].Type][Parties[soo].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[soo].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
+ if (map2(rand(),100,RAND_MAX) < ((MoveList[Turns[eop]->Move].GNRL_PURPOSE[4] << 1) >> 1)) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
     mult = 1;
@@ -110,16 +82,16 @@ void OtherBoost(char et,bool eop) {
         CLR_BIT(temp,7);
         mult = -1;
       }
-      if (!((((temp >> 4)*mult) < 0) && (AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[1],1))) {
-      Boostandprint(i,(temp >> 4)*mult,Parties[!eop].Member[0],!eop);
+      if (!((((temp >> 4)*mult) < 0) && (AbilityList[Parties[soo].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[soo].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[soo].Member[0]->Ability].GNRL_PURPOSE[1],soo))) {
+      Boostandprint(i,(temp >> 4)*mult,Parties[soo].Member[0],soo);
         }
       } else {
       if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
         CLR_BIT(temp,3);
         mult = -1;
       }
-      if (!((((temp-((temp >> 4) << 4))*mult) < 0) && (AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[!eop].Member[0]->Ability].GNRL_PURPOSE[1],1))) {
-      Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[!eop].Member[0],!eop);
+      if (!((((temp-((temp >> 4) << 4))*mult) < 0) && (AbilityList[Parties[soo].Member[0]->Ability].abilityfunc == AF_IMMUNE_TO_STAT_DECREASE) && CHK_BIT(AbilityList[Parties[soo].Member[0]->Ability].GNRL_PURPOSE[0],i) && CHK_BIT(AbilityList[Parties[soo].Member[0]->Ability].GNRL_PURPOSE[1],soo))) {
+      Boostandprint(i,(temp-((temp >> 4) << 4))*mult,Parties[soo].Member[0],soo);
         }
       }
     }
@@ -138,4 +110,10 @@ if (map2(rand(),100,RAND_MAX) < MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]) {
   }
 }
 
-gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&SelfBoost,&OtherBoost,&OtherStatus};
+void ProtectingMove(char et,bool eop) {
+  if (First = !eop) {
+    SET_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_PROTECT);
+  }
+}
+
+gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&OtherBoost,&OtherStatus,&ProtectingMove};
