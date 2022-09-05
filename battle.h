@@ -486,7 +486,12 @@ int Battle() {
       if(Reset == 0) {
       Retrieve = 0;
       Execute = 1;
+     if (HideMove) {
+    printf("\033[1A");
+    printf("\033[2K");
+         } else {
       printf("\n");
+       }
         } else {
         printf("\n\n");
         Reset = 0;
