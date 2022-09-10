@@ -9,23 +9,21 @@ void Boost(unsigned char stat,char boostrate,struct MyPokemon* pokemon) {
 
 void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,bool eop) {
   if (boostrate == 0) return;
-  char EOPTEXT [16] = "";
-  if (eop) strcpy(EOPTEXT,"The opposing ");
   if (pokemon->StatBoosts[stat] >= 6) {
     pokemon->StatBoosts[stat] = 6;
-    printf("%s%s's %s can't go any higher\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat]);
   } else if (pokemon->StatBoosts[stat] <= -6) {
     pokemon->StatBoosts[stat] = -6;
-    printf("%s%s's %s can't go any lower\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat]);
   } else {
     if (boostrate > 0) {
     if (pokemon->StatBoosts[stat] + boostrate > 6) boostrate = pokemon->StatBoosts[stat] + boostrate - 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s rose by %d stages\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat],boostrate);
+    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat],boostrate);
     } else if (boostrate < 0) {
     if (pokemon->StatBoosts[stat] + boostrate < -6) boostrate = pokemon->StatBoosts[stat] + boostrate + 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s fell by %d stages\n",EOPTEXT,pokemon->Poke->Name,Stagenames[stat],boostrate*-1);
+    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat],boostrate*-1);
     }
       }
   }

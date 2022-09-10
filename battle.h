@@ -503,8 +503,8 @@ int Battle() {
       // reset Damage counters, temporary mults and flags 
       Damages[0] = 0;
       Damages[1] = 0;
-      PlayerHit = 1;
-      EnemyHit = 1;
+      Hit[0] = 1;
+      Hit[1] = 1;
       TemporaryMults[0] = 1;
       TemporaryMults[1] = 1;
       PlayerSpeedTM = 1;

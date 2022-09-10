@@ -13,8 +13,8 @@ void ExecuteMove(bool eop) {
   if (!eop) {
     if (!Dead[0]) {
         if (!PlayerSwitch) {
-        PlayerHit = (rand() < RAND_MAX*((double)(MoveList[Turns[0]->Move].Accuracy*statboostmult(Parties[0].Member[0]->StatBoosts[5] / statboostmult(Parties[1].Member[0]->StatBoosts[6])))/100));
-        if (MoveList[Turns[0]->Move].Accuracy > 100) PlayerHit = 1;
+        Hit[0] = (rand() < RAND_MAX*((double)(MoveList[Turns[0]->Move].Accuracy*statboostmult(Parties[0].Member[0]->StatBoosts[5] / statboostmult(Parties[1].Member[0]->StatBoosts[6])))/100));
+        if (MoveList[Turns[0]->Move].Accuracy > 100) Hit[0] = 1;
         Crit[0] = map2(rand(),32,RAND_MAX) < 1*power2(Parties[0].Member[0]->StatBoosts[7]);
         if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           Para[0] = (rand() % 4 == 0);
@@ -47,7 +47,7 @@ void ExecuteMove(bool eop) {
           }
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](3,1);
         display_move(0);
-      if (Parties[0].Member[0]->CurrentHp > 0 && PlayerHit && CanMove[0]) {
+      if (Parties[0].Member[0]->CurrentHp > 0 && Hit[0] && CanMove[0]) {
         if (MoveList[Turns[0]->Move].Category == 0) {
          MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](1,0);
          ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
@@ -97,8 +97,8 @@ void ExecuteMove(bool eop) {
   else {
     if (Dead[1] == 0) {
         if (EnemySwitch == 0) {
-        EnemyHit = (rand() < RAND_MAX*((double)(MoveList[Turns[1]->Move].Accuracy*statboostmult(Parties[1].Member[0]->StatBoosts[5] / statboostmult(Parties[0].Member[0]->StatBoosts[6])))/100));
-        if (MoveList[Turns[1]->Move].Accuracy > 100) EnemyHit = 1;
+        Hit[1] = (rand() < RAND_MAX*((double)(MoveList[Turns[1]->Move].Accuracy*statboostmult(Parties[1].Member[0]->StatBoosts[5] / statboostmult(Parties[0].Member[0]->StatBoosts[6])))/100));
+        if (MoveList[Turns[1]->Move].Accuracy > 100) Hit[1] = 1;
         Crit[1] = (map2(rand(),32,RAND_MAX) < 1*power2(Parties[1].Member[0]->StatBoosts[7]));
         if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           Para[1] = (rand() % 4 == 0);
@@ -131,7 +131,7 @@ void ExecuteMove(bool eop) {
           }
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](3,1);
         display_move(1);
-        if (Parties[1].Member[0]->CurrentHp > 0 && EnemyHit == 1 && CanMove[1] == 1) {
+        if (Parties[1].Member[0]->CurrentHp > 0 && Hit[1] == 1 && CanMove[1] == 1) {
         if (MoveList[Turns[1]->Move].Category == 0) {
          MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](1,1);
          ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);

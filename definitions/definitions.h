@@ -223,6 +223,8 @@ char Itemtext[2][11] = {"Not Usable", "Usable"};
 
 char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
+char EOPTEXT[2][14] = {"","The opposing "};
+
 struct Party Parties [2];
 MoveSlot *Turns [2];
 unsigned char SwitchSaves [2] = {1,1};
@@ -235,8 +237,7 @@ bool First = 0;
 bool Display = 0;
 bool PlayerSwitch = 0;
 bool EnemySwitch = 0;
-bool PlayerHit = 0;
-bool EnemyHit = 0;
+bool Hit [2];
 char x[32];
 int Damages [2];
 double STABS [2];
