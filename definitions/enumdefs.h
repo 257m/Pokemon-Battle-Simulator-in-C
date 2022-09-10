@@ -94,7 +94,11 @@ Smoke_Screen,
 Aurora_Beam,
 Baby_Doll_Eyes,
 Breaking_Swipe,
-Protect
+Protect,
+Murcury_Shot,
+Superpower,
+Dragon_Tail,
+Roar,
 };
 
 enum {
@@ -102,7 +106,8 @@ MF_Nothing,
 MF_Struggle,
 MF_STATMOD,
 MF_OTHERSTATUS,
-MF_PROTECT
+MF_PROTECT,
+MF_ROAR,
 };
 
 enum {

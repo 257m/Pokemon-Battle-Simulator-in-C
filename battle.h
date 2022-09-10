@@ -509,25 +509,25 @@ int Battle() {
       TemporaryMults[1] = 1;
       PlayerSpeedTM = 1;
       EnemySpeedTM = 1;
-      PlayerCanMove = 1;
-      EnemyCanMove = 1;
-      PlayerPara = 0;
-      EnemyPara = 0;
-      EnemyDead = 0;
-      PlayerDead = 0;
-      PlayerSleep = 0;
-      EnemySleep = 0;
+      CanMove[0] = 1;
+      CanMove[1] = 1;
+      Para[0] = 0;
+      Para[1] = 0;
+      Dead[1] = 0;
+      Dead[0] = 0;
+      Sleep[0] = 0;
+      Sleep[1] = 0;
       // sets stabs
       if (MoveList[Turns[0]->Move].Type == Parties[0].Member[0]->Poke->Type1 || MoveList[Turns[0]->Move].Type == Parties[0].Member[0]->Poke->Type2) {
-        STAB = 1.5;
+        STABS[0] = 1.5;
       } else {
-        STAB = 1;
+        STABS[0] = 1;
       }
 
       if (MoveList[Turns[1]->Move].Type == Parties[1].Member[0]->Poke->Type1 || MoveList[Turns[1]->Move].Type == Parties[1].Member[0]->Poke->Type2) {
-        EnemySTAB = 1.5;
+        STABS[1] = 1.5;
       } else {
-        EnemySTAB = 1;
+        STABS[1] = 1;
       }
       // Change speed temp mult based on status
       if (Parties[0].Member[0]->Non_Volatile_Status == 3) PlayerSpeedTM /= 2;

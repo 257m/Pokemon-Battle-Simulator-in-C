@@ -1,5 +1,5 @@
 struct MyPokemon Pokemon1 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Baby_Doll_Eyes,0,3},{Vine_Whip,0,3},
+{Dragon_Tail,0,3},{Stone_Edge,0,3},{Baby_Doll_Eyes,0,3},{Vine_Whip,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon Pokemon2 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,

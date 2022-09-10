@@ -4,3 +4,4 @@ struct PokemonDex Charmander = {"Charmander",FIRE,NOTYPE,39,52,43,60,50,65};
 struct PokemonDex Squirtle =
 {"Squirtle",WATER,NOTYPE,44,48,65,50,64,43};
 struct PokemonDex Pidgey = {"Pidgey",NORMAL,FLYING,40,45,40,35,35,56};
+struct PokemonDex Cordagar = {"Cordagar",DRAGON,FIGHTING,75,100,75,25,25,85};

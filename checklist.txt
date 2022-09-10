@@ -46,8 +46,16 @@ x | change damages into array
 
 x | update display party to show abilties
 
-o | create a universal DBOG
+x | create a universal DBOG
 
 x | Merge SelfBoost and Otherboost
 
-o | implement protect
+x | implement protect
+
+o | add flinch and confusion
+
+x | Turn stabs into array
+
+x | Turn Para into array
+
+o | make MyPokemon store an bitfield unsigned int of size 10 rather than a pointer and turn the pokemondex struct into a const array
