@@ -72,7 +72,7 @@ void OtherBoost(char et,bool eop) {
   bool soo = eop;
   if (CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[4],7)) soo = !eop;
   if (et == 2) {
-  if (!CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,FLAG_PROTECT_AFFECTED)) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
   if ((TypeChart[MoveList[Turns[eop]->Move].Type][Parties[soo].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[soo].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
  if (rand() < RAND_MAX*((double)((MoveList[Turns[eop]->Move].GNRL_PURPOSE[4] << 1) >> 1)/100)) {  
     for (int i = 0; i < 8;i++) {  
@@ -103,7 +103,7 @@ void OtherBoost(char et,bool eop) {
 
 void OtherStatus(char et,bool eop) {
 if (et == 2) {
-  if (!CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,FLAG_PROTECT_AFFECTED)) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
   if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
 if (rand() < RAND_MAX*((double)(MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]/100))) {  
     if ((StatusImmunity(MoveList[Turns[eop]->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
@@ -116,8 +116,8 @@ if (rand() < RAND_MAX*((double)(MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]/100))
 
 void ProtectingMove(char et,bool eop) {
   if (et == 1) {
-  if (rand() < RAND_MAX/pow(2,Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT])) {
-  if (First = !eop) {
+  if (rand() < (RAND_MAX/pow(2,Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT]))+1) {
+  if (First == !eop) {
     SET_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_PROTECT);
   Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT]++;
   } else {
@@ -136,7 +136,7 @@ void ProtectingMove(char et,bool eop) {
 void RoarFunc(char et,bool eop) {
   char randswitch;
   if (et == 2) {
-  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,FLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
     randswitch = 1 + (rand() % ((Parties[!eop].Member[1]->CurrentHp > 0) + (Parties[!eop].Member[2]->CurrentHp > 0) + (Parties[!eop].Member[3]->CurrentHp > 0) + (Parties[!eop].Member[4]->CurrentHp > 0) + (Parties[!eop].Member[5]->CurrentHp > 0)));
     while(1) {
       if (Parties[!eop].Member[randswitch]->CurrentHp > 0) break;

@@ -61,7 +61,7 @@ void ExecuteMove(bool eop) {
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](1,0);
         ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
         ItemList[Parties[1].Member[0]->Item].itemfunc(-1,1);
-  if (!(CHK_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[0]->Move].FLAGS,FLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[0]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
         UDBOG(&Parties[1].Member[0]->CurrentHp,&Damages[0]);
     } else {
     Damages[0] = 0;
@@ -74,7 +74,7 @@ void ExecuteMove(bool eop) {
         MOVE_FUNC_LIST[MoveList[Turns[0]->Move].movefunc](1,0);
         ItemList[Parties[0].Member[0]->Item].itemfunc(1,0);
         ItemList[Parties[1].Member[0]->Item].itemfunc(-1,1);
-  if (!(CHK_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[0]->Move].FLAGS,FLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[1].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[0]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
         UDBOG(&Parties[1].Member[0]->CurrentHp,&Damages[0]);
     } else {
     Damages[0] = 0;
@@ -145,7 +145,7 @@ void ExecuteMove(bool eop) {
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](1,1);
         ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);
         ItemList[Parties[0].Member[0]->Item].itemfunc(-1,0);
-  if (!(CHK_BIT(Parties[0].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[1]->Move].FLAGS,FLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[0].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[1]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
         UDBOG(&Parties[0].Member[0]->CurrentHp,&Damages[1]);
         } else {
         Damages[1] = 0;
@@ -159,7 +159,7 @@ void ExecuteMove(bool eop) {
         MOVE_FUNC_LIST[MoveList[Turns[1]->Move].movefunc](1,1);
         ItemList[Parties[1].Member[0]->Item].itemfunc(1,1);
         ItemList[Parties[0].Member[0]->Item].itemfunc(-1,0);
-  if (!(CHK_BIT(Parties[0].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[1]->Move].FLAGS,FLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[0].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[1]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
         UDBOG(&Parties[0].Member[0]->CurrentHp,&Damages[1]);
     } else {
     Damages[1] = 0;

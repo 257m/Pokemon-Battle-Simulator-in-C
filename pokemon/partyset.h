@@ -23,7 +23,7 @@ struct MyPokemon Pokemon6 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,
 0,236,36,4,0,228};
 
 struct MyPokemon EnemyPokemon1 = {&Charmander,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Swords_Dance,0,3},{Mud_Slap,0,3},
+{Protect,0,3},{Stone_Edge,0,3},{Swords_Dance,0,3},{Mud_Slap,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon EnemyPokemon2 = {&Pidgey,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
