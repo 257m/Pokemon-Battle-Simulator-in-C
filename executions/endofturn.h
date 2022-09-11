@@ -1,7 +1,7 @@
 void endturn(bool eop) {
   if (!eop) {
-    MOVE_FUNC_LIST[MoveList[Turns[eop]->Move].movefunc](5,0);
-    if (MoveList[Turns[eop]->Move].movefunc != MF_PROTECT) Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT] = 0;
+    MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](5,0);
+    if (MoveList[Parties[eop].Turn->Move].movefunc != MF_PROTECT) Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT] = 0;
     if (Parties[0].Member[0]->Non_Volatile_Status == STATUS_BURN) {
         Parties[0].Member[0]->CurrentHp -= tt(Parties[0].Member[0]->Hp/8 > 1,Parties[0].Member[0]->Hp/8,1);
         printf("%s took some damage from its burn!\n",Parties[0].Member[0]->Poke->Name);
@@ -25,8 +25,8 @@ void endturn(bool eop) {
       ItemList[Parties[0].Member[0]->Item].itemfunc(5,0);
       }
     } else {
-    MOVE_FUNC_LIST[MoveList[Turns[eop]->Move].movefunc](5,1);
-    if (MoveList[Turns[eop]->Move].movefunc != MF_PROTECT) Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT] = 0;
+    MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](5,1);
+    if (MoveList[Parties[eop].Turn->Move].movefunc != MF_PROTECT) Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT] = 0;
     if (Parties[1].Member[0]->Non_Volatile_Status == STATUS_BURN) {
         Parties[1].Member[0]->CurrentHp -= tt(Parties[1].Member[0]->Hp/8 > 1,floor(Parties[1].Member[0]->Hp/8),1);
         printf("The opposing %s took some damage from its burn!\n\n",Parties[1].Member[0]->Poke->Name);

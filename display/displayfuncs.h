@@ -1,6 +1,6 @@
 void display_move(bool eop) {
         if (CanMove[eop]) {
-          printf("%s%s used %s!\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name,MoveList[Turns[eop]->Move].Name);
+          printf("%s%s used %s!\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name,MoveList[Parties[eop].Turn->Move].Name);
           if (!Hit[eop]) printf("But it missed!\n");
           } else {
           printf("%s%s couldn't move\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name);
@@ -13,13 +13,13 @@ void display_move(bool eop) {
 void move_result(bool eop) {
   if (!eop) {
         if (Hit[eop] && CanMove[eop]) {
-        if (MoveList[Turns[eop]->Move].Category != 0) {
+        if (MoveList[Parties[eop].Turn->Move].Category != 0) {
         if (Damages[eop] > 0) printf("It did %d damage!\n",Damages[eop]);
-        if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] >= 2) {
+        if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
         }
-        else if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0.5) {
-          if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0) printf("It dosen't affect %s\n",Parties[!eop].Member[0]->Poke->Name);
+        else if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0.5) {
+          if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0) printf("It dosen't affect %s\n",Parties[!eop].Member[0]->Poke->Name);
           else printf("It was not very effective!\n");
           }
         if (Crit[eop]) printf("It was a critical hit!\n");

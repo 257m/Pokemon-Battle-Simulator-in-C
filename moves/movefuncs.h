@@ -48,8 +48,8 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 char StatusImmunity(unsigned char status,bool eop) {
   if (status == STATUS_BURN && (Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE)) return 0;
   else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (Parties[!eop].Member[0]->Poke->Type1 == POISON || Parties[!eop].Member[0]->Poke->Type2 == POISON || Parties[!eop].Member[0]->Poke->Type1 == STEEL || Parties[!eop].Member[0]->Poke->Type2 == STEEL)) return 0;
-  else if (CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
-  else if  ((status == STATUS_PARALYSIS) && (Parties[!eop].Member[0]->Poke->Type1 == ELECTRIC || Parties[!eop].Member[0]->Poke->Type2 == ELECTRIC || (Turns[eop]->Move == Thunder_Wave && (Parties[!eop].Member[0]->Poke->Type1 == GROUND || Parties[!eop].Member[0]->Poke->Type2 == GROUND)))) return 0;
+  else if (CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
+  else if  ((status == STATUS_PARALYSIS) && (Parties[!eop].Member[0]->Poke->Type1 == ELECTRIC || Parties[!eop].Member[0]->Poke->Type2 == ELECTRIC || (Parties[eop].Turn->Move == Thunder_Wave && (Parties[!eop].Member[0]->Poke->Type1 == GROUND || Parties[!eop].Member[0]->Poke->Type2 == GROUND)))) return 0;
   else if ((status == STATUS_FREEZE) && (Parties[!eop].Member[0]->Poke->Type1 == ICE || Parties[!eop].Member[0]->Poke->Type2 == ICE)) return 0;
   return 1;
 }
@@ -58,7 +58,7 @@ void Nothingf(char et, bool eop) {
 }
 
 void Strugglef(char et, bool eop) {
-  Turns[eop]->PP++;
+  Parties[eop].Turn->PP++;
   if (et == 2) {
       Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
   }
@@ -68,16 +68,16 @@ void OtherBoost(char et,bool eop) {
   char temp;
   char mult;
   bool soo = eop;
-  if (CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[4],7)) soo = !eop;
+  if (CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[4],7)) soo = !eop;
   if (et == 2) {
-  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
-  if ((TypeChart[MoveList[Turns[eop]->Move].Type][Parties[soo].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[soo].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
- if (rand() < RAND_MAX*((double)((MoveList[Turns[eop]->Move].GNRL_PURPOSE[4] << 1) >> 1)/100)) {  
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
+  if ((TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[soo].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[soo].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
+ if (rand() < RAND_MAX*((double)((MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[4] << 1) >> 1)/100)) {  
     for (int i = 0; i < 8;i++) {  
-    temp = MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2];
+    temp = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[i/2];
     mult = 1;
     if (i % 2 == 0) {
-      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],7)) {
+      if(CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[i/2],7)) {
         CLR_BIT(temp,7);
         mult = -1;
       }
@@ -85,7 +85,7 @@ void OtherBoost(char et,bool eop) {
       Boostandprint(i,(temp >> 4)*mult,Parties[soo].Member[0],soo);
         }
       } else {
-      if(CHK_BIT(MoveList[Turns[eop]->Move].GNRL_PURPOSE[i/2],3)) {
+      if(CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[i/2],3)) {
         CLR_BIT(temp,3);
         mult = -1;
       }
@@ -101,11 +101,11 @@ void OtherBoost(char et,bool eop) {
 
 void OtherStatus(char et,bool eop) {
 if (et == 2) {
-  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
-  if (TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[eop]->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
-if (rand() < RAND_MAX*((double)(MoveList[Turns[eop]->Move].GNRL_PURPOSE[1]/100))) {  
-    if ((StatusImmunity(MoveList[Turns[eop]->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
-    Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Turns[eop]->Move].GNRL_PURPOSE[0];
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
+  if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
+if (rand() < RAND_MAX*((double)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[1]/100))) {  
+    if ((StatusImmunity(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
+    Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0];
       }
   }
   }
@@ -134,7 +134,7 @@ void ProtectingMove(char et,bool eop) {
 void RoarFunc(char et,bool eop) {
   char randswitch;
   if (et == 2) {
-  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Turns[eop]->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
     randswitch = 1 + (rand() % ((Parties[!eop].Member[1]->CurrentHp > 0) + (Parties[!eop].Member[2]->CurrentHp > 0) + (Parties[!eop].Member[3]->CurrentHp > 0) + (Parties[!eop].Member[4]->CurrentHp > 0) + (Parties[!eop].Member[5]->CurrentHp > 0)));
     while(1) {
       if (Parties[!eop].Member[randswitch]->CurrentHp > 0) break;
