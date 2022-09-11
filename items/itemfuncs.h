@@ -1,28 +1,16 @@
 void NoItemf(char et,bool eop) {
 }
 
-void Leftoversf(char et,bool eop) {
-  if (!eop) {
-    if (Parties[0].Member[0]->ItemUsable) {  
+void Leftoversf(char et,bool eop) {  
     if (et == 5) {
-        if (Parties[0].Member[0]->CurrentHp < Parties[0].Member[0]->Hp) {
-        Parties[0].Member[0]->CurrentHp += Parties[0].Member[0]->Hp/16;
-        printf("%s restored a little HP using its Leftovers\n",Parties[0].Member[0]->Poke->Name);
-        printf("%s is at %d/%d hp\n\n",Parties[0].Member[0]->Poke->Name,Parties[0].Member[0]->CurrentHp,Parties[0].Member[0]->Hp);
+    if (Parties[eop].Member[0]->ItemUsable) {
+      if (Parties[eop].Member[0]->CurrentHp < Parties[eop].Member[0]->Hp) {
+        Parties[eop].Member[0]->CurrentHp += Parties[eop].Member[0]->Hp/16;
+        printf("%s restored a little HP using its Leftovers\n",Parties[eop].Member[0]->Poke->Name);
+        printf("%s is at %d/%d hp\n\n",Parties[eop].Member[0]->Poke->Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
           }
       }
       }
-  } else {
-      if (Parties[1].Member[0]->ItemUsable) {
-      if (et == 5) {
-      if (Parties[1].Member[0]->CurrentHp < Parties[1].Member[0]->Hp) {
-      Parties[1].Member[0]->CurrentHp += Parties[1].Member[0]->Hp/16;
-      printf("The opposing %s restored a little HP using its Leftovers\n",Parties[1].Member[0]->Poke->Name);
-      printf("The opposing %s is at %d/%d hp\n\n",Parties[1].Member[0]->Poke->Name,Parties[1].Member[0]->CurrentHp,Parties[1].Member[0]->Hp);
-      }
-        }
-        }
-  }
 }
 
 void Focus_Sashf(char et,bool eop) {
