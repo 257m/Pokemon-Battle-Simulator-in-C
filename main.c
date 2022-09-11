@@ -27,6 +27,7 @@
 
 int main(void) {
   unsigned long int seed = time(NULL);
+  //unsigned long int seed = 1662863004;
   system("clear");
   srand(seed);    
   printf("%d\n",seed);

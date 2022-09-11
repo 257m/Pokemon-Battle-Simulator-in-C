@@ -134,6 +134,7 @@ void ProtectingMove(char et,bool eop) {
 void RoarFunc(char et,bool eop) {
   char randswitch;
   if (et == 2) {
+  if (Dead[!eop]) return;
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
     randswitch = 1 + (rand() % ((Parties[!eop].Member[1]->CurrentHp > 0) + (Parties[!eop].Member[2]->CurrentHp > 0) + (Parties[!eop].Member[3]->CurrentHp > 0) + (Parties[!eop].Member[4]->CurrentHp > 0) + (Parties[!eop].Member[5]->CurrentHp > 0)));
     while(1) {
@@ -144,7 +145,7 @@ void RoarFunc(char et,bool eop) {
     CLEAR_EFFECTS(!eop);
     Switch(!eop,randswitch);
     printf("%s was dragged out!\n",Parties[!eop].Member[0]->Poke->Name);
-  }
+  } 
     }
 }
 

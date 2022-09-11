@@ -11,7 +11,6 @@ void display_move(bool eop) {
 }
 
 void move_result(bool eop) {
-  if (!eop) {
         if (Hit[eop] && CanMove[eop]) {
         if (MoveList[Parties[eop].Turn->Move].Category != 0) {
         if (Damages[eop] > 0) printf("It did %d damage!\n",Damages[eop]);
@@ -31,5 +30,4 @@ void move_result(bool eop) {
           SwitchIn(!eop);
           Dead[!eop] = 1;
         }
-  } 
 }
