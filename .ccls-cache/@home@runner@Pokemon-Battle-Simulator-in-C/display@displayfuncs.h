@@ -4,9 +4,9 @@ void display_move(bool eop) {
           if (!Parties[eop].Hit) printf("But it missed!\n");
           } else {
           printf("%s%s couldn't move\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name);
-          if (Parties[eop].Para) printf("It was paralyzed!\n");
-          else if (Parties[eop].Sleep) printf("It is asleep\n");
-          else if (Parties[eop].Frozen) printf("It is frozen!\n");
+          if (Para[eop]) printf("It was paralyzed!\n");
+          else if (Sleep[eop]) printf("It is asleep\n");
+          else if (Frozen[eop]) printf("It is frozen!\n");
           }
 }
 
@@ -21,7 +21,7 @@ void move_result(bool eop) {
           if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0) printf("It dosen't affect %s\n",Parties[!eop].Member[0]->Poke->Name);
           else printf("It was not very effective!\n");
           }
-        if (Parties[eop].Crit) printf("It was a critical hit!\n");
+        if (Crit[eop]) printf("It was a critical hit!\n");
         printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],Parties[!eop].Member[0]->Poke->Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 
