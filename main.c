@@ -23,6 +23,7 @@
 #include "executions/execution.h"
 #include "executions/endofturn.h"
 #include "pokemon/partyset.h"
+#include "other/statcalc.h"
 #include "battle.h"
 
 int main(void) {
