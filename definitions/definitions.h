@@ -214,7 +214,11 @@ unsigned char GNRL_PURPOSE [2];
 struct Party {
  struct MyPokemon *Member [6];
  MoveSlot *Turn;
+ int Damage;
  double SpeedTM;
+ bool Switching;
+ bool Hit;
+ unsigned char SwitchSave;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
 };
@@ -228,7 +232,6 @@ char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed"
 char EOPTEXT[2][14] = {"","The opposing "};
 
 struct Party Parties [2];
-unsigned char SwitchSaves [2] = {1,1};
 bool StatCalc = 1;
 bool BattleMode = 0;
 bool Retrieve = 0;
@@ -236,11 +239,7 @@ bool Execute = 0;
 bool Reset = 0;
 bool First = 0;
 bool Display = 0;
-bool PlayerSwitch = 0;
-bool EnemySwitch = 0;
-bool Hit [2];
 char x[32];
-int Damages [2];
 double STABS [2];
 double TemporaryMults [2];
 bool CanMove [2];

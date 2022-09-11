@@ -1,7 +1,7 @@
 void display_move(bool eop) {
         if (CanMove[eop]) {
           printf("%s%s used %s!\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name,MoveList[Parties[eop].Turn->Move].Name);
-          if (!Hit[eop]) printf("But it missed!\n");
+          if (!Parties[eop].Hit) printf("But it missed!\n");
           } else {
           printf("%s%s couldn't move\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name);
           if (Para[eop]) printf("It was paralyzed!\n");
@@ -11,9 +11,9 @@ void display_move(bool eop) {
 }
 
 void move_result(bool eop) {
-        if (Hit[eop] && CanMove[eop]) {
+        if (Parties[eop].Hit && CanMove[eop]) {
         if (MoveList[Parties[eop].Turn->Move].Category != 0) {
-        if (Damages[eop] > 0) printf("It did %d damage!\n",Damages[eop]);
+        if (Parties[eop].Damage > 0) printf("It did %d damage!\n",Parties[eop].Damage);
         if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] >= 2) {
           printf("It was super effective!\n");
         }

@@ -275,8 +275,8 @@ int Battle() {
     TurnCounter++;
     printf("\033[100m\033[3m\033[1mTURN: %d\033[0m\n\n",TurnCounter);
     while(Retrieve) {
-    PlayerSwitch = 0;
-    EnemySwitch = 0;
+    Parties[0].Switching = 0;
+    Parties[1].Switching = 0;
     printf("Enter your move: ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
@@ -336,36 +336,36 @@ int Battle() {
     }
     }
     } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[1]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
-       SwitchSaves[0] = 1;
-       PlayerSwitch = 1;
+       Parties[0].SwitchSave = 1;
+       Parties[0].Switching = 1;
       if(strcmp(Parties[0].Member[1]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[1]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[2]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
-       SwitchSaves[0] = 2;
-       PlayerSwitch = 1;
+       Parties[0].SwitchSave = 2;
+       Parties[0].Switching = 1;
       if(strcmp(Parties[0].Member[2]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[2]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[3]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[3]->Poke->Name) == 0  || strcmp(x,"P4") == 0) {
-       SwitchSaves[0] = 3;
-       PlayerSwitch = 1;
+       Parties[0].SwitchSave = 3;
+       Parties[0].Switching = 1;
       if(strcmp(Parties[0].Member[3]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[3]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[4]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
-       SwitchSaves[0] = 4;
-       PlayerSwitch = 1;
+       Parties[0].SwitchSave = 4;
+       Parties[0].Switching = 1;
       if(strcmp(Parties[0].Member[4]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[4]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[5]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
-       SwitchSaves[0] = 5;
-       PlayerSwitch = 1;
+       Parties[0].SwitchSave = 5;
+       Parties[0].Switching = 1;
       if(strcmp(Parties[0].Member[5]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[5]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
@@ -441,36 +441,36 @@ int Battle() {
     }
   }
     }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[1]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
-       SwitchSaves[1] = 1;
-       EnemySwitch = 1;
+       Parties[1].SwitchSave = 1;
+       Parties[1].Switching = 1;
       if(strcmp(Parties[1].Member[1]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[1]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[2]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
-       SwitchSaves[1] = 2;
-       EnemySwitch = 1;
+       Parties[1].SwitchSave = 2;
+       Parties[1].Switching = 1;
       if(strcmp(Parties[1].Member[2]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[2]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[3]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[3]->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
-       SwitchSaves[1] = 3;
-       EnemySwitch = 1;
+       Parties[1].SwitchSave = 3;
+       Parties[1].Switching = 1;
       if(strcmp(Parties[1].Member[3]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[3]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[4]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
-       SwitchSaves[1] = 4;
-       EnemySwitch = 1;
+       Parties[1].SwitchSave = 4;
+       Parties[1].Switching = 1;
       if(strcmp(Parties[1].Member[4]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[4]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
     } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[5]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
-       SwitchSaves[1] = 5;
-       EnemySwitch = 1;
+       Parties[1].SwitchSave = 5;
+       Parties[1].Switching = 1;
       if(strcmp(Parties[1].Member[5]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[5]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
@@ -501,10 +501,10 @@ int Battle() {
     
     while (Execute == 1) {
       // reset Damage counters, temporary mults and flags 
-      Damages[0] = 0;
-      Damages[1] = 0;
-      Hit[0] = 1;
-      Hit[1] = 1;
+      Parties[0].Damage = 0;
+      Parties[1].Damage = 0;
+      Parties[0].Hit = 1;
+      Parties[1].Hit = 1;
       TemporaryMults[0] = 1;
       TemporaryMults[1] = 1;
       Parties[0].SpeedTM = 1;
@@ -542,8 +542,8 @@ int Battle() {
         } else {
         First = (MoveList[Parties[0].Turn->Move].Priority > MoveList[Parties[1].Turn->Move].Priority);
         }
-      if (PlayerSwitch ^ EnemySwitch) {
-        First = PlayerSwitch;
+      if (Parties[0].Switching ^ Parties[1].Switching) {
+        First = Parties[0].Switching;
       }
       // post speed,stab and reset funcs
       ABILITY_FUNC_LIST[AbilityList[Parties[0].Member[0]->Ability].abilityfunc](1,0);
