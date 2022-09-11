@@ -15,6 +15,7 @@ void SwitchIn(const bool eop) {
             if (Parties[eop].Member[1]->CurrentHp > 0) {
             ResetBoosts(Parties[eop].Member[0]);
             CLEAR_EFFECTS(eop);
+            CLEAR_EFFECT_COUNTERS(eop);
             Switch(eop,1);
             printf("Go! %s!\n",Parties[eop].Member[0]->Poke->Name);
             return;
@@ -23,6 +24,7 @@ void SwitchIn(const bool eop) {
             if (Parties[eop].Member[2]->CurrentHp > 0) {
             ResetBoosts(Parties[eop].Member[0]);
             CLEAR_EFFECTS(eop);
+            CLEAR_EFFECT_COUNTERS(eop);
             Switch(eop,2);
             printf("Go! %s!\n",Parties[eop].Member[0]->Poke->Name);
             return;
@@ -31,6 +33,7 @@ void SwitchIn(const bool eop) {
             if (Parties[eop].Member[3]->CurrentHp > 0) {
             ResetBoosts(Parties[eop].Member[0]);
             CLEAR_EFFECTS(eop);
+            CLEAR_EFFECT_COUNTERS(eop);
             Switch(eop,3);
             printf("Go! %s!\n",Parties[eop].Member[0]->Poke->Name);
             return;
@@ -39,6 +42,7 @@ void SwitchIn(const bool eop) {
             if (Parties[eop].Member[4]->CurrentHp > 0) {
             ResetBoosts(Parties[eop].Member[0]);
             CLEAR_EFFECTS(eop);
+            CLEAR_EFFECT_COUNTERS(eop);
             Switch(eop,4);
             printf("Go! %s!\n",Parties[eop].Member[0]->Poke->Name);
             return;
@@ -47,6 +51,7 @@ void SwitchIn(const bool eop) {
             if (Parties[eop].Member[5]->CurrentHp > 0) {
             ResetBoosts(Parties[eop].Member[0]);
             CLEAR_EFFECTS(eop);
+            CLEAR_EFFECT_COUNTERS(eop);
             Switch(eop,5);
             printf("Go! %s!\n",Parties[eop].Member[0]->Poke->Name);
             return;

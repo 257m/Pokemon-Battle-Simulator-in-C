@@ -11,7 +11,7 @@ void UDBOG(int* hp,int* damage) {
 
 void ExecuteMove(bool eop) {
   if (!eop) {
-    if (!Dead[0]) {
+    if (!Dead[eop]) {
         if (!PlayerSwitch) {
         Hit[0] = (rand() < RAND_MAX*((double)(MoveList[Turns[0]->Move].Accuracy*statboostmult(Parties[0].Member[0]->StatBoosts[5] / statboostmult(Parties[1].Member[0]->StatBoosts[6])))/100));
         if (MoveList[Turns[0]->Move].Accuracy > 100) Hit[0] = 1;
@@ -88,6 +88,7 @@ void ExecuteMove(bool eop) {
         if (Parties[0].Member[0]->Non_Volatile_Status == 5) Parties[0].Member[0]->Counter = 0; 
          ResetBoosts(Parties[0].Member[0]);
          CLEAR_EFFECTS(0);
+          CLEAR_EFFECT_COUNTERS(0);
          Switch(0,SwitchSaves[0]);
          printf("You switched out to %s\n",Parties[0].Member[0]->Poke->Name);
       }
@@ -173,6 +174,7 @@ void ExecuteMove(bool eop) {
         if (Parties[1].Member[0]->Non_Volatile_Status == 5) Parties[1].Member[0]->Counter = 0; 
         ResetBoosts(Parties[1].Member[0]);
         CLEAR_EFFECTS(1);
+        CLEAR_EFFECT_COUNTERS(1);
         Switch(1,SwitchSaves[1]);
         printf("The Enemy switched out to %s\n",Parties[1].Member[0]->Poke->Name);
           }

@@ -23,34 +23,13 @@ void move_result(bool eop) {
           else printf("It was not very effective!\n");
           }
         if (Crit[eop]) printf("It was a critical hit!\n");
-        printf("The opposing %s is at %d/%d hp\n",Parties[!eop].Member[0]->Poke->Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
+        printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],Parties[!eop].Member[0]->Poke->Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 
         if (Parties[!eop].Member[0]->CurrentHp <= 0) {
-          printf("The opposing %s fainted!\n",Parties[!eop].Member[0]->Poke->Name);
+          printf("%s%s fainted!\n",EOPTEXT[!eop],Parties[!eop].Member[0]->Poke->Name);
           SwitchIn(!eop);
           Dead[!eop] = 1;
         }
   } 
-  else {
-          if (Hit[1] && CanMove[1]) {        
-        if (MoveList[Turns[1]->Move].Category != 0) {
-        if (Damages[1] > 0) printf("It did %d damage!\n",Damages[1]);
-        if (TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] >= 2) {
-          printf("It was super effective!\n");
-        }
-        else if (TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] <= 0.5) {
-          if (TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type1] * TypeChart[MoveList[Turns[1]->Move].Type][Parties[0].Member[0]->Poke->Type2] <= 0) printf("It dosen't affect %s\n",Parties[0].Member[0]->Poke->Name);
-          printf("It was not very effective!\n");
-        }
-        if (Crit[1]) printf("It was a critical hit!\n");
-        printf("Your %s is at %d/%d hp\n",Parties[0].Member[0]->Poke->Name,Parties[0].Member[0]->CurrentHp,Parties[0].Member[0]->Hp);
-          } 
-          } 
-        if (Parties[0].Member[0]->CurrentHp <= 0) {
-          printf("Your %s fainted!\n",Parties[0].Member[0]->Poke->Name);
-          SwitchIn(!eop);
-          Dead[0] = 1;
-        }
-  }
 }
