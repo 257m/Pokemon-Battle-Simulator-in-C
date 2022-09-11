@@ -214,6 +214,7 @@ unsigned char GNRL_PURPOSE [2];
 struct Party {
  struct MyPokemon *Member [6];
  MoveSlot *Turn;
+ double SpeedTM;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
 };
@@ -242,8 +243,6 @@ char x[32];
 int Damages [2];
 double STABS [2];
 double TemporaryMults [2];
-double PlayerSpeedTM;
-double EnemySpeedTM;
 bool CanMove [2];
 bool Para [2];
 bool Dead [2];

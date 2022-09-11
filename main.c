@@ -31,7 +31,7 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
-  printf("%lu\n",sizeof(struct Move));
+  printf("%lu\n",sizeof(MoveList));
   Battle();
   return 0;
   }

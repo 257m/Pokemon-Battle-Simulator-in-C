@@ -507,8 +507,8 @@ int Battle() {
       Hit[1] = 1;
       TemporaryMults[0] = 1;
       TemporaryMults[1] = 1;
-      PlayerSpeedTM = 1;
-      EnemySpeedTM = 1;
+      Parties[0].SpeedTM = 1;
+      Parties[1].SpeedTM = 1;
       CanMove[0] = 1;
       CanMove[1] = 1;
       Para[0] = 0;
@@ -530,14 +530,14 @@ int Battle() {
         STABS[1] = 1;
       }
       // Change speed temp mult based on status
-      if (Parties[0].Member[0]->Non_Volatile_Status == 3) PlayerSpeedTM /= 2;
-      if (Parties[1].Member[0]->Non_Volatile_Status == 3) EnemySpeedTM /= 2;
+      if (Parties[0].Member[0]->Non_Volatile_Status == 3) Parties[0].SpeedTM /= 2;
+      if (Parties[1].Member[0]->Non_Volatile_Status == 3) Parties[1].SpeedTM /= 2;
       // sees who moves first
       if (MoveList[Parties[0].Turn->Move].Priority == MoveList[Parties[1].Turn->Move].Priority) {
-      if (floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*PlayerSpeedTM == floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*EnemySpeedTM) {
+      if (floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*Parties[0].SpeedTM == floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*Parties[1].SpeedTM) {
         First = (rand() % 2);
       } else {
-        First = floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*PlayerSpeedTM > floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*EnemySpeedTM;
+        First = floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*Parties[0].SpeedTM > floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*Parties[1].SpeedTM;
       }
         } else {
         First = (MoveList[Parties[0].Turn->Move].Priority > MoveList[Parties[1].Turn->Move].Priority);
@@ -556,10 +556,10 @@ int Battle() {
         ExecuteMove(!First);
         ExecuteMove(First);
       
-      if (floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*PlayerSpeedTM == floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*EnemySpeedTM) {
+      if (floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*Parties[0].SpeedTM == floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*Parties[1].SpeedTM) {
         EndFirst = (rand() % 2);
       } else {
-        EndFirst = floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*PlayerSpeedTM > floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*EnemySpeedTM;
+        EndFirst = floor(Parties[0].Member[0]->Spe*statboostmult(Parties[0].Member[0]->StatBoosts[4]))*Parties[0].SpeedTM > floor(Parties[1].Member[0]->Spe*statboostmult(Parties[1].Member[0]->StatBoosts[4]))*Parties[1].SpeedTM;
       }
 
       endturn(!EndFirst);
