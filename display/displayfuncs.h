@@ -3,10 +3,14 @@ void display_move(bool eop) {
           printf("%s%s used %s!\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name,MoveList[Parties[eop].Turn->Move].Name);
           if (!Parties[eop].Hit) printf("But it missed!\n");
           } else {
+          if (Parties[eop].Confused) printf("It hurt itself in its confusion!\n");
+            else {
           printf("%s%s couldn't move\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name);
-          if (Parties[eop].Para) printf("It was paralyzed!\n");
+          if (Parties[eop].Flinch) printf("It flinched!\n");
+          else if (Parties[eop].Para) printf("It was paralyzed!\n");
           else if (Parties[eop].Sleep) printf("It is asleep\n");
           else if (Parties[eop].Frozen) printf("It is frozen!\n");
+          }
           }
 }
 

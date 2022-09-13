@@ -52,7 +52,7 @@ x | Merge SelfBoost and Otherboost
 
 x | implement protect
 
-o | add flinch and confusion
+x | add flinch and confusion (2/2)
 
 x | Turn stabs into array
 

@@ -29,6 +29,7 @@ STATUS_PARALYSIS,
 STATUS_SLEEP,
 STATUS_FREEZE,
 STATE_CONFUSION,
+STATE_FLINCH,
 };
 
 enum {
@@ -99,6 +100,8 @@ Murcury_Shot,
 Superpower,
 Dragon_Tail,
 Roar,
+Icicle_Crash,
+Confuse_Ray
 };
 
 enum {

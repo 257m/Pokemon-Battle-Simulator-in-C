@@ -72,7 +72,7 @@ void OtherBoost(char et,bool eop) {
   if (et == 2) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
   if ((TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[soo].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[soo].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
- if (rand() < RAND_MAX*((double)((MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[4] << 1) >> 1)/100)) {  
+ if (rand() < RAND_MAX*(((double)((MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[4] << 1) >> 1))/100)) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[i/2];
     mult = 1;
@@ -103,9 +103,19 @@ void OtherStatus(char et,bool eop) {
 if (et == 2) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
   if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
-if (rand() < RAND_MAX*((double)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[1]/100))) {  
+if (rand() < RAND_MAX*(((double)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[1])/100))) {  
     if ((StatusImmunity(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
+    if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0] < STATE_CONFUSION) {
     Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0];
+      } else {
+      if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0] == STATE_CONFUSION) {
+        SET_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_CONFUSION);
+        if (Parties[!eop].EFFECT_COUNTERS[EFFECT_CONFUSION] == 0) Parties[!eop].EFFECT_COUNTERS[EFFECT_CONFUSION] = (rand() % 4) + 2;
+        }
+      else {
+        Parties[!eop].Flinch = 1;
+      }
+      }
       }
   }
   }

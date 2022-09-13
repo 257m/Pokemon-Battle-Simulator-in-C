@@ -315,6 +315,11 @@ int Battle() {
       Parties[0].Dead = 0;
       Parties[0].Sleep = 0;
       Parties[1].Sleep = 0;
+      Parties[0].Flinch = 0;
+      Parties[1].Flinch = 0;
+      Parties[0].Confused = 0;
+      Parties[1].Confused = 0;
+      
       // sets stabs
       if (MoveList[Parties[0].Turn->Move].Type == Parties[0].Member[0]->Poke->Type1 || MoveList[Parties[0].Turn->Move].Type == Parties[0].Member[0]->Poke->Type2) {
         Parties[0].STAB = 1.5;

@@ -9,6 +9,11 @@ void UDBOG(int* hp,int* damage) {
   *hp -= *damage;
 }
 
+void UDBOG2(int *hp,int damage) {
+  if (*hp-damage < 0) damage = *hp;
+  *hp -= damage;
+}
+
 void ExecuteMove(bool eop) {
     if (!Parties[eop].Dead) {
         if (!Parties[eop].Switching) {
@@ -44,6 +49,22 @@ void ExecuteMove(bool eop) {
           printf("%s%s thawed out\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name); 
           }
           }
+        if (Parties[eop].Flinch) Parties[eop].CanMove = 0;
+        if (CHK_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_CONFUSION)) {
+        printf("%s%s is confused!\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name);
+          if (Parties[eop].EFFECT_COUNTERS[EFFECT_CONFUSION] > 0) {
+          if (rand() % 2) {
+            Parties[eop].CanMove = 0;
+            Parties[eop].Confused = 1;
+            UDBOG2(&Parties[eop].Member[0]->CurrentHp,(((((2 * Parties[eop].Member[0]->Level / 5 + 2) * (Parties[eop].Member[0]->Atk*statboostmult(Parties[eop].Member[0]->StatBoosts[0])) * 40 / (Parties[eop].Member[0]->Def*statboostmult(Parties[eop].Member[0]->StatBoosts[1]))) / 50) + 2) * (TypeChart[0][Parties[eop].Member[0]->Poke->Type1] * TypeChart[0][Parties[eop].Member[0]->Poke->Type2]) * ((rand() % 16) + 85) / 100));
+          }
+          Parties[eop].EFFECT_COUNTERS[EFFECT_CONFUSION]--;
+            }
+          else {
+            CLR_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_CONFUSION);
+            printf("%s%s snapped out of its confusion!\n",EOPTEXT[eop],Parties[eop].Member[0]->Poke->Name);
+          }
+        }
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](3,eop);
         display_move(eop);
       if (Parties[eop].Member[0]->CurrentHp > 0 && Parties[eop].Hit && Parties[eop].CanMove) {
