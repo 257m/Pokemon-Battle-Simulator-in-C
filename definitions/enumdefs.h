@@ -137,7 +137,8 @@ Torrent,
 Swarm,
 Clear_Body,
 Big_Pecks,
-Hyper_Cutter
+Hyper_Cutter,
+Aerilate,
 };
 
 enum {

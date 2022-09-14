@@ -7,5 +7,5 @@ Ability AbilityList [] = {
 {"Clear Body",AF_IMMUNE_TO_STAT_DECREASE,{255,2}},
 {"Big Pecks",AF_IMMUNE_TO_STAT_DECREASE,{2,2}},
 {"Hyper Cutter",AF_IMMUNE_TO_STAT_DECREASE,{1,2}},
-{"Aerialite",AF_TYPECHANGE,{0,0}};
+{"Aerilate",AF_TYPECHANGE,{10,134}},
 };
