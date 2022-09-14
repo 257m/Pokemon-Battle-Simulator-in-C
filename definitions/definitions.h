@@ -177,7 +177,7 @@ unsigned char GNRL_PURPOSE [2];
 } Ability;
 
  struct MyPokemon {
- struct PokemonDex *Poke;
+ unsigned int Poke : 10;
  unsigned int Level : 7;
  int CurrentHp;
  unsigned char Item;
@@ -255,4 +255,5 @@ unsigned int TurnCounter = 0;
 bool HideMove = 0;
 
 Ability AbilityList [];
+const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);

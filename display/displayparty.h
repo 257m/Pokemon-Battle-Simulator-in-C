@@ -1,6 +1,6 @@
 void displaymember(unsigned int PartyMember,bool eop) {
     printf("\e[1;37m\nP%d:\e[0m\n",PartyMember+1);
-    printf("Pokemon: %s\n",Parties[eop].Member[PartyMember]->Poke->Name);
+    printf("Pokemon: %s\n",POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name);
     printf("Health: %d/%d\n",Parties[eop].Member[PartyMember]->CurrentHp,Parties[eop].Member[PartyMember]->Hp);
     printf("Attack: %d\n",Parties[eop].Member[PartyMember]->Atk);
     printf("Defense: %d\n",Parties[eop].Member[PartyMember]->Def);
@@ -18,12 +18,12 @@ void displaymember(unsigned int PartyMember,bool eop) {
 }
 
 void displayparty(bool eop) {
-    printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",Parties[eop].Member[0]->Poke->Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
-      printf("\e[1;37mP2:\e[0m %s %d/%d\n",Parties[eop].Member[1]->Poke->Name,Parties[eop].Member[1]->CurrentHp,Parties[eop].Member[1]->Hp);
-      printf("\e[1;37mP3:\e[0m %s %d/%d\n",Parties[eop].Member[2]->Poke->Name,Parties[eop].Member[2]->CurrentHp,Parties[eop].Member[2]->Hp);
-      printf("\e[1;37mP4:\e[0m %s %d/%d\n",Parties[eop].Member[3]->Poke->Name,Parties[eop].Member[3]->CurrentHp,Parties[eop].Member[3]->Hp);
-      printf("\e[1;37mP5:\e[0m %s %d/%d\n",Parties[eop].Member[4]->Poke->Name,Parties[eop].Member[4]->CurrentHp,Parties[eop].Member[4]->Hp);
-      printf("\e[1;37mP6:\e[0m %s %d/%d\n",Parties[eop].Member[5]->Poke->Name,Parties[eop].Member[5]->CurrentHp,Parties[eop].Member[5]->Hp);
+    printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+      printf("\e[1;37mP2:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[1]->Poke].Name,Parties[eop].Member[1]->CurrentHp,Parties[eop].Member[1]->Hp);
+      printf("\e[1;37mP3:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[2]->Poke].Name,Parties[eop].Member[2]->CurrentHp,Parties[eop].Member[2]->Hp);
+      printf("\e[1;37mP4:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[3]->Poke].Name,Parties[eop].Member[3]->CurrentHp,Parties[eop].Member[3]->Hp);
+      printf("\e[1;37mP5:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[4]->Poke].Name,Parties[eop].Member[4]->CurrentHp,Parties[eop].Member[4]->Hp);
+      printf("\e[1;37mP6:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[5]->Poke].Name,Parties[eop].Member[5]->CurrentHp,Parties[eop].Member[5]->Hp);
       printf("\nPartyMember: ");
       fgets(x,31,stdin);
       x[strcspn(x, "\n")] = 0;

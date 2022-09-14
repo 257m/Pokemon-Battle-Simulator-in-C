@@ -65,8 +65,8 @@ int Battle() {
     Retrieve = 1;
   }
   
-  printf("Go %s!\n",Parties[0].Member[0]->Poke->Name);
-  printf("The Enemy sent out %s!\n\n", Parties[1].Member[0]->Poke->Name);
+  printf("Go %s!\n",POKEMONDEX[Parties[0].Member[0]->Poke].Name);
+  printf("The Enemy sent out %s!\n\n", POKEMONDEX[Parties[1].Member[0]->Poke].Name);
   Parties[0].Turn = &Empty_slot;
   Parties[1].Turn = &Empty_slot;
   while(BattleMode) {
@@ -133,38 +133,38 @@ int Battle() {
       Reset = 1;
     }
     }
-    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[1]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
+    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[1]->Poke].Name) == 0 || strcmp(x,"P2") == 0) {
        Parties[0].SwitchSave = 1;
        Parties[0].Switching = 1;
-      if(strcmp(Parties[0].Member[1]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[1]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[0].Member[1]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[1]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[2]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
+    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[2]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[2]->Poke].Name) == 0 || strcmp(x,"P3") == 0) {
        Parties[0].SwitchSave = 2;
        Parties[0].Switching = 1;
-      if(strcmp(Parties[0].Member[2]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[2]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[0].Member[2]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[2]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[3]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[3]->Poke->Name) == 0  || strcmp(x,"P4") == 0) {
+    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[3]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[3]->Poke].Name) == 0  || strcmp(x,"P4") == 0) {
        Parties[0].SwitchSave = 3;
        Parties[0].Switching = 1;
-      if(strcmp(Parties[0].Member[3]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[3]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[0].Member[3]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[3]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[4]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
+    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[4]->Poke].Name) == 0 || strcmp(x,"P5") == 0) {
        Parties[0].SwitchSave = 4;
        Parties[0].Switching = 1;
-      if(strcmp(Parties[0].Member[4]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[4]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[0].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[4]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",Parties[0].Member[5]->Poke->Name)) == 0 || strcmp(x,Parties[0].Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
+    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[5]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[5]->Poke].Name) == 0 || strcmp(x,"P6") == 0) {
        Parties[0].SwitchSave = 5;
        Parties[0].Switching = 1;
-      if(strcmp(Parties[0].Member[5]->Poke->Name,"NoPoke") == 0 || Parties[0].Member[5]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[0].Member[5]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[5]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
@@ -238,38 +238,38 @@ int Battle() {
       Reset = 1;
     }
   }
-    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[1]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[1]->Poke->Name) == 0 || strcmp(x,"P2") == 0) {
+    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[1]->Poke].Name) == 0 || strcmp(x,"P2") == 0) {
        Parties[1].SwitchSave = 1;
        Parties[1].Switching = 1;
-      if(strcmp(Parties[1].Member[1]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[1]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[1].Member[1]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[1]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[2]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[2]->Poke->Name) == 0 || strcmp(x,"P3") == 0) {
+    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[2]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[2]->Poke].Name) == 0 || strcmp(x,"P3") == 0) {
        Parties[1].SwitchSave = 2;
        Parties[1].Switching = 1;
-      if(strcmp(Parties[1].Member[2]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[2]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[1].Member[2]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[2]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[3]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[3]->Poke->Name) == 0 || strcmp(x,"P4") == 0) {
+    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[4]->Poke].Name) == 0 || strcmp(x,"P4") == 0) {
        Parties[1].SwitchSave = 3;
        Parties[1].Switching = 1;
-      if(strcmp(Parties[1].Member[3]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[3]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[1].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[3]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[4]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[4]->Poke->Name) == 0 || strcmp(x,"P5") == 0) {
+    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[4]->Poke].Name) == 0 || strcmp(x,"P5") == 0) {
        Parties[1].SwitchSave = 4;
        Parties[1].Switching = 1;
-      if(strcmp(Parties[1].Member[4]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[4]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[1].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[4]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",Parties[1].Member[5]->Poke->Name)) == 0 || strcmp(x,Parties[1].Member[5]->Poke->Name) == 0 || strcmp(x,"P6") == 0) {
+    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[5]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[5]->Poke].Name) == 0 || strcmp(x,"P6") == 0) {
        Parties[1].SwitchSave = 5;
        Parties[1].Switching = 1;
-      if(strcmp(Parties[1].Member[5]->Poke->Name,"NoPoke") == 0 || Parties[1].Member[5]->CurrentHp <= 0) {
+      if(strcmp(POKEMONDEX[Parties[1].Member[5]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[5]->CurrentHp <= 0) {
         printf("Move Selection Failed. Please retry.");
         Reset = 1;
       }
@@ -321,13 +321,13 @@ int Battle() {
       Parties[1].Confused = 0;
       
       // sets stabs
-      if (MoveList[Parties[0].Turn->Move].Type == Parties[0].Member[0]->Poke->Type1 || MoveList[Parties[0].Turn->Move].Type == Parties[0].Member[0]->Poke->Type2) {
+      if (MoveList[Parties[0].Turn->Move].Type == POKEMONDEX[Parties[0].Member[0]->Poke].Type1 || MoveList[Parties[0].Turn->Move].Type == POKEMONDEX[Parties[0].Member[0]->Poke].Type2) {
         Parties[0].STAB = 1.5;
       } else {
         Parties[0].STAB = 1;
       }
 
-      if (MoveList[Parties[1].Turn->Move].Type == Parties[1].Member[0]->Poke->Type1 || MoveList[Parties[1].Turn->Move].Type == Parties[1].Member[0]->Poke->Type2) {
+      if (MoveList[Parties[1].Turn->Move].Type == POKEMONDEX[Parties[1].Member[0]->Poke].Type1 || MoveList[Parties[1].Turn->Move].Type == POKEMONDEX[Parties[1].Member[0]->Poke].Type2) {
         Parties[1].STAB = 1.5;
       } else {
         Parties[1].STAB = 1;

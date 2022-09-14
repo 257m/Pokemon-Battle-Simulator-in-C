@@ -11,19 +11,19 @@ void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,b
   if (boostrate == 0) return;
   if (pokemon->StatBoosts[stat] >= 6) {
     pokemon->StatBoosts[stat] = 6;
-    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat]);
   } else if (pokemon->StatBoosts[stat] <= -6) {
     pokemon->StatBoosts[stat] = -6;
-    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat]);
   } else {
     if (boostrate > 0) {
     if (pokemon->StatBoosts[stat] + boostrate > 6) boostrate = pokemon->StatBoosts[stat] + boostrate - 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat],boostrate);
+    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat],boostrate);
     } else if (boostrate < 0) {
     if (pokemon->StatBoosts[stat] + boostrate < -6) boostrate = pokemon->StatBoosts[stat] + boostrate + 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],pokemon->Poke->Name,Stagenames[stat],boostrate*-1);
+    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat],boostrate*-1);
     }
       }
   }
@@ -46,11 +46,11 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 }
 
 char StatusImmunity(unsigned char status,bool eop) {
-  if (status == STATUS_BURN && (Parties[!eop].Member[0]->Poke->Type1 == FIRE || Parties[!eop].Member[0]->Poke->Type2 == FIRE)) return 0;
-  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (Parties[!eop].Member[0]->Poke->Type1 == POISON || Parties[!eop].Member[0]->Poke->Type2 == POISON || Parties[!eop].Member[0]->Poke->Type1 == STEEL || Parties[!eop].Member[0]->Poke->Type2 == STEEL)) return 0;
-  else if (CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_POWDER_MOVE) && (Parties[!eop].Member[0]->Poke->Type1 == GRASS || Parties[!eop].Member[0]->Poke->Type2 == GRASS)) return 0;
-  else if  ((status == STATUS_PARALYSIS) && (Parties[!eop].Member[0]->Poke->Type1 == ELECTRIC || Parties[!eop].Member[0]->Poke->Type2 == ELECTRIC || (Parties[eop].Turn->Move == Thunder_Wave && (Parties[!eop].Member[0]->Poke->Type1 == GROUND || Parties[!eop].Member[0]->Poke->Type2 == GROUND)))) return 0;
-  else if ((status == STATUS_FREEZE) && (Parties[!eop].Member[0]->Poke->Type1 == ICE || Parties[!eop].Member[0]->Poke->Type2 == ICE)) return 0;
+  if (status == STATUS_BURN && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == FIRE || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == FIRE)) return 0;
+  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == POISON || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == POISON || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == STEEL || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == STEEL)) return 0;
+  else if (CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_POWDER_MOVE) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == GRASS || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == GRASS)) return 0;
+  else if  ((status == STATUS_PARALYSIS) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == ELECTRIC || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == ELECTRIC || (Parties[eop].Turn->Move == Thunder_Wave && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == GROUND || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == GROUND)))) return 0;
+  else if ((status == STATUS_FREEZE) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == ICE || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == ICE)) return 0;
   return 1;
 }
 
@@ -71,7 +71,7 @@ void OtherBoost(char et,bool eop) {
   if (CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[4],7)) soo = !eop;
   if (et == 2) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
-  if ((TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[soo].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[soo].Member[0]->Poke->Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
+  if ((TypeChart[MoveList[Parties[eop].Turn->Move].Type][POKEMONDEX[Parties[soo].Member[0]->Poke].Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][POKEMONDEX[Parties[soo].Member[0]->Poke].Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo) return;
  if (rand() < RAND_MAX*(((double)((MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[4] << 1) >> 1))/100)) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[i/2];
@@ -102,7 +102,7 @@ void OtherBoost(char et,bool eop) {
 void OtherStatus(char et,bool eop) {
 if (et == 2) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
-  if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][Parties[!eop].Member[0]->Poke->Type2] <= 0 && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
+  if (TypeChart[MoveList[Parties[eop].Turn->Move].Type][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] <= 0 && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
 if (rand() < RAND_MAX*(((double)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[1])/100))) {  
     if ((StatusImmunity(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0],eop) || !CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
     if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0] < STATE_CONFUSION) {
@@ -154,7 +154,7 @@ void RoarFunc(char et,bool eop) {
     ResetBoosts(Parties[!eop].Member[0]);
     CLEAR_EFFECTS(!eop);
     Switch(!eop,randswitch);
-    printf("%s was dragged out!\n",Parties[!eop].Member[0]->Poke->Name);
+    printf("%s was dragged out!\n",POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
   } 
     }
 }
