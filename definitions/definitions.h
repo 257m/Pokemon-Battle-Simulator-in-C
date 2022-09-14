@@ -231,6 +231,7 @@ struct Party {
  unsigned char SwitchSave;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
+ unsigned int MoveTempType : 5;
 };
 
 char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};

@@ -14,4 +14,8 @@ void TypeBasedBoost(char et,bool eop) {
 void StatDecreaseImmunity(char et,bool eop) {
 }
 
-gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity};
+void TypeChange(char et,bool eop) {
+  
+}
+
+gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity,&TypeChange};

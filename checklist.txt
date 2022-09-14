@@ -58,4 +58,6 @@ x | Turn stabs into array
 
 x | Turn Para into array
 
-o | make MyPokemon store an bitfield unsigned int of size 10 rather than a pointer and turn the pokemondex struct into a const array
+x | make MyPokemon store an bitfield unsigned int of size 10 rather than a pointer and turn the pokemondex struct into a const array
+
+o | make a crit boosting move
