@@ -51,6 +51,17 @@ double tt(bool condition,double ifcon,double elsecon) {
   else return elsecon;
 }
 
+double tt2(bool condition,double ifcon,double elsecon,double* var) {
+  if (condition) {
+    *var = ifcon;
+    return ifcon;
+    }
+  else {
+    *var = elsecon;
+    return elsecon;
+    }
+}
+
 struct PokemonDex {
 char Name[12];
 unsigned int Type1 : 5;
@@ -177,7 +188,7 @@ unsigned char GNRL_PURPOSE [2];
 } Ability;
 
  struct MyPokemon {
- struct PokemonDex *Poke;
+ unsigned int Poke : 10;
  unsigned int Level : 7;
  int CurrentHp;
  unsigned char Item;
@@ -218,14 +229,20 @@ struct Party {
  double STAB;
  double TemporaryMult;
  double SpeedTM;
- bool Switching;
- bool Hit;
- bool CanMove;
- bool Dead;
- bool Para;
+ unsigned int Hit : 1;
+ unsigned int CanMove : 1;
+ unsigned int Dead : 1;
+ unsigned int Para : 1;
+ unsigned int Sleep : 1;
+ unsigned int Frozen : 1;
+ unsigned int Flinch : 1;
+ unsigned int Crit : 1;
+ unsigned int Confused : 1;
+ unsigned int Switching;
  unsigned char SwitchSave;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
+ unsigned int MoveTempType : 5;
 };
 
 char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
@@ -245,12 +262,10 @@ bool Reset = 0;
 bool First = 0;
 bool Display = 0;
 char x[32];
-bool Sleep [2];
-bool Frozen [2];
-bool Crit [2];
 bool EndFirst;
 unsigned int TurnCounter = 0;
 bool HideMove = 0;
 
 Ability AbilityList [];
+const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);

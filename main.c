@@ -33,6 +33,7 @@ int main(void) {
   srand(seed);    
   printf("%d\n",seed);
   printf("%lu\n",sizeof(MoveList));
+  //printf("%d\n",FLYING << 3 + ICE >> 3)
   Battle();
   return 0;
   }

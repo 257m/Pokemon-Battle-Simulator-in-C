@@ -51,6 +51,17 @@ double tt(bool condition,double ifcon,double elsecon) {
   else return elsecon;
 }
 
+double tt2(bool condition,double ifcon,double elsecon,double* var) {
+  if (condition) {
+    *var = ifcon;
+    return ifcon;
+    }
+  else {
+    *var = elsecon;
+    return elsecon;
+    }
+}
+
 struct PokemonDex {
 char Name[12];
 unsigned int Type1 : 5;
