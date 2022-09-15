@@ -63,15 +63,15 @@ double tt2(bool condition,double ifcon,double elsecon,double* var) {
 }
 
 struct PokemonDex {
-char Name[12];
+char Name[16];
 unsigned int Type1 : 5;
 unsigned int Type2 : 5;
-char Hp;
-char Atk;
-char Def;
-char SpA;
-char SpD;
-char Spe;
+unsigned char Hp;
+unsigned char Atk;
+unsigned char Def;
+unsigned char SpA;
+unsigned char SpD;
+unsigned char Spe;
 }__attribute__((__packed__));
 
 float TypeChart[19][19] = {
