@@ -21,7 +21,7 @@ void ExecuteMove(bool eop) {
         if (!Parties[eop].Switching) {
         Parties[eop].Hit = (rand() < RAND_MAX*((double)(MoveList[Parties[eop].Turn->Move].Accuracy*statboostmult(Parties[eop].Member[0]->StatBoosts[5] / statboostmult(Parties[!eop].Member[0]->StatBoosts[6])))/100));
         if (MoveList[Parties[eop].Turn->Move].Accuracy > 100) Parties[eop].Hit = 1;
-        Parties[eop].Crit = map2(rand(),32,RAND_MAX) < 1*power2(Parties[eop].Member[0]->StatBoosts[7]);
+        Parties[eop].Crit = rand() % CRIT_CHANCE < power2(Parties[eop].Member[0]->StatBoosts[7] + CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_HIGH_CRIT));
         if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_PARALYSIS) {
           Parties[eop].Para = (rand() % 4 == 0);
           if (Parties[eop].Para) Parties[eop].CanMove = 0;

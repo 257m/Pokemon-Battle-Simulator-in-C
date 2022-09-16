@@ -17,7 +17,9 @@ GHOST,
 DRAGON,
 DARK,
 STEEL,
-FAIRY
+FAIRY,
+SOUND,
+LIGHT
 };
 
 enum {
@@ -148,6 +150,7 @@ Roar,
 Icicle_Crash,
 Confuse_Ray,
 Feather_Dance,
+Growl,
 };
 
 enum {
