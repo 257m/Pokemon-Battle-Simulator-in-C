@@ -22,7 +22,7 @@ void move_result(bool eop) {
           if (TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] <= 0) printf("It dosen't affect %s\n",POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
           else printf("It was not very effective!\n");
           }
-        if (Parties[eop].Crit) printf("It was a critical hit!\n");
+        if (Parties[eop].Crit && Parties[eop].Damage > 0) printf("It was a critical hit!\n");
         printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 

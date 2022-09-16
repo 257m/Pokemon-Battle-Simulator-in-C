@@ -274,4 +274,4 @@ Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
 
-#define CRIT_CHANCE 32
+#define CRIT_CHANCE 2
