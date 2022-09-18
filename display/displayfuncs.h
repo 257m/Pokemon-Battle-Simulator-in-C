@@ -14,7 +14,8 @@ void display_move(bool eop) {
 void move_result(bool eop) {
         if (Parties[eop].Hit && Parties[eop].CanMove) {
         if (MoveList[Parties[eop].Turn->Move].Category != 0) {
-        if (Parties[eop].Damage > 0) printf("It did %d damage!\n",Parties[eop].Damage);
+        if (Parties[eop].Damage > 0) {
+        printf("It did %d damage!\n",Parties[eop].Damage);
         if (TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] >= 2) {
           printf("It was super effective!\n");
         }
@@ -23,6 +24,8 @@ void move_result(bool eop) {
           else printf("It was not very effective!\n");
           }
         if (Parties[eop].Crit && Parties[eop].Damage > 0) printf("It was a critical hit!\n");
+          }
+        else printf("It had no effect on %s%s...\n",EOPTEXT[!eop + 2],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
         printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 

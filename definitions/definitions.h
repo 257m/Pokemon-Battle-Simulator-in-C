@@ -113,9 +113,9 @@ float TypeChart[21][21] = {
 // [17] Steel
 {1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,1 ,1 },
 // [18] Fairy
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,0.5 ,0.5 ,2 },
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
 // [19] Sound
-{1 ,1 ,0 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,0 ,1 },
+{1 ,1 ,0 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,0 ,0 },
 // [20] Light
 };
 
@@ -249,13 +249,13 @@ struct Party {
  unsigned int MoveTempType : 5;
 };
 
-char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
+const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 
-char Itemtext[2][11] = {"Not Usable", "Usable"};
+const char Itemtext[2][11] = {"Not Usable", "Usable"};
 
-char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
+const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
-char EOPTEXT[2][14] = {"","The opposing "};
+const char EOPTEXT[4][14] = {"","The opposing ","","the opposing "};
 
 struct Party Parties [2];
 bool StatCalc = 1;

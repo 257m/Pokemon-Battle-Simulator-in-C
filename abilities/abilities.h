@@ -11,4 +11,7 @@ Ability AbilityList [] = {
 {"Pixilate",AF_TYPECHANGE,{12,134}},
 {"Frozen Wing",AF_TYPECHANGE,{81,160}},
 {"Galvanize",AF_TYPECHANGE,{9,12}},
+{"Levitate",AF_TYPEIMMUNITY,{(GROUND << 3) + 0,0}},
+{"Water Absorb",AF_TYPEIMMUNITY,{(WATER << 3) + 1,25}},
+{"Motor Drive",AF_TYPEIMMUNITY,{(ELECTRIC << 3) + 2,129}},
 };

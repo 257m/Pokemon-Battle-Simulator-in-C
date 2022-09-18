@@ -28,8 +28,14 @@ BULBASAUR,
 IVYSAUR,
 VENUSAUR,
 CHARMANDER,
+CHARMELEON,
+CHARIZARD,
 SQUIRTLE,
+WARTORTLE,
+BLASTOISE,
 PIDGEY,
+PIDGEOTTO,
+PIDGEOT,
 CORDAGAR,
 BULEJ,
 BULICJEL,
@@ -151,6 +157,8 @@ Icicle_Crash,
 Confuse_Ray,
 Feather_Dance,
 Growl,
+Luminous_Glow,
+Earthquake,
 };
 
 enum {
@@ -181,6 +189,9 @@ Aerilate,
 Pixilate,
 Frozen_Wing,
 Galvanize,
+Levitate,
+Water_Absorb,
+Motor_Drive,
 };
 
 enum {
@@ -188,6 +199,7 @@ AF_NOABILITY,
 AF_TYPE_BASED_BOOST,
 AF_IMMUNE_TO_STAT_DECREASE,
 AF_TYPECHANGE,
+AF_TYPEIMMUNITY,
 };
 
 enum {

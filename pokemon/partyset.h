@@ -1,5 +1,5 @@
-struct MyPokemon Pokemon1 = {RHINORIUM,5,20,Focus_Sash,Aerilate,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Confuse_Ray,0,3},{Vine_Whip,0,3},
+struct MyPokemon Pokemon1 = {VENUSAUR,5,20,Focus_Sash,Levitate,Jolly,31,31,31,31,31,31,
+{Muddy_Water,0,3},{Stone_Edge,0,3},{Luminous_Glow,0,3},{Earthquake,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon Pokemon2 = {4,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
@@ -22,8 +22,8 @@ struct MyPokemon Pokemon6 = {35,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
 {Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Gust,0,3},
 0,236,36,4,0,228};
 
-struct MyPokemon EnemyPokemon1 = {ILSONAR,5,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Protect,0,3},{Stone_Edge,0,3},{Confuse_Ray,0,3},{Mud_Slap,0,3},
+struct MyPokemon EnemyPokemon1 = {BLASTOISE,5,20,Focus_Sash,Levitate,Jolly,31,31,31,31,31,31,
+{Muddy_Water,0,3},{Stone_Edge,0,3},{Confuse_Ray,0,3},{Earthquake,0,3},
 0,180,92,4,0,236};
 
 struct MyPokemon EnemyPokemon2 = {21,5,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,

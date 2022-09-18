@@ -28,4 +28,31 @@ void TypeChange(char et,bool eop) {
   }
 }
 
-gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity,&TypeChange};
+void TypeImmunity(char et,bool eop) {
+  char boost = 0;
+  if (et == -4) {
+    if ((Parties[!eop].MoveTempType == ((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] >> 3))) && MoveList[Parties[!eop].Turn->Move].Category != 0 && CHK_BIT(MoveList[Parties[!eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) {
+      
+      Parties[!eop].TemporaryMult = 0;
+      
+      if (((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] << 5)) >> 5 == 1) {
+        if ((Parties[eop].Member[0]->CurrentHp + Parties[eop].Member[0]->Hp*(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100)) <= Parties[eop].Member[0]->Hp) {
+        Parties[eop].Member[0]->CurrentHp += Parties[eop].Member[0]->Hp*AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100;
+          } else {
+          Parties[eop].Member[0]->CurrentHp = Parties[eop].Member[0]->Hp;
+          }
+      } 
+      
+      else if (((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] << 5)) >> 5 == 2) {
+        boost = (unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1] << 4) >> 4;
+        if (CHK_BIT(boost,3)) {
+          boost *= -1;
+        }
+        Boostandprint((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1] >> 5),boost,Parties[eop ^ CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1],4)].Member[0],eop ^ CHK_BIT(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1],4));
+      } 
+      
+    }
+  }
+}
+
+gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity,&TypeChange,&TypeImmunity};
