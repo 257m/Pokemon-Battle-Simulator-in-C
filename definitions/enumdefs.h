@@ -159,6 +159,7 @@ Feather_Dance,
 Growl,
 Luminous_Glow,
 Earthquake,
+Giga_Drain,
 };
 
 enum {
@@ -168,6 +169,7 @@ MF_STATMOD,
 MF_OTHERSTATUS,
 MF_PROTECT,
 MF_ROAR,
+MF_DRAININGMOVE,
 };
 
 enum {

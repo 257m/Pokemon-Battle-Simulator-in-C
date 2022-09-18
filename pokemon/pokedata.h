@@ -2,7 +2,7 @@ const struct PokemonDex POKEMONDEX [] = {
 {"NoPoke",NOTYPE,0,0,0,0,0,0,0},
 {"Bulbasaur",GRASS,POISON,45,49,49,65,65,45},
 {"Ivysaur",GRASS,POISON,60,62,63,80,80,60},
-{"Venusaur",GRASS,POISON,80,82,83.100,100,80},
+{"Venusaur",GRASS,POISON,80,82,83,100,100,80},
 {"Charmander",FIRE,NOTYPE,39,52,43,60,50,65},
 {"Charmeleon",FIRE,NOTYPE,58,64,58,80,65,80},
 {"Charizard",FIRE,FLYING,78,84,78,109,85,100},

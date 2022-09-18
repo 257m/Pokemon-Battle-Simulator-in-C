@@ -64,7 +64,7 @@ void Strugglef(char et, bool eop) {
   }
 }
 
-void OtherBoost(char et,bool eop) {
+void StatMod(char et,bool eop) {
   char temp;
   char mult;
   bool soo = eop;
@@ -102,7 +102,7 @@ void OtherBoost(char et,bool eop) {
     }
   }
 
-void OtherStatus(char et,bool eop) {
+void StatusInfliction(char et,bool eop) {
 if (et == 2) {
   if (!Parties[!eop].Dead) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
@@ -164,4 +164,18 @@ void RoarFunc(char et,bool eop) {
     }
 }
 
-gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&OtherBoost,&OtherStatus,&ProtectingMove,&RoarFunc};
+void Hp_Draining_Move(char et,bool eop) {
+  int Recovery;
+  if (et == 2) {
+    Recovery = ceil(Parties[eop].Damage*MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[0]/100);
+    if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
+    Parties[eop].Member[0]->CurrentHp += Recovery;
+    if (Recovery > 0) {
+    printf("%s%s regained %d hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery);
+    printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+    }
+    else printf("%s%s is already at full health!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+  }
+}
+    
+gpf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&StatMod,&StatusInfliction,&ProtectingMove,&RoarFunc,&Hp_Draining_Move};
