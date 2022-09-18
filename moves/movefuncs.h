@@ -131,7 +131,8 @@ void ProtectingMove(char et,bool eop) {
   if (et == 1) {
   if (rand() < (RAND_MAX/pow(2,Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT]))+1) {
   if (First == !eop) {
-    SET_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_PROTECT);
+  SET_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_PROTECT);
+  Parties[!eop].DoesNothing = 1;
   Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT]++;
   } else {
   Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT] = 0;

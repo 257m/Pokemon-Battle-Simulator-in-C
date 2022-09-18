@@ -266,13 +266,14 @@ struct Party {
  unsigned int Hit : 1;
  unsigned int CanMove : 1;
  unsigned int Dead : 1;
+ unsigned int DoesNothing : 1;
  unsigned int Para : 1;
  unsigned int Sleep : 1;
  unsigned int Frozen : 1;
  unsigned int Flinch : 1;
  unsigned int Crit : 1;
  unsigned int Confused : 1;
- unsigned int Switching;
+ unsigned int Switching : 1;
  unsigned char SwitchSave;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];

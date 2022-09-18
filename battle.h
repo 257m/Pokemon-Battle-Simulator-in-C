@@ -323,6 +323,8 @@ int Battle() {
       Parties[1].Flinch = 0;
       Parties[0].Confused = 0;
       Parties[1].Confused = 0;
+      Parties[0].DoesNothing = 0;
+      Parties[1].DoesNothing = 0;
       Parties[0].MoveTempType = MoveList[Parties[0].Turn->Move].Type;
       Parties[1].MoveTempType = MoveList[Parties[1].Turn->Move].Type;
       
