@@ -1,7 +1,11 @@
 int Battle() {
   while (StatCalc) {
-    StatCalculation(0);
-    StatCalculation(1);
+    for(int i = 0;i < 6;i++) {
+    StatCalcMon(i,0);
+    //PP_Calc(i,0);
+    StatCalcMon(i,1);
+    //PP_Calc(i,1);
+    }
 
     printf("\nHeal? (y/n): ");
     fgets(x,31,stdin);

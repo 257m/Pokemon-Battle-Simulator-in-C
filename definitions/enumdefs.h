@@ -171,6 +171,12 @@ MF_ROAR,
 };
 
 enum {
+STATUS,
+PHYSICAL,
+SPECIAL,
+};
+
+enum {
 NoItem,
 Leftovers,
 Focus_Sash

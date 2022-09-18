@@ -58,7 +58,7 @@ void Nothingf(char et, bool eop) {
 }
 
 void Strugglef(char et, bool eop) {
-  Parties[eop].Turn->PP++;
+  Parties[eop].Turn->PP = 1;
   if (et == 2) {
       Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
   }
