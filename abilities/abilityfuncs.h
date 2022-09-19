@@ -38,6 +38,7 @@ void TypeImmunity(char et,bool eop) {
       if (((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] << 5)) >> 5 == 1) {
         if ((Parties[eop].Member[0]->CurrentHp + Parties[eop].Member[0]->Hp*(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100)) <= Parties[eop].Member[0]->Hp) {
         Parties[eop].Member[0]->CurrentHp += Parties[eop].Member[0]->Hp*AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100;
+        printf("%s%s regained some hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
           } else {
           Parties[eop].Member[0]->CurrentHp = Parties[eop].Member[0]->Hp;
           }

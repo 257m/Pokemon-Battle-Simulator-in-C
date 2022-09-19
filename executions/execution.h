@@ -87,7 +87,7 @@ void ExecuteMove(bool eop) {
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](1,eop);
         ItemList[Parties[eop].Member[0]->Item].itemfunc(1,eop);
         ItemList[Parties[!eop].Member[0]->Item].itemfunc(-1,!eop);
-  if (!Parties[eop].DoesNothing) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
         UDBOG(&Parties[!eop].Member[0]->CurrentHp,&Parties[eop].Damage);
     } else {
     Parties[eop].Damage = 0;
@@ -102,7 +102,7 @@ void ExecuteMove(bool eop) {
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](1,eop);
         ItemList[Parties[eop].Member[0]->Item].itemfunc(1,eop);
         ItemList[Parties[!eop].Member[0]->Item].itemfunc(-1,!eop);
-  if (!Parties[!eop].DoesNothing) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
         UDBOG(&Parties[!eop].Member[0]->CurrentHp,&Parties[eop].Damage);
     } else {
     Parties[eop].Damage = 0;

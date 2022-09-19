@@ -12,7 +12,7 @@ void StatCalcMon(unsigned char partymember,bool eop) {
   Parties[eop].Member[partymember]->Spe = (((Parties[eop].Member[partymember]->IVSpe + 2 * POKEMONDEX[Parties[eop].Member[partymember]->Poke].Spe + (Parties[eop].Member[partymember]->EVSpe/4) ) * Parties[eop].Member[partymember]->Level/100 ) + 5) * NATURE_LIST[Parties[eop].Member[partymember]->Nature].Spe;
 }
 
-void PP_Calc(unsigned partymember,bool eop) {
+void PP_Set(unsigned partymember,bool eop) {
     Parties[eop].Member[partymember]->Move1.PP = MoveList[Parties[eop].Member[partymember]->Move1.Move].PP * ppboostmult(Parties[eop].Member[partymember]->Move1.PPmult);
   Parties[eop].Member[partymember]->Move2.PP = MoveList[Parties[eop].Member[partymember]->Move2.Move].PP * ppboostmult(Parties[eop].Member[partymember]->Move2.PPmult);
   Parties[eop].Member[partymember]->Move3.PP = MoveList[Parties[eop].Member[partymember]->Move3.Move].PP * ppboostmult(Parties[eop].Member[partymember]->Move3.PPmult);

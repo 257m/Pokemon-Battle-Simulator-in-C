@@ -175,7 +175,7 @@ void Hp_Draining_Move(char et,bool eop) {
     printf("%s%s regained %d hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery);
     printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
     }
-    else printf("%s%s is already at full health!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+    else if (Parties[eop].Damage > 0 && Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp) printf("%s%s is already at full health!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
   }
 }
     

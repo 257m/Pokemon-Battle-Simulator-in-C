@@ -2,7 +2,7 @@ const struct PokemonDex POKEMONDEX [] = {
 {"NoPoke",NOTYPE,0,0,0,0,0,0,0},
 {"Bulbasaur",GRASS,POISON,45,49,49,65,65,45},
 {"Ivysaur",GRASS,POISON,60,62,63,80,80,60},
-{"Venusaur",GRASS,POISON,80,82,83.100,100,80},
+{"Venusaur",GRASS,POISON,80,82,83,100,100,80},
 {"Charmander",FIRE,NOTYPE,39,52,43,60,50,65},
 {"Charmeleon",FIRE,NOTYPE,58,64,58,80,65,80},
 {"Charizard",FIRE,FLYING,78,84,78,109,85,100},
@@ -37,7 +37,7 @@ const struct PokemonDex POKEMONDEX [] = {
 {"Axaquanel",WATER,PSYCHIC,100,50,100,110,110,70},
 {"Graloth",GRASS,NOTYPE,60,50,60,60,60,10},
 {"Mushoraloth",GRASS,NOTYPE,80,80,80,80,80,20},
-{"BiLuminasoth",GRASS,LIGHT,100,100,100,110,100,30},
+{"Biluminasoth",GRASS,LIGHT,100,100,100,110,100,30},
 {"Elemig",ELECTRIC,STEEL,35,60,25,20,45,60},
 {"Stelirengo",ELECTRIC,STEEL,60,80,75,40,75,90},
 {"Leechester",WATER,DARK,65,80,60,75,60,60},
@@ -47,5 +47,6 @@ const struct PokemonDex POKEMONDEX [] = {
 {"Faeternaert",LIGHT,FAIRY,120,50,50,130,150,100},
 {"Roasinaught",DARK,GHOST,60,150,60,150,60,120},
 {"Rhinorium",ROCK,PSYCHIC,70,115,120,60,64,68},
+{"Horighnile",LIGHT,SOUND,50,40,40,120,120,100},
 };
 
