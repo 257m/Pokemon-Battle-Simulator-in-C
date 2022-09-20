@@ -62,4 +62,8 @@ x | make MyPokemon store an bitfield unsigned int of size 10 rather than a point
 
 x | make a crit boosting move
 
-o | add a bit of internal documentation
+x | add a bit of internal documentation
+
+o | make moves have two movefuncs and double the GNRL_PURPOSE
+
+o | Generalize items

@@ -160,6 +160,7 @@ Growl,
 Luminous_Glow,
 Earthquake,
 Giga_Drain,
+Blinding_Flash,
 };
 
 enum {

@@ -32,8 +32,7 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
-  printf("%lu\n",sizeof(MoveList));
-  //printf("%d\n",FLYING << 3 + ICE >> 3)
+  printf("%lu\n",sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]));
   Battle();
   return 0;
   }

@@ -1,9 +1,3 @@
-void DBOG(bool eop) {
-if (Parties[!eop].Member[0]->CurrentHp < Parties[eop].Damage) {
-  Parties[eop].Damage = Parties[!eop].Member[0]->CurrentHp;
-}
-}
-
 void UDBOG(int* hp,int* damage) {
   if (*hp-*damage < 0) *damage = *hp;
   *hp -= *damage;

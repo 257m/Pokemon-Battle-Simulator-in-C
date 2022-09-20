@@ -1,54 +1,23 @@
 int Battle() {
   while (StatCalc) {
-    StatCalculation(0);
-    StatCalculation(1);
+    for(int i = 0;i < 6;i++) {
+    StatCalcMon(i,0);
+    PP_Set(i,0);
+    StatCalcMon(i,1);
+    PP_Set(i,1);
+    }
 
     printf("\nHeal? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"y") == 0) {
-      Parties[0].Member[0]->CurrentHp = Parties[0].Member[0]->Hp;
-      Parties[0].Member[1]->CurrentHp = Parties[0].Member[1]->Hp;
-      Parties[0].Member[2]->CurrentHp = Parties[0].Member[2]->Hp;
-      Parties[0].Member[3]->CurrentHp = Parties[0].Member[3]->Hp;
-      Parties[0].Member[4]->CurrentHp = Parties[0].Member[4]->Hp;
-      Parties[0].Member[5]->CurrentHp = Parties[0].Member[5]->Hp;
-
-      Parties[1].Member[0]->CurrentHp = Parties[1].Member[0]->Hp;
-      Parties[1].Member[1]->CurrentHp = Parties[1].Member[1]->Hp;
-      Parties[1].Member[2]->CurrentHp = Parties[1].Member[2]->Hp;
-      Parties[1].Member[3]->CurrentHp = Parties[1].Member[3]->Hp;
-      Parties[1].Member[4]->CurrentHp = Parties[1].Member[4]->Hp;
-      Parties[1].Member[5]->CurrentHp = Parties[1].Member[5]->Hp;
-      
-      Parties[0].Member[0]->Non_Volatile_Status = 0; 
-      Parties[0].Member[1]->Non_Volatile_Status = 0;
-      Parties[0].Member[2]->Non_Volatile_Status = 0;
-      Parties[0].Member[3]->Non_Volatile_Status = 0;
-      Parties[0].Member[4]->Non_Volatile_Status = 0;
-      Parties[0].Member[5]->Non_Volatile_Status = 0;
-
-      Parties[1].Member[0]->Non_Volatile_Status = 0;
-      Parties[1].Member[1]->Non_Volatile_Status = 0;
-      Parties[1].Member[2]->Non_Volatile_Status = 0;
-      Parties[1].Member[3]->Non_Volatile_Status = 0;
-      Parties[1].Member[4]->Non_Volatile_Status = 0;
-      Parties[1].Member[5]->Non_Volatile_Status = 0;
-
-      Parties[0].Member[0]->ItemUsable = 1; 
-      Parties[0].Member[1]->ItemUsable = 1;
-      Parties[0].Member[2]->ItemUsable = 1;
-      Parties[0].Member[3]->ItemUsable = 1;
-      Parties[0].Member[4]->ItemUsable = 1;
-      Parties[0].Member[5]->ItemUsable = 1;
-
-      Parties[1].Member[0]->ItemUsable = 1;
-      Parties[1].Member[1]->ItemUsable = 1;
-      Parties[1].Member[2]->ItemUsable = 1;
-      Parties[1].Member[3]->ItemUsable = 1;
-      Parties[1].Member[4]->ItemUsable = 1;
-      Parties[1].Member[5]->ItemUsable = 1;
-
+      for (int j = 0;j < 2;j++) {
+      for (int i = 0;i < 6;i++) {
+      Parties[j].Member[i]->CurrentHp = Parties[j].Member[i]->Hp;
+      Parties[j].Member[i]->Non_Volatile_Status = 0; 
+      Parties[j].Member[i]->ItemUsable = 1;
+        }
+        }
       CLEAR_EFFECTS(0);
       CLEAR_EFFECTS(1);
     }
@@ -319,6 +288,8 @@ int Battle() {
       Parties[1].Flinch = 0;
       Parties[0].Confused = 0;
       Parties[1].Confused = 0;
+      Parties[0].DoesNothing = 0;
+      Parties[1].DoesNothing = 0;
       Parties[0].MoveTempType = MoveList[Parties[0].Turn->Move].Type;
       Parties[1].MoveTempType = MoveList[Parties[1].Turn->Move].Type;
       

@@ -13,6 +13,9 @@ char* stratt(const char *s1, const char *s2)
     strcat(result, s2);
     return result;
 }
+/*
+stratt simply returns str1 + str2 without changin str1
+*/
 
 double statboostmult(char statboost) {
   if (statboost >= 0) {
@@ -21,10 +24,16 @@ double statboostmult(char statboost) {
     return (double)1/(1+(statboost*-1*0.5));
   }
 }
+/*
+This function takes in a char and returns what the stat should be multiplyed by
+*/
 
-float ppboostmult(ppboost) {
+float ppboostmult(char ppboost) {
   return 1 + (0.2 * ppboost);
 }
+/* 
+Takes in a a num from 0-3 and returns the a multiples 0.2 from 1-1.6
+*/
 
 unsigned int map(unsigned int num,unsigned int newmax,unsigned int currentmax) {
   if (currentmax==0) currentmax = RAND_MAX;
@@ -36,6 +45,9 @@ unsigned int map2(unsigned int num,unsigned int newmax,unsigned int currentmax) 
   if (num > (currentmax-(currentmax % newmax))) return map2(rand(),newmax,currentmax);
   else return (num % newmax);
 }
+/*
+these map function are now obsolete but they used to make random chance more evenly distributed
+*/
 
 unsigned int power2(char num) {
   if (num < 0) return 0;
@@ -45,11 +57,17 @@ unsigned int power2(char num) {
   }
   return total;
 }
+/*
+Gives a power of 2 for a number >= 0 else gives a 0
+*/
 
 double tt(bool condition,double ifcon,double elsecon) {
   if (condition) return ifcon;
   else return elsecon;
 }
+/*
+This is to make conditional logic availble within a single statement
+*/
 
 double tt2(bool condition,double ifcon,double elsecon,double* var) {
   if (condition) {
@@ -61,77 +79,89 @@ double tt2(bool condition,double ifcon,double elsecon,double* var) {
     return elsecon;
     }
 }
+/*
+Same as tt but makes var = the return value before returning
+*/
 
 struct PokemonDex {
-char Name[12];
-unsigned int Type1 : 5;
-unsigned int Type2 : 5;
-char Hp;
-char Atk;
-char Def;
-char SpA;
-char SpD;
-char Spe;
+char Name[16]; // Stores the name of pokemon later this going to be compressed
+unsigned int Type1 : 5; // The first type of pokemon stores 0-32 if a pokemon has been declared with a type > 21 it will cause a segfault
+unsigned int Type2 : 5; // Same as Type1 but for the secondary type
+unsigned char Hp;
+unsigned char Atk;
+unsigned char Def;
+unsigned char SpA;
+unsigned char SpD;
+unsigned char Spe;
+// These are the BST values of pokemon stats
 }__attribute__((__packed__));
 
-float TypeChart[19][19] = {
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 },
+/*
+This is how pokemon data is stored the entire dex will be stored in a array
+*/
+
+float TypeChart[21][21] = {
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 },
 // [0] ???
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,0 ,1 ,1 ,0.5 ,1 },
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,0 ,1 ,1 ,0.5 ,1 ,1 ,1 },
 // [1] Normal
-{1 ,1 ,0.5 ,0.5 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,2 ,1 },
+{1 ,1 ,0.5 ,0.5 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,2 ,1 ,1 ,1 },
 // [2] Fire 
-{1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 },
+{1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
 // [3] Water
-{1 ,1 ,1 ,2 ,0.5 ,0.5 ,1 ,1 ,1 ,0 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
+{1 ,1 ,1 ,2 ,0.5 ,0.5 ,1 ,1 ,1 ,0 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
 // [4] Electric
-{1 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,1 ,0.5 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,0.5 ,1 },
+{1 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,1 ,0.5 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 ,1 },
 // [5] Grass
-{1 ,1 ,0.5 ,0.5 ,1 ,2 ,0.5 ,1 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1},
+{1 ,1 ,0.5 ,0.5 ,1 ,2 ,0.5 ,1 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 },
 // [6] Ice
-{1 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,0.5 ,0.5 ,2 ,0 ,1 ,2 ,2 ,0.5},
+{1 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,0.5 ,0.5 ,2 ,0 ,1 ,2 ,2 ,0.5 ,2 ,1 },
 // [7] Fighting
-{1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,0 ,2 },
+{1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,0 ,2 ,1 ,1 },
 // [8] Poison
-{1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,1 ,2 ,1 ,0 ,1 ,0.5 ,2 ,1 ,1 ,1 ,2 ,1 },
+{1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,1 ,2 ,1 ,0 ,1 ,0.5 ,2 ,1 ,1 ,1 ,2 ,1 ,1 ,1 },
 // [9] Ground
-{1 ,1 ,1 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,0.5 ,1 },
+{1 ,1 ,1 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
 // [10] Flying
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,0 ,0.5 ,1 },
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,0 ,0.5 ,1 ,1 ,1 },
 // [11] Psychic
-{1 ,1 ,0.5 ,1 ,1 ,2 ,1 ,0.5 ,0.5 ,1 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,0.5 ,0.5 },
+{1 ,1 ,0.5 ,1 ,1 ,2 ,1 ,0.5 ,0.5 ,1 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,0.5 ,0.5 ,1 ,1 },
 // [12] Bug 
-{1 ,1 ,2 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1},
+{1 ,1 ,2 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
 // [13] Rock
-{1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 },
+{1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 },
 // [14] Ghost
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,0 },
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,0 ,1 ,1 },
 // [15] Dragon
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 },
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 },
 // [16] Dark
 {1 ,1 ,0.5 ,0.5 ,0.5 ,1 ,2 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,0.5 ,2 },
 // [17] Steel
-{1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,1 }
+{1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,1 ,1 },
 // [18] Fairy
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
+// [19] Sound
+{1 ,1 ,0 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,0 ,0 },
+// [20] Light
 };
-
-typedef struct {
-unsigned char Status; // Burn=0 Poison=1 Toxic=2 Para=3 Sleep=4 Freeze=5 Frostbite=6
-unsigned char Chance;
-} StatusChance_t;
+//  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
 struct Move {
- char Name[16];
- unsigned char BP;
- unsigned int Accuracy : 7;
- unsigned int PP : 6;
- unsigned int Type : 5;
- unsigned int Category : 2;
- int Priority : 4;
- unsigned int movefunc : 5;
- unsigned char GNRL_PURPOSE [5];
- unsigned int FLAGS : 12; 
+ char Name[16]; // Stores the names of the pokemon it going to be compressed soon enough to save space
+ unsigned char BP; // The Basepower of the move its a value from 0-255
+ unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses
+ unsigned int PP : 6; // The PP value between 0-64 it should soon be a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the value but I haven't implemented that in yet
+ unsigned int Type : 5; // Pretty obvious will segfault if above 21
+ unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet
+ int Priority : 4; // Priority of the move from -8 to 8
+ unsigned int movefunc : 5; // The number value conresponding to a function stoed in MOVE_FUNC_LIST
+ unsigned char GNRL_PURPOSE [5]; // General info on the move it's meaning will be interpeted differently based on the movefunc
+ unsigned int FLAGS : 12; // Flags to stores things that do not vary based on movefunc
 }__attribute__((__packed__));
+
+/*
+The structure for move storage it subject to change
+*/
 
 struct Nature {
   float Atk;
@@ -141,6 +171,10 @@ struct Nature {
   float Spe;
   char NatureName [8];
 };
+
+/*
+Structure for storing nature data the values will soon be compressed
+*/
 
 struct Nature NATURE_LIST [] = {
 {1,1,1,1,1,"Hardy"},
@@ -232,26 +266,27 @@ struct Party {
  unsigned int Hit : 1;
  unsigned int CanMove : 1;
  unsigned int Dead : 1;
+ unsigned int DoesNothing : 1;
  unsigned int Para : 1;
  unsigned int Sleep : 1;
  unsigned int Frozen : 1;
  unsigned int Flinch : 1;
  unsigned int Crit : 1;
  unsigned int Confused : 1;
- unsigned int Switching;
+ unsigned int Switching : 1;
  unsigned char SwitchSave;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
  unsigned int MoveTempType : 5;
 };
 
-char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
+const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 
-char Itemtext[2][11] = {"Not Usable", "Usable"};
+const char Itemtext[2][11] = {"Not Usable", "Usable"};
 
-char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
+const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
-char EOPTEXT[2][14] = {"","The opposing "};
+const char EOPTEXT[4][14] = {"","The opposing ","","the opposing "};
 
 struct Party Parties [2];
 bool StatCalc = 1;
@@ -269,3 +304,5 @@ bool HideMove = 0;
 Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
+
+#define CRIT_CHANCE 2
