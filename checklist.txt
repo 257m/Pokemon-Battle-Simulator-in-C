@@ -66,4 +66,6 @@ x | add a bit of internal documentation
 
 o | make moves have two movefuncs and double the GNRL_PURPOSE
 
-o | Generalize items
+x | Generalize items
+
+o | Text compression
