@@ -47,13 +47,13 @@ int Battle() {
     printf("Enter your move: ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
-    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Move1.Move].Name) == 0) {
-      Parties[0].Turn = &Parties[0].Member[0]->Move1;
-      if(Parties[0].Member[0]->Move1.Move == Nothing) {
+    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[0].Move].Name) == 0) {
+      Parties[0].Turn = &Parties[0].Member[0]->Moves[0];
+      if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[0].Member[0]->Move1.PP <= 0) {
-    if (Parties[0].Member[0]->Move2.PP <= 0 && Parties[0].Member[0]->Move3.PP <= 0 && Parties[0].Member[0]->Move4.PP <= 0) {
+  } else if (Parties[0].Member[0]->Moves[0].PP <= 0) {
+    if (Parties[0].Member[0]->Moves[1].PP <= 0 && Parties[0].Member[0]->Moves[2].PP <= 0 && Parties[0].Member[0]->Moves[3].PP <= 0) {
       Parties[0].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -61,13 +61,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Move2.Move].Name) == 0) {
-       Parties[0].Turn = &Parties[0].Member[0]->Move2;
-      if(Parties[0].Member[0]->Move1.Move == Nothing) {
+    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[1].Move].Name) == 0) {
+       Parties[0].Turn = &Parties[0].Member[0]->Moves[1];
+      if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[0].Member[0]->Move2.PP <= 0) {
-    if (Parties[0].Member[0]->Move1.PP <= 0 && Parties[0].Member[0]->Move3.PP <= 0 && Parties[0].Member[0]->Move4.PP <= 0) {
+  } else if (Parties[0].Member[0]->Moves[1].PP <= 0) {
+    if (Parties[0].Member[0]->Moves[0].PP <= 0 && Parties[0].Member[0]->Moves[2].PP <= 0 && Parties[0].Member[0]->Moves[3].PP <= 0) {
       Parties[0].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -75,13 +75,13 @@ int Battle() {
     }
     }
     }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Move3.Move].Name) == 0) {
-       Parties[0].Turn = &Parties[0].Member[0]->Move3;
-       if(Parties[0].Member[0]->Move1.Move == Nothing) {
+    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[2].Move].Name) == 0) {
+       Parties[0].Turn = &Parties[0].Member[0]->Moves[2];
+       if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[0].Member[0]->Move3.PP <= 0) {
-    if (Parties[0].Member[0]->Move1.PP <= 0 && Parties[0].Member[0]->Move2.PP <= 0 && Parties[0].Member[0]->Move4.PP <= 0) {
+  } else if (Parties[0].Member[0]->Moves[2].PP <= 0) {
+    if (Parties[0].Member[0]->Moves[0].PP <= 0 && Parties[0].Member[0]->Moves[1].PP <= 0 && Parties[0].Member[0]->Moves[3].PP <= 0) {
       Parties[0].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -89,13 +89,13 @@ int Battle() {
     }
     }
     }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Move4.Move].Name) == 0) {
-       Parties[0].Turn = &Parties[0].Member[0]->Move4;
-       if(Parties[0].Member[0]->Move1.Move == Nothing) {
+    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[3].Move].Name) == 0) {
+       Parties[0].Turn = &Parties[0].Member[0]->Moves[3];
+       if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[0].Member[0]->Move4.PP <= 0) {
-    if (Parties[0].Member[0]->Move1.PP <= 0 && Parties[0].Member[0]->Move2.PP <= 0 && Parties[0].Member[0]->Move3.PP <= 0) {
+  } else if (Parties[0].Member[0]->Moves[3].PP <= 0) {
+    if (Parties[0].Member[0]->Moves[0].PP <= 0 && Parties[0].Member[0]->Moves[1].PP <= 0 && Parties[0].Member[0]->Moves[2].PP <= 0) {
       Parties[0].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -152,13 +152,13 @@ int Battle() {
      printf("\nEnter enemy's move: ");
      fgets(x,31,stdin);
      x[strcspn(x, "\n")] = 0;
-      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Move1.Move].Name) == 0) {
-      Parties[1].Turn = &Parties[1].Member[0]->Move1;
-      if(Parties[1].Member[0]->Move1.Move == Nothing) {
+      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[0].Move].Name) == 0) {
+      Parties[1].Turn = &Parties[1].Member[0]->Moves[0];
+      if(Parties[1].Member[0]->Moves[0].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[1].Member[0]->Move1.PP <= 0) {
-    if (Parties[1].Member[0]->Move2.PP <= 0 && Parties[1].Member[0]->Move3.PP <= 0 && Parties[1].Member[0]->Move4.PP <= 0) {
+  } else if (Parties[1].Member[0]->Moves[0].PP <= 0) {
+    if (Parties[1].Member[0]->Moves[1].PP <= 0 && Parties[1].Member[0]->Moves[2].PP <= 0 && Parties[1].Member[0]->Moves[3].PP <= 0) {
       Parties[1].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -166,13 +166,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Move2.Move].Name) == 0) {
-       Parties[1].Turn = &Parties[1].Member[0]->Move2;
-      if(Parties[1].Member[0]->Move2.Move == Nothing) {
+    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[1].Move].Name) == 0) {
+       Parties[1].Turn = &Parties[1].Member[0]->Moves[1];
+      if(Parties[1].Member[0]->Moves[1].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[1].Member[0]->Move2.PP <= 0) {
-    if (Parties[1].Member[0]->Move1.PP <= 0 && Parties[1].Member[0]->Move3.PP <= 0 && Parties[1].Member[0]->Move4.PP <= 0) {
+  } else if (Parties[1].Member[0]->Moves[1].PP <= 0) {
+    if (Parties[1].Member[0]->Moves[0].PP <= 0 && Parties[1].Member[0]->Moves[2].PP <= 0 && Parties[1].Member[0]->Moves[3].PP <= 0) {
       Parties[1].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -180,13 +180,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Move3.Move].Name) == 0) {
-       Parties[1].Turn = &Parties[1].Member[0]->Move3;
-      if(Parties[1].Member[0]->Move3.Move == Nothing) {
+    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[2].Move].Name) == 0) {
+       Parties[1].Turn = &Parties[1].Member[0]->Moves[2];
+      if(Parties[1].Member[0]->Moves[2].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[1].Member[0]->Move3.PP <= 0) {
-    if (Parties[1].Member[0]->Move1.PP <= 0 && Parties[1].Member[0]->Move2.PP <= 0 && Parties[1].Member[0]->Move4.PP <= 0) {
+  } else if (Parties[1].Member[0]->Moves[2].PP <= 0) {
+    if (Parties[1].Member[0]->Moves[0].PP <= 0 && Parties[1].Member[0]->Moves[1].PP <= 0 && Parties[1].Member[0]->Moves[3].PP <= 0) {
       Parties[1].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");
@@ -194,13 +194,13 @@ int Battle() {
     }
   }
     }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Move4.Move].Name) == 0) {
-       Parties[1].Turn = &Parties[1].Member[0]->Move4;
-      if(Parties[1].Member[0]->Move4.Move == Nothing) {
+    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[3].Move].Name) == 0) {
+       Parties[1].Turn = &Parties[1].Member[0]->Moves[3];
+      if(Parties[1].Member[0]->Moves[3].Move == Nothing) {
         printf("There is no move in that slot.");
         Reset = 1;
-  } else if (Parties[1].Member[0]->Move4.PP <= 0) {
-    if (Parties[1].Member[0]->Move1.PP <= 0 && Parties[1].Member[0]->Move2.PP <= 0 && Parties[1].Member[0]->Move3.PP <= 0) {
+  } else if (Parties[1].Member[0]->Moves[3].PP <= 0) {
+    if (Parties[1].Member[0]->Moves[0].PP <= 0 && Parties[1].Member[0]->Moves[1].PP <= 0 && Parties[1].Member[0]->Moves[2].PP <= 0) {
       Parties[1].Turn = &Struggle_Slot;
     } else {
       printf("There no more PP left in that move");

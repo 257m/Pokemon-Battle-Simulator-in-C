@@ -8,10 +8,10 @@ void displaymember(unsigned int PartyMember,bool eop) {
     printf("Special Defense: %d\n",Parties[eop].Member[PartyMember]->SpD);
     printf("Speed: %d\n",Parties[eop].Member[PartyMember]->Spe);
     printf("Nature: %s\n",NATURE_LIST[Parties[eop].Member[PartyMember]->Nature].NatureName);
-    printf("Move1: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move1.Move].Name,Parties[eop].Member[PartyMember]->Move1.PP,MoveList[Parties[eop].Member[PartyMember]->Move1.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move1.PPmult));
-    printf("Move2: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move2.Move].Name,Parties[eop].Member[PartyMember]->Move2.PP,MoveList[Parties[eop].Member[PartyMember]->Move2.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move2.PPmult));
-    printf("Move3: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move3.Move].Name,Parties[eop].Member[PartyMember]->Move3.PP,MoveList[Parties[eop].Member[PartyMember]->Move3.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move3.PPmult));
-    printf("Move4: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Move4.Move].Name,Parties[eop].Member[PartyMember]->Move4.PP,MoveList[Parties[eop].Member[PartyMember]->Move4.Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Move4.PPmult));
+    printf("Moves[0]: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[0].Move].Name,Parties[eop].Member[PartyMember]->Moves[0].PP,MoveList[Parties[eop].Member[PartyMember]->Moves[0].Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Moves[0].PPmult));
+    printf("Moves[1]: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[1].Move].Name,Parties[eop].Member[PartyMember]->Moves[1].PP,MoveList[Parties[eop].Member[PartyMember]->Moves[1].Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Moves[1].PPmult));
+    printf("Moves[2]: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[2].Move].Name,Parties[eop].Member[PartyMember]->Moves[2].PP,MoveList[Parties[eop].Member[PartyMember]->Moves[2].Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Moves[2].PPmult));
+    printf("Moves[3]: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[3].Move].Name,Parties[eop].Member[PartyMember]->Moves[3].PP,MoveList[Parties[eop].Member[PartyMember]->Moves[3].Move].PP * ppboostmult(Parties[eop].Member[PartyMember]->Moves[3].PPmult));
     printf("Item: %s (%s)\n",ItemList[Parties[eop].Member[PartyMember]->Item].Name,Itemtext[Parties[eop].Member[PartyMember]->ItemUsable]);
     printf("Ability: %s\n",AbilityList[Parties[eop].Member[PartyMember]->Ability].Name);
     printf("Status: %s\n",Statusnames[Parties[eop].Member[PartyMember]->Non_Volatile_Status]);
