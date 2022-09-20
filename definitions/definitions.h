@@ -297,6 +297,7 @@ char x[32];
 bool EndFirst;
 unsigned int TurnCounter = 0;
 bool HideMove = 0;
+bool AI_MODE = 0;
 
 Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];

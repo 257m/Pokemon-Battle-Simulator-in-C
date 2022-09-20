@@ -29,10 +29,18 @@ int Battle() {
     if (strcmp(x,"y") == 0) HideMove = 1;
     printf("\033[1A");
     printf("\033[2K");
+    printf("Turn on Ai? (y/n): ");
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
+    if (strcmp(x,"y") == 0) AI_MODE = 1;
+    printf("\033[1A");
+    printf("\033[2K");
     StatCalc = 0;
     BattleMode = 1;
     Retrieve = 1;
   }
+
+  
   
   printf("Go %s!\n",POKEMONDEX[Parties[0].Member[0]->Poke].Name);
   printf("The Enemy sent out %s!\n\n", POKEMONDEX[Parties[1].Member[0]->Poke].Name);
@@ -265,7 +273,7 @@ int Battle() {
         }
       }
 
-    
+    if (AI_MODE) Parties[1].Turn = &Parties[1].Member[0]->Moves[rand() % 4];
     while (Execute == 1) {
       // reset Damage counters, temporary mults and flags 
       Parties[0].Damage = 0;
