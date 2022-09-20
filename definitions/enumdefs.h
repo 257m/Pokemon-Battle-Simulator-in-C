@@ -186,6 +186,12 @@ Focus_Sash
 };
 
 enum {
+TF_NONE,
+TF_LEFTOVERS,
+TF_FOCUS_SASH,
+};
+
+enum {
 NoAbility,
 Overgrow,
 Blaze,

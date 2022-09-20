@@ -20,6 +20,6 @@ void endturn(bool eop) {
         SwitchIn(eop);
         printf("\n");
       } else {
-      ItemList[Parties[eop].Member[0]->Item].itemfunc(5,eop);
+      ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](5,eop);
       }
 }

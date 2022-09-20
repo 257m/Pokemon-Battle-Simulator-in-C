@@ -212,7 +212,8 @@ unsigned int PPmult : 2;
 
 typedef struct { 
 char Name [12];
-void (*itemfunc)(char,bool);
+unsigned int itemfunc : 8;
+unsigned char GNRL_PURPOSE[2];
 } Item;
 
 typedef struct {
