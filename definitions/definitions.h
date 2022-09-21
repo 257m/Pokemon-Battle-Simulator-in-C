@@ -167,9 +167,9 @@ struct Move {
  unsigned int Type : 5; // Pretty obvious will segfault if above 21
  unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet
  int Priority : 4; // Priority of the move from -8 to 8
- unsigned int movefunc : 5; // The number value conresponding to a function stoed in MOVE_FUNC_LIST
+ unsigned char movefunc; // The number value conresponding to a function stored in MOVE_FUNC_LIST
  unsigned char GNRL_PURPOSE [5]; // General info on the move it's meaning will be interpeted differently based on the movefunc
- unsigned int FLAGS : 12; // Flags to stores things that do not vary based on movefunc
+ unsigned char FLAGS; // Flags to stores things that do not vary based on movefunc
 }__attribute__((__packed__));
 
 /*

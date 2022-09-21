@@ -1,12 +1,41 @@
 int Battle() {
   while (StatCalc) {
+   /* printf("\nSet Party (y/n): ");
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
+    if (strcmp(x,"y") == 0) {
+    for (int j = 0;j < 2;j++) {
+    for (int i = 0;i < 6;i++) {
+        printf("\n%sP%d Pokemon? (Name): ",EOPTEXT[j],i+1);
+        fgets(x,31,stdin);
+        x[strcspn(x, "\n")] = 0;
+        for (int k = 0;k < sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]);k++) {
+        if (strcmp(x,POKEMONDEX[k].Name) == 0) {
+          Parties[j].Member[i]->Poke = k;
+          break;
+          }
+        }
+        for (int h = 0;h < 4;h++) {
+          printf("\n%sP%d Move%d? (Move): ",EOPTEXT[j],i+1,h+1);
+          fgets(x,31,stdin);
+          x[strcspn(x, "\n")] = 0;
+          for (int g = 0;g < sizeof(MoveList)/sizeof(MoveList[0]);g++)
+          if (strcmp(x,MoveList[g].Name) == 0) {
+            Parties[j].Member[i]->Moves[h].Move = g;
+            break;
+          }
+        }
+      }
+      }
+    } */
+    
     for(int i = 0;i < 6;i++) {
     StatCalcMon(i,0);
     PP_Set(i,0);
     StatCalcMon(i,1);
     PP_Set(i,1);
     }
-
+    
     printf("\nHeal? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
