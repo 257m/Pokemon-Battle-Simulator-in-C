@@ -104,7 +104,7 @@ void StatMod(char et,bool eop, bool pos) {
   }
 
 void StatusInfliction(char et,bool eop, bool pos) {
-unsigned char rs = pow*5;
+unsigned char rs = pos*5;
 if (et == 2) {
   if (!Parties[!eop].Dead) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
