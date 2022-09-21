@@ -4,6 +4,7 @@
 
 typedef void (*gpf)(char,bool);
 typedef void (*ugpf)(unsigned char,bool);
+typedef void (*mf)(char,bool,bool);
 
 char* stratt(const char *s1, const char *s2)
 {
@@ -168,7 +169,7 @@ struct Move {
  unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet
  int Priority : 4; // Priority of the move from -8 to 8
  unsigned int movefunc : 10; // The number value conresponding to a function stored in MOVE_FUNC_LIST
- unsigned char GNRL_PURPOSE [5]; // General info on the move it's meaning will be interpeted differently based on the movefunc
+ unsigned char GNRL_PURPOSE [10]; // General info on the move it's meaning will be interpeted differently based on the movefunc
  unsigned char FLAGS; // Flags to stores things that do not vary based on movefunc
 }__attribute__((__packed__));
 
@@ -318,4 +319,4 @@ const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
 
 #define CRIT_CHANCE 16
-#define REMOVE_FIRST_FIVE_BITS 0x0000011111
+#define REMOVE_FIRST_FIVE_BITS 31

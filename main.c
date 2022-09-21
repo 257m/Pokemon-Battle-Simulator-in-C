@@ -32,7 +32,7 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
-  printf("%lu\n",sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]));
+  printf("%lu\n",sizeof(struct Party));
   Battle();
   return 0;
   }

@@ -1,5 +1,6 @@
 void endturn(bool eop) {
-    MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](5,eop);
+    MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](5,eop,0);
+    MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](5,eop,1);
     if (((unsigned char)MoveList[Parties[eop].Turn->Move].movefunc >> 5 != MF_PROTECT) && ((~MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS) != MF_PROTECT)) Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT] = 0; 
     if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_BURN) {
         Parties[eop].Member[0]->CurrentHp -= tt(Parties[eop].Member[0]->Hp/8 > 1,Parties[eop].Member[0]->Hp/8,1);

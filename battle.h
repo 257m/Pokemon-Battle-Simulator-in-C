@@ -361,8 +361,10 @@ int Battle() {
       // post speed,stab and reset funcs
       ABILITY_FUNC_LIST[AbilityList[Parties[0].Member[0]->Ability].abilityfunc](1,0);
       ABILITY_FUNC_LIST[AbilityList[Parties[1].Member[0]->Ability].abilityfunc](1,1);
-      MOVE_FUNC_LIST[MoveList[Parties[0].Turn->Move].movefunc >> 5](0,0);
-      MOVE_FUNC_LIST[MoveList[Parties[1].Turn->Move].movefunc >> 5](0,1);
+      MOVE_FUNC_LIST[MoveList[Parties[0].Turn->Move].movefunc >> 5](0,0,0);
+      MOVE_FUNC_LIST[MoveList[Parties[0].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](0,0,1);
+      MOVE_FUNC_LIST[MoveList[Parties[1].Turn->Move].movefunc >> 5](0,1,0);
+      MOVE_FUNC_LIST[MoveList[Parties[1].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](0,1,1);
       ACTIVATE_EFFECTS(0,0);
       ACTIVATE_EFFECTS(0,1);
       
