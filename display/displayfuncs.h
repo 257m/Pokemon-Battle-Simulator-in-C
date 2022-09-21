@@ -27,7 +27,7 @@ void move_result(bool eop) {
           }
         else {
         if (CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT)) {
-        printf("%s%s protected itself!\n",EOPTEXT[!eop + 2],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
+        printf("%s%s protected itself!\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
         } else {
         printf("It had no effect on %s%s...\n",EOPTEXT[!eop + 2],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
           }

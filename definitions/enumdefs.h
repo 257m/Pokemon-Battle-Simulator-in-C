@@ -161,7 +161,8 @@ Luminous_Glow,
 Earthquake,
 Giga_Drain,
 Blinding_Flash,
-Blindstrike
+Blindstrike,
+Web_Blast,
 };
 
 enum {

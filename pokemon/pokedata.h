@@ -1,5 +1,5 @@
 const struct PokemonDex POKEMONDEX [] = {
-{"NoPoke",NOTYPE,0,0,0,0,0,0,0},
+{"NoPoke",NOTYPE,NOTYPE,0,0,0,0,0,0,0},
 {"Bulbasaur",GRASS,POISON,45,49,49,65,65,45},
 {"Ivysaur",GRASS,POISON,60,62,63,80,80,60},
 {"Venusaur",GRASS,POISON,80,82,83,100,100,80},

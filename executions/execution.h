@@ -61,24 +61,27 @@ void ExecuteMove(bool eop) {
             printf("%s%s snapped out of its confusion!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
           }
         }
-        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](3,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](3,eop);
         display_move(eop);
       if (Parties[eop].Member[0]->CurrentHp > 0 && Parties[eop].Hit && Parties[eop].CanMove) {
         if (MoveList[Parties[eop].Turn->Move].Category == 0) {
          ABILITY_FUNC_LIST[AbilityList[Parties[eop].Member[0]->Ability].abilityfunc](2,eop);
         ABILITY_FUNC_LIST[AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc](-4,!eop);
-         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](1,eop);
+         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](1,eop);
+         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](1,eop);
          ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](1,eop);
          ITEM_FUNC_LIST[ItemList[Parties[!eop].Member[0]->Item].itemfunc](-1,!eop);
          Parties[eop].Turn->PP--;
          move_result(eop);
-         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](2,eop);
+         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](2,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](2,eop);
           }
         else if (MoveList[Parties[eop].Turn->Move].Category == 1) {
         ABILITY_FUNC_LIST[AbilityList[Parties[eop].Member[0]->Ability].abilityfunc](2,eop);
         ABILITY_FUNC_LIST[AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc](-4,!eop);
         Parties[eop].Damage = (((((2 * Parties[eop].Member[0]->Level / 5 + 2) * (Parties[eop].Member[0]->Atk*tt(Parties[eop].Crit && (Parties[eop].Member[0]->StatBoosts[0] < 0),1,statboostmult(Parties[eop].Member[0]->StatBoosts[0]))) * MoveList[Parties[eop].Turn->Move].BP / (Parties[!eop].Member[0]->Def*tt(Parties[eop].Crit && (Parties[!eop].Member[0]->StatBoosts[1] > 0),1,statboostmult(Parties[!eop].Member[0]->StatBoosts[1])))) / 50) + 2) * tt2(Parties[eop].MoveTempType == POKEMONDEX[Parties[eop].Member[0]->Poke].Type1 || Parties[eop].MoveTempType == POKEMONDEX[Parties[eop].Member[0]->Poke].Type1,1.5,1,&Parties[eop].STAB) * (TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2]) * ((rand() % 16) + 85) / 100) * Parties[eop].TemporaryMult * tt(Parties[eop].Crit,1.5,1);
-        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](1,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](1,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](1,eop);
         ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](1,eop);
         ITEM_FUNC_LIST[ItemList[Parties[!eop].Member[0]->Item].itemfunc](-1,!eop);
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
@@ -88,12 +91,14 @@ void ExecuteMove(bool eop) {
     }
         Parties[eop].Turn->PP--;
         move_result(eop);
-        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](2,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](2,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](2,eop);
           } else if (MoveList[Parties[eop].Turn->Move].Category == 2) {
         ABILITY_FUNC_LIST[AbilityList[Parties[eop].Member[0]->Ability].abilityfunc](2,eop);
         ABILITY_FUNC_LIST[AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc](-4,!eop);
         Parties[eop].Damage = (((((2 * Parties[eop].Member[0]->Level / 5 + 2) * (Parties[eop].Member[0]->SpA*tt(Parties[eop].Crit && (Parties[eop].Member[0]->StatBoosts[2] < 0),1,statboostmult(Parties[eop].Member[0]->StatBoosts[2]))) * MoveList[Parties[eop].Turn->Move].BP / (Parties[!eop].Member[0]->SpD*tt(Parties[eop].Crit && (Parties[!eop].Member[0]->StatBoosts[3] > 0),1,statboostmult(Parties[!eop].Member[0]->StatBoosts[3])))) / 50) + 2) * tt2(Parties[eop].MoveTempType == POKEMONDEX[Parties[eop].Member[0]->Poke].Type1 || Parties[eop].MoveTempType == POKEMONDEX[Parties[eop].Member[0]->Poke].Type1,1.5,1,&Parties[eop].STAB) * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] * ((rand() % 16) + 85) / 100) * Parties[eop].TemporaryMult * tt(Parties[eop].Crit,1.5,1);
-        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](1,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](1,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](1,eop);
         ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](1,eop);
         ITEM_FUNC_LIST[ItemList[Parties[!eop].Member[0]->Item].itemfunc](-1,!eop);
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
@@ -103,7 +108,8 @@ void ExecuteMove(bool eop) {
     }
         Parties[eop].Turn->PP--;
          move_result(eop);
-        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc](2,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](2,eop);
+        MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](2,eop);
           }
           }
           }  else {
