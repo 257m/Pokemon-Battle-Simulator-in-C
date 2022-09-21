@@ -149,7 +149,7 @@ Aurora_Beam,
 Baby_Doll_Eyes,
 Breaking_Swipe,
 Protect,
-Murcury_Shot,
+Mercury_Shot,
 Superpower,
 Dragon_Tail,
 Roar,
@@ -161,6 +161,7 @@ Luminous_Glow,
 Earthquake,
 Giga_Drain,
 Blinding_Flash,
+Blindstrike
 };
 
 enum {

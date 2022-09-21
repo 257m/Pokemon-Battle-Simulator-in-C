@@ -83,6 +83,19 @@ double tt2(bool condition,double ifcon,double elsecon,double* var) {
 Same as tt but makes var = the return value before returning
 */
 
+/*
+char* str_compress_5_8(const char* decompressed_str) {
+  char* compressed_str = malloc(ceil(sizeof(decompressed_str)*5/8));
+  char tempchar;
+  for (int i = 0;i < sizeof(decompressed_str);i++) {
+    tempchar = ((unsigned char)decompressed_str[i] << 3) >> 3;
+    compressed_str[i*5/8] |= (unsigned char)((tempchar << 3) >> (unsigned char)((i*5/8-floor(i*5/8))*8));
+    compressed_str[(i+1)*5/8] |= (unsigned char)(tempchar << 11 >> (((unsigned char)(((i*5/8-floor(i*5/8))*8)+5)) % 8));
+  }
+  return compressed_str;
+}
+*/
+
 struct PokemonDex {
 char Name[16]; // Stores the name of pokemon later this going to be compressed
 unsigned int Type1 : 5; // The first type of pokemon stores 0-32 if a pokemon has been declared with a type > 21 it will cause a segfault
@@ -94,7 +107,7 @@ unsigned char SpA;
 unsigned char SpD;
 unsigned char Spe;
 // These are the BST values of pokemon stats
-}__attribute__((__packed__));
+}__attribute__((__packed__)); // the gains from the pack are basiclly none-existent but I did it because I can
 
 /*
 This is how pokemon data is stored the entire dex will be stored in a array

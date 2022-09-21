@@ -1,5 +1,5 @@
 struct MyPokemon Pokemon1 = {VENUSAUR,100,20,Focus_Sash,Levitate,Jolly,31,31,31,31,31,31,
-{{Giga_Drain,0,3},{Stone_Edge,0,3},{Luminous_Glow,0,3},{Earthquake,0,3}},
+{{Giga_Drain,0,3},{Stone_Edge,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
 0,180,92,4,0,236};
 
 struct MyPokemon Pokemon2 = {48,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
@@ -23,7 +23,7 @@ struct MyPokemon Pokemon6 = {35,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
 0,236,36,4,0,228};
 
 struct MyPokemon EnemyPokemon1 = {BLASTOISE,100,20,Focus_Sash,Levitate,Jolly,31,31,31,31,31,31,
-{{Protect,0,3},{Stone_Edge,0,3},{Confuse_Ray,0,3},{Earthquake,0,3}},
+{{Protect,0,3},{Stone_Edge,0,3},{Mercury_Shot,0,3},{Earthquake,0,3}},
 0,180,92,4,0,236};
 
 struct MyPokemon EnemyPokemon2 = {19,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
