@@ -75,7 +75,7 @@ void StatMod(char et,bool eop, bool pos) {
     }
   if (et == 2) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
-  if (((Parties[eop].TemporaryMult == 0) || TypeChart[MoveList[Parties[eop].Turn->Move].Type][POKEMONDEX[Parties[soo].Member[0]->Poke].Type1] * TypeChart[MoveList[Parties[eop].Turn->Move].Type][POKEMONDEX[Parties[soo].Member[0]->Poke].Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo == !eop) return;
+  if (((Parties[eop].TemporaryMult == 0) || TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[soo].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[soo].Member[0]->Poke].Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo == !eop) return;
  if (rand() < RAND_MAX*(((double)(((unsigned char)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 4] << 1)) >> 1))/100)) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + i/2];
@@ -109,10 +109,10 @@ if (et == 2) {
   if (!Parties[!eop].Dead) {
   if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
   if (((Parties[eop].TemporaryMult == 0) || (TypeChart[MoveList[Parties[eop].MoveTempType].Type][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[MoveList[Parties[eop].MoveTempType].Type][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] <= 0)) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) return;
-if (rand()*100 < RAND_MAX*(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 1])) {
+if (rand() < RAND_MAX*((double)MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 1])/100) {
     if ((StatusImmunity(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0],eop) || !CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED))) {
     if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] < STATE_CONFUSION && Parties[!eop].Member[0]->Non_Volatile_Status == 0) {
-    Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0];
+    Parties[!eop].Member[0]->Non_Volatile_Status = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs];
       } else {
       if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] == STATE_CONFUSION) {
         SET_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_CONFUSION);
@@ -130,7 +130,7 @@ if (rand()*100 < RAND_MAX*(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 1
 }
 
 void ProtectingMove(char et,bool eop, bool pos) {
-  char rs = pos*5;
+  unsigned char rs = pos*5;
   if (et == 1) {
   if (rand() < (RAND_MAX/pow(2,Parties[eop].EFFECT_COUNTERS[EFFECT_PROTECT]))+1) {
   if (First == !eop) {
@@ -151,7 +151,7 @@ void ProtectingMove(char et,bool eop, bool pos) {
 }
 
 void RoarFunc(char et,bool eop, bool pos) {
-  char randswitch;
+  unsigned char randswitch;
   char rs = pos*5;
   if (et == 2) {
   if (Parties[!eop].Dead) return;
@@ -171,10 +171,11 @@ void RoarFunc(char et,bool eop, bool pos) {
 
 void Hp_Draining_Move(char et,bool eop, bool pos) {
   int Recovery;
-  char rs = pos*5;
+  unsigned char rs = pos*5;
   if (et == 2) {
-    Recovery = ceil(Parties[eop].Damage*MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0]/100);
+    Recovery = ceil(Parties[eop].Damage*tt(CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0],7),MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0]/100,(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0] - 128)/100));
     if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
+    if (Recovery + Parties[eop].Member[0]->CurrentHp < 0) Recovery = Parties[eop].Member[0]->CurrentHp;
     Parties[eop].Member[0]->CurrentHp += Recovery;
     if (Recovery > 0) {
     printf("%s%s regained %d hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery);
@@ -183,5 +184,14 @@ void Hp_Draining_Move(char et,bool eop, bool pos) {
     else if (Parties[eop].Damage > 0 && Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp) printf("%s%s is already at full health!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
   }
 }
+
+void EdgeCase(char et, bool eop, bool pos) {
+  unsigned char rs = pos*5;
+  if (Parties[eop].Turn->Move == Illusion_Field)
+    if (et == 2)
+      for (int i = 0;i < 8;i++)
+        if (rand() < RAND_MAX*((double)MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs]/100))
+          Boostandprint(i,-12,Parties[!eop].Member[0],!eop);
+}
     
-mf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&StatMod,&StatusInfliction,&ProtectingMove,&RoarFunc,&Hp_Draining_Move};
+mf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&StatMod,&StatusInfliction,&ProtectingMove,&RoarFunc,&Hp_Draining_Move,&EdgeCase};

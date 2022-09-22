@@ -5,8 +5,8 @@
 #include <string.h>
 #include <math.h>
 #include <stdint.h>
-#include "definitions/definitions.h"
 #include "definitions/enumdefs.h"
+#include "definitions/definitions.h"
 #include "effects/effectfuncs.h"
 #include "effects/effects.h"
 #include "moves/movedata.h"
@@ -32,7 +32,7 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
-  printf("%lu\n",sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]));
+  printf("%lu\n",sizeof(struct MyPokemon));
   Battle();
   return 0;
   }

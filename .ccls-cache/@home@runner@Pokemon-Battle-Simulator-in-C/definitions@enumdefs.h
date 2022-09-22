@@ -49,7 +49,7 @@ SORLIGHNOR,
 POOCHYENA,
 MIGHTYENA,
 BOLTYENA,
-ILSONAR,
+ILLSONAR,
 DRILLBUR,
 EXCADRILL,
 RADRILLITE,
@@ -69,8 +69,9 @@ GUINER,
 GUINIGEREM,
 GARASOLEM,
 FAETERNAERT,
-ROASINAUGHT,
+DAROASINAUGHT,
 RHINORIUM,
+HORIGHNILE
 };
 
 enum {
@@ -149,7 +150,7 @@ Aurora_Beam,
 Baby_Doll_Eyes,
 Breaking_Swipe,
 Protect,
-Murcury_Shot,
+Mercury_Shot,
 Superpower,
 Dragon_Tail,
 Roar,
@@ -160,6 +161,10 @@ Growl,
 Luminous_Glow,
 Earthquake,
 Giga_Drain,
+Blinding_Flash,
+Blindstrike,
+Web_Blast,
+Illusion_Field,
 };
 
 enum {
@@ -170,6 +175,7 @@ MF_OTHERSTATUS,
 MF_PROTECT,
 MF_ROAR,
 MF_DRAININGMOVE,
+MF_EDGECASE,
 };
 
 enum {
@@ -182,6 +188,12 @@ enum {
 NoItem,
 Leftovers,
 Focus_Sash
+};
+
+enum {
+TF_NONE,
+TF_LEFTOVERS,
+TF_FOCUS_SASH,
 };
 
 enum {

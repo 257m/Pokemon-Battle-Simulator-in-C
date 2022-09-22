@@ -1,2 +1,2 @@
 Item ItemList [] = {
-{"Nothing",&NoItemf},{"Leftovers",&Leftoversf},{"Focus Sash",&Focus_Sashf}};
+{"Nothing",TF_NONE},{"Leftovers",TF_LEFTOVERS},{"Focus Sash",TF_FOCUS_SASH}};

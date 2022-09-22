@@ -1,48 +1,50 @@
-struct MyPokemon Pokemon1 = {VENUSAUR,100,20,Focus_Sash,Levitate,Jolly,31,31,31,31,31,31,
-{Giga_Drain,0,3},{Stone_Edge,0,3},{Luminous_Glow,0,3},{Earthquake,0,3},
-0,180,92,4,0,236};
+struct MyPokemon Pokemon1 = {ILLSONAR,100,20,Focus_Sash,Levitate,Jolly,31,0,0,31,31,31,
+{{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
+0,0,0,252,252,4};
 
-struct MyPokemon Pokemon2 = {48,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
-{Luminous_Glow,0,3},{Blinding_Flash,0,3},{Super_Attack,0,3},{Mud_Slap,0,3},
-0,236,36,4,0,228};
+struct MyPokemon Pokemon2 = {HORIGHNILE,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
+{{Luminous_Glow,0,3},{Blinding_Flash,0,3},{Blindstrike,0,3},{Quick_Attack,0,3}},
+4,0,0,252,0,252};
 
-struct MyPokemon Pokemon3 = {15,100,22,Leftovers,Blaze,Impish,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Vine_Whip,0,3}
-,76,44,204,156,0,0};
+struct MyPokemon Pokemon3 = {DAROASINAUGHT,100,22,Leftovers,Blaze,Impish,31,31,31,31,31,31,
+{{Night_Daze,0,3},{Will_O_Wisp,0,3},{Super_Attack,0,3},{Confuse_Ray,0,3}}
+,0,252,0,152,0,104};
 
-struct MyPokemon Pokemon4 = {32,100,21,Leftovers,Blaze,Impish,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Bulk_Up,0,3},{Vine_Whip,0,3},
-4,212,156,36,84,12};
+struct MyPokemon Pokemon4 = {FAETERNAERT,100,21,Leftovers,Blaze,Impish,31,31,31,31,31,31,
+{{Luminous_Glow,0,3},{Blinding_Flash,0,3},{Charm,0,3},{Baby_Doll_Eyes,0,3}},
+4,0,0,252,252,0};
 
-struct MyPokemon Pokemon5 = {28,100,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Vine_Whip,0,3},{Ember,0,3},
-0,180,92,4,0,236};
+struct MyPokemon Pokemon5 = {BOLTYENA,100,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
+{{Quick_Attack,0,3},{Super_Attack,0,3},{Superpower,0,3},{Blindstrike,0,3}},
+0,252,4,0,0,252};
 
-struct MyPokemon Pokemon6 = {35,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Gust,0,3},
-0,236,36,4,0,228};
+struct MyPokemon Pokemon6 = {BULICAYJAL,100,20,Focus_Sash,Aerilate,Jolly,31,31,31,31,31,31,
+{{Double_Edge,0,3},{Super_Attack,0,3},{Icicle_Crash,0,3},{Quick_Attack,0,3}},
+0,252,4,0,0,252};
 
-struct MyPokemon EnemyPokemon1 = {BLASTOISE,100,20,Focus_Sash,Levitate,Jolly,31,31,31,31,31,31,
-{Protect,0,3},{Stone_Edge,0,3},{Confuse_Ray,0,3},{Earthquake,0,3},
-0,180,92,4,0,236};
+struct MyPokemon EnemyPokemon1 = {ILLSONAR,100,20,Focus_Sash,Levitate,Jolly,31,0,0,31,31,31,
+{{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
+0,0,0,252,252,4};
 
-struct MyPokemon EnemyPokemon2 = {19,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Sand_Attack,0,3},
-0,236,36,4,0,228};
+struct MyPokemon EnemyPokemon2 = {HORIGHNILE,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
+{{Luminous_Glow,0,3},{Blinding_Flash,0,3},{Blindstrike,0,3},{Quick_Attack,0,3}},
+4,0,0,252,0,252};
 
-struct MyPokemon EnemyPokemon3 = {4,100,22,Leftovers,Blaze,Impish,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Vine_Whip,0,3}
-,76,44,204,156,0,0};
+struct MyPokemon EnemyPokemon3 = {DAROASINAUGHT,100,22,Leftovers,Blaze,Impish,31,31,31,31,31,31,
+{{Night_Daze,0,3},{Will_O_Wisp,0,3},{Super_Attack,0,3},{Confuse_Ray,0,3}}
+,0,252,0,152,0,104};
 
-struct MyPokemon EnemyPokemon4 = {23,100,21,Leftovers,Blaze,Impish,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Bulk_Up,0,3},{Will_O_Wisp,0,3}, 4,212,156,36,84,12};
+struct MyPokemon EnemyPokemon4 = {FAETERNAERT,100,21,Leftovers,Blaze,Impish,31,31,31,31,31,31,
+{{Luminous_Glow,0,3},{Blinding_Flash,0,3},{Charm,0,3},{Baby_Doll_Eyes,0,3}},
+4,0,0,252,252,0};
 
-struct MyPokemon EnemyPokemon5 = {30,100,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Vine_Whip,0,3},{Ember,0,3},
-0,180,92,4,0,236};
+struct MyPokemon EnemyPokemon5 = {BOLTYENA,100,20,Focus_Sash,Blaze,Jolly,31,31,31,31,31,31,
+{{Quick_Attack,0,3},{Super_Attack,0,3},{Superpower,0,3},{Blindstrike,0,3}},
+0,252,4,0,0,252};
 
-struct MyPokemon EnemyPokemon6 = {29,100,20,Focus_Sash,Blaze,Naive,31,31,31,31,31,31,
-{Quick_Attack,0,3},{Stone_Edge,0,3},{Super_Attack,0,3},{Gust,0,3},
-0,236,36,4,0,228};
+struct MyPokemon EnemyPokemon6 = {BULICAYJAL,100,20,Focus_Sash,Aerilate,Jolly,31,31,31,31,31,31,
+{{Double_Edge,0,3},{Super_Attack,0,3},{Icicle_Crash,0,3},{Quick_Attack,0,3}},
+0,252,4,0,0,252};
 
-struct Party Parties [2] = {{&Pokemon1,&Pokemon2,&Pokemon3,&Pokemon4,&Pokemon5,&Pokemon6},{&EnemyPokemon1,&EnemyPokemon2,&EnemyPokemon3,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6}};
+
+struct Party Parties [2] = {{&Pokemon3,&Pokemon2,&Pokemon1,&Pokemon4,&Pokemon5,&Pokemon6},{&EnemyPokemon3,&EnemyPokemon2,&EnemyPokemon1,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6}};

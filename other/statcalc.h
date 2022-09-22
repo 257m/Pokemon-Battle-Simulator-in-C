@@ -13,8 +13,8 @@ void StatCalcMon(unsigned char partymember,bool eop) {
 }
 
 void PP_Set(unsigned partymember,bool eop) {
-    Parties[eop].Member[partymember]->Moves[0].PP = MoveList[Parties[eop].Member[partymember]->Moves[0].Move].PP * ppboostmult(Parties[eop].Member[partymember]->Moves[0].PPmult);
-  Parties[eop].Member[partymember]->Moves[1].PP = MoveList[Parties[eop].Member[partymember]->Moves[1].Move].PP * ppboostmult(Parties[eop].Member[partymember]->Moves[1].PPmult);
-  Parties[eop].Member[partymember]->Moves[2].PP = MoveList[Parties[eop].Member[partymember]->Moves[2].Move].PP * ppboostmult(Parties[eop].Member[partymember]->Moves[2].PPmult);
-  Parties[eop].Member[partymember]->Moves[3].PP = MoveList[Parties[eop].Member[partymember]->Moves[3].Move].PP * ppboostmult(Parties[eop].Member[partymember]->Moves[3].PPmult);
+    Parties[eop].Member[partymember]->Moves[0].PP = MoveList[Parties[eop].Member[partymember]->Moves[0].Move].PP * 5 * ppboostmult(Parties[eop].Member[partymember]->Moves[0].PPmult);
+  Parties[eop].Member[partymember]->Moves[1].PP = MoveList[Parties[eop].Member[partymember]->Moves[1].Move].PP * 5 * ppboostmult(Parties[eop].Member[partymember]->Moves[1].PPmult);
+  Parties[eop].Member[partymember]->Moves[2].PP = MoveList[Parties[eop].Member[partymember]->Moves[2].Move].PP * 5 * ppboostmult(Parties[eop].Member[partymember]->Moves[2].PPmult);
+  Parties[eop].Member[partymember]->Moves[3].PP = MoveList[Parties[eop].Member[partymember]->Moves[3].Move].PP * 5 * ppboostmult(Parties[eop].Member[partymember]->Moves[3].PPmult);
 }

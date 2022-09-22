@@ -47,7 +47,7 @@ unsigned int map2(unsigned int num,unsigned int newmax,unsigned int currentmax) 
   else return (num % newmax);
 }
 /*
-these map function are now obsolete but they used to make random chance more evenly distributed
+these map function are now obsolete but they used to make random number into a more uniform distribution
 */
 
 unsigned int power2(char num) {
@@ -99,8 +99,6 @@ char* str_compress_5_8(const char* decompressed_str) {
 
 struct PokemonDex {
 char Name[16]; // Stores the name of pokemon later this going to be compressed
-unsigned int Type1 : 5; // The first type of pokemon stores 0-32 if a pokemon has been declared with a type > 21 it will cause a segfault
-unsigned int Type2 : 5; // Same as Type1 but for the secondary type
 unsigned char Hp;
 unsigned char Atk;
 unsigned char Def;
@@ -108,6 +106,8 @@ unsigned char SpA;
 unsigned char SpD;
 unsigned char Spe;
 // These are the BST values of pokemon stats
+unsigned int Type1 : 5; // The first type of pokemon stores 0-32 if a pokemon has been declared with a type > 21 it will cause a segfault
+unsigned int Type2 : 5; // Same as Type1 but for the secondary type
 }__attribute__((__packed__)); // the gains from the pack are basiclly none-existent but I did it because I can
 
 /*
@@ -125,11 +125,11 @@ float TypeChart[21][21] = {
 // [3] Water
 {1 ,1 ,1 ,2 ,0.5 ,0.5 ,1 ,1 ,1 ,0 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
 // [4] Electric
-{1 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,1 ,0.5 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 ,1 },
+{1 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,1 ,0.5 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 ,2 },
 // [5] Grass
 {1 ,1 ,0.5 ,0.5 ,1 ,2 ,0.5 ,1 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 },
 // [6] Ice
-{1 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,0.5 ,0.5 ,2 ,0 ,1 ,2 ,2 ,0.5 ,2 ,1 },
+{1 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,0.5 ,0.5 ,2 ,0 ,1 ,2 ,2 ,0.5 ,2 ,2 },
 // [7] Fighting
 {1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,0 ,2 ,1 ,1 },
 // [8] Poison
@@ -139,38 +139,38 @@ float TypeChart[21][21] = {
 // [10] Flying
 {1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,0 ,0.5 ,1 ,1 ,1 },
 // [11] Psychic
-{1 ,1 ,0.5 ,1 ,1 ,2 ,1 ,0.5 ,0.5 ,1 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,0.5 ,0.5 ,1 ,1 },
+{1 ,1 ,0.5 ,1 ,1 ,2 ,1 ,0.5 ,0.5 ,1 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,0.5 ,0.5 ,1 ,2 },
 // [12] Bug 
 {1 ,1 ,2 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
 // [13] Rock
 {1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 },
 // [14] Ghost
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,0 ,1 ,1 },
+{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,0 ,1 ,0.5 },
 // [15] Dragon
 {1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 },
 // [16] Dark
-{1 ,1 ,0.5 ,0.5 ,0.5 ,1 ,2 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,0.5 ,2 },
+{1 ,1 ,0.5 ,0.5 ,0.5 ,1 ,2 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,0.5 ,0 },
 // [17] Steel
 {1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,1 ,1 },
 // [18] Fairy
 {1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
 // [19] Sound
-{1 ,1 ,0 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,0 ,0 },
+{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },
 // [20] Light
 };
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
 struct Move {
- char Name[16]; // Stores the names of the pokemon it going to be compressed soon enough to save space
- unsigned char BP; // The Basepower of the move its a value from 0-255
- unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses
- unsigned int PP : 6; // The PP value between 0-64 it should soon be a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the value but I haven't implemented that in yet
- unsigned int Type : 5; // Pretty obvious will segfault if above 21
- unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet
- int Priority : 4; // Priority of the move from -8 to 8
- unsigned int movefunc : 10; // The number value conresponding to a function stored in MOVE_FUNC_LIST
- unsigned char GNRL_PURPOSE [10]; // General info on the move it's meaning will be interpeted differently based on the movefunc
- unsigned char FLAGS; // Flags to stores things that do not vary based on movefunc
+ char Name[16]; // Stores the names of the pokemon it is going to be compressed soon enough to save space
+ unsigned char BP; // The Basepower of the move its a value from 0-255. Note that some move may have a BP over 255 in some cases but that will be handled by a PP multiplier
+ unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses.
+ unsigned int PP : 4; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
+ unsigned int Type : 5; // Pretty obvious it stores the Type of the pokemon and it will segfault if above 21 because there are only 22 types if you add the NULL type
+ unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet I could probably shave off a bit if I merged this with Priority. Actually nevermind 3x12 is 3 which is above 32 so at the very least 6 bits
+ int Priority : 4; // Priority of the move from -8 to 8. Although it will at max be -6 to 6 but 12 is higher than 8 so I need 16
+ unsigned int movefunc : 10; // Two number values conresponding to a function stored in MOVE_FUNC_LIST. The first five bits are the index of movefunc1 the next five are the index for movefunc2
+ unsigned char GNRL_PURPOSE [10]; // General info on the move it's meaning will be interpeted differently based on the movefunc. the first 5 bytes are reserved for movefunc1 the next 5 are for movefunc2
+ unsigned char FLAGS; // Flags to stores things that do not vary based on movefunc. Such as if it is a Contact Move or Not
 }__attribute__((__packed__));
 
 /*
@@ -226,7 +226,7 @@ unsigned int PPmult : 2;
 
 typedef struct { 
 char Name [12];
-unsigned int itemfunc : 8;
+unsigned char itemfunc;
 unsigned char GNRL_PURPOSE[2];
 } Item;
 
@@ -275,6 +275,9 @@ struct Party {
  double STAB;
  double TemporaryMult;
  double SpeedTM;
+ uint64_t EFFECT_FLAGS [2];
+ char EFFECT_COUNTERS [128];
+ unsigned int MoveTempType : 5;
  unsigned int Hit : 1;
  unsigned int CanMove : 1;
  unsigned int Dead : 1;
@@ -287,10 +290,7 @@ struct Party {
  unsigned int Confused : 1;
  unsigned int Switching : 1;
  unsigned char SwitchSave;
- uint64_t EFFECT_FLAGS [2];
- char EFFECT_COUNTERS [128];
- unsigned int MoveTempType : 5;
-};
+}__attribute__((__packed__));
 
 const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 
