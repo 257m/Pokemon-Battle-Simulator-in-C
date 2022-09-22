@@ -264,8 +264,8 @@ unsigned char GNRL_PURPOSE [2];
  unsigned int Spe;
  unsigned char Counter;
  unsigned char Non_Volatile_Status;
- char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
  unsigned int ItemUsable : 1;
+ char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
 };
 
 struct Party {
@@ -277,6 +277,7 @@ struct Party {
  double SpeedTM;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
+ unsigned char SwitchSave;
  unsigned int MoveTempType : 5;
  unsigned int Hit : 1;
  unsigned int CanMove : 1;
@@ -289,8 +290,7 @@ struct Party {
  unsigned int Crit : 1;
  unsigned int Confused : 1;
  unsigned int Switching : 1;
- unsigned char SwitchSave;
-}__attribute__((__packed__));
+};
 
 const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 

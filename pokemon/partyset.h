@@ -47,4 +47,4 @@ struct MyPokemon EnemyPokemon6 = {BULICAYJAL,100,20,Focus_Sash,Aerilate,Jolly,31
 0,252,4,0,0,252};
 
 
-struct Party Parties [2] = {{&Pokemon3,&Pokemon2,&Pokemon1,&Pokemon4,&Pokemon5,&Pokemon6},{&EnemyPokemon3,&EnemyPokemon2,&EnemyPokemon1,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6}};
+struct Party Parties [2] = {{&Pokemon1,&Pokemon2,&Pokemon3,&Pokemon4,&Pokemon5,&Pokemon6},{&EnemyPokemon1,&EnemyPokemon2,&EnemyPokemon3,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6}};

@@ -1,10 +1,9 @@
 void Boost(unsigned char stat,char boostrate,struct MyPokemon* pokemon) {
   pokemon->StatBoosts[stat] += boostrate;
-  if (pokemon->StatBoosts[stat] > 6) {
+  if (pokemon->StatBoosts[stat] > 6)
     pokemon->StatBoosts[stat] = 6;
-  } else if (pokemon->StatBoosts[stat] < -6) {
+  else if (pokemon->StatBoosts[stat] < -6)
     pokemon->StatBoosts[stat] = -6;
-  }
 }
 
 void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,bool eop) {
@@ -28,21 +27,9 @@ void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,b
       }
   }
 
-void BoostChance(unsigned char statc,char boostratec,struct MyPokemon* pokemonc,unsigned char Chance) {
-  if (map2(rand(),100,RAND_MAX) < Chance) {
-    Boost(statc,boostratec,pokemonc);
-  }
-};
-
 void ResetBoosts(struct MyPokemon* pokemon) {
-  pokemon->StatBoosts[0] = 0;
-  pokemon->StatBoosts[1] = 0;
-  pokemon->StatBoosts[2] = 0;
-  pokemon->StatBoosts[3] = 0;
-  pokemon->StatBoosts[4] = 0;
-  pokemon->StatBoosts[5] = 0;
-  pokemon->StatBoosts[6] = 0;
-  pokemon->StatBoosts[7] = 0;
+  for (int i = 0;i < 8;i++)
+    pokemon->StatBoosts[0] = 0;
 }
 
 char StatusImmunity(unsigned char status,bool eop) {
@@ -59,9 +46,8 @@ void Nothingf(char et, bool eop, bool pos) {
 
 void Strugglef(char et, bool eop, bool pos) {
   Parties[eop].Turn->PP = 1;
-  if (et == 2) {
-      Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
-  }
+  if (et == 2)
+    Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
 }
 
 void StatMod(char et,bool eop, bool pos) {
@@ -194,4 +180,13 @@ void EdgeCase(char et, bool eop, bool pos) {
           Boostandprint(i,-12,Parties[!eop].Member[0],!eop);
 }
     
-mf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&StatMod,&StatusInfliction,&ProtectingMove,&RoarFunc,&Hp_Draining_Move,&EdgeCase};
+mf MOVE_FUNC_LIST [] = {
+&  Nothingf,
+&  Strugglef,
+&  StatMod,
+&  StatusInfliction,
+&  ProtectingMove,
+&  RoarFunc,
+&  Hp_Draining_Move,
+&  EdgeCase,
+};

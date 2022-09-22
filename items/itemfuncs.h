@@ -26,4 +26,8 @@ void Focus_Sashf(char et,bool eop) {
   
 }
 
-gpf ITEM_FUNC_LIST [] = {&NoItemf,&Leftoversf,&Focus_Sashf};
+gpf ITEM_FUNC_LIST [] = {
+&  NoItemf,
+&  Leftoversf,
+&  Focus_Sashf,
+};

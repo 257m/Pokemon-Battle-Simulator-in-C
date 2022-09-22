@@ -56,4 +56,10 @@ void TypeImmunity(char et,bool eop) {
   }
 }
 
-gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity,&TypeChange,&TypeImmunity};
+gpf ABILITY_FUNC_LIST [] = {
+&  NoAbilityf,
+&  TypeBasedBoost,
+&  StatDecreaseImmunity,
+&  TypeChange,
+&  TypeImmunity,
+};

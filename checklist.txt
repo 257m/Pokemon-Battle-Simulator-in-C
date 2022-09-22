@@ -69,5 +69,3 @@ o | make moves have two movefuncs and double the GNRL_PURPOSE
 x | Generalize items
 
 o | Text compression // this is harder than I thought
-
-Put party back to normal
