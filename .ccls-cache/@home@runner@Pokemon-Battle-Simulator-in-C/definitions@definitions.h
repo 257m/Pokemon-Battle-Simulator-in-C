@@ -155,9 +155,8 @@ float TypeChart[21][21] = {
 // [18] Fairy
 {1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
 // [19] Sound
-{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },
+{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },7
 // [20] Light
-
 };
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
@@ -223,7 +222,7 @@ typedef struct {
 unsigned char Move;
 unsigned int PP : 6;
 unsigned int PPmult : 2;
-} MoveSlot;
+}__attribute__((__packed__)) MoveSlot;
 
 typedef struct { 
 char Name [12];
@@ -238,11 +237,27 @@ unsigned char GNRL_PURPOSE [2];
 } Ability;
 
  struct MyPokemon {
- unsigned int Poke : 10;
- unsigned int Level : 7;
+ char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
+ MoveSlot Moves [4];
  int CurrentHp;
+ unsigned int Hp;
+ unsigned int Atk;
+ unsigned int Def;
+ unsigned int SpA;
+ unsigned int SpD;
+ unsigned int Spe;
  unsigned char Item;
  unsigned char Ability;
+ unsigned char EVHp;
+ unsigned char EVAtk;
+ unsigned char EVDef;
+ unsigned char EVSpA;
+ unsigned char EVSpD;
+ unsigned char EVSpe;
+ unsigned char Counter;
+ unsigned int ItemUsable : 1;
+ unsigned int Level : 7;
+ unsigned int Non_Volatile_Status : 4;
  unsigned int Nature : 5;
  unsigned int IVHp : 5;
  unsigned int IVAtk : 5;
@@ -250,23 +265,7 @@ unsigned char GNRL_PURPOSE [2];
  unsigned int IVSpA : 5;
  unsigned int IVSpD : 5;
  unsigned int IVSpe : 5;
- MoveSlot Moves [4];
- unsigned char EVHp;
- unsigned char EVAtk;
- unsigned char EVDef;
- unsigned char EVSpA;
- unsigned char EVSpD;
- unsigned char EVSpe;
- unsigned int Hp;
- unsigned int Atk;
- unsigned int Def;
- unsigned int SpA;
- unsigned int SpD;
- unsigned int Spe;
- unsigned char Counter;
- unsigned char Non_Volatile_Status;
- char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
- unsigned int ItemUsable : 1;
+ unsigned int Poke : 10;
 };
 
 struct Party {
@@ -278,6 +277,7 @@ struct Party {
  double SpeedTM;
  uint64_t EFFECT_FLAGS [2];
  char EFFECT_COUNTERS [128];
+ unsigned char SwitchSave;
  unsigned int MoveTempType : 5;
  unsigned int Hit : 1;
  unsigned int CanMove : 1;
@@ -290,8 +290,7 @@ struct Party {
  unsigned int Crit : 1;
  unsigned int Confused : 1;
  unsigned int Switching : 1;
- unsigned char SwitchSave;
-}__attribute__((__packed__));
+};
 
 const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
 

@@ -18,6 +18,14 @@ char* stratt(const char *s1, const char *s2)
 stratt simply returns str1 + str2 without changing str1
 */
 
+char* str_delete_char(char* string,unsigned int del_char) {
+  char lensave = (strlen(string)-del_char)+2;
+  for (int i = del_char;i < lensave;i++) {
+    string[i] = string[i+1];
+  }
+  return string;
+}
+
 double statboostmult(char statboost) {
   if (statboost >= 0) {
     return (statboost*0.5)+1;
@@ -155,7 +163,7 @@ float TypeChart[21][21] = {
 // [18] Fairy
 {1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
 // [19] Sound
-{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },
+{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },7
 // [20] Light
 };
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
@@ -222,7 +230,7 @@ typedef struct {
 unsigned char Move;
 unsigned int PP : 6;
 unsigned int PPmult : 2;
-} MoveSlot;
+}__attribute__((__packed__)) MoveSlot;
 
 typedef struct { 
 char Name [12];
@@ -237,11 +245,27 @@ unsigned char GNRL_PURPOSE [2];
 } Ability;
 
  struct MyPokemon {
- unsigned int Poke : 10;
- unsigned int Level : 7;
+ char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
+ MoveSlot Moves [4];
  int CurrentHp;
+ unsigned int Hp;
+ unsigned int Atk;
+ unsigned int Def;
+ unsigned int SpA;
+ unsigned int SpD;
+ unsigned int Spe;
  unsigned char Item;
  unsigned char Ability;
+ unsigned char EVHp;
+ unsigned char EVAtk;
+ unsigned char EVDef;
+ unsigned char EVSpA;
+ unsigned char EVSpD;
+ unsigned char EVSpe;
+ unsigned char Counter;
+ unsigned int ItemUsable : 1;
+ unsigned int Level : 7;
+ unsigned int Non_Volatile_Status : 4;
  unsigned int Nature : 5;
  unsigned int IVHp : 5;
  unsigned int IVAtk : 5;
@@ -249,23 +273,7 @@ unsigned char GNRL_PURPOSE [2];
  unsigned int IVSpA : 5;
  unsigned int IVSpD : 5;
  unsigned int IVSpe : 5;
- MoveSlot Moves [4];
- unsigned char EVHp;
- unsigned char EVAtk;
- unsigned char EVDef;
- unsigned char EVSpA;
- unsigned char EVSpD;
- unsigned char EVSpe;
- unsigned int Hp;
- unsigned int Atk;
- unsigned int Def;
- unsigned int SpA;
- unsigned int SpD;
- unsigned int Spe;
- unsigned char Counter;
- unsigned char Non_Volatile_Status;
- unsigned int ItemUsable : 1;
- char StatBoosts [8]; // [0] Attack [1] Defense [2] Special Attack [3] Special Defense [4] Speed [5] Accuracy [6] Evasion [7] Crit
+ unsigned int Poke : 10;
 };
 
 struct Party {
@@ -290,6 +298,7 @@ struct Party {
  unsigned int Crit : 1;
  unsigned int Confused : 1;
  unsigned int Switching : 1;
+ unsigned int AI_MODE : 1;
 };
 
 const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
@@ -298,7 +307,7 @@ const char Itemtext[2][11] = {"Not Usable", "Usable"};
 
 const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
-const char EOPTEXT[4][14] = {"","The opposing ","","the opposing "};
+const char EOPTEXT[4][14] = {"","The opposing ","","the opposing ","your","enemy","Player","Enemy"};
 
 struct Party Parties [2];
 bool StatCalc = 1;
@@ -312,11 +321,11 @@ char x[32];
 bool EndFirst;
 unsigned int TurnCounter = 0;
 bool HideMove = 0;
-bool AI_MODE = 0;
 
 Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
 
 #define CRIT_CHANCE 16
+#define NUMBER_OF_MOVES 49
 #define REMOVE_FIRST_FIVE_BITS 31

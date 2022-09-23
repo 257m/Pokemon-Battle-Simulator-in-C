@@ -32,7 +32,6 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
-  printf("%lu\n",sizeof(struct MyPokemon));
   Battle();
   return 0;
   }

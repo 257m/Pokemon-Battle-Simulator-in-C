@@ -166,6 +166,7 @@ Blindstrike,
 Web_Blast,
 Illusion_Field,
 Double_Edge,
+Buzsring,
 };
 
 enum {

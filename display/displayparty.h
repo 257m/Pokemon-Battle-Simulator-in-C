@@ -1,6 +1,7 @@
 void displaymember(unsigned int PartyMember,bool eop) {
     printf("\e[1;37m\nP%d:\e[0m\n",PartyMember+1);
     printf("Pokemon: %s\n",POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name);
+    printf("Level: %d\n",Parties[eop].Member[PartyMember]->Level);
     printf("Health: %d/%d\n",Parties[eop].Member[PartyMember]->CurrentHp,Parties[eop].Member[PartyMember]->Hp);
     printf("Attack: %d\n",Parties[eop].Member[PartyMember]->Atk);
     printf("Defense: %d\n",Parties[eop].Member[PartyMember]->Def);
@@ -27,17 +28,5 @@ void displayparty(bool eop) {
       printf("\nPartyMember: ");
       fgets(x,31,stdin);
       x[strcspn(x, "\n")] = 0;
-      if (strcmp(x,"P1") == 0) {
-      displaymember(0,eop);
-      } else if (strcmp(x,"P2") == 0) {
-      displaymember(1,eop);
-      } else if (strcmp(x,"P3") == 0) {
-      displaymember(2,eop);
-      } else if (strcmp(x,"P4") == 0) {
-      displaymember(3,eop);
-      } else if (strcmp(x,"P5") == 0) {
-      displaymember(4,eop);
-      } else if (strcmp(x,"P6") == 0) {
-      displaymember(5,eop);
-    }
+      if (x[1] > 48 && x[1] < 55) displaymember(x[1]-49,eop);
 }
