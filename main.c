@@ -24,6 +24,7 @@
 #include "executions/endofturn.h"
 #include "pokemon/partyset.h"
 #include "other/statcalc.h"
+#include "other/retrieve.h"
 #include "battle.h"
 
 int main(void) {

@@ -4,4 +4,4 @@ main.o main.d : main.c definitions/enumdefs.h definitions/definitions.h \
   pokemon/pokedata.h items/itemfuncs.h items/helditems.h \
   display/displayparty.h other/win.h other/switching.h \
   display/displayfuncs.h executions/execution.h executions/endofturn.h \
-  pokemon/partyset.h other/statcalc.h battle.h
+  pokemon/partyset.h other/statcalc.h other/retrieve.h battle.h

@@ -307,7 +307,7 @@ const char Itemtext[2][11] = {"Not Usable", "Usable"};
 
 const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
-const char EOPTEXT[4][14] = {"","The opposing ","","the opposing ","your","enemy","Player","Enemy"};
+const char EOPTEXT[][14] = {"","The opposing ","","the opposing ","your","enemy","Player","Enemy"};
 
 struct Party Parties [2];
 bool StatCalc = 1;
