@@ -1,5 +1,5 @@
 void displaymember(unsigned int PartyMember,bool eop) {
-    printf("\e[1;37m\nP%d:\e[0m\n",PartyMember+1);
+    printf("\e[1;37mP%d:\e[0m\n",PartyMember+1);
     printf("Pokemon: %s\n",POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name);
     printf("Level: %d\n",Parties[eop].Member[PartyMember]->Level);
     printf("Health: %d/%d\n",Parties[eop].Member[PartyMember]->CurrentHp,Parties[eop].Member[PartyMember]->Hp);
@@ -19,14 +19,16 @@ void displaymember(unsigned int PartyMember,bool eop) {
 }
 
 void displayparty(bool eop) {
-    printf("\n\e[1;37mP1:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
-      printf("\e[1;37mP2:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[1]->Poke].Name,Parties[eop].Member[1]->CurrentHp,Parties[eop].Member[1]->Hp);
-      printf("\e[1;37mP3:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[2]->Poke].Name,Parties[eop].Member[2]->CurrentHp,Parties[eop].Member[2]->Hp);
-      printf("\e[1;37mP4:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[3]->Poke].Name,Parties[eop].Member[3]->CurrentHp,Parties[eop].Member[3]->Hp);
-      printf("\e[1;37mP5:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[4]->Poke].Name,Parties[eop].Member[4]->CurrentHp,Parties[eop].Member[4]->Hp);
-      printf("\e[1;37mP6:\e[0m %s %d/%d\n",POKEMONDEX[Parties[eop].Member[5]->Poke].Name,Parties[eop].Member[5]->CurrentHp,Parties[eop].Member[5]->Hp);
+  for (int i = 0;i < 6;i++) {  
+  printf("\e[1;37mP%d:\e[0m %s %d/%d\n",i+1,POKEMONDEX[Parties[eop].Member[i]->Poke].Name,Parties[eop].Member[i]->CurrentHp,Parties[eop].Member[i]->Hp);
+    }
       printf("\nPartyMember: ");
       fgets(x,31,stdin);
       x[strcspn(x, "\n")] = 0;
-      if (x[1] > 48 && x[1] < 55) displaymember(x[1]-49,eop);
+      printf("\033[1A");
+      printf("\033[2K");
+      if (x[1] > 48 && x[1] < 55) {
+        displaymember(x[1]-49,eop);
+        printf("\n");
+        }
 }

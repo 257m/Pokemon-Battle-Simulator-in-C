@@ -14,8 +14,8 @@
 #include "abilities/abilities.h"
 #include "abilities/abilityfuncs.h"
 #include "pokemon/pokedata.h"
-#include "items/itemfuncs.h"
 #include "items/helditems.h"
+#include "items/itemfuncs.h"
 #include "display/displayparty.h"
 #include "other/win.h"
 #include "other/switching.h"
@@ -30,6 +30,9 @@
 int main(void) {
   unsigned long int seed = time(NULL);
   //unsigned long int seed = 1662863004;
+  system("/bin/stty echo");
+  system ("/bin/stty cooked");
+  printf("\e[?25h");
   system("clear");
   srand(seed);    
   printf("%d\n",seed);

@@ -44,9 +44,9 @@ struct MyPokemon* pokemon_clear(struct MyPokemon* pokemon) {
 
 struct MyPokemon* pokemon_randomize(struct MyPokemon* pokemon) {
  for (int i = 0;i < 4;i++) {
- pokemon->Moves[i].Move = rand() % sizeof(MoveList)/sizeof(MoveList[0]);
- pokemon->Moves[i].PP = 0;
- pokemon->Moves[i].PPmult = rand() % 4;
+   pokemon->Moves[i].Move = rand() % sizeof(MoveList)/sizeof(MoveList[0]);
+   pokemon->Moves[i].PP = 0;
+   pokemon->Moves[i].PPmult = rand() % 4;
    }
  pokemon->Item = rand() % sizeof(ItemList)/sizeof(ItemList[0]);
  pokemon->Ability = rand() % sizeof(AbilityList)/sizeof(AbilityList[0]);

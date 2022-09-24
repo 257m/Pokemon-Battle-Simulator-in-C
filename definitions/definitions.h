@@ -233,13 +233,13 @@ unsigned int PPmult : 2;
 }__attribute__((__packed__)) MoveSlot;
 
 typedef struct { 
-char Name [12];
+char Name [16];
 unsigned char itemfunc;
 unsigned char GNRL_PURPOSE[2];
 } Item;
 
 typedef struct {
-char Name [15];
+char Name [16];
 unsigned char abilityfunc;
 unsigned char GNRL_PURPOSE [2];
 } Ability;
@@ -329,3 +329,4 @@ void Switch(bool party,unsigned char member);
 #define CRIT_CHANCE 16
 #define NUMBER_OF_MOVES 49
 #define REMOVE_FIRST_FIVE_BITS 31
+#define KEEP_LAST_FOUR_BITS 15

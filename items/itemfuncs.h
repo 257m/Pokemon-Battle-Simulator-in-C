@@ -26,8 +26,21 @@ void Focus_Sashf(char et,bool eop) {
   
 }
 
+void Berries(char et,bool eop) {
+  if (et == 3 || et == -3) {
+    if (Parties[eop].Member[0]->ItemUsable) {
+    if (Parties[eop].Member[0]->CurrentHp <= Parties[eop].Member[0]->Hp/(ItemList[Parties[eop].Member[0]->Item].GNRL_PURPOSE[1] & KEEP_LAST_FOUR_BITS)) {
+      printf("%s%s's %s actiated!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,ItemList[Parties[eop].Member[0]->Item].Name);
+      Parties[eop].Member[0]->ItemUsable = 0;
+      Boostandprint(ItemList[Parties[eop].Member[0]->Item].GNRL_PURPOSE[0] >> 4,ItemList[Parties[eop].Member[0]->Item].GNRL_PURPOSE[0] & KEEP_LAST_FOUR_BITS,Parties[eop].Member[0],eop);
+      }
+  }
+}
+  }
+
 gpf ITEM_FUNC_LIST [] = {
 &  NoItemf,
 &  Leftoversf,
 &  Focus_Sashf,
+&  Berries,
 };

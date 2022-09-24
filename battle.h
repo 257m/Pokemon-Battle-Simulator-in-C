@@ -107,13 +107,12 @@ int Battle() {
     Parties[1].Switching = 0;
       
     RetrieveUserMove(0);
-    RetrieveUserMove(1);
+    if (Reset == 0) RetrieveUserMove(1);
       
       if(Reset == 0) {
       Retrieve = 0;
       Execute = 1;
         } else {
-        printf("\n\n");
         Reset = 0;
         }
       }

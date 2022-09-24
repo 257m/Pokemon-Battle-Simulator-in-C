@@ -1,4 +1,5 @@
 void RetrieveUserMove(bool eop) {
+  char tempchar [1] = "";
   printf("Enter %s move: ",EOPTEXT[4+eop]);
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
@@ -6,101 +7,74 @@ void RetrieveUserMove(bool eop) {
     printf("\033[1A");
     printf("\033[2K");
       }
-    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[eop].Member[0]->Moves[0].Move].Name) == 0) {
-      Parties[eop].Turn = &Parties[eop].Member[0]->Moves[0];
-      if(Parties[eop].Member[0]->Moves[0].Move == Nothing) {
+    for (int i = 0;i < 4;i++) {
+    tempchar[0] = 49+i;
+    if ((x[0] == tempchar[0] && x[1] == 0) || strcmp(x,stratt("Move ",tempchar)) == 0 || strcmp(x,MoveList[Parties[eop].Member[0]->Moves[i].Move].Name) == 0) {
+      Parties[eop].Turn = &Parties[eop].Member[0]->Moves[i];
+      if(Parties[eop].Member[0]->Moves[i].Move == Nothing) {
         printf("There is no move in that slot.");
+        printf("\e[?25l");
+        system ("/bin/stty raw");
+        system ("/bin/stty -echo");
+        getchar();
+        system ("/bin/stty echo");
+        system ("/bin/stty cooked");
+        printf("\e[?25h");
+        printf("\033[2K\r");
         Reset = 1;
-  } else if (Parties[eop].Member[0]->Moves[0].PP <= 0) {
-    if (Parties[eop].Member[0]->Moves[1].PP <= 0 && Parties[eop].Member[0]->Moves[2].PP <= 0 && Parties[eop].Member[0]->Moves[3].PP <= 0) {
+  } else if (Parties[eop].Member[0]->Moves[i].PP <= 0) {
+    if (Parties[eop].Member[0]->Moves[0].PP && Parties[eop].Member[0]->Moves[1].PP <= 0 && Parties[eop].Member[0]->Moves[2].PP <= 0 && Parties[eop].Member[0]->Moves[3].PP <= 0) {
       Parties[eop].Turn = &Struggle_Slot;
     } else {
-      printf("There no more PP left in that move");
+      printf("There no more PP left in that move.");
+      printf("\e[?25l");
+      system ("/bin/stty raw");
+      system ("/bin/stty -echo");
+      getchar();
+      system ("/bin/stty echo");
+      system ("/bin/stty cooked");
+      printf("\e[?25h");
+      printf("\033[2K\r");
       Reset = 1;
     }
   }
+    return;
     }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[eop].Member[0]->Moves[1].Move].Name) == 0) {
-       Parties[eop].Turn = &Parties[eop].Member[0]->Moves[1];
-      if(Parties[eop].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[eop].Member[0]->Moves[1].PP <= 0) {
-    if (Parties[eop].Member[0]->Moves[0].PP <= 0 && Parties[eop].Member[0]->Moves[2].PP <= 0 && Parties[eop].Member[0]->Moves[3].PP <= 0) {
-      Parties[eop].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-    }
-    }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[eop].Member[0]->Moves[2].Move].Name) == 0) {
-       Parties[eop].Turn = &Parties[eop].Member[0]->Moves[2];
-       if(Parties[eop].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[eop].Member[0]->Moves[2].PP <= 0) {
-    if (Parties[eop].Member[0]->Moves[0].PP <= 0 && Parties[eop].Member[0]->Moves[1].PP <= 0 && Parties[eop].Member[0]->Moves[3].PP <= 0) {
-      Parties[eop].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-    }
-    }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[eop].Member[0]->Moves[3].Move].Name) == 0) {
-       Parties[eop].Turn = &Parties[eop].Member[0]->Moves[3];
-       if(Parties[eop].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[eop].Member[0]->Moves[3].PP <= 0) {
-    if (Parties[eop].Member[0]->Moves[0].PP <= 0 && Parties[eop].Member[0]->Moves[1].PP <= 0 && Parties[eop].Member[0]->Moves[2].PP <= 0) {
-      Parties[eop].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-    }
-    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[1]->Poke].Name) == 0 || strcmp(x,"P2") == 0) {
+      }
+    for (int i = 0;i < 5;i++) {
+    tempchar[0] = 50+i;
+    if (strcmp(x,stratt("Switch to P",tempchar)) == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name) == 0 || strcmp(x,stratt("P",tempchar)) == 0) {
        Parties[eop].SwitchSave = 1;
        Parties[eop].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[eop].Member[1]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[1]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
+      if(strcmp(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[i+1]->CurrentHp <= 0) {
+        printf("There is no pokemon in that party slot.");
+        printf("\e[?25l");
+        system ("/bin/stty raw");
+        system ("/bin/stty -echo");
+        getchar();
+        system ("/bin/stty echo");
+        system ("/bin/stty cooked");
+        printf("\e[?25h");
+        printf("\033[2K\r");
         Reset = 1;
       }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[2]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[2]->Poke].Name) == 0 || strcmp(x,"P3") == 0) {
-       Parties[eop].SwitchSave = 2;
-       Parties[eop].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[eop].Member[2]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[2]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
+      return;
+    }
       }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[3]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[3]->Poke].Name) == 0  || strcmp(x,"P4") == 0) {
-       Parties[eop].SwitchSave = 3;
-       Parties[eop].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[eop].Member[3]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[3]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[4]->Poke].Name) == 0 || strcmp(x,"P5") == 0) {
-       Parties[eop].SwitchSave = 4;
-       Parties[eop].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[eop].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[4]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[5]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[5]->Poke].Name) == 0 || strcmp(x,"P6") == 0) {
-       Parties[eop].SwitchSave = 5;
-       Parties[eop].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[eop].Member[5]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[5]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"View Party") == 0 || strcmp(x,"View") == 0 || strcmp(x,"Party") == 0) {
+    
+    if (strcmp(x,"View Party") == 0 || strcmp(x,"View") == 0 || strcmp(x,"Party") == 0) {
      displayparty(eop);
      Reset = 1;
     } else {
       printf("Move Selection Failed. Please retry.");
+      printf("\e[?25l");
+      system ("/bin/stty raw");
+      system ("/bin/stty -echo");
+      getchar();
+      system ("/bin/stty echo");
+      system ("/bin/stty cooked");
+      printf("\e[?25h");
+      printf("\033[2K\r");
       Reset = 1;
     }
 }

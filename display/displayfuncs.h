@@ -35,9 +35,16 @@ void move_result(bool eop) {
         printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 
+  
         if (Parties[!eop].Member[0]->CurrentHp <= 0) {
           printf("%s%s fainted!\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
           SwitchIn(!eop);
           Parties[!eop].Dead = 1;
+        }
+
+        if (Parties[eop].Member[0]->CurrentHp <= 0) {
+          printf("%s%s fainted!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+          SwitchIn(eop);
+          Parties[eop].Dead = 1;
         }
 }

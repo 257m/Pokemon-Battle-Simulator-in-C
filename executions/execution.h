@@ -3,10 +3,12 @@ void UDBOG(int* hp,int* damage) {
   *hp -= *damage;
 }
 
-void UDBOG2(int *hp,int damage,bool eop) {
+void UDBOG2(int *hp,int damage,bool eop,unsigned status) {
   if (*hp-damage < 0) damage = *hp;
   *hp -= damage;
+  if (STATE_CONFUSION) {
   printf("It hurt itself in its confusion\n");
+    }
   printf("%s%s is at %d/%d\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
 }
 
@@ -52,7 +54,7 @@ void ExecuteMove(bool eop) {
           if (rand() % 2) {
             Parties[eop].CanMove = 0;
             Parties[eop].Confused = 1;
-            UDBOG2(&Parties[eop].Member[0]->CurrentHp,(((((2 * Parties[eop].Member[0]->Level / 5 + 2) * (Parties[eop].Member[0]->Atk*statboostmult(Parties[eop].Member[0]->StatBoosts[0])) * 40 / (Parties[eop].Member[0]->Def*statboostmult(Parties[eop].Member[0]->StatBoosts[1]))) / 50) + 2) * ((rand() % 16) + 85) / 100),eop);
+            UDBOG2(&Parties[eop].Member[0]->CurrentHp,(((((2 * Parties[eop].Member[0]->Level / 5 + 2) * (Parties[eop].Member[0]->Atk*statboostmult(Parties[eop].Member[0]->StatBoosts[0])) * 40 / (Parties[eop].Member[0]->Def*statboostmult(Parties[eop].Member[0]->StatBoosts[1]))) / 50) + 2) * ((rand() % 16) + 85) / 100),eop,STATE_CONFUSION);
           }
           Parties[eop].EFFECT_COUNTERS[EFFECT_CONFUSION]--;
             }
@@ -76,6 +78,8 @@ void ExecuteMove(bool eop) {
          move_result(eop);
          MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](2,eop,0);
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](2,eop,1);
+         ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](3,eop);
+         ITEM_FUNC_LIST[ItemList[Parties[!eop].Member[0]->Item].itemfunc](-3,!eop);
           }
         else if (MoveList[Parties[eop].Turn->Move].Category == 1) {
         ABILITY_FUNC_LIST[AbilityList[Parties[eop].Member[0]->Ability].abilityfunc](2,eop);
@@ -94,6 +98,8 @@ void ExecuteMove(bool eop) {
         move_result(eop);
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](2,eop,0);
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](2,eop,1);
+        ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](3,eop);
+        ITEM_FUNC_LIST[ItemList[Parties[!eop].Member[0]->Item].itemfunc](-3,!eop);
           } else if (MoveList[Parties[eop].Turn->Move].Category == 2) {
         ABILITY_FUNC_LIST[AbilityList[Parties[eop].Member[0]->Ability].abilityfunc](2,eop);
         ABILITY_FUNC_LIST[AbilityList[Parties[!eop].Member[0]->Ability].abilityfunc](-4,!eop);
@@ -111,6 +117,8 @@ void ExecuteMove(bool eop) {
          move_result(eop);
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](2,eop,0);
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc & REMOVE_FIRST_FIVE_BITS](2,eop,1);
+        ITEM_FUNC_LIST[ItemList[Parties[eop].Member[0]->Item].itemfunc](3,eop);
+        ITEM_FUNC_LIST[ItemList[Parties[!eop].Member[0]->Item].itemfunc](-3,!eop);
           }
           }
           }  else {

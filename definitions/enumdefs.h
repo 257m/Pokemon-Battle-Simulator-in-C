@@ -87,6 +87,17 @@ STATE_FLINCH,
 };
 
 enum {
+STAT_ATK,
+STAT_DEF,
+STAT_SPA,
+STAT_SPD,
+STAT_SPE,
+STAT_ACC,
+STAT_EVA,
+STAT_CRIT,
+};
+
+enum {
 Hardy,
 Lonely,
 Brave,
@@ -189,13 +200,15 @@ SPECIAL,
 enum {
 NoItem,
 Leftovers,
-Focus_Sash
+Focus_Sash,
+Salac_Berry
 };
 
 enum {
 TF_NONE,
 TF_LEFTOVERS,
 TF_FOCUS_SASH,
+TF_BERRIES,
 };
 
 enum {
