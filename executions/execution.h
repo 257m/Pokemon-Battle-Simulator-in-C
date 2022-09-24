@@ -6,7 +6,12 @@ void UDBOG(int* hp,int* damage) {
 void UDBOG2(int *hp,int damage,bool eop,unsigned status) {
   if (*hp-damage < 0) damage = *hp;
   *hp -= damage;
-  if (STATE_CONFUSION) {
+  if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_BURN) {
+  printf("%s took some damage from its burn!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+  } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_POISON) {
+    
+  }
+  else if (Parties[eop].Member[0]->Non_Volatile_Status == STATE_CONFUSION) {
   printf("It hurt itself in its confusion\n");
     }
   printf("%s%s is at %d/%d\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);

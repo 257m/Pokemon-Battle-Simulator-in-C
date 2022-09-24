@@ -15,7 +15,7 @@ void SwitchIn(const bool eop) {
           x[strcspn(x, "\n")] = 0;
           system("/bin/stty -echo");
           printf("\033[1A");
-          printf("\033[2K");
+          printf("\033[2K\r");
           if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[1]->Poke].Name) == 0 || strcmp(x,"P2") == 0) {
             if (Parties[eop].Member[1]->CurrentHp > 0) {
             ResetBoosts(Parties[eop].Member[0]);

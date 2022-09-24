@@ -325,6 +325,7 @@ bool HideMove = 0;
 Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
+void SwitchIn(const bool eop);
 
 #define CRIT_CHANCE 16
 #define NUMBER_OF_MOVES 49

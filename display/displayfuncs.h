@@ -41,10 +41,4 @@ void move_result(bool eop) {
           SwitchIn(!eop);
           Parties[!eop].Dead = 1;
         }
-
-        if (Parties[eop].Member[0]->CurrentHp <= 0) {
-          printf("%s%s fainted!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
-          SwitchIn(eop);
-          Parties[eop].Dead = 1;
-        }
 }
