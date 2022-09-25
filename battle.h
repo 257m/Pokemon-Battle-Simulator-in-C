@@ -42,7 +42,7 @@ int Battle() {
     if (strcmp(x,"y") == 0) {
       for (int j = 0;j < 2;j++) {
       for (int i = 0;i < 6;i++) {
-      pokemon_randomize(Parties[j].Member[i]);
+      pokemon_randomize(pokemon_clear(Parties[j].Member[i]));
       }
       }
       }
