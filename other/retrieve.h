@@ -5,7 +5,7 @@ void RetrieveUserMove(bool eop) {
     x[strcspn(x, "\n")] = 0;
     if (HideMove) {
     printf("\033[1A");
-    printf("\033[2K");
+    printf("\033[2K\r");
       }
     for (int i = 0;i < 4;i++) {
     tempchar[0] = 49+i;
@@ -66,10 +66,10 @@ void RetrieveUserMove(bool eop) {
      displayparty(eop);
      Reset = 1;
     } else {
-      printf("Move Selection Failed. Please retry.");
       printf("\e[?25l");
       system ("/bin/stty raw");
       system ("/bin/stty -echo");
+      printf("Move Selection Failed. Please retry.");
       getchar();
       system ("/bin/stty echo");
       system ("/bin/stty cooked");

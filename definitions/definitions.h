@@ -92,6 +92,11 @@ double tt2(bool condition,double ifcon,double elsecon,double* var) {
 Same as tt but makes var = the return value before returning
 */
 
+double never0(double num) {
+  if (num > 0 && num < 1) num = 1;
+  return num;
+}
+
 /*
 char* str_compress_5_8(const char* decompressed_str) {
   char* compressed_str = malloc(ceil(sizeof(decompressed_str)*5/8));
@@ -309,6 +314,8 @@ const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Para
 
 const char EOPTEXT[][14] = {"","The opposing ","","the opposing ","your","enemy","Player","Enemy"};
 
+const char TypeNames[][14] = {"NOTYPE","NORMAL","FIRE","WATER","ELECTRIC","GRASS","ICE","FIGHTING","POISON","GROUND","FLYING","PSYCHIC","BUG","ROCK","GHOST","DRAGON","DARK","STEEL","FAIRY","SOUND","LIGHT","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL"};
+
 struct Party Parties [2];
 bool StatCalc = 1;
 bool BattleMode = 0;
@@ -328,6 +335,5 @@ void Switch(bool party,unsigned char member);
 void SwitchIn(const bool eop);
 
 #define CRIT_CHANCE 16
-#define NUMBER_OF_MOVES 49
 #define REMOVE_FIRST_FIVE_BITS 31
 #define KEEP_LAST_FOUR_BITS 15

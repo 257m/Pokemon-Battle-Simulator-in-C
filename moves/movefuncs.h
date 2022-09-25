@@ -104,7 +104,7 @@ if (rand() < RAND_MAX*((double)MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs
         SET_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_CONFUSION);
         if (Parties[!eop].EFFECT_COUNTERS[EFFECT_CONFUSION] == 0) Parties[!eop].EFFECT_COUNTERS[EFFECT_CONFUSION] = (rand() % 4) + 2;
         }
-      else {
+      else if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] == STATE_FLINCH) {
         Parties[!eop].Flinch = 1;
       }
       }
@@ -159,7 +159,8 @@ void Hp_Draining_Move(char et,bool eop, bool pos) {
   int Recovery;
   unsigned char rs = pos*5;
   if (et == 2) {
-    Recovery = ceil(Parties[eop].Damage*tt(CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0],7),MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0]/100,(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0] - 128)/100));
+    Recovery = Parties[eop].Damage*MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs]/100;
+    if (CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 1],7)) Recovery *= -1;
     if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
     if (Recovery + Parties[eop].Member[0]->CurrentHp < 0) Recovery = Parties[eop].Member[0]->CurrentHp;
     Parties[eop].Member[0]->CurrentHp += Recovery;
@@ -167,7 +168,7 @@ void Hp_Draining_Move(char et,bool eop, bool pos) {
     printf("%s%s regained %d hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery);
     printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
     } else if (Recovery < 0) {
-      printf("%s%s took %d damage as recoil!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery);
+      printf("%s%s took %d damage as recoil!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery*-1);
       printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
       if (Parties[eop].Member[0]->CurrentHp <= 0) {
           printf("%s%s fainted!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);

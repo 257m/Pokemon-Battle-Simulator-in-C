@@ -75,7 +75,7 @@ struct MyPokemon Pokemon1 = {
 .IVSpA = 31,
 .IVSpD = 31,
 .IVSpe = 31,
-.Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
+.Moves = {{Double_Edge,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
 .EVHp = 0,
 .EVAtk = 0,
 .EVDef = 0,
@@ -207,7 +207,7 @@ struct MyPokemon EnemyPokemon1 = {
 .IVSpA = 31,
 .IVSpD = 31,
 .IVSpe = 31,
-.Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
+.Moves = {{Double_Edge,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
 .EVHp = 0,
 .EVAtk = 0,
 .EVDef = 0,
@@ -333,7 +333,7 @@ struct Party Parties [2] = {
   &Pokemon3,
   &Pokemon4,
   &Pokemon5,
-  &Pokemon6
+  &Pokemon6,
 },
 {
   &EnemyPokemon1,

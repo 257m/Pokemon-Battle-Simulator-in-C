@@ -2,10 +2,13 @@ void NoItemf(char et,bool eop) {
 }
 
 void Leftoversf(char et,bool eop) {  
+    int Recovery;
     if (et == 5) {
     if (Parties[eop].Member[0]->ItemUsable) {
       if (Parties[eop].Member[0]->CurrentHp < Parties[eop].Member[0]->Hp) {
-        Parties[eop].Member[0]->CurrentHp += Parties[eop].Member[0]->Hp/16;
+        Recovery = Parties[eop].Member[0]->Hp/16;
+        if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
+        Parties[eop].Member[0]->CurrentHp += Recovery;
         printf("%s restored a little HP using its Leftovers\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
         printf("%s is at %d/%d hp\n\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
           }

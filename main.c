@@ -36,6 +36,30 @@ int main(void) {
   system("clear");
   srand(seed);    
   printf("%d\n",seed);
+  // Pokemon Game data display (will segfault if uncommented)
+  /*for (int i = 0;i < 1024;i++) {
+    printf("%d\t",i);
+    printf("%s\t",POKEMONDEX[i].Name);
+    printf("%d\t",POKEMONDEX[i].Hp);
+    printf("%d\t",POKEMONDEX[i].Atk);
+    printf("%d\t",POKEMONDEX[i].Def);
+    printf("%d\t",POKEMONDEX[i].SpA);
+    printf("%d\t",POKEMONDEX[i].SpD);
+    printf("%d\t",POKEMONDEX[i].Spe);
+    printf("%s\t",TypeNames[POKEMONDEX[i].Type1]);
+    printf("%s\n",TypeNames[POKEMONDEX[i].Type2]);
+  }*/
+  // Move data display
+  /*for (int i = 0;i < 1024;i++) {
+    printf("%d\t",i);
+    printf("%s\t",MoveList[i].Name);
+    printf("%u\t",MoveList[i].BP);
+    printf("%u\t",MoveList[i].Accuracy);
+    printf("%u\t",MoveList[i].PP);
+    printf("%s\t",TypeNames[MoveList[i].Type]);
+    printf("%u\t",MoveList[i].Category);
+    printf("%d\n",MoveList[i].Priority);
+  }*/
   Battle();
   return 0;
   }

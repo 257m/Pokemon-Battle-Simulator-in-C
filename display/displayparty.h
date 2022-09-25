@@ -19,8 +19,8 @@ void displaymember(unsigned int PartyMember,bool eop) {
 }
 
 void displayparty(bool eop) {
-  for (int i = 0;i < 6;i++) {  
-  printf("\e[1;37mP%d:\e[0m %s %d/%d\n",i+1,POKEMONDEX[Parties[eop].Member[i]->Poke].Name,Parties[eop].Member[i]->CurrentHp,Parties[eop].Member[i]->Hp);
+  for (int i = 0;i < 6;i++) {   
+printf("\e[1;37mP%d:\e[0m %s\r\t\t\t\t\033[1CLvl:%d\t\033[1CHp:%d/%d\n",i+1,POKEMONDEX[Parties[eop].Member[i]->Poke].Name,Parties[eop].Member[i]->Level,Parties[eop].Member[i]->CurrentHp,Parties[eop].Member[i]->Hp);
     }
       printf("\nPartyMember: ");
       fgets(x,31,stdin);
