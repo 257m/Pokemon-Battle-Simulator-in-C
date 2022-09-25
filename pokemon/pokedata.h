@@ -49,4 +49,3 @@ const struct PokemonDex POKEMONDEX [] = {
 {"Rhinorium",70,115,120,60,64,68,ROCK,PSYCHIC},
 {"Horighnile",50,40,40,120,120,100,LIGHT,SOUND},
 };
-

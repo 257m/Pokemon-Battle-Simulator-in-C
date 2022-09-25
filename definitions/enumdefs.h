@@ -98,6 +98,15 @@ STAT_CRIT,
 };
 
 enum {
+Hp,
+Atk,
+Def,
+SpA,
+SpD,
+Spe,
+};
+
+enum {
 Hardy,
 Lonely,
 Brave,

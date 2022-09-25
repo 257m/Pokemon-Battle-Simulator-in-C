@@ -16,6 +16,20 @@ void displaymember(unsigned int PartyMember,bool eop) {
     printf("Item: %s (%s)\n",ItemList[Parties[eop].Member[PartyMember]->Item].Name,Itemtext[Parties[eop].Member[PartyMember]->ItemUsable]);
     printf("Ability: %s\n",AbilityList[Parties[eop].Member[PartyMember]->Ability].Name);
     printf("Status: %s\n",Statusnames[Parties[eop].Member[PartyMember]->Non_Volatile_Status]);
+    printf("IVs: %d %d %d %d %d %d\n",Parties[eop].Member[PartyMember]->IVHp,Parties[eop].Member[PartyMember]->IVAtk,Parties[eop].Member[PartyMember]->IVDef,Parties[eop].Member[PartyMember]->IVSpA,Parties[eop].Member[PartyMember]->IVSpD,Parties[eop].Member[PartyMember]->IVSpe);
+   printf("EVs: %d %d %d %d %d %d\n",Parties[eop].Member[PartyMember]->EVS[Hp],Parties[eop].Member[PartyMember]->EVS[Atk],Parties[eop].Member[PartyMember]->EVS[Def],Parties[eop].Member[PartyMember]->EVS[SpA],Parties[eop].Member[PartyMember]->EVS[SpD],Parties[eop].Member[PartyMember]->EVS[Spe]);
+  printf("\e[?25l");
+  system ("/bin/stty raw");
+  system ("/bin/stty -echo");
+  getchar();
+  system ("/bin/stty echo");
+  system ("/bin/stty cooked");
+  printf("\e[?25h");
+  printf("\033[2K\r");
+  for (int i = 0;i < 20;i++) {
+      printf("\033[1A");
+      printf("\033[2K");
+        }
 }
 
 void displayparty(bool eop) {
@@ -25,8 +39,10 @@ printf("\e[1;37mP%d:\e[0m %s\r\t\t\t\t\033[1CLvl:%d\t\033[1CHp:%d/%d\n",i+1,POKE
       printf("\nPartyMember: ");
       fgets(x,31,stdin);
       x[strcspn(x, "\n")] = 0;
+      for (int i = 0;i < 8;i++) {
       printf("\033[1A");
       printf("\033[2K");
+        }
       if (x[1] > 48 && x[1] < 55) {
         displaymember(x[1]-49,eop);
         printf("\n");
