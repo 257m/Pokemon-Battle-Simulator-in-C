@@ -63,7 +63,8 @@ void RetrieveUserMove(bool eop) {
       }
     
     if (strcmp(x,"View Party") == 0 || strcmp(x,"View") == 0 || strcmp(x,"Party") == 0) {
-     displayparty(eop);
+      if (!HideMove) printf("\n");
+      displayparty(eop);
      Reset = 1;
     } else {
       printf("\e[?25l");
