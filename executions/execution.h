@@ -12,7 +12,7 @@ void UDBOG2(int *hp,int damage,bool eop,unsigned status) {
     printf("%s is hurt by poison!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
   } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_TOXIC) {
     printf("%s is hurt by poison! (it's badly poisoned)\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
-  } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATE_CONFUSION) {
+  } else if (CHK_BIT(Parties[eop].EFFECT_FLAGS[0],STATE_CONFUSION)) {
   printf("It hurt itself in its confusion\n");
     }
   printf("%s%s is at %d/%d\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);

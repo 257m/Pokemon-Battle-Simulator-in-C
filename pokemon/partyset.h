@@ -44,7 +44,7 @@ struct MyPokemon* pokemon_clear(struct MyPokemon* pokemon) {
 
 struct MyPokemon* pokemon_randomize(struct MyPokemon* pokemon) {
  for (int i = 0;i < 4;i++) {
-   pokemon->Moves[i].Move = rand() % sizeof(MoveList)/sizeof(MoveList[0]);
+   pokemon->Moves[i].Move = (rand() % (sizeof(MoveList)/sizeof(MoveList[0])-2))+2;
    pokemon->Moves[i].PP = 0;
    pokemon->Moves[i].PPmult = rand() % 4;
    }
@@ -58,7 +58,7 @@ struct MyPokemon* pokemon_randomize(struct MyPokemon* pokemon) {
  pokemon->IVSpA = rand() % 32;
  pokemon->IVSpD = rand() % 32;
  pokemon->IVSpe = rand() % 32;
- pokemon->Poke = rand() % sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]);
+ pokemon->Poke = (rand() % (sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0])-1))+1;
  char tempstat;
  char tempstat2;
  for (int i = 0;i < 127;i++) {
@@ -73,8 +73,10 @@ struct MyPokemon* pokemon_randomize(struct MyPokemon* pokemon) {
  return pokemon;
 }
 
+#define pokemon_delete(pokepointer) free(pokepointer); pokepointer = NULL;
+
 struct MyPokemon Pokemon1 = {
-.Poke = ILLSONAR,
+.Poke = 252,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,
@@ -206,7 +208,7 @@ struct MyPokemon Pokemon6 = {
 };
 
 struct MyPokemon EnemyPokemon1 = {
-.Poke = ILLSONAR,
+.Poke = 300,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,

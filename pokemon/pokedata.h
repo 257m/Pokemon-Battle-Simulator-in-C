@@ -46,6 +46,8 @@ const struct PokemonDex POKEMONDEX [] = {
 {"Garasolem",45,85,85,85,85,20,POISON,GROUND},
 {"Faeternaert",120,50,50,130,150,100,LIGHT,FAIRY},
 {"Daroasinaught",60,150,60,150,60,120,DARK,GHOST},
-{"Rhinorium",70,115,120,60,64,68,ROCK,PSYCHIC},
+{"Rhinorium",70,115,120,60,70,68,ROCK,PSYCHIC},
 {"Horighnile",50,40,40,120,120,100,LIGHT,SOUND},
+{"Spiramp",200,40,140,40,140,10,GRASS,BUG},
+{"Trevantula",100,101,71,120,101,91,BUG,POISON},
 };

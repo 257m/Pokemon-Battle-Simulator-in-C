@@ -26,6 +26,52 @@ char* str_delete_char(char* string,unsigned int del_char) {
   return string;
 }
 
+char* str_compress(const char* decompressed_string) {
+  char* compressed_string = malloc(ceil((strlen(decompressed_string)*5/8)+1)+1);
+  for (int i = 0;i < strlen(compressed_string)+1;i++) {
+    compressed_string[i] = 0;
+  }
+  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+      if ((i*5/8) == (((i*5)+4)/8)) {
+      compressed_string[i*5/8] |= ((decompressed_string[i] & 31) << (3-((i*5) % 8)));
+        } else {
+      compressed_string[i*5/8] |= (decompressed_string[i] & 31) >> (((i*5) % 8)-3);
+      compressed_string[(i+1)*5/8] |= (decompressed_string[i] & 31) << (11-((i*5) % 8));
+       }
+  }
+   return compressed_string;
+}
+
+char* str_decompress(const char* compressed_string) {
+  char* decompressed_string = malloc((strlen(compressed_string)+1)*1.6);
+  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+    decompressed_string[i] = 0;
+  }
+  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+    if ((i*5/8) == (((i*5)+4)/8)) {
+      decompressed_string[i] |= ((compressed_string[i*5/8] & 255) >> (3-((i*5) % 8))) & 31;
+        } else {
+      decompressed_string[i] |= (((compressed_string[i*5/8] & 255) << (((i*5) % 8)-3)) & 31) | (((compressed_string[(i+1)*5/8] & 255) >> (11-((i*5) % 8))) & 31);
+       }
+  }
+  return decompressed_string;
+}
+
+char* str_decompressed_format(char* decompressed_string) {
+  unsigned int strlength = strlen(decompressed_string);
+  for (int i = 0;i < strlength;i++) {
+    if (decompressed_string[i] < 27) decompressed_string[i] += 96;
+    else if (decompressed_string[i] == 27) decompressed_string[i] = 32;
+    else if (decompressed_string[i] == 28) decompressed_string[i] = 45;
+    else decompressed_string[i] += 64;
+  }
+  decompressed_string[0] -= 32;
+  for (int i = 1;i < strlength;i++) {
+    if (decompressed_string[i-1] == 32 || decompressed_string[i-1] == 45 || decompressed_string[i-1] == 95) decompressed_string[i] -= 32;
+    }
+  return decompressed_string;
+}
+
 double statboostmult(char statboost) {
   if (statboost >= 0) {
     return (statboost*0.5)+1;
@@ -127,49 +173,29 @@ unsigned int Type2 : 5; // Same as Type1 but for the secondary type
 This is how pokemon data is stored the entire dex will be stored in a array
 */
 
-float TypeChart[21][21] = {
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 },
-// [0] ???
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,0 ,1 ,1 ,0.5 ,1 ,1 ,1 },
-// [1] Normal
-{1 ,1 ,0.5 ,0.5 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,2 ,1 ,1 ,1 },
-// [2] Fire 
-{1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
-// [3] Water
-{1 ,1 ,1 ,2 ,0.5 ,0.5 ,1 ,1 ,1 ,0 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
-// [4] Electric
-{1 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,1 ,0.5 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 ,2 },
-// [5] Grass
-{1 ,1 ,0.5 ,0.5 ,1 ,2 ,0.5 ,1 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 },
-// [6] Ice
-{1 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,0.5 ,0.5 ,2 ,0 ,1 ,2 ,2 ,0.5 ,2 ,2 },
-// [7] Fighting
-{1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,0 ,2 ,1 ,1 },
-// [8] Poison
-{1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,1 ,2 ,1 ,0 ,1 ,0.5 ,2 ,1 ,1 ,1 ,2 ,1 ,1 ,1 },
-// [9] Ground
-{1 ,1 ,1 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
-// [10] Flying
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,0 ,0.5 ,1 ,1 ,1 },
-// [11] Psychic
-{1 ,1 ,0.5 ,1 ,1 ,2 ,1 ,0.5 ,0.5 ,1 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,0.5 ,0.5 ,1 ,2 },
-// [12] Bug 
-{1 ,1 ,2 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
-// [13] Rock
-{1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 },
-// [14] Ghost
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,0 ,1 ,0.5 },
-// [15] Dragon
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 },
-// [16] Dark
-{1 ,1 ,0.5 ,0.5 ,0.5 ,1 ,2 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,0.5 ,0 },
-// [17] Steel
-{1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,1 ,1 },
-// [18] Fairy
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
-// [19] Sound
-{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },7
-// [20] Light
+
+float TypeChart [21][21] = {
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1,1,0.5,1,0.5,1},
+{1,1,0.5,0.5,1,2,2,1,1,1,1,1,2,0.5,1,0.5,1,2,1,1,1},
+{1,1,2,0.5,1,0.5,1,1,1,2,1,1,1,2,1,0.5,1,1,1,1,1},
+{1,1,1,2,0.5,0.5,1,1,1,0,2,1,1,1,1,0.5,1,1,1,1,2},
+{1,1,0.5,2,1,0.5,1,1,0.5,2,0.5,1,0.5,2,1,0.5,1,0.5,1,1,1},
+{1,1,0.5,0.5,1,2,0.5,1,1,2,2,1,1,1,1,2,1,0.5,1,1,1},
+{1,2,1,1,1,1,2,1,0.5,1,0.5,0.5,0.5,2,0,1,2,2,0.5,0,0},
+{1,1,1,1,1,2,1,1,0.5,0.5,1,1,1,0.5,0.5,1,1,0,2,1,1},
+{1,1,2,1,2,0.5,1,1,2,1,0,1,0.5,2,1,1,1,2,1,2,1},
+{1,1,1,1,0.5,2,1,2,1,1,1,1,2,0.5,1,1,1,0.5,1,1,1},
+{1,1,1,1,1,1,1,2,2,1,1,0.5,1,1,1,1,0,0.5,1,2,2},
+{1,1,0.5,1,1,2,1,0.5,0.5,1,0.5,2,1,1,0.5,1,2,0.5,0.5,1,1},
+{1,1,2,1,1,1,2,0.5,1,0.5,2,1,2,1,1,1,1,0.5,1,2,1},
+{1,0,1,1,1,1,1,1,1,1,1,2,1,1,2,1,0.5,1,1,0.5,0.5},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,0.5,0,1,1},
+{1,1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,1,0.5,2,0},
+{1,1,0.5,0.5,0.5,1,2,1,1,1,1,1,1,2,1,1,1,0.5,2,1,1},
+{1,1,0.5,1,1,1,1,2,1,1,1,1,1,1,1,2,2,0.5,1,1,1},
+{1,1,2,1,1,1,1,1,1,2,1,2,1,2,0.5,1,1,2,1,0.5,2},
+{1,1,0,2,2,0.5,2,2,1,0.5,1,1,1,0.5,2,1,2,0,1,2,0},
 };
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
@@ -177,7 +203,7 @@ struct Move {
  char Name[16]; // Stores the names of the pokemon it is going to be compressed soon enough to save space
  unsigned char BP; // The Basepower of the move its a value from 0-255. Note that some move may have a BP over 255 in some cases but that will be handled by a PP multiplier
  unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses.
- unsigned int PP : 4; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
+ unsigned int PP : 3; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
  unsigned int Type : 5; // Pretty obvious it stores the Type of the pokemon and it will segfault if above 21 because there are only 22 types if you add the NULL type
  unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet I could probably shave off a bit if I merged this with Priority. Actually nevermind 3x12 is 3 which is above 32 so at the very least 6 bits
  int Priority : 4; // Priority of the move from -8 to 8. Although it will at max be -6 to 6 but 12 is higher than 8 so I need 16
@@ -323,8 +349,9 @@ char x[32];
 bool EndFirst;
 unsigned int TurnCounter = 0;
 bool HideMove = 0;
+unsigned long int seed;
 
-Ability AbilityList [];
+const Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
 void SwitchIn(const bool eop);

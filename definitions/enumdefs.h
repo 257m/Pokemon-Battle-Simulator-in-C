@@ -71,7 +71,9 @@ GARASOLEM,
 FAETERNAERT,
 DAROASINAUGHT,
 RHINORIUM,
-HORIGHNILE
+HORIGHNILE,
+SPIRAMP,
+TREVANTULA,
 };
 
 enum {
@@ -187,6 +189,7 @@ Web_Blast,
 Illusion_Field,
 Double_Edge,
 Buzsring,
+Snap,
 };
 
 enum {
@@ -236,6 +239,7 @@ Galvanize,
 Levitate,
 Water_Absorb,
 Motor_Drive,
+Sap_Sipper,
 };
 
 enum {

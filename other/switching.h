@@ -6,13 +6,26 @@ void Switch(bool party,unsigned char member) {
 }
 
 void SwitchIn(const bool eop) {
-    bool TryAgain = 1;      
+    bool TryAgain = 1;
+    unsigned char randswitch;
+    char tempchar [1] = "";
           if (CheckIfAllDead(eop)) {
           while(1) {
           printf("Switch-In: ");
           system("/bin/stty echo");
+          if (!Parties[eop].AI_MODE) {
           fgets(x,31,stdin);
           x[strcspn(x, "\n")] = 0;
+            } else {
+            randswitch = 1 + (rand() % ((Parties[eop].Member[1]->CurrentHp > 0) +(Parties[eop].Member[2]->CurrentHp > 0) + (Parties[eop].Member[3]->CurrentHp > 0) + (Parties[eop].Member[4]->CurrentHp > 0) + (Parties[eop].Member[5]->CurrentHp > 0)));
+            while(1) {
+            if (Parties[eop].Member[randswitch]->CurrentHp > 0) break;
+            randswitch++;
+            }
+            tempchar[0] = randswitch + 49;
+            strcpy(x,stratt("P",tempchar));
+            printf("%s\n",x);
+            }
           system("/bin/stty -echo");
           printf("\033[1A");
           printf("\033[2K\r");

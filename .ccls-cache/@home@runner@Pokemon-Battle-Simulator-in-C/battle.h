@@ -1,14 +1,18 @@
 int Battle() {
   while (StatCalc) {
-   /* printf("\nSet Party (y/n): ");
+    printf("\nSet Party? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
+    printf("\033[1A");
+    printf("\033[2K");
     if (strcmp(x,"y") == 0) {
     for (int j = 0;j < 2;j++) {
     for (int i = 0;i < 6;i++) {
-        printf("\n%sP%d Pokemon? (Name): ",EOPTEXT[j],i+1);
+        printf("%sP%d Pokemon? (Name): ",EOPTEXT[j],i+1);
         fgets(x,31,stdin);
         x[strcspn(x, "\n")] = 0;
+        printf("\033[1A");
+        printf("\033[2K");
         for (int k = 0;k < sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]);k++) {
         if (strcmp(x,POKEMONDEX[k].Name) == 0) {
           Parties[j].Member[i]->Poke = k;
@@ -16,9 +20,11 @@ int Battle() {
           }
         }
         for (int h = 0;h < 4;h++) {
-          printf("\n%sP%d Move%d? (Move): ",EOPTEXT[j],i+1,h+1);
+          printf("%sP%d Move%d? (Move): ",EOPTEXT[j],i+1,h+1);
           fgets(x,31,stdin);
           x[strcspn(x, "\n")] = 0;
+          printf("\033[1A");
+          printf("\033[2K");
           for (int g = 0;g < sizeof(MoveList)/sizeof(MoveList[0]);g++)
           if (strcmp(x,MoveList[g].Name) == 0) {
             Parties[j].Member[i]->Moves[h].Move = g;
@@ -27,7 +33,20 @@ int Battle() {
         }
       }
       }
-    } */
+      } else {
+    printf("Randomize Party? (y/n): ");
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
+    printf("\033[1A");
+    printf("\033[2K");
+    if (strcmp(x,"y") == 0) {
+      for (int j = 0;j < 2;j++) {
+      for (int i = 0;i < 6;i++) {
+      pokemon_randomize(pokemon_clear(Parties[j].Member[i]));
+      }
+      }
+      }
+    }
     
     for(int i = 0;i < 6;i++) {
     StatCalcMon(i,0);
@@ -36,9 +55,11 @@ int Battle() {
     PP_Set(i,1);
     }
     
-    printf("\nHeal? (y/n): ");
+    printf("Heal? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
+    printf("\033[1A");
+    printf("\033[2K");
     if (strcmp(x,"y") == 0) {
       for (int j = 0;j < 2;j++) {
       for (int i = 0;i < 6;i++) {
@@ -50,26 +71,29 @@ int Battle() {
       CLEAR_EFFECTS(0);
       CLEAR_EFFECTS(1);
     }
-    printf("\033[1A");
-    printf("\033[2K");
+
     printf("Hide Moves? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
     if (strcmp(x,"y") == 0) HideMove = 1;
     printf("\033[1A");
     printf("\033[2K");
-    printf("Turn on Ai? (y/n): ");
+    printf("Turn on Player Ai? (y/n): ");
     fgets(x,31,stdin);
     x[strcspn(x, "\n")] = 0;
-    if (strcmp(x,"y") == 0) AI_MODE = 1;
+    if (strcmp(x,"y") == 0) Parties[0].AI_MODE = 1;
+    printf("\033[1A");
+    printf("\033[2K");
+    printf("Turn on Enemy Ai? (y/n): ");
+    fgets(x,31,stdin);
+    x[strcspn(x, "\n")] = 0;
+    if (strcmp(x,"y") == 0) Parties[1].AI_MODE = 1;
     printf("\033[1A");
     printf("\033[2K");
     StatCalc = 0;
     BattleMode = 1;
     Retrieve = 1;
   }
-
-  
   
   printf("Go %s!\n",POKEMONDEX[Parties[0].Member[0]->Poke].Name);
   printf("The Enemy sent out %s!\n\n", POKEMONDEX[Parties[1].Member[0]->Poke].Name);
@@ -81,228 +105,26 @@ int Battle() {
     while(Retrieve) {
     Parties[0].Switching = 0;
     Parties[1].Switching = 0;
-    printf("Enter your move: ");
-    fgets(x,31,stdin);
-    x[strcspn(x, "\n")] = 0;
-    if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[0].Move].Name) == 0) {
-      Parties[0].Turn = &Parties[0].Member[0]->Moves[0];
-      if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[0].Member[0]->Moves[0].PP <= 0) {
-    if (Parties[0].Member[0]->Moves[1].PP <= 0 && Parties[0].Member[0]->Moves[2].PP <= 0 && Parties[0].Member[0]->Moves[3].PP <= 0) {
-      Parties[0].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-  }
-    }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[1].Move].Name) == 0) {
-       Parties[0].Turn = &Parties[0].Member[0]->Moves[1];
-      if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[0].Member[0]->Moves[1].PP <= 0) {
-    if (Parties[0].Member[0]->Moves[0].PP <= 0 && Parties[0].Member[0]->Moves[2].PP <= 0 && Parties[0].Member[0]->Moves[3].PP <= 0) {
-      Parties[0].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-    }
-    }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[2].Move].Name) == 0) {
-       Parties[0].Turn = &Parties[0].Member[0]->Moves[2];
-       if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[0].Member[0]->Moves[2].PP <= 0) {
-    if (Parties[0].Member[0]->Moves[0].PP <= 0 && Parties[0].Member[0]->Moves[1].PP <= 0 && Parties[0].Member[0]->Moves[3].PP <= 0) {
-      Parties[0].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-    }
-    }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[0].Member[0]->Moves[3].Move].Name) == 0) {
-       Parties[0].Turn = &Parties[0].Member[0]->Moves[3];
-       if(Parties[0].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[0].Member[0]->Moves[3].PP <= 0) {
-    if (Parties[0].Member[0]->Moves[0].PP <= 0 && Parties[0].Member[0]->Moves[1].PP <= 0 && Parties[0].Member[0]->Moves[2].PP <= 0) {
-      Parties[0].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-    }
-    } else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[1]->Poke].Name) == 0 || strcmp(x,"P2") == 0) {
-       Parties[0].SwitchSave = 1;
-       Parties[0].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[0].Member[1]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[1]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
+      
+    RetrieveUserMove(0);
+    if (Reset == 0) { 
+      if (!HideMove) printf("\n");
+      RetrieveUserMove(1);
       }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[2]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[2]->Poke].Name) == 0 || strcmp(x,"P3") == 0) {
-       Parties[0].SwitchSave = 2;
-       Parties[0].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[0].Member[2]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[2]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[3]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[3]->Poke].Name) == 0  || strcmp(x,"P4") == 0) {
-       Parties[0].SwitchSave = 3;
-       Parties[0].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[0].Member[3]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[3]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[4]->Poke].Name) == 0 || strcmp(x,"P5") == 0) {
-       Parties[0].SwitchSave = 4;
-       Parties[0].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[0].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[4]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[0].Member[5]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[0].Member[5]->Poke].Name) == 0 || strcmp(x,"P6") == 0) {
-       Parties[0].SwitchSave = 5;
-       Parties[0].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[0].Member[5]->Poke].Name,"NoPoke") == 0 || Parties[0].Member[5]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"View Party") == 0 || strcmp(x,"View") == 0 || strcmp(x,"Party") == 0) {
-     displayparty(0);
-     Reset = 1;
-    } else {
-      printf("Move Selection Failed. Please retry.");
-      Reset = 1;
-    }
-      if (Reset != 1) {
-     if (HideMove) {
-    printf("\033[2A");
-    printf("\033[2K");
-         }
-     printf("\nEnter enemy's move: ");
-     fgets(x,31,stdin);
-     x[strcspn(x, "\n")] = 0;
-      if (strcmp(x,"1") == 0 || strcmp(x,"Move 1") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[0].Move].Name) == 0) {
-      Parties[1].Turn = &Parties[1].Member[0]->Moves[0];
-      if(Parties[1].Member[0]->Moves[0].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[1].Member[0]->Moves[0].PP <= 0) {
-    if (Parties[1].Member[0]->Moves[1].PP <= 0 && Parties[1].Member[0]->Moves[2].PP <= 0 && Parties[1].Member[0]->Moves[3].PP <= 0) {
-      Parties[1].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-  }
-    }
-    else if (strcmp(x,"2") == 0 || strcmp(x,"Move 2") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[1].Move].Name) == 0) {
-       Parties[1].Turn = &Parties[1].Member[0]->Moves[1];
-      if(Parties[1].Member[0]->Moves[1].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[1].Member[0]->Moves[1].PP <= 0) {
-    if (Parties[1].Member[0]->Moves[0].PP <= 0 && Parties[1].Member[0]->Moves[2].PP <= 0 && Parties[1].Member[0]->Moves[3].PP <= 0) {
-      Parties[1].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-  }
-    }
-    else if (strcmp(x,"3") == 0 || strcmp(x,"Move 3") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[2].Move].Name) == 0) {
-       Parties[1].Turn = &Parties[1].Member[0]->Moves[2];
-      if(Parties[1].Member[0]->Moves[2].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[1].Member[0]->Moves[2].PP <= 0) {
-    if (Parties[1].Member[0]->Moves[0].PP <= 0 && Parties[1].Member[0]->Moves[1].PP <= 0 && Parties[1].Member[0]->Moves[3].PP <= 0) {
-      Parties[1].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-  }
-    }
-    else if (strcmp(x,"4") == 0|| strcmp(x,"Move 4") == 0 || strcmp(x,MoveList[Parties[1].Member[0]->Moves[3].Move].Name) == 0) {
-       Parties[1].Turn = &Parties[1].Member[0]->Moves[3];
-      if(Parties[1].Member[0]->Moves[3].Move == Nothing) {
-        printf("There is no move in that slot.");
-        Reset = 1;
-  } else if (Parties[1].Member[0]->Moves[3].PP <= 0) {
-    if (Parties[1].Member[0]->Moves[0].PP <= 0 && Parties[1].Member[0]->Moves[1].PP <= 0 && Parties[1].Member[0]->Moves[2].PP <= 0) {
-      Parties[1].Turn = &Struggle_Slot;
-    } else {
-      printf("There no more PP left in that move");
-      Reset = 1;
-    }
-  }
-    }  else if (strcmp(x,"Switch to P2") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[1]->Poke].Name) == 0 || strcmp(x,"P2") == 0) {
-       Parties[1].SwitchSave = 1;
-       Parties[1].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[1].Member[1]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[1]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P3") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[2]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[2]->Poke].Name) == 0 || strcmp(x,"P3") == 0) {
-       Parties[1].SwitchSave = 2;
-       Parties[1].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[1].Member[2]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[2]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P4") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[4]->Poke].Name) == 0 || strcmp(x,"P4") == 0) {
-       Parties[1].SwitchSave = 3;
-       Parties[1].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[1].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[3]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P5") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[4]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[4]->Poke].Name) == 0 || strcmp(x,"P5") == 0) {
-       Parties[1].SwitchSave = 4;
-       Parties[1].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[1].Member[4]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[4]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"Switch to P6") == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[1].Member[5]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[1].Member[5]->Poke].Name) == 0 || strcmp(x,"P6") == 0) {
-       Parties[1].SwitchSave = 5;
-       Parties[1].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[1].Member[5]->Poke].Name,"NoPoke") == 0 || Parties[1].Member[5]->CurrentHp <= 0) {
-        printf("Move Selection Failed. Please retry.");
-        Reset = 1;
-      }
-    } else if (strcmp(x,"View Party") == 0 || strcmp(x,"View") == 0 || strcmp(x,"Party") == 0) {
-      displayparty(1);
-      Reset = 1;
-    } else {
-      printf("Move Selection Failed. Please retry.");
-      Reset = 1;
-    }
-        }
+      
       if(Reset == 0) {
       Retrieve = 0;
       Execute = 1;
-     if (HideMove) {
-    printf("\033[1A");
-    printf("\033[2K");
-         } else {
-      printf("\n");
-       }
+      if (!HideMove) printf("\n");
         } else {
-        printf("\n\n");
         Reset = 0;
         }
       }
-
-    if (AI_MODE) Parties[1].Turn = &Parties[1].Member[0]->Moves[rand() % 4];
+    
+    for (int i = 0;i < 2;i++) {
+    if (Parties[i].AI_MODE && Parties[i].Turn != &Struggle_Slot) Parties[i].Turn = &Parties[i].Member[0]->Moves[rand() % 4];
+      }
+    
     while (Execute == 1) {
       // reset Damage counters, temporary mults and flags 
       Parties[0].Damage = 0;
@@ -330,7 +152,7 @@ int Battle() {
       Parties[0].MoveTempType = MoveList[Parties[0].Turn->Move].Type;
       Parties[1].MoveTempType = MoveList[Parties[1].Turn->Move].Type;
       
-      // sets stabs
+      // sets stabs (not actually needed anymore but why change it?)
       if (MoveList[Parties[0].Turn->Move].Type == POKEMONDEX[Parties[0].Member[0]->Poke].Type1 || MoveList[Parties[0].Turn->Move].Type == POKEMONDEX[Parties[0].Member[0]->Poke].Type2) {
         Parties[0].STAB = 1.5;
       } else {

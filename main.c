@@ -28,8 +28,8 @@
 #include "battle.h"
 
 int main(void) {
-  unsigned long int seed = time(NULL);
-  //unsigned long int seed = 1662863004;
+  seed = time(NULL);
+  //seed = 1662863004;
   system("/bin/stty echo");
   system ("/bin/stty cooked");
   printf("\e[?25h");
@@ -60,6 +60,15 @@ int main(void) {
     printf("%u\t",MoveList[i].Category);
     printf("%d\n",MoveList[i].Priority);
   }*/
+  for (int i = 0;i < sizeof(MoveList)/sizeof(MoveList[0]);i++) {
+  unsigned char* tempstring = str_compress(MoveList[i].Name);
+  for (int j = 0;j < strlen(tempstring);j++) {
+  printf("%d ",tempstring[j]);
+    }
+    printf("\n");
+  }
+  while (1) {
   Battle();
+    }
   return 0;
   }

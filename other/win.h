@@ -5,7 +5,9 @@ int CheckIfAllDead(bool eop) {
       } else {
       printf("The Enemy has won\n");
       }
-     printf("Do you want to play again? (y/n): ");
+     printf("%d-%d\n",(Parties[0].Member[0]->CurrentHp > 0) + (Parties[0].Member[1]->CurrentHp > 0) + (Parties[0].Member[2]->CurrentHp > 0) + (Parties[0].Member[3]->CurrentHp > 0) + (Parties[0].Member[4]->CurrentHp > 0) + (Parties[0].Member[5]->CurrentHp > 0),(Parties[1].Member[0]->CurrentHp > 0) + (Parties[1].Member[1]->CurrentHp > 0) + (Parties[1].Member[2]->CurrentHp > 0) + (Parties[1].Member[3]->CurrentHp > 0) + (Parties[1].Member[4]->CurrentHp > 0) + (Parties[1].Member[5]->CurrentHp > 0));
+     printf("The seed for this game was %u (just in case you want to recreate the game)\n",seed);
+     printf("Do you want to play again? (Playing again probably has some bugs) (y/n): ");
      fgets(x,31,stdin);
      x[strcspn(x,"\n")] = 0;
      if (strcmp(x,"y") == 0) {
@@ -53,6 +55,10 @@ int CheckIfAllDead(bool eop) {
       Parties[1].Member[2]->ItemUsable = 1;
       Parties[1].Member[3]->ItemUsable = 1;
       Parties[1].Member[4]->ItemUsable = 1;
+      Parties[0].AI_MODE = 0;
+      Parties[1].AI_MODE = 0;
+
+      TurnCounter = 0;
   } else {
      exit(0);
   }

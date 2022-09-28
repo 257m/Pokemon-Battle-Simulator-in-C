@@ -18,6 +18,14 @@ char* stratt(const char *s1, const char *s2)
 stratt simply returns str1 + str2 without changing str1
 */
 
+char* str_delete_char(char* string,unsigned int del_char) {
+  char lensave = (strlen(string)-del_char)+2;
+  for (int i = del_char;i < lensave;i++) {
+    string[i] = string[i+1];
+  }
+  return string;
+}
+
 double statboostmult(char statboost) {
   if (statboost >= 0) {
     return (statboost*0.5)+1;
@@ -84,6 +92,11 @@ double tt2(bool condition,double ifcon,double elsecon,double* var) {
 Same as tt but makes var = the return value before returning
 */
 
+double never0(double num) {
+  if (num > 0 && num < 1) num = 1;
+  return num;
+}
+
 /*
 char* str_compress_5_8(const char* decompressed_str) {
   char* compressed_str = malloc(ceil(sizeof(decompressed_str)*5/8));
@@ -114,49 +127,29 @@ unsigned int Type2 : 5; // Same as Type1 but for the secondary type
 This is how pokemon data is stored the entire dex will be stored in a array
 */
 
-float TypeChart[21][21] = {
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 },
-// [0] ???
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,0 ,1 ,1 ,0.5 ,1 ,1 ,1 },
-// [1] Normal
-{1 ,1 ,0.5 ,0.5 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,2 ,1 ,1 ,1 },
-// [2] Fire 
-{1 ,1 ,2 ,0.5 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
-// [3] Water
-{1 ,1 ,1 ,2 ,0.5 ,0.5 ,1 ,1 ,1 ,0 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,1 },
-// [4] Electric
-{1 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,1 ,0.5 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 ,2 },
-// [5] Grass
-{1 ,1 ,0.5 ,0.5 ,1 ,2 ,0.5 ,1 ,1 ,2 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 },
-// [6] Ice
-{1 ,2 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,0.5 ,0.5 ,2 ,0 ,1 ,2 ,2 ,0.5 ,2 ,2 },
-// [7] Fighting
-{1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,1 ,0.5 ,0.5 ,1 ,1 ,0 ,2 ,1 ,1 },
-// [8] Poison
-{1 ,1 ,2 ,1 ,2 ,0.5 ,1 ,1 ,2 ,1 ,0 ,1 ,0.5 ,2 ,1 ,1 ,1 ,2 ,1 ,1 ,1 },
-// [9] Ground
-{1 ,1 ,1 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
-// [10] Flying
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,0 ,0.5 ,1 ,1 ,1 },
-// [11] Psychic
-{1 ,1 ,0.5 ,1 ,1 ,2 ,1 ,0.5 ,0.5 ,1 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,0.5 ,0.5 ,1 ,2 },
-// [12] Bug 
-{1 ,1 ,2 ,1 ,1 ,1 ,2 ,0.5 ,1 ,0.5 ,2 ,1 ,2 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 },
-// [13] Rock
-{1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,1 ,1 ,1 },
-// [14] Ghost
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,0.5 ,0 ,1 ,0.5 },
-// [15] Dragon
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,0.5 ,1 ,1 ,1 ,2 ,1 ,1 ,2 ,1 ,0.5 ,1 ,0.5 ,1 ,1 },
-// [16] Dark
-{1 ,1 ,0.5 ,0.5 ,0.5 ,1 ,2 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,1 ,1 ,1 ,0.5 ,0 },
-// [17] Steel
-{1 ,1 ,0.5 ,1 ,1 ,1 ,1 ,2 ,0.5 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,1 ,1 },
-// [18] Fairy
-{1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,2 ,2 ,0.5 ,2 },
-// [19] Sound
-{1 ,1 ,0 ,2 ,0.5 ,0.5 ,2 ,1 ,1 ,0.5 ,1 ,2 ,1 ,0.5 ,2 ,2 ,2 ,2 ,0 ,1 ,0 ,0 },7
-// [20] Light
+
+float TypeChart [21][21] = {
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1,1,0.5,1,0.5,1},
+{1,1,0.5,0.5,1,2,2,1,1,1,1,1,2,0.5,1,0.5,1,2,1,1,1},
+{1,1,2,0.5,1,0.5,1,1,1,2,1,1,1,2,1,0.5,1,1,1,1,1},
+{1,1,1,2,0.5,0.5,1,1,1,0,2,1,1,1,1,0.5,1,1,1,1,2},
+{1,1,0.5,2,1,0.5,1,1,0.5,2,0.5,1,0.5,2,1,0.5,1,0.5,1,1,1},
+{1,1,0.5,0.5,1,2,0.5,1,1,2,2,1,1,1,1,2,1,0.5,1,1,1},
+{1,2,1,1,1,1,2,1,0.5,1,0.5,0.5,0.5,2,0,1,2,2,0.5,0,0},
+{1,1,1,1,1,2,1,1,0.5,0.5,1,1,1,0.5,0.5,1,1,0,2,1,1},
+{1,1,2,1,2,0.5,1,1,2,1,0,1,0.5,2,1,1,1,2,1,2,1},
+{1,1,1,1,0.5,2,1,2,1,1,1,1,2,0.5,1,1,1,0.5,1,1,1},
+{1,1,1,1,1,1,1,2,2,1,1,0.5,1,1,1,1,0,0.5,1,2,2},
+{1,1,0.5,1,1,2,1,0.5,0.5,1,0.5,2,1,1,0.5,1,2,0.5,0.5,1,1},
+{1,1,2,1,1,1,2,0.5,1,0.5,2,1,2,1,1,1,1,0.5,1,2,1},
+{1,0,1,1,1,1,1,1,1,1,1,2,1,1,2,1,0.5,1,1,0.5,0.5},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,0.5,0,1,1},
+{1,1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,1,0.5,2,0},
+{1,1,0.5,0.5,0.5,1,2,1,1,1,1,1,1,2,1,1,1,0.5,2,1,1},
+{1,1,0.5,1,1,1,1,2,1,1,1,1,1,1,1,2,2,0.5,1,1,1},
+{1,1,2,1,1,1,1,1,1,2,1,2,1,2,0.5,1,1,2,1,0.5,2},
+{1,1,0,2,2,0.5,2,2,1,0.5,1,1,1,0.5,2,1,2,0,1,2,0},
 };
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
@@ -164,7 +157,7 @@ struct Move {
  char Name[16]; // Stores the names of the pokemon it is going to be compressed soon enough to save space
  unsigned char BP; // The Basepower of the move its a value from 0-255. Note that some move may have a BP over 255 in some cases but that will be handled by a PP multiplier
  unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses.
- unsigned int PP : 4; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
+ unsigned int PP : 3; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
  unsigned int Type : 5; // Pretty obvious it stores the Type of the pokemon and it will segfault if above 21 because there are only 22 types if you add the NULL type
  unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet I could probably shave off a bit if I merged this with Priority. Actually nevermind 3x12 is 3 which is above 32 so at the very least 6 bits
  int Priority : 4; // Priority of the move from -8 to 8. Although it will at max be -6 to 6 but 12 is higher than 8 so I need 16
@@ -225,13 +218,13 @@ unsigned int PPmult : 2;
 }__attribute__((__packed__)) MoveSlot;
 
 typedef struct { 
-char Name [12];
+char Name [16];
 unsigned char itemfunc;
 unsigned char GNRL_PURPOSE[2];
 } Item;
 
 typedef struct {
-char Name [15];
+char Name [16];
 unsigned char abilityfunc;
 unsigned char GNRL_PURPOSE [2];
 } Ability;
@@ -248,12 +241,7 @@ unsigned char GNRL_PURPOSE [2];
  unsigned int Spe;
  unsigned char Item;
  unsigned char Ability;
- unsigned char EVHp;
- unsigned char EVAtk;
- unsigned char EVDef;
- unsigned char EVSpA;
- unsigned char EVSpD;
- unsigned char EVSpe;
+ unsigned char EVS [6];
  unsigned char Counter;
  unsigned int ItemUsable : 1;
  unsigned int Level : 7;
@@ -290,6 +278,7 @@ struct Party {
  unsigned int Crit : 1;
  unsigned int Confused : 1;
  unsigned int Switching : 1;
+ unsigned int AI_MODE : 1;
 };
 
 const char Stagenames [8][16] = {"Attack","Defense","Special Attack","Special Defense","Speed","Accuracy","Evasion","Crit Chance"};
@@ -298,7 +287,9 @@ const char Itemtext[2][11] = {"Not Usable", "Usable"};
 
 const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Paralyzed","Asleep","Frozen"};
 
-const char EOPTEXT[4][14] = {"","The opposing ","","the opposing "};
+const char EOPTEXT[][14] = {"","The opposing ","","the opposing ","your","enemy","Player","Enemy"};
+
+const char TypeNames[][14] = {"NOTYPE","NORMAL","FIRE","WATER","ELECTRIC","GRASS","ICE","FIGHTING","POISON","GROUND","FLYING","PSYCHIC","BUG","ROCK","GHOST","DRAGON","DARK","STEEL","FAIRY","SOUND","LIGHT","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL"};
 
 struct Party Parties [2];
 bool StatCalc = 1;
@@ -312,11 +303,13 @@ char x[32];
 bool EndFirst;
 unsigned int TurnCounter = 0;
 bool HideMove = 0;
-bool AI_MODE = 0;
+unsigned long int seed;
 
-Ability AbilityList [];
+const Ability AbilityList [];
 const struct PokemonDex POKEMONDEX [];
 void Switch(bool party,unsigned char member);
+void SwitchIn(const bool eop);
 
 #define CRIT_CHANCE 16
 #define REMOVE_FIRST_FIVE_BITS 31
+#define KEEP_LAST_FOUR_BITS 15
