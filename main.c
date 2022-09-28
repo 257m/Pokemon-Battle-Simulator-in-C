@@ -60,13 +60,6 @@ int main(void) {
     printf("%u\t",MoveList[i].Category);
     printf("%d\n",MoveList[i].Priority);
   }*/
-  for (int i = 0;i < sizeof(MoveList)/sizeof(MoveList[0]);i++) {
-  unsigned char* tempstring = str_compress(MoveList[i].Name);
-  for (int j = 0;j < strlen(tempstring);j++) {
-  printf("%d ",tempstring[j]);
-    }
-    printf("\n");
-  }
   while (1) {
   Battle();
     }

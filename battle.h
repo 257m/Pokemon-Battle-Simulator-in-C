@@ -26,7 +26,7 @@ int Battle() {
           printf("\033[1A");
           printf("\033[2K");
           for (int g = 0;g < sizeof(MoveList)/sizeof(MoveList[0]);g++)
-          if (strcmp(x,MoveList[g].Name) == 0) {
+          if (strcmp(x,str_decompressed_and_format(MoveList[g].Name)) == 0) {
             Parties[j].Member[i]->Moves[h].Move = g;
             break;
           }

@@ -42,6 +42,30 @@ char* str_compress(const char* decompressed_string) {
    return compressed_string;
 }
 
+char* str_format_and_compress(const char* original_decompressed_string) {
+  unsigned int decompressed_length = strlen(original_decompressed_string)+1;
+  char* decompressed_string = malloc(decompressed_length);
+  strcpy(decompressed_string,original_decompressed_string);
+  for (int i = 0;i < decompressed_length;i++) {
+    if (decompressed_string[i] == 32) decompressed_string[i] = 27;
+    else if (decompressed_string[i] == 45) decompressed_string[i] = 28;
+  }
+  char* compressed_string = malloc(ceil((decompressed_length*5/8)+1)+1);
+  unsigned int compressed_length = strlen(compressed_string)+1;
+  for (int i = 0;i < compressed_length+1;i++) {
+    compressed_string[i] = 0;
+  }
+  for (int i = 0;i < decompressed_length+1;i++) {
+      if ((i*5/8) == (((i*5)+4)/8)) {
+      compressed_string[i*5/8] |= ((decompressed_string[i] & 31) << (3-((i*5) % 8)));
+        } else {
+      compressed_string[i*5/8] |= (decompressed_string[i] & 31) >> (((i*5) % 8)-3);
+      compressed_string[(i+1)*5/8] |= (decompressed_string[i] & 31) << (11-((i*5) % 8));
+       }
+  }
+   return compressed_string;
+}
+
 char* str_decompress(const char* compressed_string) {
   char* decompressed_string = malloc((strlen(compressed_string)+1)*1.6);
   for (int i = 0;i < strlen(decompressed_string)+1;i++) {
@@ -71,6 +95,34 @@ char* str_decompressed_format(char* decompressed_string) {
     }
   return decompressed_string;
 }
+
+char* str_decompressed_and_format(const char* compressed_string) {
+  char* decompressed_string = malloc((strlen(compressed_string)+1)*1.6);
+  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+    decompressed_string[i] = 0;
+  }
+  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+    if ((i*5/8) == (((i*5)+4)/8)) {
+      decompressed_string[i] |= ((compressed_string[i*5/8] & 255) >> (3-((i*5) % 8))) & 31;
+        } else {
+      decompressed_string[i] |= (((compressed_string[i*5/8] & 255) << (((i*5) % 8)-3)) & 31) | (((compressed_string[(i+1)*5/8] & 255) >> (11-((i*5) % 8))) & 31);
+       }
+  }
+
+  unsigned int strlength = strlen(decompressed_string);
+  for (int i = 0;i < strlength;i++) {
+    if (decompressed_string[i] < 27) decompressed_string[i] += 96;
+    else if (decompressed_string[i] == 27) decompressed_string[i] = 32;
+    else if (decompressed_string[i] == 28) decompressed_string[i] = 45;
+    else decompressed_string[i] += 64;
+  }
+  decompressed_string[0] -= 32;
+  for (int i = 1;i < strlength;i++) {
+    if (decompressed_string[i-1] == 32 || decompressed_string[i-1] == 45 || decompressed_string[i-1] == 95) decompressed_string[i] -= 32;
+    }
+  return decompressed_string;
+}
+
 
 double statboostmult(char statboost) {
   if (statboost >= 0) {
@@ -175,32 +227,53 @@ This is how pokemon data is stored the entire dex will be stored in a array
 
 
 float TypeChart [21][21] = {
+// [0] ???
 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+// [1] NORMAL
 {1,1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1,1,0.5,1,0.5,1},
+// [2] FIRE
 {1,1,0.5,0.5,1,2,2,1,1,1,1,1,2,0.5,1,0.5,1,2,1,1,1},
+// [3] WATER
 {1,1,2,0.5,1,0.5,1,1,1,2,1,1,1,2,1,0.5,1,1,1,1,1},
+// [4] ELECTRIC
 {1,1,1,2,0.5,0.5,1,1,1,0,2,1,1,1,1,0.5,1,1,1,1,2},
+// [5] GRASS
 {1,1,0.5,2,1,0.5,1,1,0.5,2,0.5,1,0.5,2,1,0.5,1,0.5,1,1,1},
+// [6] ICE
 {1,1,0.5,0.5,1,2,0.5,1,1,2,2,1,1,1,1,2,1,0.5,1,1,1},
+// [7] ???
 {1,2,1,1,1,1,2,1,0.5,1,0.5,0.5,0.5,2,0,1,2,2,0.5,0,0},
+// [8] ???
 {1,1,1,1,1,2,1,1,0.5,0.5,1,1,1,0.5,0.5,1,1,0,2,1,1},
+// [9] ???
 {1,1,2,1,2,0.5,1,1,2,1,0,1,0.5,2,1,1,1,2,1,2,1},
+// [10] ???
 {1,1,1,1,0.5,2,1,2,1,1,1,1,2,0.5,1,1,1,0.5,1,1,1},
+// [11] ???
 {1,1,1,1,1,1,1,2,2,1,1,0.5,1,1,1,1,0,0.5,1,2,2},
+// [12] ???
 {1,1,0.5,1,1,2,1,0.5,0.5,1,0.5,2,1,1,0.5,1,2,0.5,0.5,1,1},
+// [13] ???
 {1,1,2,1,1,1,2,0.5,1,0.5,2,1,2,1,1,1,1,0.5,1,2,1},
+// [14] ???
 {1,0,1,1,1,1,1,1,1,1,1,2,1,1,2,1,0.5,1,1,0.5,0.5},
+// [15] ???
 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,0.5,0,1,1},
+// [16] ???
 {1,1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,1,0.5,2,0},
+// [17] ???
 {1,1,0.5,0.5,0.5,1,2,1,1,1,1,1,1,2,1,1,1,0.5,2,1,1},
+// [18] ???
 {1,1,0.5,1,1,1,1,2,1,1,1,1,1,1,1,2,2,0.5,1,1,1},
+// [19] ???
 {1,1,2,1,1,1,1,1,1,2,1,2,1,2,0.5,1,1,2,1,0.5,2},
+// [20] ???
 {1,1,0,2,2,0.5,2,2,1,0.5,1,1,1,0.5,2,1,2,0,1,2,0},
 };
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
 struct Move {
- char Name[16]; // Stores the names of the pokemon it is going to be compressed soon enough to save space
+ char Name[10]; // Stores the names of the pokemon it is compressed to save space currently it is at 5 bit per character
  unsigned char BP; // The Basepower of the move its a value from 0-255. Note that some move may have a BP over 255 in some cases but that will be handled by a PP multiplier
  unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses.
  unsigned int PP : 3; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
