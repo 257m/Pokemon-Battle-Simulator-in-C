@@ -7,15 +7,15 @@ void UDBOG2(int *hp,int damage,bool eop,unsigned status) {
   if (*hp-damage < 0) damage = *hp;
   *hp -= damage;
   if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_BURN) {
-  printf("%s took some damage from its burn!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+  printf("%s took some damage from its burn!\n",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
   } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_POISON) {
-    printf("%s is hurt by poison!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+    printf("%s is hurt by poison!\n",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
   } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_TOXIC) {
-    printf("%s is hurt by poison! (it's badly poisoned)\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+    printf("%s is hurt by poison! (it's badly poisoned)\n",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
   } else if (CHK_BIT(Parties[eop].EFFECT_FLAGS[0],STATE_CONFUSION)) {
   printf("It hurt itself in its confusion\n");
     }
-  printf("%s%s is at %d/%d\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+  printf("%s%s is at %d/%d\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
 }
 
 void ExecuteMove(bool eop) {
@@ -42,7 +42,7 @@ void ExecuteMove(bool eop) {
             }
           }
           if (Parties[eop].Sleep) Parties[eop].Member[0]->Counter++;
-          else {Parties[eop].Member[0]->Counter = 0; Parties[eop].Member[0]->Non_Volatile_Status = 0; printf("%s%s woke up\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);}
+          else {Parties[eop].Member[0]->Counter = 0; Parties[eop].Member[0]->Non_Volatile_Status = 0; printf("%s%s woke up\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));}
           } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_FREEZE) {
           Parties[eop].Frozen = (map2(rand(),5,RAND_MAX) != 0);
           if (Parties[eop].Frozen) {
@@ -50,12 +50,12 @@ void ExecuteMove(bool eop) {
           }
           else {
           Parties[eop].Member[0]->Non_Volatile_Status = 0;
-          printf("%s%s thawed out\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name); 
+          printf("%s%s thawed out\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name)); 
           }
           }
         if (Parties[eop].Flinch) Parties[eop].CanMove = 0;
         if (CHK_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_CONFUSION) && Parties[eop].CanMove) {
-        printf("%s%s is confused!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+        printf("%s%s is confused!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
           if (Parties[eop].EFFECT_COUNTERS[EFFECT_CONFUSION] > 0) {
           if (rand() % 2) {
             Parties[eop].CanMove = 0;
@@ -66,7 +66,7 @@ void ExecuteMove(bool eop) {
             }
           else {
             CLR_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_CONFUSION);
-            printf("%s%s snapped out of its confusion!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+            printf("%s%s snapped out of its confusion!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
           }
         }
         MOVE_FUNC_LIST[MoveList[Parties[eop].Turn->Move].movefunc >> 5](3,eop,0);
@@ -129,12 +129,12 @@ void ExecuteMove(bool eop) {
           }
           }  else {
         if (Parties[eop].Member[0]->Non_Volatile_Status == 5) Parties[eop].Member[0]->Counter = 0; 
-         printf("%s, that's enough!\nCome back!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+         printf("%s, that's enough!\nCome back!\n",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
          ResetBoosts(Parties[eop].Member[0]);
          CLEAR_EFFECTS(eop);
          CLEAR_EFFECT_COUNTERS(eop);
          Switch(eop,Parties[eop].SwitchSave);
-         printf("Go! %s!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+         printf("Go! %s!\n",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
       }
         printf("\n");
         }

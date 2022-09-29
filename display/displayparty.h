@@ -1,6 +1,6 @@
 void displaymember(unsigned int PartyMember,bool eop) {
     printf("\e[1;37mP%d:\e[0m\n",PartyMember+1);
-    printf("Pokemon: %s\n",POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name);
+    printf("Pokemon: %s\n",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name));
     printf("Level: %d\n",Parties[eop].Member[PartyMember]->Level);
     printf("Health: %d/%d\n",Parties[eop].Member[PartyMember]->CurrentHp,Parties[eop].Member[PartyMember]->Hp);
     printf("Attack: %d\n",Parties[eop].Member[PartyMember]->Atk);
@@ -34,7 +34,7 @@ void displaymember(unsigned int PartyMember,bool eop) {
 
 void displayparty(bool eop) {
   for (int i = 0;i < 6;i++) {   
-printf("\e[1;37mP%d:\e[0m %s\r\t\t\t\t\033[1CLvl:%d\t\033[1CHp:%d/%d\n",i+1,POKEMONDEX[Parties[eop].Member[i]->Poke].Name,Parties[eop].Member[i]->Level,Parties[eop].Member[i]->CurrentHp,Parties[eop].Member[i]->Hp);
+printf("\e[1;37mP%d:\e[0m %s\r\t\t\t\t\033[1CLvl:%d\t\033[1CHp:%d/%d\n",i+1,str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[i]->Poke].Name),Parties[eop].Member[i]->Level,Parties[eop].Member[i]->CurrentHp,Parties[eop].Member[i]->Hp);
     }
       printf("\nPartyMember: ");
       fgets(x,31,stdin);

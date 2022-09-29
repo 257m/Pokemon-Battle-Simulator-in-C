@@ -95,8 +95,8 @@ int Battle() {
     Retrieve = 1;
   }
   
-  printf("Go %s!\n",POKEMONDEX[Parties[0].Member[0]->Poke].Name);
-  printf("The Enemy sent out %s!\n\n", POKEMONDEX[Parties[1].Member[0]->Poke].Name);
+  printf("Go %s!\n",str_decompressed_and_format(POKEMONDEX[Parties[0].Member[0]->Poke].Name));
+  printf("The Enemy sent out %s!\n\n",str_decompressed_and_format(POKEMONDEX[Parties[1].Member[0]->Poke].Name));
   Parties[0].Turn = &Empty_slot;
   Parties[1].Turn = &Empty_slot;
   while(BattleMode) {

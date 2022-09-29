@@ -1,9 +1,9 @@
 void display_move(bool eop) {
         if (Parties[eop].CanMove) {
-          printf("%s%s used %s!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,str_decompressed_and_format(MoveList[Parties[eop].Turn->Move].Name));
+          printf("%s%s used %s!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),str_decompressed_and_format(MoveList[Parties[eop].Turn->Move].Name));
           if (!Parties[eop].Hit) printf("But it missed!\n");
           } else if (!Parties[eop].Confused) {
-          printf("%s%s couldn't move\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+          printf("%s%s couldn't move\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
           if (Parties[eop].Flinch) printf("It flinched!\n");
           else if (Parties[eop].Para) printf("It was paralyzed!\n");
           else if (Parties[eop].Sleep) printf("It is asleep\n");
@@ -20,24 +20,24 @@ void move_result(bool eop) {
           printf("It was super effective!\n");
         }
         else if (TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] <= 0.5) {
-          if (TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] <= 0) printf("It dosen't affect %s\n",POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
+          if (TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2] <= 0) printf("It dosen't affect %s\n",str_decompressed_and_format(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
           else printf("It was not very effective!\n");
           }
         if (Parties[eop].Crit && Parties[eop].Damage > 0) printf("It was a critical hit!\n");
           }
         else {
         if (CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT)) {
-        printf("%s%s protected itself!\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
+        printf("%s%s protected itself!\n",EOPTEXT[!eop],str_decompressed_and_format(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
         } else {
-        printf("It had no effect on %s%s...\n",EOPTEXT[!eop + 2],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
+        printf("It had no effect on %s%s...\n",EOPTEXT[!eop + 2],str_decompressed_and_format(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
           }
           }
-        printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
+        printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],str_decompressed_and_format(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name),Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 
   
         if (Parties[!eop].Member[0]->CurrentHp <= 0) {
-          printf("%s%s fainted!\n",EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
+          printf("%s%s fainted!\n",EOPTEXT[!eop],str_decompressed_and_format(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
           SwitchIn(!eop);
           Parties[!eop].Dead = 1;
         }

@@ -42,7 +42,7 @@ void TypeImmunity(char et,bool eop) {
           boost = Parties[eop].Member[0]->Hp-Parties[eop].Member[0]->CurrentHp;
         }
         Parties[eop].Member[0]->CurrentHp += boost;
-        printf("%s%s regained some hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+        printf("%s%s regained some hp!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
           } else {
           Parties[eop].Member[0]->CurrentHp = Parties[eop].Member[0]->Hp;
           }

@@ -27,7 +27,7 @@ void RetrieveUserMove(bool eop) {
       }
     for (int i = 0;i < 4;i++) {
     tempchar[0] = 49+i;
-    if ((x[0] == tempchar[0] && x[1] == 0) || strcmp(x,stratt("Move ",tempchar)) == 0 || (strcmp(x,MoveList[Parties[eop].Member[0]->Moves[i].Move].Name) == 0)) {
+    if ((x[0] == tempchar[0] && x[1] == 0) || strcmp(x,stratt("Move ",tempchar)) == 0 || (strcmp(x,str_decompressed_and_format(MoveList[Parties[eop].Member[0]->Moves[i].Move].Name)) == 0)) {
       Parties[eop].Turn = &Parties[eop].Member[0]->Moves[i];
       if(Parties[eop].Member[0]->Moves[i].Move == Nothing) {
         printf("There is no move in that slot.");
@@ -63,10 +63,10 @@ void RetrieveUserMove(bool eop) {
       }
     for (int i = 0;i < 5;i++) {
     tempchar[0] = 50+i;
-    if (strcmp(x,stratt("Switch to P",tempchar)) == 0 || strcmp(x,stratt("Switch to ",POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name)) == 0 || strcmp(x,POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name) == 0 || strcmp(x,stratt("P",tempchar)) == 0) {
+    if (strcmp(x,stratt("Switch to P",tempchar)) == 0 || strcmp(x,stratt("Switch to ",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name))) == 0 || strcmp(x,str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name)) == 0 || strcmp(x,stratt("P",tempchar)) == 0) {
        Parties[eop].SwitchSave = 1;
        Parties[eop].Switching = 1;
-      if(strcmp(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name,"NoPoke") == 0 || Parties[eop].Member[i+1]->CurrentHp <= 0) {
+      if(Parties[eop].Member[i+1]->Poke == NOPOKE || Parties[eop].Member[i+1]->CurrentHp <= 0) {
         printf("There is no pokemon in that party slot.");
         printf("\e[?25l");
         system ("/bin/stty raw");

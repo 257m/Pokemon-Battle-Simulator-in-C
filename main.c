@@ -39,7 +39,7 @@ int main(void) {
   // Pokemon Game data display (will segfault if uncommented)
   /*for (int i = 0;i < 1024;i++) {
     printf("%d\t",i);
-    printf("%s\t",POKEMONDEX[i].Name);
+    printf("%s\t",str_decompressed_and_format(POKEMONDEX[i].Name));
     printf("%d\t",POKEMONDEX[i].Hp);
     printf("%d\t",POKEMONDEX[i].Atk);
     printf("%d\t",POKEMONDEX[i].Def);
