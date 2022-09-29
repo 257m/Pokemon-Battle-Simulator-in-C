@@ -63,6 +63,7 @@ char* str_format_and_compress(const char* original_decompressed_string) {
       compressed_string[(i+1)*5/8] |= (decompressed_string[i] & 31) << (11-((i*5) % 8));
        }
   }
+   free(decompressed_string);
    return compressed_string;
 }
 
@@ -195,19 +196,6 @@ double never0(double num) {
   return num;
 }
 
-/*
-char* str_compress_5_8(const char* decompressed_str) {
-  char* compressed_str = malloc(ceil(sizeof(decompressed_str)*5/8));
-  char tempchar;
-  for (int i = 0;i < sizeof(decompressed_str);i++) {
-    tempchar = ((unsigned char)decompressed_str[i] << 3) >> 3;
-    compressed_str[i*5/8] |= (unsigned char)((tempchar << 3) >> (unsigned char)((i*5/8-floor(i*5/8))*8));
-    compressed_str[(i+1)*5/8] |= (unsigned char)(tempchar << 11 >> (((unsigned char)(((i*5/8-floor(i*5/8))*8)+5)) % 8));
-  }
-  return compressed_str;
-}
-*/
-
 struct PokemonDex {
 char Name[16]; // Stores the name of pokemon later this going to be compressed
 unsigned char Hp;
@@ -279,7 +267,7 @@ struct Move {
  unsigned int PP : 3; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
  unsigned int Type : 5; // Pretty obvious it stores the Type of the pokemon and it will segfault if above 21 because there are only 22 types if you add the NULL type
  unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet I could probably shave off a bit if I merged this with Priority. Actually nevermind 3x12 is 3 which is above 32 so at the very least 6 bits
- int Priority : 4; // Priority of the move from -8 to 8. Although it will at max be -6 to 6 but 12 is higher than 8 so I need 16
+ int Priority : 4; // Priority of the move from -8 to 8. Although it will at max be -6 to 6 but 12 is higher than 8 so I need 16. We could shave off a bit by merging this with Type because 21x12 is 252 which fits in a byte but that is not worth it and restricts my ability to add more types
  unsigned int movefunc : 10; // Two number values conresponding to a function stored in MOVE_FUNC_LIST. The first five bits are the index of movefunc1 the next five are the index for movefunc2
  unsigned char GNRL_PURPOSE [10]; // General info on the move it's meaning will be interpeted differently based on the movefunc. the first 5 bytes are reserved for movefunc1 the next 5 are for movefunc2
  unsigned char FLAGS; // Flags to stores things that do not vary based on movefunc. Such as if it is a Contact Move or Not

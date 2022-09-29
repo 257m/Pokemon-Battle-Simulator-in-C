@@ -52,7 +52,7 @@ int main(void) {
   // Move data display
   /*for (int i = 0;i < 1024;i++) {
     printf("%d\t",i);
-    printf("%s\t",MoveList[i].Name);
+    printf("%s\t",str_decompressed_and_format(MoveList[i].Name));
     printf("%u\t",MoveList[i].BP);
     printf("%u\t",MoveList[i].Accuracy);
     printf("%u\t",MoveList[i].PP);

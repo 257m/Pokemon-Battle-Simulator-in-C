@@ -64,8 +64,10 @@ x | make a crit boosting move
 
 x | add a bit of internal documentation
 
-o | make moves have two movefuncs and double the GNRL_PURPOSE
+x | make moves have two movefuncs and double the GNRL_PURPOSE
 
 x | Generalize items
 
-o | Text compression // this is harder than I thought
+x | Text compression // this is harder than I thought // that took four hours of back breaking work but i got it done
+
+o | compress pokemon aswell
