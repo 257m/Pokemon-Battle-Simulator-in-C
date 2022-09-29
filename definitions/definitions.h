@@ -197,7 +197,7 @@ double never0(double num) {
 }
 
 struct PokemonDex {
-char Name[16]; // Stores the name of pokemon later this going to be compressed
+char Name[10]; // Stores the name of pokemon later this going to be compressed
 unsigned char Hp;
 unsigned char Atk;
 unsigned char Def;
