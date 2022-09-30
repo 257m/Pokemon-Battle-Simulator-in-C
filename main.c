@@ -40,7 +40,7 @@ int main(void) {
   system ("/bin/stty cooked");
   printf("\e[?25h");
   system("clear");
-  srand(seed);    
+  srand(seed);
   printf("%d\n",seed);
   init_free_queue(&garbage_strings);
   garbage_strings.head = NULL;

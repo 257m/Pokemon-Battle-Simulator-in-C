@@ -70,4 +70,4 @@ x | Generalize items
 
 x | Text compression // this is harder than I thought // that took four hours of back breaking work but i got it done
 
-o | compress pokemon aswell
+x | compress pokemon aswell
