@@ -43,8 +43,6 @@ int main(void) {
   srand(seed);
   printf("%d\n",seed);
   init_free_queue(&garbage_strings);
-  garbage_strings.head = NULL;
-  garbage_strings.tail = NULL;
   // Pokemon Game data display (will segfault if uncommented)
   /*for (int i = 0;i < 1024;i++) {
     printf("%d\t",i);
