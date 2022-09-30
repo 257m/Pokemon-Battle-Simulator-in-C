@@ -17,7 +17,7 @@ void RetrieveUserMove(bool eop) {
             randswitch++;
             }
             tempchar[0] = randswitch + 49;
-            strcpy(x,stratt("P",tempchar));
+            strcpy(x,stratt_free("P",tempchar));
         }
       printf("%s\n",x);
       }
@@ -27,7 +27,7 @@ void RetrieveUserMove(bool eop) {
       }
     for (int i = 0;i < 4;i++) {
     tempchar[0] = 49+i;
-    if ((x[0] == tempchar[0] && x[1] == 0) || strcmp(x,stratt("Move ",tempchar)) == 0 || (strcmp(x,str_decompressed_and_format(MoveList[Parties[eop].Member[0]->Moves[i].Move].Name)) == 0)) {
+    if ((x[0] == tempchar[0] && x[1] == 0) || strcmp(x,stratt_free("Move ",tempchar)) == 0 || (strcmp(x,str_decompress_and_format_free(MoveList[Parties[eop].Member[0]->Moves[i].Move].Name)) == 0)) {
       Parties[eop].Turn = &Parties[eop].Member[0]->Moves[i];
       if(Parties[eop].Member[0]->Moves[i].Move == Nothing) {
         printf("There is no move in that slot.");
@@ -63,7 +63,7 @@ void RetrieveUserMove(bool eop) {
       }
     for (int i = 0;i < 5;i++) {
     tempchar[0] = 50+i;
-    if (strcmp(x,stratt("Switch to P",tempchar)) == 0 || strcmp(x,stratt("Switch to ",str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name))) == 0 || strcmp(x,str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name)) == 0 || strcmp(x,stratt("P",tempchar)) == 0) {
+    if (strcmp(x,stratt_free("Switch to P",tempchar)) == 0 || strcmp(x,stratt_free("Switch to ",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name))) == 0 || strcmp(x,str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name)) == 0 || strcmp(x,stratt_free("P",tempchar)) == 0) {
        Parties[eop].SwitchSave = 1;
        Parties[eop].Switching = 1;
       if(Parties[eop].Member[i+1]->Poke == NOPOKE || Parties[eop].Member[i+1]->CurrentHp <= 0) {

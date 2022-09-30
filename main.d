@@ -1,4 +1,5 @@
-main.o main.d : main.c definitions/enumdefs.h definitions/definitions.h \
+main.o main.d : main.c predefs/queue.h predefs/stringfuncs.h predefs/gnrltxt.h \
+  predefs/gnrlfuncs.h definitions/enumdefs.h definitions/definitions.h \
   effects/effectfuncs.h effects/effects.h moves/movedata.h \
   moves/movefuncs.h abilities/abilities.h abilities/abilityfuncs.h \
   pokemon/pokedata.h items/helditems.h items/itemfuncs.h \

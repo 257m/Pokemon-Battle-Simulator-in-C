@@ -58,7 +58,10 @@ int CheckIfAllDead(bool eop) {
       Parties[0].AI_MODE = 0;
       Parties[1].AI_MODE = 0;
 
+      HideMove = 0;
       TurnCounter = 0;
+      //printf("%d\n",mallinfo().arena);
+      malloc_stats();
   } else {
      exit(0);
   }

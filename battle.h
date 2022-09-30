@@ -26,7 +26,7 @@ int Battle() {
           printf("\033[1A");
           printf("\033[2K");
           for (int g = 0;g < sizeof(MoveList)/sizeof(MoveList[0]);g++)
-          if (strcmp(x,str_decompressed_and_format(MoveList[g].Name)) == 0) {
+          if (strcmp(x,str_decompress_and_format_free(MoveList[g].Name)) == 0) {
             Parties[j].Member[i]->Moves[h].Move = g;
             break;
           }
@@ -95,11 +95,12 @@ int Battle() {
     Retrieve = 1;
   }
   
-  printf("Go %s!\n",str_decompressed_and_format(POKEMONDEX[Parties[0].Member[0]->Poke].Name));
-  printf("The Enemy sent out %s!\n\n",str_decompressed_and_format(POKEMONDEX[Parties[1].Member[0]->Poke].Name));
+  printf("Go %s!\n",str_decompress_and_format_free(POKEMONDEX[Parties[0].Member[0]->Poke].Name));
+  printf("The Enemy sent out %s!\n\n",str_decompress_and_format_free(POKEMONDEX[Parties[1].Member[0]->Poke].Name));
   Parties[0].Turn = &Empty_slot;
   Parties[1].Turn = &Empty_slot;
   while(BattleMode) {
+    clear_free_queue(&garbage_strings);
     TurnCounter++;
     printf("\033[100m\033[3m\033[1mTURN: %d\033[0m\n\n",TurnCounter);
     while(Retrieve) {

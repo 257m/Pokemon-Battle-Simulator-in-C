@@ -10,19 +10,19 @@ void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,b
   if (boostrate == 0) return;
   if (pokemon->StatBoosts[stat] >= 6) {
     pokemon->StatBoosts[stat] = 6;
-    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat]);
+    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat]);
   } else if (pokemon->StatBoosts[stat] <= -6) {
     pokemon->StatBoosts[stat] = -6;
-    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat]);
+    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat]);
   } else {
     if (boostrate > 0) {
     if (pokemon->StatBoosts[stat] + boostrate > 6) boostrate = pokemon->StatBoosts[stat] + boostrate - 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat],boostrate);
+    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat],boostrate);
     } else if (boostrate < 0) {
     if (pokemon->StatBoosts[stat] + boostrate < -6) boostrate = pokemon->StatBoosts[stat] + boostrate + 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat],boostrate*-1);
+    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat],boostrate*-1);
     }
       }
   }
@@ -150,7 +150,7 @@ void RoarFunc(char et,bool eop, bool pos) {
     ResetBoosts(Parties[!eop].Member[0]);
     CLEAR_EFFECTS(!eop);
     Switch(!eop,randswitch);
-    printf("%s was dragged out!\n",str_decompressed_and_format(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
+    printf("%s was dragged out!\n",str_decompress_and_format_free(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
   } 
     }
 }
@@ -165,18 +165,18 @@ void Hp_Draining_Move(char et,bool eop, bool pos) {
     if (CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 1],7)) Recovery *= -1;
     Parties[eop].Member[0]->CurrentHp += Recovery;
     if (Recovery > 0) {
-    printf("%s%s regained %d hp!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Recovery);
-    printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+    printf("%s%s regained %d hp!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Recovery);
+    printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
     } else if (Recovery < 0) {
-      printf("%s%s took %d damage as recoil!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Recovery*-1);
-      printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+      printf("%s%s took %d damage as recoil!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Recovery*-1);
+      printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
       if (Parties[eop].Member[0]->CurrentHp <= 0) {
-          printf("%s%s fainted!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
+          printf("%s%s fainted!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
           SwitchIn(eop);
           Parties[eop].Dead = 1;
         }
     }
-    else if (Parties[eop].Damage > 0 && Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp) printf("%s%s is already at full health!\n",EOPTEXT[eop],str_decompressed_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
+    else if (Parties[eop].Damage > 0 && Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp) printf("%s%s is already at full health!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
   }
 }
 

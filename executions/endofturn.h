@@ -11,7 +11,7 @@ void endturn(bool eop) {
         UDBOG2(&Parties[eop].Member[0]->CurrentHp,never0(((double)Parties[eop].Member[0]->Counter/16)),eop,STATUS_TOXIC);
       }
       if (Parties[eop].Member[0]->CurrentHp <= 0) {
-        printf("\033[1F%s fainted!\n",POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+        printf("\033[1F%s fainted!\n",str_decompress_and_format(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
         SwitchIn(eop);
         printf("\n");
       } else {
