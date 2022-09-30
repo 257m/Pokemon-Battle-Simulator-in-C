@@ -1,6 +1,7 @@
 { pkgs }: {
 	deps = [
-		pkgs.hol
+		pkgs.valgrind
+  pkgs.hol
 pkgs.pkgconfig
 pkgs.vim
 pkgs.clang_12

@@ -32,12 +32,12 @@ void move_result(bool eop) {
         printf("It had no effect on %s%s...\n",EOPTEXT[!eop + 2],str_decompress_and_format_free(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
           }
           }
-        printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],str_decompress_and_format_free(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name),Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
+        printf("%s%s is at %d/%d hp\n",EOPTEXT[!eop],str_decompress_and_format_free(&POKEMONDEX[Parties[!eop].Member[0]->Poke].Name),Parties[!eop].Member[0]->CurrentHp,Parties[!eop].Member[0]->Hp);
           }
           } 
   
         if (Parties[!eop].Member[0]->CurrentHp <= 0) {
-          printf("%s%s fainted!\n",EOPTEXT[!eop],str_decompress_and_format_free(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
+          printf("%s%s fainted!\n",EOPTEXT[!eop],str_decompress_and_format_free(&POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
           SwitchIn(!eop);
           Parties[!eop].Dead = 1;
         }

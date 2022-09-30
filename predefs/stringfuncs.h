@@ -99,11 +99,12 @@ char* str_format_and_compress_free(const char* original_decompressed_string) {
 }
 
 char* str_decompress(const char* compressed_string) {
-  char* decompressed_string = malloc((strlen(compressed_string)+1)*1.6);
-  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+  unsigned int decompressed_length = (strlen(compressed_string)+1)*1.6;
+  char* decompressed_string = malloc(decompressed_length);
+  for (int i = 0;i < decompressed_length;i++) {
     decompressed_string[i] = 0;
   }
-  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+  for (int i = 0;i < decompressed_length;i++) {
     if ((i*5/8) == (((i*5)+4)/8)) {
       decompressed_string[i] |= ((compressed_string[i*5/8] & 255) >> (3-((i*5) % 8))) & 31;
         } else {
