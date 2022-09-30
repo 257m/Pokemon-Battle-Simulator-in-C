@@ -68,10 +68,8 @@ int main(void) {
     printf("%s\t",TypeNames[MoveList[i].Type]);
     printf("%u\t",MoveList[i].Category);
     printf("%d\n",MoveList[i].Priority);
-    if (i == 25) clear_free_queue(&garbage_strings);
   }
-  clear_free_queue(&garbage_strings);
-  malloc_stats();*/
+  clear_free_queue(&garbage_strings);*/
   
   while (1) {
   Battle();

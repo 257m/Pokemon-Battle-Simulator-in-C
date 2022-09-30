@@ -55,12 +55,9 @@ void init_free_queue(free_queue *q) {
   q->tail = NULL;
 }
 
-bool free_enqueue(free_queue *q, const void* value_to_free) {
+bool free_enqueue(free_queue *q, void* value_to_free) {
   free_node* newnode = malloc(sizeof(free_node));
-  if (newnode == NULL) {
-    free(newnode);
-    return false;
-    }
+  if (newnode == NULL) return false;
   newnode->value_to_free = value_to_free;
   newnode->next = NULL;
   if (q->tail != NULL) {
@@ -73,22 +70,29 @@ bool free_enqueue(free_queue *q, const void* value_to_free) {
   return true;
 }
 
-bool free_dequeue(free_queue *q) {
+void* free_dequeue(free_queue *q) {
   if (q->head == NULL) return false;
   free_node* tmp = q->head;
-  void* result = tmp->value_to_free;
-  q->head = q->head->next;
-  if (q->head == NULL) q->tail = NULL;
   free(tmp->value_to_free);
   tmp->value_to_free = NULL;
-  tmp->next = NULL;
+  q->head = q->head->next;
+  if (q->head == NULL) q->tail = NULL;
   free(tmp);
-  tmp = NULL;
   return true;
 }
 
 void clear_free_queue(free_queue *q) {
-  while (free_dequeue(q) == true);
+  while (free_dequeue(q) != false);
+}
+
+void print_free_queue(free_queue *q) {
+  free_node* tmp = q->head;
+  if (tmp == NULL) return;
+  printf("Queue:\n%s\n",tmp->value_to_free);
+while(tmp->next != NULL) {
+  tmp = tmp->next;
+  printf("%s\n",tmp->value_to_free);
+}
 }
 
 free_queue garbage_strings = {NULL,NULL};

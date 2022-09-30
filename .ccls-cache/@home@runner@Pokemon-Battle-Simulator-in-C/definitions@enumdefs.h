@@ -71,7 +71,9 @@ GARASOLEM,
 FAETERNAERT,
 DAROASINAUGHT,
 RHINORIUM,
-HORIGHNILE
+HORIGHNILE,
+SPIRAMP,
+TREVANTULA,
 };
 
 enum {
@@ -84,6 +86,26 @@ STATUS_SLEEP,
 STATUS_FREEZE,
 STATE_CONFUSION,
 STATE_FLINCH,
+};
+
+enum {
+STAT_ATK,
+STAT_DEF,
+STAT_SPA,
+STAT_SPD,
+STAT_SPE,
+STAT_ACC,
+STAT_EVA,
+STAT_CRIT,
+};
+
+enum {
+Hp,
+Atk,
+Def,
+SpA,
+SpD,
+Spe,
 };
 
 enum {
@@ -167,6 +189,7 @@ Web_Blast,
 Illusion_Field,
 Double_Edge,
 Buzsring,
+Snap,
 };
 
 enum {
@@ -189,13 +212,15 @@ SPECIAL,
 enum {
 NoItem,
 Leftovers,
-Focus_Sash
+Focus_Sash,
+Salac_Berry
 };
 
 enum {
 TF_NONE,
 TF_LEFTOVERS,
 TF_FOCUS_SASH,
+TF_BERRIES,
 };
 
 enum {
@@ -214,6 +239,7 @@ Galvanize,
 Levitate,
 Water_Absorb,
 Motor_Drive,
+Sap_Sipper,
 };
 
 enum {

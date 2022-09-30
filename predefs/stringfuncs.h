@@ -16,7 +16,7 @@ char* stratt_free(const char *s1, const char *s2)
     // in real code you would check for errors in malloc here
     strcpy(result, s1);
     strcat(result, s2);
-    //free_enqueue(&garbage_strings,result);
+    free_enqueue(&garbage_strings,result);
     return result;
 }
 /*
@@ -156,11 +156,12 @@ char* str_decompress_and_format(const char* compressed_string) {
 }
 
 char* str_decompress_and_format_free(const char* compressed_string) {
-  char* decompressed_string = malloc((strlen(compressed_string)+1)*1.6);
-  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+  unsigned int decompressed_length = (strlen(compressed_string)+1)*1.6;
+  char* decompressed_string = malloc(decompressed_length);
+  for (int i = 0;i < decompressed_length;i++) {
     decompressed_string[i] = 0;
   }
-  for (int i = 0;i < strlen(decompressed_string)+1;i++) {
+  for (int i = 0;i < decompressed_length;i++) {
     if ((i*5/8) == (((i*5)+4)/8)) {
       decompressed_string[i] |= ((compressed_string[i*5/8] & 255) >> (3-((i*5) % 8))) & 31;
         } else {
@@ -168,15 +169,15 @@ char* str_decompress_and_format_free(const char* compressed_string) {
        }
   }
 
-  unsigned int strlength = strlen(decompressed_string);
-  for (int i = 0;i < strlength;i++) {
+  decompressed_length = strlen(decompressed_string);
+  for (int i = 0;i < decompressed_length;i++) {
     if (decompressed_string[i] < 27) decompressed_string[i] += 96;
     else if (decompressed_string[i] == 27) decompressed_string[i] = 32;
     else if (decompressed_string[i] == 28) decompressed_string[i] = 45;
     else decompressed_string[i] += 64;
   }
   decompressed_string[0] -= 32;
-  for (int i = 1;i < strlength;i++) {
+  for (int i = 1;i < decompressed_length;i++) {
     if (decompressed_string[i-1] == 32 || decompressed_string[i-1] == 45 || decompressed_string[i-1] == 95) decompressed_string[i] -= 32;
     }
   free_enqueue(&garbage_strings,decompressed_string);
