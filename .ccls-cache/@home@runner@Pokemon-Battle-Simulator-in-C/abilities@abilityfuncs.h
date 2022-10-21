@@ -29,7 +29,7 @@ void TypeChange(char et,bool eop) {
 }
 
 void TypeImmunity(char et,bool eop) {
-  char boost = 0;
+  int boost = 0;
   if (et == -4) {
     if ((Parties[!eop].MoveTempType == ((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] >> 3))) && MoveList[Parties[!eop].Turn->Move].Category != 0 && CHK_BIT(MoveList[Parties[!eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED)) {
       
@@ -37,8 +37,12 @@ void TypeImmunity(char et,bool eop) {
       
       if (((unsigned char)(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[0] << 5)) >> 5 == 1) {
         if ((Parties[eop].Member[0]->CurrentHp + Parties[eop].Member[0]->Hp*(AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100)) <= Parties[eop].Member[0]->Hp) {
-        Parties[eop].Member[0]->CurrentHp += Parties[eop].Member[0]->Hp*AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100;
-        printf("%s%s regained some hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+        boost = Parties[eop].Member[0]->Hp*AbilityList[Parties[eop].Member[0]->Ability].GNRL_PURPOSE[1]/100;
+        if (boost + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) {
+          boost = Parties[eop].Member[0]->Hp-Parties[eop].Member[0]->CurrentHp;
+        }
+        Parties[eop].Member[0]->CurrentHp += boost;
+        printf("%s%s regained some hp!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
           } else {
           Parties[eop].Member[0]->CurrentHp = Parties[eop].Member[0]->Hp;
           }
@@ -56,4 +60,10 @@ void TypeImmunity(char et,bool eop) {
   }
 }
 
-gpf ABILITY_FUNC_LIST [] = {&NoAbilityf,&TypeBasedBoost,&StatDecreaseImmunity,&TypeChange,&TypeImmunity};
+gpf ABILITY_FUNC_LIST [] = {
+&  NoAbilityf,
+&  TypeBasedBoost,
+&  StatDecreaseImmunity,
+&  TypeChange,
+&  TypeImmunity,
+};

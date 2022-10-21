@@ -6,13 +6,13 @@ void UDBOG(int* hp,int* damage) {
 void UDBOG2(int *hp,int damage,bool eop,unsigned status) {
   if (*hp-damage < 0) damage = *hp;
   *hp -= damage;
-  if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_BURN) {
+  if (status == STATUS_BURN) {
   printf("%s took some damage from its burn!\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
-  } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_POISON) {
+  } else if (status == STATUS_POISON) {
     printf("%s is hurt by poison!\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
-  } else if (Parties[eop].Member[0]->Non_Volatile_Status == STATUS_TOXIC) {
+  } else if (status == STATUS_TOXIC) {
     printf("%s is hurt by poison! (it's badly poisoned)\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
-  } else if (CHK_BIT(Parties[eop].EFFECT_FLAGS[0],STATE_CONFUSION)) {
+  } else if (status == STATE_CONFUSION) {
   printf("It hurt itself in its confusion\n");
     }
   printf("%s%s is at %d/%d\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);

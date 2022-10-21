@@ -3,9 +3,15 @@ struct MyPokemon* pokemon_create() {
   return pokemon;
 }
 
-void pokemon_clear(struct MyPokemon* pokemon) {
- pokemon->StatBoosts = {0};
- pokemon->Moves = {0};
+struct MyPokemon* pokemon_clear(struct MyPokemon* pokemon) {
+ for (int i = 0;i < 4;i++) {
+ pokemon->Moves[i].Move = 0;
+ pokemon->Moves[i].PP = 0;
+ pokemon->Moves[i].PPmult = 0;
+   }
+ for (int i = 0;i < 8;i++) {
+   pokemon->StatBoosts[i] = 0;
+ }
  pokemon->CurrentHp = 0;
  pokemon->Hp = 0;
  pokemon->Atk = 0;
@@ -15,12 +21,12 @@ void pokemon_clear(struct MyPokemon* pokemon) {
  pokemon->Spe = 0;
  pokemon->Item = 0;
  pokemon->Ability = 0;
- pokemon->EVHp = 0;
- pokemon->EVAtk = 0;
- pokemon->EVDef = 0;
- pokemon->EVSpA = 0;
- pokemon->EVSpD = 0;
- pokemon->EVSpe = 0;
+ pokemon->EVS[Hp] = 0;
+ pokemon->EVS[Atk] = 0;
+ pokemon->EVS[Def] = 0;
+ pokemon->EVS[SpA] = 0;
+ pokemon->EVS[SpD] = 0;
+ pokemon->EVS[Spe] = 0;
  pokemon->Counter = 0;
  pokemon->ItemUsable = 0;
  pokemon->Level = 0;
@@ -33,12 +39,17 @@ void pokemon_clear(struct MyPokemon* pokemon) {
  pokemon->IVSpD = 0;
  pokemon->IVSpe = 0;
  pokemon->Poke = 0;
+ return pokemon;
 }
 
-void pokemon_randomize(struct MyPokemon* pokemon) {
- pokemon->Moves = {{rand() % sizeof(MoveList)/sizeof(MoveList[0]),0,rand() % 4},{rand() % sizeof(MoveList)/sizeof(MoveList[0]),0,rand() % 4},{rand() % sizeof(MoveList)/sizeof(MoveList[0]),0,rand() % 4},{rand() % sizeof(MoveList)/sizeof(MoveList[0]),0,rand() % 4}};
+struct MyPokemon* pokemon_randomize(struct MyPokemon* pokemon) {
+ for (int i = 0;i < 4;i++) {
+   pokemon->Moves[i].Move = (rand() % (sizeof(MoveList)/sizeof(MoveList[0])-2))+2;
+   pokemon->Moves[i].PP = 0;
+   pokemon->Moves[i].PPmult = rand() % 4;
+   }
  pokemon->Item = rand() % sizeof(ItemList)/sizeof(ItemList[0]);
- pokemon->Ability = rand() % sizeof(AbilityList)/sizeof(AbiltiyList[0]);
+ pokemon->Ability = rand() % sizeof(AbilityList)/sizeof(AbilityList[0]);
  pokemon->Level = (rand() % 100) + 1;
  pokemon->Nature = rand() % 25;
  pokemon->IVHp = rand() % 32;
@@ -47,9 +58,22 @@ void pokemon_randomize(struct MyPokemon* pokemon) {
  pokemon->IVSpA = rand() % 32;
  pokemon->IVSpD = rand() % 32;
  pokemon->IVSpe = rand() % 32;
- pokemon->Poke = rand() % sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0]);
+ pokemon->Poke = (rand() % (sizeof(POKEMONDEX)/sizeof(POKEMONDEX[0])-1))+1;
+ char tempstat;
+ char tempstat2;
+ for (int i = 0;i < 127;i++) {
+   tempstat = rand() % 6;
+   if (pokemon->EVS[tempstat] >= 252) {
+     tempstat2 = tempstat;
+     tempstat = rand() % 5;
+     if (tempstat >= tempstat2) tempstat++;
+     }
+   pokemon->EVS[tempstat] += 4;
+ }
+ return pokemon;
 }
 
+#define pokemon_delete(pokepointer) free(pokepointer); pokepointer = NULL;
 
 struct MyPokemon Pokemon1 = {
 .Poke = ILLSONAR,
@@ -64,13 +88,13 @@ struct MyPokemon Pokemon1 = {
 .IVSpA = 31,
 .IVSpD = 31,
 .IVSpe = 31,
-.Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.Moves = {{Double_Edge,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon Pokemon2 = {
@@ -87,12 +111,12 @@ struct MyPokemon Pokemon2 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon Pokemon3 = {
@@ -109,12 +133,12 @@ struct MyPokemon Pokemon3 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon Pokemon4 = {
@@ -131,12 +155,12 @@ struct MyPokemon Pokemon4 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon Pokemon5 = {
@@ -153,12 +177,12 @@ struct MyPokemon Pokemon5 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon Pokemon6 = {
@@ -175,12 +199,12 @@ struct MyPokemon Pokemon6 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon EnemyPokemon1 = {
@@ -196,13 +220,13 @@ struct MyPokemon EnemyPokemon1 = {
 .IVSpA = 31,
 .IVSpD = 31,
 .IVSpe = 31,
-.Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.Moves = {{Double_Edge,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon EnemyPokemon2 = {
@@ -219,12 +243,12 @@ struct MyPokemon EnemyPokemon2 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon EnemyPokemon3 = {
@@ -241,12 +265,12 @@ struct MyPokemon EnemyPokemon3 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon EnemyPokemon4 = {
@@ -263,12 +287,12 @@ struct MyPokemon EnemyPokemon4 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon EnemyPokemon5 = {
@@ -285,12 +309,12 @@ struct MyPokemon EnemyPokemon5 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
 struct MyPokemon EnemyPokemon6 = {
@@ -307,12 +331,29 @@ struct MyPokemon EnemyPokemon6 = {
 .IVSpD = 31,
 .IVSpe = 31,
 .Moves = {{Illusion_Field,0,3},{Blinding_Flash,0,3},{Luminous_Glow,0,3},{Blindstrike,0,3}},
-.EVHp = 0,
-.EVAtk = 0,
-.EVDef = 0,
-.EVSpA = 252,
-.EVSpD = 252,
-.EVSpe = 4
+.EVS[Hp] = 0,
+.EVS[Atk] = 0,
+.EVS[Def] = 0,
+.EVS[SpA] = 252,
+.EVS[SpD] = 252,
+.EVS[Spe] = 4
 };
 
-struct Party Parties [2] = {{&Pokemon1,&Pokemon2,&Pokemon3,&Pokemon4,&Pokemon5,&Pokemon6},{&EnemyPokemon1,&EnemyPokemon2,&EnemyPokemon3,&EnemyPokemon4,&EnemyPokemon5,&EnemyPokemon6}};
+struct Party Parties [2] = {
+{
+  &Pokemon1,
+  &Pokemon2,
+  &Pokemon3,
+  &Pokemon4,
+  &Pokemon5,
+  &Pokemon6,
+},
+{
+  &EnemyPokemon1,
+  &EnemyPokemon2,
+  &EnemyPokemon3,
+  &EnemyPokemon4,
+  &EnemyPokemon5,
+  &EnemyPokemon6,
+}
+};

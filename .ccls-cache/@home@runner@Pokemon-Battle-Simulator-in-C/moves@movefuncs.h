@@ -1,48 +1,35 @@
 void Boost(unsigned char stat,char boostrate,struct MyPokemon* pokemon) {
   pokemon->StatBoosts[stat] += boostrate;
-  if (pokemon->StatBoosts[stat] > 6) {
+  if (pokemon->StatBoosts[stat] > 6)
     pokemon->StatBoosts[stat] = 6;
-  } else if (pokemon->StatBoosts[stat] < -6) {
+  else if (pokemon->StatBoosts[stat] < -6)
     pokemon->StatBoosts[stat] = -6;
-  }
 }
 
 void Boostandprint(unsigned char stat,char boostrate,struct MyPokemon* pokemon,bool eop) {
   if (boostrate == 0) return;
   if (pokemon->StatBoosts[stat] >= 6) {
     pokemon->StatBoosts[stat] = 6;
-    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any higher\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat]);
   } else if (pokemon->StatBoosts[stat] <= -6) {
     pokemon->StatBoosts[stat] = -6;
-    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat]);
+    printf("%s%s's %s can't go any lower\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat]);
   } else {
     if (boostrate > 0) {
     if (pokemon->StatBoosts[stat] + boostrate > 6) boostrate = pokemon->StatBoosts[stat] + boostrate - 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat],boostrate);
+    printf("%s%s's %s rose by %d stages\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat],boostrate);
     } else if (boostrate < 0) {
     if (pokemon->StatBoosts[stat] + boostrate < -6) boostrate = pokemon->StatBoosts[stat] + boostrate + 6;
     pokemon->StatBoosts[stat] += boostrate;
-    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],POKEMONDEX[pokemon->Poke].Name,Stagenames[stat],boostrate*-1);
+    printf("%s%s's %s fell by %d stages\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[pokemon->Poke].Name),Stagenames[stat],boostrate*-1);
     }
       }
   }
 
-void BoostChance(unsigned char statc,char boostratec,struct MyPokemon* pokemonc,unsigned char Chance) {
-  if (map2(rand(),100,RAND_MAX) < Chance) {
-    Boost(statc,boostratec,pokemonc);
-  }
-};
-
 void ResetBoosts(struct MyPokemon* pokemon) {
-  pokemon->StatBoosts[0] = 0;
-  pokemon->StatBoosts[1] = 0;
-  pokemon->StatBoosts[2] = 0;
-  pokemon->StatBoosts[3] = 0;
-  pokemon->StatBoosts[4] = 0;
-  pokemon->StatBoosts[5] = 0;
-  pokemon->StatBoosts[6] = 0;
-  pokemon->StatBoosts[7] = 0;
+  for (int i = 0;i < 8;i++)
+    pokemon->StatBoosts[0] = 0;
 }
 
 char StatusImmunity(unsigned char status,bool eop) {
@@ -59,9 +46,8 @@ void Nothingf(char et, bool eop, bool pos) {
 
 void Strugglef(char et, bool eop, bool pos) {
   Parties[eop].Turn->PP = 1;
-  if (et == 2) {
-      Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
-  }
+  if (et == 2)
+    Parties[eop].Member[0]->CurrentHp -= Parties[0].Member[0]->Hp/4;
 }
 
 void StatMod(char et,bool eop, bool pos) {
@@ -74,8 +60,8 @@ void StatMod(char et,bool eop, bool pos) {
     if (Parties[!eop].Dead) return;
     }
   if (et == 2) {
-  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo)) {
-  if (((Parties[eop].TemporaryMult == 0) || TypeChart[MoveList[Parties[eop].MoveTempType].Type][POKEMONDEX[Parties[soo].Member[0]->Poke].Type1] * TypeChart[MoveList[Parties[eop].MoveTempType].Type][POKEMONDEX[Parties[soo].Member[0]->Poke].Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo == !eop) return;
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED) && soo == !eop)) {
+  if (((Parties[eop].TemporaryMult == 0) || TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[soo].Member[0]->Poke].Type1] * TypeChart[Parties[eop].MoveTempType][POKEMONDEX[Parties[soo].Member[0]->Poke].Type2] <= 0) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_TYPE_IMMUNITY_AFFECTED) && soo == !eop) return;
  if (rand() < RAND_MAX*(((double)(((unsigned char)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 4] << 1)) >> 1))/100)) {  
     for (int i = 0; i < 8;i++) {  
     temp = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + i/2];
@@ -118,7 +104,7 @@ if (rand() < RAND_MAX*((double)MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs
         SET_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_CONFUSION);
         if (Parties[!eop].EFFECT_COUNTERS[EFFECT_CONFUSION] == 0) Parties[!eop].EFFECT_COUNTERS[EFFECT_CONFUSION] = (rand() % 4) + 2;
         }
-      else {
+      else if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] == STATE_FLINCH) {
         Parties[!eop].Flinch = 1;
       }
       }
@@ -155,7 +141,7 @@ void RoarFunc(char et,bool eop, bool pos) {
   char rs = pos*5;
   if (et == 2) {
   if (Parties[!eop].Dead) return;
-  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
+  if (!(CHK_BIT(Parties[!eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED)) &&((Parties[!eop].Member[1]->CurrentHp > 0) + (Parties[!eop].Member[2]->CurrentHp > 0) + (Parties[!eop].Member[3]->CurrentHp > 0) + (Parties[!eop].Member[4]->CurrentHp > 0) + (Parties[!eop].Member[5]->CurrentHp > 0))) {
     randswitch = 1 + (rand() % ((Parties[!eop].Member[1]->CurrentHp > 0) + (Parties[!eop].Member[2]->CurrentHp > 0) + (Parties[!eop].Member[3]->CurrentHp > 0) + (Parties[!eop].Member[4]->CurrentHp > 0) + (Parties[!eop].Member[5]->CurrentHp > 0)));
     while(1) {
       if (Parties[!eop].Member[randswitch]->CurrentHp > 0) break;
@@ -164,7 +150,7 @@ void RoarFunc(char et,bool eop, bool pos) {
     ResetBoosts(Parties[!eop].Member[0]);
     CLEAR_EFFECTS(!eop);
     Switch(!eop,randswitch);
-    printf("%s was dragged out!\n",POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
+    printf("%s was dragged out!\n",str_decompress_and_format_free(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
   } 
     }
 }
@@ -173,15 +159,24 @@ void Hp_Draining_Move(char et,bool eop, bool pos) {
   int Recovery;
   unsigned char rs = pos*5;
   if (et == 2) {
-    Recovery = ceil(Parties[eop].Damage*tt(CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0],7),MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0]/100,(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 0] - 128)/100));
+    Recovery = Parties[eop].Damage*MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs]/100;
     if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
     if (Recovery + Parties[eop].Member[0]->CurrentHp < 0) Recovery = Parties[eop].Member[0]->CurrentHp;
+    if (CHK_BIT(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 1],7)) Recovery *= -1;
     Parties[eop].Member[0]->CurrentHp += Recovery;
     if (Recovery > 0) {
-    printf("%s%s regained %d hp!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Recovery);
-    printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+    printf("%s%s regained %d hp!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Recovery);
+    printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+    } else if (Recovery < 0) {
+      printf("%s%s took %d damage as recoil!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Recovery*-1);
+      printf("%s%s is at %d/%d hp\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
+      if (Parties[eop].Member[0]->CurrentHp <= 0) {
+          printf("%s%s fainted!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
+          SwitchIn(eop);
+          Parties[eop].Dead = 1;
+        }
     }
-    else if (Parties[eop].Damage > 0 && Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp) printf("%s%s is already at full health!\n",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+    else if (Parties[eop].Damage > 0 && Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp) printf("%s%s is already at full health!\n",EOPTEXT[eop],str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
   }
 }
 
@@ -194,4 +189,13 @@ void EdgeCase(char et, bool eop, bool pos) {
           Boostandprint(i,-12,Parties[!eop].Member[0],!eop);
 }
     
-mf MOVE_FUNC_LIST [] = {&Nothingf,&Strugglef,&StatMod,&StatusInfliction,&ProtectingMove,&RoarFunc,&Hp_Draining_Move,&EdgeCase};
+mf MOVE_FUNC_LIST [] = {
+&  Nothingf,
+&  Strugglef,
+&  StatMod,
+&  StatusInfliction,
+&  ProtectingMove,
+&  RoarFunc,
+&  Hp_Draining_Move,
+&  EdgeCase,
+};

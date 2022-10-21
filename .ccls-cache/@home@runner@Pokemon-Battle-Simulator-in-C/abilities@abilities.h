@@ -1,4 +1,4 @@
-Ability AbilityList [] = {
+const Ability AbilityList [] = {
 {"NoAbility",AF_NOABILITY},
 {"Overgrow",AF_TYPE_BASED_BOOST,{GRASS,3}},
 {"Blaze",AF_TYPE_BASED_BOOST,{FIRE,3}},
@@ -11,7 +11,8 @@ Ability AbilityList [] = {
 {"Pixilate",AF_TYPECHANGE,{12,134}},
 {"Frozen Wing",AF_TYPECHANGE,{81,160}},
 {"Galvanize",AF_TYPECHANGE,{9,12}},
-{"Levitate",AF_TYPEIMMUNITY,{(GROUND << 3) + 0,0}},
-{"Water Absorb",AF_TYPEIMMUNITY,{(WATER << 3) + 1,25}},
-{"Motor Drive",AF_TYPEIMMUNITY,{(ELECTRIC << 3) + 2,129}},
+{"Levitate",AF_TYPEIMMUNITY,{(GROUND << 3) | 0,0}},
+{"Water Absorb",AF_TYPEIMMUNITY,{(WATER << 3) | 1,25}},
+{"Motor Drive",AF_TYPEIMMUNITY,{(ELECTRIC << 3) | 2,129}},
+{"Sap Sipper",AF_TYPEIMMUNITY,{(GRASS << 3) | 2,1}},
 };

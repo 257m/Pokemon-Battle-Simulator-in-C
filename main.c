@@ -68,7 +68,13 @@ int main(void) {
     printf("%d\n",MoveList[i].Priority);
   }
   clear_free_queue(&garbage_strings);*/
-  
+
+	unsigned char* string = str_format_and_compress("Guinerem");
+
+	for (int i = 0;i < strlen(string);i++) {
+		printf("%d,",string[i]);
+	}
+	
   while (1) {
   Battle();
     }
