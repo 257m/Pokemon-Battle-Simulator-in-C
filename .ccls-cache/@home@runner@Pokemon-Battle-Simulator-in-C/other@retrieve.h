@@ -66,7 +66,7 @@ void RetrieveUserMove(bool eop) {
     if (strcmp(x,stratt_free("Switch to P",tempchar)) == 0 || strcmp(x,stratt_free("Switch to ",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name))) == 0 || strcmp(x,str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[i+1]->Poke].Name)) == 0 || strcmp(x,stratt_free("P",tempchar)) == 0) {
        Parties[eop].SwitchSave = i+1;
        Parties[eop].Switching = 1;
-      if(Parties[eop].Member[i+1]->Poke == NOPOKE || Parties[eop].Member[i+1]->CurrentHp <= 0) {
+      if (Parties[eop].Member[i+1]->Poke == NOPOKE || Parties[eop].Member[i+1]->CurrentHp <= 0) {
         printf("There is no pokemon in that party slot.");
         printf("\e[?25l");
         system ("/bin/stty raw");

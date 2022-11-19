@@ -69,7 +69,7 @@ int main(void) {
   }
   clear_free_queue(&garbage_strings);*/
 
-	unsigned char* string = str_format_and_compress("Solighnire");
+	unsigned char* string = str_format_and_compress("Guinerem");
 
 	for (int i = 0;i < strlen(string);i++) {
 		printf("%d,",string[i]);
